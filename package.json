@@ -1,32 +1,28 @@
 {
-    "title": "Clean Blog",
-    "name": "startbootstrap-clean-blog",
-    "version": "5.0.8",
+    "title": "Gestoria Sercon",
+    "name": "test",
+    "version": "0.0.1",
     "scripts": {
-        "start": "node_modules/.bin/gulp watch"
+        //"start": "node_modules/.bin/gulp watch"
     },
-    "description": "Clean Blog is a Medium inspired blog theme for Bootstrap.",
+    "description": "description",
     "keywords": [
-        "css",
-        "sass",
-        "html",
-        "responsive",
-        "theme",
-        "template"
+        "gestoria",
+        "sercon"
     ],
-    "homepage": "https://startbootstrap.com/template-overviews/clean-blog",
+    "homepage": "lets see",
     "bugs": {
-        "url": "https://github.com/BlackrockDigital/startbootstrap-clean-blog/issues",
-        "email": "feedback@startbootstrap.com"
+        "url": "not for now",
+        "email": "not for now"
     },
-    "license": "MIT",
-    "author": "Start Bootstrap",
+    "license": "some license",
+    "author": "some author",
     "contributors": [
-        "David Miller (http://davidmiller.io/)"
+        "some random user"
     ],
     "repository": {
         "type": "git",
-        "url": "https://github.com/BlackrockDigital/startbootstrap-clean-blog.git"
+        "url": "some git respository"
     },
     "dependencies": {
         "@fortawesome/fontawesome-free": "5.10.2",
