@@ -49,7 +49,7 @@
         <div class="content-center">
           <div class="cc-profile-image"><a href="#"><img src="images/myphoto.jpg" alt="Image"/></a></div>
           <div class="h2 title">Iago Santos</div>
-          <p class="category text-white">Hard-working, conscientious, committed  and pragmatic</p><a class="btn btn-primary smooth-scroll mr-2" href="https://www.linkedin.com/messaging/compose/?recipient=iasantosp" data-aos="zoom-in" data-aos-anchor="data-aos-anchor">Hire Me</a><a class="btn btn-primary" href="/CV/ISP_CV_Original.pdf" data-aos="zoom-in" data-aos-anchor="data-aos-anchor">Download my CV</a>
+          <p class="category text-white">Hard-working, conscientious, committed  and pragmatic</p><a class="btn btn-primary smooth-scroll mr-2" href="#contact" data-aos="zoom-in" data-aos-anchor="data-aos-anchor">Hire Me</a><a class="btn btn-primary" href="/CV/ISP_CV_Original.pdf" data-aos="zoom-in" data-aos-anchor="data-aos-anchor">Download my CV</a>
         </div>
       </div>
       <div class="section">
@@ -130,7 +130,7 @@
         </div>
         <div class="col-md-9" data-aos="fade-left" data-aos-offset="50" data-aos-duration="500">
           <div class="card-body">
-            <div class="h5">Senior DevOps Project Manager & Deputy People Lead.<p></p>
+            <div class="h5">Senior DevOps Project Manager.<p></p>
               Adfinis A.G., Switzerland.</div>
             <p>
               Defining and managing roadmaps for implementation of DevOps for multiple clients.
@@ -141,13 +141,6 @@
               <p></p>
               Providing CI/CD training for end users using Terraform, Azure, Vault, ArgoCD, following the best GitOps tools.
               <p></p>
-              <strong>Deputy People Lead Responsibilities:</strong>
-              <ul>
-                <li>Assist in the oversight of team development and management responsibilities.</li>
-                <li>Facilitate communication and coordination between project teams and management.</li>
-                <li>Help in setting and tracking performance metrics for development teams.</li>
-                <li>Contribute to hiring, onboarding, and training new team members.</li>
-            </ul>
           </div>
         </div>
       </div>
@@ -557,25 +550,6 @@
                   </figure></a></div>
             </div>
 
-            <div class="col-md-6">
-              <div class="cc-porfolio-image img-raised" data-aos="fade-up" data-aos-anchor-placement="top-bottom"><a href="https://gitlab.badgr.com/public/pathway/60ca65c754855a740512656e/element/60ca65c754855a740512656d"></a>
-                  <figure class="cc-effect"><img src="portfolio/GitLab-DP.png" alt="Image"/>
-                    <figcaption>
-                      <div class="h4">GitLab DP</div>
-                      <p>GitLab Certified DevOps Professional</p>
-                    </figcaption>
-                  </figure></a></div>
-                </div>
-
-            <div class="col-md-6">
-              <div class="cc-porfolio-image img-raised" data-aos="fade-up" data-aos-anchor-placement="top-bottom"><a href="https://gitlab.badgr.com/public/pathway/615a5c5a45567c21b75d5f2d/element/615a5c5a45567c21b75d5f2c"></a>
-                  <figure class="cc-effect"><img src="portfolio/GitLab-PSE.png" alt="Image"/>
-                    <figcaption>
-                      <div class="h4">GitLab PSE</div>
-                      <p>GitLab Certified Professional Services Engineer</p>
-                    </figcaption>
-                  </figure></a></div>
-            </div>
 
 
           </div>
