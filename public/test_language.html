@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Language Detection Test</title>
+</head>
+<body>
+    <h1>Language Detection Test</h1>
+    <p>Current URL: <span id="currentUrl"></span></p>
+    <p>Detected Language: <span id="detectedLang"></span></p>
+    <p>Current Language Variable: <span id="currentLangVar"></span></p>
+    
+    <div>
+        <h2>Test Links:</h2>
+        <a href="/">English (/)</a> | 
+        <a href="/en">English (/en)</a> | 
+        <a href="/es">Spanish (/es)</a> | 
+        <a href="/gl">Galician (/gl)</a> | 
+        <a href="/fr">French (/fr)</a>
+    </div>
+    
+    <div>
+        <h2>Manual Language Change:</h2>
+        <button onclick="testLanguage('en')">English</button>
+        <button onclick="testLanguage('es')">Spanish</button>
+        <button onclick="testLanguage('gl')">Galician</button>
+        <button onclick="testLanguage('fr')">French</button>
+    </div>
+    
+    <div>
+        <h2>Debug Info:</h2>
+        <pre id="debugInfo"></pre>
+    </div>
+
+    <script src="scripts/epic.js"></script>
+    <script>
+        // Function to detect language from URL on page load
+        function detectLanguageFromURL() {
+            const path = window.location.pathname;
+            
+            // Check if URL contains a language code
+            if (path.startsWith('/es')) {
+                return 'es';
+            } else if (path.startsWith('/gl')) {
+                return 'gl';
+            } else if (path.startsWith('/fr')) {
+                return 'fr';
+            } else if (path.startsWith('/en')) {
+                return 'en';
+            }
+            
+            // Default to English for root path
+            return 'en';
+        }
+        
+        function testLanguage(lang) {
+            const newURL = lang === 'en' ? '/' : `/${lang}`;
+            window.history.pushState({}, '', newURL);
+            updateDisplay();
+        }
+        
+        function updateDisplay() {
+            document.getElementById('currentUrl').textContent = window.location.pathname;
+            document.getElementById('detectedLang').textContent = detectLanguageFromURL();
+            document.getElementById('currentLangVar').textContent = typeof currentLanguage !== 'undefined' ? currentLanguage : 'undefined';
+            
+            document.getElementById('debugInfo').textContent = JSON.stringify({
+                pathname: window.location.pathname,
+                detectedLanguage: detectLanguageFromURL(),
+                currentLanguage: typeof currentLanguage !== 'undefined' ? currentLanguage : 'undefined',
+                translations: typeof translations !== 'undefined' ? Object.keys(translations) : 'undefined'
+            }, null, 2);
+        }
+        
+        // Update display on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            updateDisplay();
+            
+            // Update display when language changes
+            if (typeof currentLanguage !== 'undefined') {
+                const originalUpdateLanguage = window.updateLanguage;
+                if (originalUpdateLanguage) {
+                    window.updateLanguage = function(lang) {
+                        originalUpdateLanguage(lang);
+                        updateDisplay();
+                    };
+                }
+            }
+        });
+        
+        // Update display when URL changes
+        window.addEventListener('popstate', updateDisplay);
+    </script>
+</body>
+</html>

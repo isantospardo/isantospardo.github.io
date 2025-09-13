@@ -252,7 +252,7 @@ const translations = {
   }
 };
 
-// Current language - FORCED TO ENGLISH TEMPORARILY
+// Current language
 let currentLanguage = 'en';
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -278,13 +278,13 @@ document.addEventListener('DOMContentLoaded', function() {
   // Interactive Elements
   initInteractiveElements();
   
-  // Language Selector - DISABLED TEMPORARILY
-  // initLanguageSelector();
+  // Language Selector
+  initLanguageSelector();
   
-  // Force language selector initialization after a delay - DISABLED
-  // setTimeout(() => {
-  //   initLanguageSelector();
-  // }, 1000);
+  // Force language selector initialization after a delay
+  setTimeout(() => {
+    initLanguageSelector();
+  }, 1000);
   
   // URL Routing
   initURLRouting();
@@ -300,71 +300,32 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // Epic Typewriter Effect
-let typewriterInitialized = false;
-let typewriterTimeout = null;
-
 function initTypewriter() {
-  // Prevent multiple initializations
-  if (typewriterInitialized) {
-    console.log("Typewriter already initialized, skipping...");
-    return;
-  }
-  
   const typewriterElement = document.getElementById('typewriter-text');
   
-  if (!typewriterElement) {
-    console.log("Typewriter element not found");
-    return;
-  }
-  
-  // Clear any existing timeout
-  if (typewriterTimeout) {
-    clearTimeout(typewriterTimeout);
-  }
-  
-  // Get the text from the translation system
-  const typewriterText = typewriterElement.textContent || typewriterElement.getAttribute('data-translate');
-  
-  if (!typewriterText) {
-    console.log("No typewriter text found");
-    return;
-  }
-  
-  console.log("Initializing typewriter with text:", typewriterText);
-  
-  // Clear the element first
-  typewriterElement.textContent = '';
-  
-  let i = 0;
-  const typeSpeed = 80; // milliseconds per character
-  
-  function typeWriter() {
-    if (i < typewriterText.length) {
-      typewriterElement.textContent += typewriterText.charAt(i);
-      i++;
-      typewriterTimeout = setTimeout(typeWriter, typeSpeed);
-    } else {
-      // Mark as completed
-      typewriterInitialized = true;
-      console.log("Typewriter effect completed");
+  if (typewriterElement) {
+    // Get the text from the translation system
+    const typewriterText = typewriterElement.textContent || typewriterElement.getAttribute('data-translate');
+    
+    if (typewriterText) {
+      // Clear the element first
+      typewriterElement.textContent = '';
+      
+      let i = 0;
+      const typeSpeed = 80; // milliseconds per character
+      
+      function typeWriter() {
+        if (i < typewriterText.length) {
+          typewriterElement.textContent += typewriterText.charAt(i);
+          i++;
+          setTimeout(typeWriter, typeSpeed);
+        }
+      }
+      
+      // Start typewriter effect after a delay
+      setTimeout(typeWriter, 1500);
     }
   }
-  
-  // Start typewriter effect after a delay
-  typewriterTimeout = setTimeout(typeWriter, 1500);
-}
-
-// Function to reset typewriter for language changes
-function resetTypewriter() {
-  console.log("Resetting typewriter for language change");
-  typewriterInitialized = false;
-  if (typewriterTimeout) {
-    clearTimeout(typewriterTimeout);
-    typewriterTimeout = null;
-  }
-  
-  // Reinitialize after a short delay
-  setTimeout(initTypewriter, 500);
 }
 
 // Counter Animation
@@ -1378,20 +1339,20 @@ window.forceLanguageSelector = function() {
 (function() {
   console.log("=== EMERGENCY LANGUAGE SELECTOR FIX ===");
   
-  // Wait for DOM to be ready - DISABLED TEMPORARILY
-  // if (document.readyState === 'loading') {
-  //   document.addEventListener('DOMContentLoaded', function() {
-  //     setTimeout(initLanguageSelector, 500);
-  //   });
-  // } else {
-  //   setTimeout(initLanguageSelector, 500);
-  // }
+  // Wait for DOM to be ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function() {
+      setTimeout(initLanguageSelector, 500);
+    });
+  } else {
+    setTimeout(initLanguageSelector, 500);
+  }
   
-  // Also try after 2 seconds - DISABLED
-  // setTimeout(initLanguageSelector, 2000);
+  // Also try after 2 seconds
+  setTimeout(initLanguageSelector, 2000);
   
-  // And after 5 seconds as last resort - DISABLED
-  // setTimeout(initLanguageSelector, 5000);
+  // And after 5 seconds as last resort
+  setTimeout(initLanguageSelector, 5000);
 })();
 
 // DEBUG FUNCTION - Test the lightbox manually
@@ -1464,9 +1425,6 @@ function initLanguageSelector() {
   // Function to update language
   function updateLanguage(newLang) {
     console.log("Updating language to:", newLang);
-    
-    // Update current language variable
-    currentLanguage = newLang;
     
     // Update desktop button
     if (languageBtn) {
@@ -1557,15 +1515,11 @@ function initLanguageSelector() {
   
   // Initialize with current language - detect from URL first
   const urlLang = detectLanguageFromURL();
-  console.log("Detected language from URL:", urlLang);
-  console.log("Current URL path:", window.location.pathname);
-  
   const currentLang = urlLang || languageBtn?.dataset.current || mobileLanguageBtn?.dataset.current || 'en';
   
   // Update current language variable
   currentLanguage = currentLang;
   
-  console.log("Setting language to:", currentLang);
   updateLanguage(currentLang);
   
   // Mark as initialized
@@ -1688,9 +1642,6 @@ function updateTranslations() {
   updateElementText("[data-translate=\"hireMe\"]", t.hireMe);
   updateElementText("[data-translate=\"downloadCV\"]", t.downloadCV);
   updateElementText("[data-translate=\"scrollToExplore\"]", t.scrollToExplore);
-  
-  // Reset typewriter effect with new text - DISABLED TEMPORARILY
-  // resetTypewriter();
   
   // Update about section
   updateElementText("[data-translate=\"aboutTitle\"]", t.aboutTitle);
@@ -1864,8 +1815,8 @@ function initNewHeader() {
     console.error('Mobile menu elements not found!');
   }
   
-  // Language selector functionality - DISABLED TEMPORARILY
-  // initLanguageSelector();
+  // Language selector functionality
+  initLanguageSelector();
   
   // Test function for debugging
   window.testMobileMenu = function() {
@@ -2152,13 +2103,5 @@ function detectLanguageFromURL() {
   // Default to English for root path
   return 'en';
 }
-
-// IMMEDIATE LANGUAGE DETECTION - DISABLED TEMPORARILY
-(function() {
-  console.log("=== LANGUAGE DETECTION DISABLED ===");
-  // Force English for now
-  currentLanguage = 'en';
-  console.log("Language forced to English");
-})();
 
 

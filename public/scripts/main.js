@@ -7,7 +7,32 @@ $(document).ready(function() {
     // once: true  
   }); // initialize animate on scroll library
   
-  // Typewriter effect is handled in epic.js to avoid conflicts
+  // Typewriter effect for the description text
+  const typewriterElement = document.getElementById('typewriter-text');
+  
+  if (typewriterElement) {
+    // Get the text from the translation system
+    const typewriterText = typewriterElement.textContent || typewriterElement.getAttribute('data-translate');
+    
+    if (typewriterText) {
+      // Clear the element first
+      typewriterElement.textContent = '';
+      
+      let i = 0;
+      const typeSpeed = 100; // milliseconds per character
+      
+      function typeWriter() {
+        if (i < typewriterText.length) {
+          typewriterElement.textContent += typewriterText.charAt(i);
+          i++;
+          setTimeout(typeWriter, typeSpeed);
+        }
+      }
+      
+      // Start typewriter effect after a short delay
+      setTimeout(typeWriter, 1000);
+    }
+  }
 });
 
 // Smooth scroll for links with hashes

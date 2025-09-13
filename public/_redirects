@@ -1,0 +1,5 @@
+# Redirect language routes to index.html
+/es/*    /index.html   200
+/gl/*    /index.html   200
+/fr/*    /index.html   200
+/en/*    /index.html   200
