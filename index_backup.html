@@ -22,57 +22,33 @@
     <link href="styles/epic.css" rel="stylesheet">
   </head>
   <body id="top">
-    <!-- NEW HEADER -->
-    <header class="main-header" id="mainHeader">
-      <div class="header-container">
-        <!-- Logo/Brand -->
-        <div class="header-brand">
-          <a href="#" class="brand-link">Iago S. Pardo</a>
+    <!-- Fixed Navigation Bar -->
+    <nav class="navbar navbar-expand-lg fixed-top navbar-transparent bg-primary" id="mainNavbar" color-on-scroll="400">
+      <div class="container">
+        <div class="navbar-translate">
+          <a class="navbar-brand" href="#" rel="tooltip">Iago S. Pardo</a>
+          <button class="navbar-toggler navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-bar bar1"></span><span class="navbar-toggler-bar bar2"></span><span class="navbar-toggler-bar bar3"></span></button>
         </div>
-        
-        <!-- Desktop Navigation -->
-        <nav class="desktop-nav">
-          <ul class="nav-list">
-            <li class="nav-item"><a href="#about" class="nav-link smooth-scroll" data-translate="about">About</a></li>
-            <li class="nav-item"><a href="#experience" class="nav-link smooth-scroll" data-translate="experience">Experience</a></li>
-            <li class="nav-item"><a href="#education" class="nav-link smooth-scroll" data-translate="education">Education</a></li>
-            <li class="nav-item"><a href="#skill" class="nav-link smooth-scroll" data-translate="skills">Skills</a></li>
-            <li class="nav-item"><a href="#portfolio" class="nav-link smooth-scroll" data-translate="portfolio">Portfolio</a></li>
-            <li class="nav-item"><a href="#contact" class="nav-link smooth-scroll" data-translate="contact">Contact</a></li>
-            <li class="nav-item language-item">
-              <a href="javascript:void(0)" class="nav-link language-btn" id="languageBtn" data-current="en">
-                <span class="flag-emoji">🇬🇧</span>
+        <div class="collapse navbar-collapse justify-content-end" id="navigation">
+          <ul class="navbar-nav">
+            <li class="nav-item"><a class="nav-link smooth-scroll" href="#about" data-translate="about">About</a></li>
+            <li class="nav-item"><a class="nav-link smooth-scroll" href="#experience" data-translate="experience">Experience</a></li>
+            <li class="nav-item"><a class="nav-link smooth-scroll" href="#education" data-translate="education">Education</a></li>
+            <li class="nav-item"><a class="nav-link smooth-scroll" href="#skill" data-translate="skills">Skills</a></li>
+            <li class="nav-item"><a class="nav-link smooth-scroll" href="#portfolio" data-translate="portfolio">Portfolio</a></li>
+            <li class="nav-item"><a class="nav-link smooth-scroll" href="#contact" data-translate="contact">Contact</a></li>
+            <!-- Language Selector -->
+            <li class="nav-item language-nav-item">
+              <a class="nav-link language-btn" href="javascript:void(0)" id="languageBtn" data-current="en">
+                <div class="flag-circle">
+                  <span class="flag-emoji">🇬🇧</span>
+                </div>
               </a>
             </li>
           </ul>
-        </nav>
-        
-        <!-- Mobile Menu Button -->
-        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle mobile menu">
-          <span class="hamburger-line"></span>
-          <span class="hamburger-line"></span>
-          <span class="hamburger-line"></span>
-        </button>
+        </div>
       </div>
-      
-      <!-- Mobile Navigation -->
-      <nav class="mobile-nav" id="mobileNav">
-        <ul class="mobile-nav-list">
-          <li class="mobile-nav-item"><a href="#about" class="mobile-nav-link smooth-scroll" data-translate="about">About</a></li>
-          <li class="mobile-nav-item"><a href="#experience" class="mobile-nav-link smooth-scroll" data-translate="experience">Experience</a></li>
-          <li class="mobile-nav-item"><a href="#education" class="mobile-nav-link smooth-scroll" data-translate="education">Education</a></li>
-          <li class="mobile-nav-item"><a href="#skill" class="mobile-nav-link smooth-scroll" data-translate="skills">Skills</a></li>
-          <li class="mobile-nav-item"><a href="#portfolio" class="mobile-nav-link smooth-scroll" data-translate="portfolio">Portfolio</a></li>
-          <li class="mobile-nav-item"><a href="#contact" class="mobile-nav-link smooth-scroll" data-translate="contact">Contact</a></li>
-          <li class="mobile-nav-item language-item">
-            <a href="javascript:void(0)" class="mobile-nav-link language-btn" id="mobileLanguageBtn" data-current="en">
-              <span class="flag-emoji">🇬🇧</span>
-              <span class="language-text">English</span>
-            </a>
-          </li>
-        </ul>
-      </nav>
-    </header>
+    </nav>
 
 <!--////////////////////////////////////////////////////-->
 <!--HEAD-->
@@ -2024,365 +2000,585 @@
     <script src="js/aos.js"></script>
     <script src="scripts/main.js"></script>
     <script src="scripts/epic.js"></script>
+    <script src="scripts/lightbox-simple.min.js"></script>
+    console.log("=== EMERGENCY LANGUAGE FIX LOADING ===");
     
-    <!-- SIMPLE LIGHTBOX HTML -->
-    <div id="simpleLightbox" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.9); z-index: 9999; display: none; align-items: center; justify-content: center; overflow: hidden;">
-      <div style="position: relative; max-width: 90%; max-height: 90%; background: white; padding: 20px; border-radius: 10px; display: flex; flex-direction: column; align-items: center; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
-        <button id="simpleClose" style="position: absolute; top: 10px; right: 10px; background: #ff4444; color: white; border: none; border-radius: 50%; width: 30px; height: 30px; cursor: pointer; z-index: 10000; font-size: 18px;">×</button>
-        
-        <!-- Navigation buttons -->
-        <button id="simplePrev" style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.7); color: white; border: none; border-radius: 50%; width: 40px; height: 40px; cursor: pointer; z-index: 10000; font-size: 18px; display: flex; align-items: center; justify-content: center;">‹</button>
-        <button id="simpleNext" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.7); color: white; border: none; border-radius: 50%; width: 40px; height: 40px; cursor: pointer; z-index: 10000; font-size: 18px; display: flex; align-items: center; justify-content: center;">›</button>
-        
-        <img id="simpleImage" src="" alt="" style="max-width: 100%; max-height: 80vh; display: block; object-fit: contain; border-radius: 8px; box-shadow: 0 4px 20px rgba(0,0,0,0.3);">
-        
-        <!-- Image info -->
-        <div id="simpleInfo" style="margin-top: 15px; text-align: center;">
-          <h3 id="simpleTitle" style="margin: 0 0 5px 0; font-size: 18px; color: #333;"></h3>
-          <p id="simpleDescription" style="margin: 0; font-size: 14px; color: #666;"></p>
-        </div>
-      </div>
-    </div>
+    // Translation data
+    const translations = {
+      en: {
+        about: "About",
+        experience: "Experience", 
+        education: "Education",
+        skills: "Skills",
+        portfolio: "Portfolio",
+        contact: "Contact",
+        heroTitle1: "Iago Santos",
+        heroTitle2: "Pardo",
+        heroSubtitle: "Senior DevOps Engineer",
+        heroDescription: "Hard-working, conscientious, committed and pragmatic.",
+        hireMe: "Hire Me",
+        downloadCV: "Download my CV",
+        scrollToExplore: "Scroll to explore",
+        aboutTitle: "Professional Summary",
+        aboutText: "I am an attentive and efficient professional seeking solutions to provide the best results, while constantly trying to create a conductive and positive atmosphere through an optimistic and constructive attitude. I regularly propose activities to improve the team environment and am committed to working overtime when required by the needs of the company.",
+        contactInfo: "Contact Information",
+        email: "Email:",
+        phone: "Phone:",
+        location: "Location:",
+        languages: "Languages:",
+        experienceTitle: "Professional Journey",
+        experienceSubtitle: "Building the future of DevOps, one project at a time",
+        educationTitle: "🎓 Academic Journey",
+        educationSubtitle: "From Engineering to Business Leadership",
+        skillsTitle: "Technical Expertise",
+        skillsSubtitle: "Mastering the tools that power modern DevOps",
+        portfolioTitle: "🏆 Certifications & Achievements",
+        portfolioSubtitle: "Professional certifications and technical achievements",
+        all: "All",
+        cisco: "Cisco",
+        microsoft: "Microsoft",
+        gitlab: "GitLab",
+        contactTitle: "🚀 Let's Connect",
+        contactSubtitle: "Ready to build something amazing together?",
+        sendMessage: "Send me a message",
+        getInTouch: "Get in Touch",
+        yourName: "Your Name",
+        yourEmail: "Your Email",
+        subject: "Subject",
+        yourMessage: "Your Message",
+        send: "Send",
+        allRightsReserved: "All rights reserved.",
+        yearsExperience: "Years Experience",
+        projectsCompleted: "Projects Completed",
+        programmingLanguages: "Programming Languages",
+        devopsCicd: "DevOps & CI/CD",
+        containerizationOrchestration: "Containerization & Orchestration",
+        infrastructureAsCode: "Infrastructure as Code",
+        cloudPlatforms: "Cloud Platforms",
+        monitoringObservability: "Monitoring & Observability",
+        securityDevsecops: "Security & DevSecOps",
+        agileProjectTracking: "Agile & Project Tracking",
+        currentPosition: "Current Position",
+        deputyPeopleLead: "Deputy People Lead",
+        openShiftCloudEngineering: "OpenShift Cloud Engineering",
+        openStackCloudEngineering: "OpenStack Cloud Engineering",
+        softwareDeveloper: "Software Developer",
+        educationalActivitiesInstructor: "Educational Activities Instructor",
+        itTelecommunicationsInternship: "IT Telecommunications Internship",
+        // Experience content
+        roleSummaryAdfinis: "Leading DevOps transformation initiatives and managing complex infrastructure projects across multiple clients in Switzerland.",
+        devopsRoadmaps: "DevOps Roadmaps",
+        devopsRoadmapsDesc: "Defining and managing comprehensive roadmaps for DevOps implementation across multiple Swiss clients, ensuring scalable and efficient cloud infrastructure adoption",
+        infrastructureProjects: "Infrastructure Projects",
+        infrastructureProjectsDesc: "Leading end-to-end infrastructure projects from initial planning to deployment, managing budgets up to €500K and teams of 5-8 engineers",
+        cloudSlasCompliance: "Cloud SLAs & Compliance",
+        cloudSlasComplianceDesc: "Providing 99.9% SLA for AWS, Azure, Cloudscale, Exoscale, and GCP platforms, ensuring GDPR compliance and security standards",
+        technicalTraining: "Technical Training",
+        technicalTrainingDesc: "Conducting advanced CI/CD training sessions for 50+ engineers using Terraform, Azure, Vault, ArgoCD, and GitOps methodologies",
+        performanceOptimization: "Performance Optimization",
+        performanceOptimizationDesc: "Reducing infrastructure costs by 30% through automated scaling and resource optimization across client environments",
+        teamLeadership: "Team Leadership",
+        teamLeadershipDesc: "Managing cross-functional teams of DevOps engineers, implementing Agile methodologies and mentoring junior developers",
+        deputyPeopleLeadResponsibilities: "Deputy People Lead Responsibilities",
+        teamDevelopmentManagement: "Team development and management oversight",
+        communicationCoordination: "Communication coordination between teams and management",
+        performanceMetricsTracking: "Performance metrics tracking for development teams",
+        hiringOnboardingTraining: "Hiring, onboarding, and training new team members",
+        // CERN OpenShift content
+        roleSummaryCernOpenshift: "Main responsible engineer for OpenShift PaaS serving more than 3000 users with advanced container orchestration.",
+        openShiftPaaSPlatform: "OpenShift PaaS Platform",
+        openShiftPaaSPlatformDesc: "Main responsible engineer for OpenShift PaaS serving 3000+ researchers and scientists worldwide, managing 500+ applications",
+        containerOrchestration: "Container Orchestration",
+        containerOrchestrationDesc: "Designing and implementing enterprise-grade PaaS based on Docker containers and Kubernetes, handling 10TB+ of data daily",
+        cicdAutomation: "CI/CD Automation",
+        cicdAutomationDesc: "Managing automated deployments with CI and ArgoCD for 17,000+ users across multiple research projects and experiments",
+        platformManagement: "Platform Management",
+        platformManagementDesc: "Responsible for Jenkins, Nexus, Rundeck and SSO proxy platforms, ensuring 99.95% uptime for critical research infrastructure",
+        kubernetesOperators: "Kubernetes Operators",
+        kubernetesOperatorsDesc: "Developing custom Kubernetes Operators and APBs (Ansible Playbook Bundles) for automated application deployment and management",
+        trainingMentoring: "Training & Mentoring",
+        trainingMentoringDesc: "Providing technical training to end-users and mentoring team members, implementing SCRUM methodology for cross-team collaboration",
+        // CERN OpenStack content
+        roleSummaryCernOpenstack: "Responsible for Nova network migration to Neutron, improving scalability across 35,000 virtual machines with 300k+ cores.",
+        networkMigration: "Network Migration",
+        networkMigrationDesc: "Nova network migration to Neutron for improved scalability",
+        massiveScale: "Massive Scale",
+        massiveScaleDesc: "Managing 35,000 VMs with 300k+ cores in the cloud",
+        loadBalancer: "Load Balancer",
+        loadBalancerDesc: "Integrating Kubernetes-based Load Balancer for horizontal scaling",
+        customDHCP: "Custom DHCP",
+        customDHCPDesc: "Main developer of customized DHCP solution in Golang"
+      },
+      es: {
+        about: "Acerca de",
+        experience: "Experiencia",
+        education: "Educación",
+        skills: "Habilidades",
+        portfolio: "Portfolio",
+        contact: "Contacto",
+        heroTitle1: "Iago Santos",
+        heroTitle2: "Pardo",
+        heroSubtitle: "Ingeniero DevOps Senior",
+        heroDescription: "Trabajador, concienzudo, comprometido y pragmático.",
+        hireMe: "Contrátame",
+        downloadCV: "Descargar mi CV",
+        scrollToExplore: "Desplázate para explorar",
+        aboutTitle: "Resumen Profesional",
+        aboutText: "Soy un profesional atento y eficiente que busca soluciones para proporcionar los mejores resultados, mientras trato constantemente de crear una atmósfera positiva y constructiva a través de una actitud optimista. Propongo regularmente actividades para mejorar el ambiente del equipo y me comprometo a trabajar horas extra cuando las necesidades de la empresa lo requieran.",
+        contactInfo: "Información de Contacto",
+        email: "Email:",
+        phone: "Teléfono:",
+        location: "Ubicación:",
+        languages: "Idiomas:",
+        experienceTitle: "Trayectoria Profesional",
+        experienceSubtitle: "Construyendo el futuro del DevOps, un proyecto a la vez",
+        educationTitle: "🎓 Trayectoria Académica",
+        educationSubtitle: "De la Ingeniería al Liderazgo Empresarial",
+        skillsTitle: "Experiencia Técnica",
+        skillsSubtitle: "Dominando las herramientas que impulsan el DevOps moderno",
+        portfolioTitle: "🏆 Certificaciones y Logros",
+        portfolioSubtitle: "Certificaciones profesionales y logros técnicos",
+        all: "Todo",
+        cisco: "Cisco",
+        microsoft: "Microsoft",
+        gitlab: "GitLab",
+        contactTitle: "🚀 Conectemos",
+        contactSubtitle: "¿Listo para construir algo increíble juntos?",
+        sendMessage: "Envíame un mensaje",
+        getInTouch: "Ponte en contacto",
+        yourName: "Tu Nombre",
+        yourEmail: "Tu Email",
+        subject: "Asunto",
+        yourMessage: "Tu Mensaje",
+        send: "Enviar",
+        allRightsReserved: "Todos los derechos reservados.",
+        yearsExperience: "Años de Experiencia",
+        projectsCompleted: "Proyectos Completados",
+        programmingLanguages: "Lenguajes de Programación",
+        devopsCicd: "DevOps & CI/CD",
+        containerizationOrchestration: "Containerización y Orquestación",
+        infrastructureAsCode: "Infraestructura como Código",
+        cloudPlatforms: "Plataformas en la Nube",
+        monitoringObservability: "Monitoreo y Observabilidad",
+        securityDevsecops: "Seguridad y DevSecOps",
+        agileProjectTracking: "Metodologías Ágiles y Seguimiento de Proyectos",
+        currentPosition: "Posición Actual",
+        deputyPeopleLead: "Subdirector de Personas",
+        openShiftCloudEngineering: "Ingeniería de Nube OpenShift",
+        openStackCloudEngineering: "Ingeniería de Nube OpenStack",
+        softwareDeveloper: "Desarrollador de Software",
+        educationalActivitiesInstructor: "Instructor de Actividades Educativas",
+        itTelecommunicationsInternship: "Prácticas de Telecomunicaciones IT",
+        // Experience content
+        roleSummaryAdfinis: "Liderando iniciativas de transformación DevOps y gestionando proyectos complejos de infraestructura para múltiples clientes en Suiza.",
+        devopsRoadmaps: "Roadmaps DevOps",
+        devopsRoadmapsDesc: "Definiendo y gestionando roadmaps integrales para la implementación DevOps en múltiples clientes suizos, asegurando la adopción escalable y eficiente de infraestructura en la nube",
+        infrastructureProjects: "Proyectos de Infraestructura",
+        infrastructureProjectsDesc: "Liderando proyectos de infraestructura de extremo a extremo desde la planificación inicial hasta el despliegue, gestionando presupuestos de hasta €500K y equipos de 5-8 ingenieros",
+        cloudSlasCompliance: "SLAs en la Nube y Cumplimiento",
+        cloudSlasComplianceDesc: "Proporcionando SLA del 99.9% para plataformas AWS, Azure, Cloudscale, Exoscale y GCP, asegurando cumplimiento GDPR y estándares de seguridad",
+        technicalTraining: "Capacitación Técnica",
+        technicalTrainingDesc: "Realizando sesiones avanzadas de capacitación CI/CD para más de 50 ingenieros usando Terraform, Azure, Vault, ArgoCD y metodologías GitOps",
+        performanceOptimization: "Optimización de Rendimiento",
+        performanceOptimizationDesc: "Reduciendo costos de infraestructura en un 30% a través de escalado automático y optimización de recursos en entornos de clientes",
+        teamLeadership: "Liderazgo de Equipo",
+        teamLeadershipDesc: "Gestionando equipos multifuncionales de ingenieros DevOps, implementando metodologías Ágiles y mentorizando desarrolladores junior",
+        deputyPeopleLeadResponsibilities: "Responsabilidades como Subdirector de Personas",
+        teamDevelopmentManagement: "Supervisión del desarrollo y gestión de equipos",
+        communicationCoordination: "Coordinación de comunicación entre equipos y gerencia",
+        performanceMetricsTracking: "Seguimiento de métricas de rendimiento para equipos de desarrollo",
+        hiringOnboardingTraining: "Contratación, incorporación y capacitación de nuevos miembros del equipo",
+        // CERN OpenShift content
+        roleSummaryCernOpenshift: "Ingeniero principal responsable de OpenShift PaaS sirviendo a más de 3000 usuarios con orquestación avanzada de contenedores.",
+        openShiftPaaSPlatform: "Plataforma OpenShift PaaS",
+        openShiftPaaSPlatformDesc: "Ingeniero principal responsable de OpenShift PaaS sirviendo a más de 3000 investigadores y científicos mundialmente, gestionando más de 500 aplicaciones",
+        containerOrchestration: "Orquestación de Contenedores",
+        containerOrchestrationDesc: "Diseñando e implementando PaaS de nivel empresarial basado en contenedores Docker y Kubernetes, manejando más de 10TB de datos diariamente",
+        cicdAutomation: "Automatización CI/CD",
+        cicdAutomationDesc: "Gestionando despliegues automatizados con CI y ArgoCD para más de 17,000 usuarios a través de múltiples proyectos de investigación y experimentos",
+        platformManagement: "Gestión de Plataforma",
+        platformManagementDesc: "Responsable de las plataformas Jenkins, Nexus, Rundeck y proxy SSO, asegurando 99.95% de tiempo de actividad para infraestructura crítica de investigación",
+        kubernetesOperators: "Operadores de Kubernetes",
+        kubernetesOperatorsDesc: "Desarrollando Operadores personalizados de Kubernetes y APBs (Ansible Playbook Bundles) para despliegue y gestión automatizada de aplicaciones",
+        trainingMentoring: "Capacitación y Mentoría",
+        trainingMentoringDesc: "Proporcionando capacitación técnica a usuarios finales y mentorizando miembros del equipo, implementando metodología SCRUM para colaboración entre equipos",
+        // CERN OpenStack content
+        roleSummaryCernOpenstack: "Responsable de la migración de red Nova a Neutron, mejorando la escalabilidad a través de 35,000 máquinas virtuales con más de 300k núcleos.",
+        networkMigration: "Migración de Red",
+        networkMigrationDesc: "Migración de red Nova a Neutron para mejorar la escalabilidad",
+        massiveScale: "Escala Masiva",
+        massiveScaleDesc: "Gestionando 35,000 VMs con más de 300k núcleos en la nube",
+        loadBalancer: "Balanceador de Carga",
+        loadBalancerDesc: "Integrando Balanceador de Carga basado en Kubernetes para escalado horizontal",
+        customDHCP: "DHCP Personalizado",
+        customDHCPDesc: "Desarrollador principal de solución DHCP personalizada en Golang"
+      },
+      gl: {
+        about: "Acerca de",
+        experience: "Experiencia",
+        education: "Educación",
+        skills: "Habilidades",
+        portfolio: "Portfolio",
+        contact: "Contacto",
+        heroTitle1: "Iago Santos",
+        heroTitle2: "Pardo",
+        heroSubtitle: "Enxeñeiro DevOps Senior",
+        heroDescription: "Traballador, concienzudo, comprometido e pragmático.",
+        hireMe: "Contrátame",
+        downloadCV: "Descargar o meu CV",
+        scrollToExplore: "Desprazate para explorar",
+        aboutTitle: "Resumo Profesional",
+        aboutText: "Son un profesional atento e eficiente que busca solucións para proporcionar os mellores resultados, mentres trato constantemente de crear unha atmosfera positiva e construtiva a través dunha actitude optimista. Propoño regularmente actividades para mellorar o ambiente do equipo e comprométome a traballar horas extra cando as necesidades da empresa o requiran.",
+        contactInfo: "Información de Contacto",
+        email: "Email:",
+        phone: "Teléfono:",
+        location: "Ubicación:",
+        languages: "Idiomas:",
+        experienceTitle: "Traxectoria Profesional",
+        experienceSubtitle: "Construíndo o futuro do DevOps, un proxecto á vez",
+        educationTitle: "🎓 Traxectoria Académica",
+        educationSubtitle: "Da Enxeñería ao Liderado Empresarial",
+        skillsTitle: "Experiencia Técnica",
+        skillsSubtitle: "Dominando as ferramentas que impulsan o DevOps moderno",
+        portfolioTitle: "🏆 Certificacións e Logros",
+        portfolioSubtitle: "Certificacións profesionais e logros técnicos",
+        all: "Todo",
+        cisco: "Cisco",
+        microsoft: "Microsoft",
+        gitlab: "GitLab",
+        contactTitle: "🚀 Conectemos",
+        contactSubtitle: "¿Listo para construír algo incrible xuntos?",
+        sendMessage: "Envíame unha mensaxe",
+        getInTouch: "Ponte en contacto",
+        yourName: "O teu Nome",
+        yourEmail: "O teu Email",
+        subject: "Asunto",
+        yourMessage: "A túa Mensaxe",
+        send: "Enviar",
+        allRightsReserved: "Todos os dereitos reservados.",
+        yearsExperience: "Anos de Experiencia",
+        projectsCompleted: "Proxectos Completados",
+        programmingLanguages: "Linguaxes de Programación",
+        devopsCicd: "DevOps & CI/CD",
+        containerizationOrchestration: "Containerización e Orquestación",
+        infrastructureAsCode: "Infraestrutura como Código",
+        cloudPlatforms: "Plataformas na Nube",
+        monitoringObservability: "Monitorización e Observabilidade",
+        securityDevsecops: "Seguridade e DevSecOps",
+        agileProjectTracking: "Metodoloxías Áxiles e Seguimento de Proxectos",
+        currentPosition: "Posición Actual",
+        deputyPeopleLead: "Subdirector de Persoas",
+        openShiftCloudEngineering: "Enxeñería de Nube OpenShift",
+        openStackCloudEngineering: "Enxeñería de Nube OpenStack",
+        softwareDeveloper: "Desenvolvedor de Software",
+        educationalActivitiesInstructor: "Instructor de Actividades Educativas",
+        itTelecommunicationsInternship: "Prácticas de Telecomunicacións IT",
+        // Experience content
+        roleSummaryAdfinis: "Liderando iniciativas de transformación DevOps e xestionando proxectos complexos de infraestrutura para múltiples clientes en Suíza.",
+        devopsRoadmaps: "Roadmaps DevOps",
+        devopsRoadmapsDesc: "Definindo e xestionando roadmaps integrais para a implementación DevOps en múltiples clientes suízos, asegurando a adopción escalable e eficiente de infraestrutura na nube",
+        infrastructureProjects: "Proxectos de Infraestrutura",
+        infrastructureProjectsDesc: "Liderando proxectos de infraestrutura de extremo a extremo desde a planificación inicial ata o despregue, xestionando orzamentos de ata €500K e equipos de 5-8 enxeñeiros",
+        cloudSlasCompliance: "SLAs na Nube e Cumprimento",
+        cloudSlasComplianceDesc: "Proporcionando SLA do 99.9% para plataformas AWS, Azure, Cloudscale, Exoscale e GCP, asegurando cumprimento GDPR e estándares de seguridade",
+        technicalTraining: "Capacitación Técnica",
+        technicalTrainingDesc: "Realizando sesións avanzadas de capacitación CI/CD para máis de 50 enxeñeiros usando Terraform, Azure, Vault, ArgoCD e metodoloxías GitOps",
+        performanceOptimization: "Optimización de Rendemento",
+        performanceOptimizationDesc: "Reducindo custos de infraestrutura nun 30% a través de escalado automático e optimización de recursos en entornos de clientes",
+        teamLeadership: "Liderado de Equipo",
+        teamLeadershipDesc: "Xestionando equipos multifuncionais de enxeñeiros DevOps, implementando metodoloxías Áxiles e mentorizando desenvolvedores junior",
+        deputyPeopleLeadResponsibilities: "Responsabilidades como Subdirector de Persoas",
+        teamDevelopmentManagement: "Supervisión do desenvolvemento e xestión de equipos",
+        communicationCoordination: "Coordinación de comunicación entre equipos e xerencia",
+        performanceMetricsTracking: "Seguimento de métricas de rendemento para equipos de desenvolvemento",
+        hiringOnboardingTraining: "Contratación, incorporación e capacitación de novos membros do equipo",
+        // CERN OpenShift content
+        roleSummaryCernOpenshift: "Enxeñeiro principal responsable de OpenShift PaaS servindo a máis de 3000 usuarios con orquestación avanzada de contedores.",
+        openShiftPaaSPlatform: "Plataforma OpenShift PaaS",
+        openShiftPaaSPlatformDesc: "Enxeñeiro principal responsable de OpenShift PaaS servindo a máis de 3000 investigadores e científicos mundialmente, xestionando máis de 500 aplicacións",
+        containerOrchestration: "Orquestación de Contedores",
+        containerOrchestrationDesc: "Deseñando e implementando PaaS de nivel empresarial baseado en contedores Docker e Kubernetes, manexando máis de 10TB de datos diariamente",
+        cicdAutomation: "Automatización CI/CD",
+        cicdAutomationDesc: "Xestionando despregues automatizados con CI e ArgoCD para máis de 17,000 usuarios a través de múltiples proxectos de investigación e experimentos",
+        platformManagement: "Xestión de Plataforma",
+        platformManagementDesc: "Responsable das plataformas Jenkins, Nexus, Rundeck e proxy SSO, asegurando 99.95% de tempo de actividade para infraestrutura crítica de investigación",
+        kubernetesOperators: "Operadores de Kubernetes",
+        kubernetesOperatorsDesc: "Desenvolvendo Operadores personalizados de Kubernetes e APBs (Ansible Playbook Bundles) para despregue e xestión automatizada de aplicacións",
+        trainingMentoring: "Capacitación e Mentoría",
+        trainingMentoringDesc: "Proporcionando capacitación técnica a usuarios finais e mentorizando membros do equipo, implementando metodoloxía SCRUM para colaboración entre equipos",
+        // CERN OpenStack content
+        roleSummaryCernOpenstack: "Responsable da migración de rede Nova a Neutron, mellorando a escalabilidade a través de 35,000 máquinas virtuais con máis de 300k núcleos.",
+        networkMigration: "Migración de Rede",
+        networkMigrationDesc: "Migración de rede Nova a Neutron para mellorar a escalabilidade",
+        massiveScale: "Escala Masiva",
+        massiveScaleDesc: "Xestionando 35,000 VMs con máis de 300k núcleos na nube",
+        loadBalancer: "Balanceador de Carga",
+        loadBalancerDesc: "Integrando Balanceador de Carga baseado en Kubernetes para escalado horizontal",
+        customDHCP: "DHCP Personalizado",
+        customDHCPDesc: "Desenvolvedor principal de solución DHCP personalizada en Golang"
+      },
+      fr: {
+        about: "À propos",
+        experience: "Expérience",
+        education: "Formation",
+        skills: "Compétences",
+        portfolio: "Portfolio",
+        contact: "Contact",
+        heroTitle1: "Iago Santos",
+        heroTitle2: "Pardo",
+        heroSubtitle: "Ingénieur DevOps Senior",
+        heroDescription: "Travailleur, consciencieux, engagé et pragmatique.",
+        hireMe: "Engagez-moi",
+        downloadCV: "Télécharger mon CV",
+        scrollToExplore: "Faites défiler pour explorer",
+        aboutTitle: "Résumé Professionnel",
+        aboutText: "Je suis un professionnel attentif et efficace qui cherche des solutions pour fournir les meilleurs résultats, tout en essayant constamment de créer une atmosphère positive et constructive grâce à une attitude optimiste. Je propose régulièrement des activités pour améliorer l'environnement de l'équipe et je m'engage à faire des heures supplémentaires lorsque les besoins de l'entreprise l'exigent.",
+        contactInfo: "Informations de Contact",
+        email: "Email:",
+        phone: "Téléphone:",
+        location: "Localisation:",
+        languages: "Langues:",
+        experienceTitle: "Parcours Professionnel",
+        experienceSubtitle: "Construire l'avenir du DevOps, un projet à la fois",
+        educationTitle: "🎓 Parcours Académique",
+        educationSubtitle: "De l'Ingénierie au Leadership Commercial",
+        skillsTitle: "Expertise Technique",
+        skillsSubtitle: "Maîtriser les outils qui alimentent le DevOps moderne",
+        portfolioTitle: "🏆 Certifications et Réalisations",
+        portfolioSubtitle: "Certifications professionnelles et réalisations techniques",
+        all: "Tout",
+        cisco: "Cisco",
+        microsoft: "Microsoft",
+        gitlab: "GitLab",
+        contactTitle: "🚀 Connectons-nous",
+        contactSubtitle: "Prêt à construire quelque chose d'incroyable ensemble?",
+        sendMessage: "Envoyez-moi un message",
+        getInTouch: "Entrer en contact",
+        yourName: "Votre Nom",
+        yourEmail: "Votre Email",
+        subject: "Sujet",
+        yourMessage: "Votre Message",
+        send: "Envoyer",
+        allRightsReserved: "Tous droits réservés.",
+        yearsExperience: "Années d'Expérience",
+        projectsCompleted: "Projets Terminés",
+        programmingLanguages: "Langages de Programmation",
+        devopsCicd: "DevOps & CI/CD",
+        containerizationOrchestration: "Conteneurisation et Orchestration",
+        infrastructureAsCode: "Infrastructure as Code",
+        cloudPlatforms: "Plateformes Cloud",
+        monitoringObservability: "Surveillance et Observabilité",
+        securityDevsecops: "Sécurité et DevSecOps",
+        agileProjectTracking: "Méthodologies Agiles et Suivi de Projets",
+        currentPosition: "Poste Actuel",
+        deputyPeopleLead: "Sous-directeur des Personnes",
+        openShiftCloudEngineering: "Ingénierie Cloud OpenShift",
+        openStackCloudEngineering: "Ingénierie Cloud OpenStack",
+        softwareDeveloper: "Développeur de Logiciels",
+        educationalActivitiesInstructor: "Instructeur d'Activités Éducatives",
+        itTelecommunicationsInternship: "Stage IT Télécommunications",
+        // Experience content
+        roleSummaryAdfinis: "Diriger les initiatives de transformation DevOps et gérer des projets d'infrastructure complexes pour plusieurs clients en Suisse.",
+        devopsRoadmaps: "Roadmaps DevOps",
+        devopsRoadmapsDesc: "Définir et gérer des roadmaps complets pour l'implémentation DevOps chez plusieurs clients suisses, assurant une adoption évolutive et efficace de l'infrastructure cloud",
+        infrastructureProjects: "Projets d'Infrastructure",
+        infrastructureProjectsDesc: "Diriger des projets d'infrastructure de bout en bout depuis la planification initiale jusqu'au déploiement, gérant des budgets jusqu'à €500K et des équipes de 5-8 ingénieurs",
+        cloudSlasCompliance: "SLAs Cloud et Conformité",
+        cloudSlasComplianceDesc: "Fournir un SLA de 99.9% pour les plateformes AWS, Azure, Cloudscale, Exoscale et GCP, assurant la conformité GDPR et les standards de sécurité",
+        technicalTraining: "Formation Technique",
+        technicalTrainingDesc: "Conduire des sessions de formation CI/CD avancées pour plus de 50 ingénieurs utilisant Terraform, Azure, Vault, ArgoCD et les méthodologies GitOps",
+        performanceOptimization: "Optimisation des Performances",
+        performanceOptimizationDesc: "Réduire les coûts d'infrastructure de 30% grâce à la mise à l'échelle automatique et l'optimisation des ressources dans les environnements clients",
+        teamLeadership: "Leadership d'Équipe",
+        teamLeadershipDesc: "Gérer des équipes multifonctionnelles d'ingénieurs DevOps, implémenter les méthodologies Agiles et encadrer les développeurs juniors",
+        deputyPeopleLeadResponsibilities: "Responsabilités de Sous-directeur des Personnes",
+        teamDevelopmentManagement: "Supervision du développement et de la gestion des équipes",
+        communicationCoordination: "Coordination de la communication entre les équipes et la direction",
+        performanceMetricsTracking: "Suivi des métriques de performance pour les équipes de développement",
+        hiringOnboardingTraining: "Recrutement, intégration et formation des nouveaux membres d'équipe",
+        // CERN OpenShift content
+        roleSummaryCernOpenshift: "Ingénieur principal responsable d'OpenShift PaaS servant plus de 3000 utilisateurs avec orchestration avancée de conteneurs.",
+        openShiftPaaSPlatform: "Plateforme OpenShift PaaS",
+        openShiftPaaSPlatformDesc: "Ingénieur principal responsable d'OpenShift PaaS servant plus de 3000 chercheurs et scientifiques mondialement, gérant plus de 500 applications",
+        containerOrchestration: "Orchestration de Conteneurs",
+        containerOrchestrationDesc: "Concevant et implémentant un PaaS de niveau entreprise basé sur des conteneurs Docker et Kubernetes, gérant plus de 10TB de données quotidiennement",
+        cicdAutomation: "Automatisation CI/CD",
+        cicdAutomationDesc: "Gérant les déploiements automatisés avec CI et ArgoCD pour plus de 17,000 utilisateurs à travers plusieurs projets de recherche et expériences",
+        platformManagement: "Gestion de Plateforme",
+        platformManagementDesc: "Responsable des plateformes Jenkins, Nexus, Rundeck et proxy SSO, assurant 99.95% de temps de fonctionnement pour l'infrastructure critique de recherche",
+        kubernetesOperators: "Opérateurs Kubernetes",
+        kubernetesOperatorsDesc: "Développant des Opérateurs personnalisés Kubernetes et APBs (Ansible Playbook Bundles) pour le déploiement et la gestion automatisée d'applications",
+        trainingMentoring: "Formation et Mentorat",
+        trainingMentoringDesc: "Fournissant une formation technique aux utilisateurs finaux et mentorant les membres de l'équipe, implémentant la méthodologie SCRUM pour la collaboration inter-équipes",
+        // CERN OpenStack content
+        roleSummaryCernOpenstack: "Responsable de la migration réseau Nova vers Neutron, améliorant la scalabilité à travers 35,000 machines virtuelles avec plus de 300k cœurs.",
+        networkMigration: "Migration Réseau",
+        networkMigrationDesc: "Migration réseau Nova vers Neutron pour améliorer la scalabilité",
+        massiveScale: "Échelle Massive",
+        massiveScaleDesc: "Gérant 35,000 VMs avec plus de 300k cœurs dans le cloud",
+        loadBalancer: "Équilibreur de Charge",
+        loadBalancerDesc: "Intégrant un Équilibreur de Charge basé sur Kubernetes pour la mise à l'échelle horizontale",
+        customDHCP: "DHCP Personnalisé",
+        customDHCPDesc: "Développeur principal de solution DHCP personnalisée en Golang"
+      }
+    };
     
-    <style>
-    /* Prevent horizontal scroll without affecting element sizes */
-    html, body {
-      overflow-x: hidden !important;
-    }
-    
-    /* Ensure lightbox doesn't cause horizontal scroll */
-    #simpleLightbox {
-      overflow-x: hidden !important;
-    }
-    
-    /* Fix for any elements that might cause horizontal overflow without changing container sizes */
-    .container {
-      overflow-x: hidden !important;
-    }
-    </style>
-    
-    <script>
-    // SIMPLE LIGHTBOX SCRIPT
-    console.log('Simple lightbox script starting...');
-    
-    let lightbox, lightboxImage, closeBtn, prevBtn, nextBtn, titleEl, descEl;
-    let currentIndex = 0;
-    let portfolioItems = [];
-    
-    function showImage(src, title = '', description = '') {
-      console.log('=== SHOWING IMAGE ===');
-      console.log('Image src:', src);
-      console.log('Title:', title);
-      console.log('Description:', description);
-      console.log('Lightbox element:', lightbox);
-      console.log('Lightbox image element:', lightboxImage);
+    // Translation function
+    function translatePage(lang) {
+      console.log("Translating to:", lang);
       
-      if (!lightbox || !lightboxImage) {
-        console.error('❌ Lightbox elements not found!');
-        console.log('Lightbox:', lightbox);
-        console.log('LightboxImage:', lightboxImage);
+      if (!translations[lang]) {
+        console.error("Language not found:", lang);
         return;
       }
       
-      // Set image source
-      lightboxImage.src = src;
-      lightboxImage.alt = title;
+      const t = translations[lang];
       
-      // Set title and description
-      if (titleEl) {
-        titleEl.textContent = title;
-        console.log('Title set:', title);
-      }
-      if (descEl) {
-        descEl.textContent = description;
-        console.log('Description set:', description);
-      }
+      // Update navigation
+      updateElementText("[data-translate=\"about\"]", t.about);
+      updateElementText("[data-translate=\"experience\"]", t.experience);
+      updateElementText("[data-translate=\"education\"]", t.education);
+      updateElementText("[data-translate=\"skills\"]", t.skills);
+      updateElementText("[data-translate=\"portfolio\"]", t.portfolio);
+      updateElementText("[data-translate=\"contact\"]", t.contact);
       
-      // Show the lightbox
-      lightbox.style.display = 'flex';
-      lightbox.style.visibility = 'visible';
-      lightbox.style.opacity = '1';
-      lightbox.style.position = 'fixed';
-      lightbox.style.top = '0';
-      lightbox.style.left = '0';
-      lightbox.style.width = '100vw';
-      lightbox.style.height = '100vh';
-      lightbox.style.zIndex = '9999';
+      // Update hero section
+      updateElementText("[data-translate=\"heroTitle1\"]", t.heroTitle1);
+      updateElementText("[data-translate=\"heroTitle2\"]", t.heroTitle2);
+      updateElementText("[data-translate=\"heroSubtitle\"]", t.heroSubtitle);
+      updateElementText("[data-translate=\"heroDescription\"]", t.heroDescription);
+      updateElementText("[data-translate=\"hireMe\"]", t.hireMe);
+      updateElementText("[data-translate=\"downloadCV\"]", t.downloadCV);
+      updateElementText("[data-translate=\"scrollToExplore\"]", t.scrollToExplore);
       
-      // Prevent body scroll
-      document.body.style.overflow = 'hidden';
-      document.body.style.position = 'fixed';
-      document.body.style.width = '100%';
-      document.body.style.height = '100%';
+      // Update about section
+      updateElementText("[data-translate=\"aboutTitle\"]", t.aboutTitle);
+      updateElementText("[data-translate=\"aboutText\"]", t.aboutText);
+      updateElementText("[data-translate=\"contactInfo\"]", t.contactInfo);
+      updateElementText("[data-translate=\"email\"]", t.email);
+      updateElementText("[data-translate=\"phone\"]", t.phone);
+      updateElementText("[data-translate=\"location\"]", t.location);
+      updateElementText("[data-translate=\"languages\"]", t.languages);
       
-      console.log('✅ Lightbox should be visible now');
-      console.log('Lightbox styles:', {
-        display: lightbox.style.display,
-        visibility: lightbox.style.visibility,
-        opacity: lightbox.style.opacity,
-        zIndex: lightbox.style.zIndex
-      });
+      // Update experience section
+      updateElementText("[data-translate=\"experienceTitle\"]", t.experienceTitle);
+      updateElementText("[data-translate=\"experienceSubtitle\"]", t.experienceSubtitle);
+      
+      // Update education section
+      updateElementText("[data-translate=\"educationTitle\"]", t.educationTitle);
+      updateElementText("[data-translate=\"educationSubtitle\"]", t.educationSubtitle);
+      
+      // Update skills section
+      updateElementText("[data-translate=\"skillsTitle\"]", t.skillsTitle);
+      updateElementText("[data-translate=\"skillsSubtitle\"]", t.skillsSubtitle);
+      
+      // Update portfolio section
+      updateElementText("[data-translate=\"portfolioTitle\"]", t.portfolioTitle);
+      updateElementText("[data-translate=\"portfolioSubtitle\"]", t.portfolioSubtitle);
+      updateElementText("[data-translate=\"all\"]", t.all);
+      updateElementText("[data-translate=\"cisco\"]", t.cisco);
+      updateElementText("[data-translate=\"microsoft\"]", t.microsoft);
+      updateElementText("[data-translate=\"gitlab\"]", t.gitlab);
+      
+      // Update contact section
+      updateElementText("[data-translate=\"contactTitle\"]", t.contactTitle);
+      updateElementText("[data-translate=\"contactSubtitle\"]", t.contactSubtitle);
+      updateElementText("[data-translate=\"sendMessage\"]", t.sendMessage);
+      updateElementText("[data-translate=\"getInTouch\"]", t.getInTouch);
+      updateElementText("[data-translate=\"yourName\"]", t.yourName);
+      updateElementText("[data-translate=\"yourEmail\"]", t.yourEmail);
+      updateElementText("[data-translate=\"subject\"]", t.subject);
+      updateElementText("[data-translate=\"yourMessage\"]", t.yourMessage);
+      updateElementText("[data-translate=\"send\"]", t.send);
+      
+      // Update footer
+      updateElementText("[data-translate=\"allRightsReserved\"]", t.allRightsReserved);
+      
+      // Update additional elements
+      updateElementText("[data-translate=\"yearsExperience\"]", t.yearsExperience);
+      updateElementText("[data-translate=\"projectsCompleted\"]", t.projectsCompleted);
+      updateElementText("[data-translate=\"programmingLanguages\"]", t.programmingLanguages);
+      updateElementText("[data-translate=\"devopsCicd\"]", t.devopsCicd);
+      updateElementText("[data-translate=\"containerizationOrchestration\"]", t.containerizationOrchestration);
+      updateElementText("[data-translate=\"infrastructureAsCode\"]", t.infrastructureAsCode);
+      updateElementText("[data-translate=\"cloudPlatforms\"]", t.cloudPlatforms);
+      updateElementText("[data-translate=\"monitoringObservability\"]", t.monitoringObservability);
+      updateElementText("[data-translate=\"securityDevsecops\"]", t.securityDevsecops);
+      updateElementText("[data-translate=\"agileProjectTracking\"]", t.agileProjectTracking);
+      updateElementText("[data-translate=\"currentPosition\"]", t.currentPosition);
+      updateElementText("[data-translate=\"deputyPeopleLead\"]", t.deputyPeopleLead);
+      updateElementText("[data-translate=\"openShiftCloudEngineering\"]", t.openShiftCloudEngineering);
+      updateElementText("[data-translate=\"openStackCloudEngineering\"]", t.openStackCloudEngineering);
+      updateElementText("[data-translate=\"softwareDeveloper\"]", t.softwareDeveloper);
+      updateElementText("[data-translate=\"educationalActivitiesInstructor\"]", t.educationalActivitiesInstructor);
+      updateElementText("[data-translate=\"itTelecommunicationsInternship\"]", t.itTelecommunicationsInternship);
+      
+      // Update experience content
+      updateElementText("[data-translate=\"roleSummaryAdfinis\"]", t.roleSummaryAdfinis);
+      updateElementText("[data-translate=\"devopsRoadmaps\"]", t.devopsRoadmaps);
+      updateElementText("[data-translate=\"devopsRoadmapsDesc\"]", t.devopsRoadmapsDesc);
+      updateElementText("[data-translate=\"infrastructureProjects\"]", t.infrastructureProjects);
+      updateElementText("[data-translate=\"infrastructureProjectsDesc\"]", t.infrastructureProjectsDesc);
+      updateElementText("[data-translate=\"cloudSlasCompliance\"]", t.cloudSlasCompliance);
+      updateElementText("[data-translate=\"cloudSlasComplianceDesc\"]", t.cloudSlasComplianceDesc);
+      updateElementText("[data-translate=\"technicalTraining\"]", t.technicalTraining);
+      updateElementText("[data-translate=\"technicalTrainingDesc\"]", t.technicalTrainingDesc);
+      updateElementText("[data-translate=\"performanceOptimization\"]", t.performanceOptimization);
+      updateElementText("[data-translate=\"performanceOptimizationDesc\"]", t.performanceOptimizationDesc);
+      updateElementText("[data-translate=\"teamLeadership\"]", t.teamLeadership);
+      updateElementText("[data-translate=\"teamLeadershipDesc\"]", t.teamLeadershipDesc);
+      updateElementText("[data-translate=\"deputyPeopleLeadResponsibilities\"]", t.deputyPeopleLeadResponsibilities);
+      updateElementText("[data-translate=\"teamDevelopmentManagement\"]", t.teamDevelopmentManagement);
+      updateElementText("[data-translate=\"communicationCoordination\"]", t.communicationCoordination);
+      updateElementText("[data-translate=\"performanceMetricsTracking\"]", t.performanceMetricsTracking);
+      updateElementText("[data-translate=\"hiringOnboardingTraining\"]", t.hiringOnboardingTraining);
+      
+      // Update CERN OpenShift content
+      updateElementText("[data-translate=\"roleSummaryCernOpenshift\"]", t.roleSummaryCernOpenshift);
+      updateElementText("[data-translate=\"openShiftPaaSPlatform\"]", t.openShiftPaaSPlatform);
+      updateElementText("[data-translate=\"openShiftPaaSPlatformDesc\"]", t.openShiftPaaSPlatformDesc);
+      updateElementText("[data-translate=\"containerOrchestration\"]", t.containerOrchestration);
+      updateElementText("[data-translate=\"containerOrchestrationDesc\"]", t.containerOrchestrationDesc);
+      updateElementText("[data-translate=\"cicdAutomation\"]", t.cicdAutomation);
+      updateElementText("[data-translate=\"cicdAutomationDesc\"]", t.cicdAutomationDesc);
+      updateElementText("[data-translate=\"platformManagement\"]", t.platformManagement);
+      updateElementText("[data-translate=\"platformManagementDesc\"]", t.platformManagementDesc);
+      updateElementText("[data-translate=\"kubernetesOperators\"]", t.kubernetesOperators);
+      updateElementText("[data-translate=\"kubernetesOperatorsDesc\"]", t.kubernetesOperatorsDesc);
+      updateElementText("[data-translate=\"trainingMentoring\"]", t.trainingMentoring);
+      updateElementText("[data-translate=\"trainingMentoringDesc\"]", t.trainingMentoringDesc);
+      
+      // Update CERN OpenStack content
+      updateElementText("[data-translate=\"roleSummaryCernOpenstack\"]", t.roleSummaryCernOpenstack);
+      updateElementText("[data-translate=\"networkMigration\"]", t.networkMigration);
+      updateElementText("[data-translate=\"networkMigrationDesc\"]", t.networkMigrationDesc);
+      updateElementText("[data-translate=\"massiveScale\"]", t.massiveScale);
+      updateElementText("[data-translate=\"massiveScaleDesc\"]", t.massiveScaleDesc);
+      updateElementText("[data-translate=\"loadBalancer\"]", t.loadBalancer);
+      updateElementText("[data-translate=\"loadBalancerDesc\"]", t.loadBalancerDesc);
+      updateElementText("[data-translate=\"customDHCP\"]", t.customDHCP);
+      updateElementText("[data-translate=\"customDHCPDesc\"]", t.customDHCPDesc);
+      
+      console.log("Translation complete for:", lang);
     }
     
-    // Make showImage globally available
-    window.showImage = showImage;
-    
-    function showImageByIndex(index) {
-      if (portfolioItems.length === 0) return;
-      
-      const item = portfolioItems[index];
-      if (item) {
-        showImage(item.image, item.title, item.description);
-        currentIndex = index;
-        
-        // Update navigation button states
-        if (prevBtn) prevBtn.style.display = portfolioItems.length > 1 ? 'flex' : 'none';
-        if (nextBtn) nextBtn.style.display = portfolioItems.length > 1 ? 'flex' : 'none';
-      }
-    }
-    
-    function showNextImage() {
-      if (portfolioItems.length === 0) return;
-      currentIndex = (currentIndex + 1) % portfolioItems.length;
-      showImageByIndex(currentIndex);
-    }
-    
-    function showPrevImage() {
-      if (portfolioItems.length === 0) return;
-      currentIndex = (currentIndex - 1 + portfolioItems.length) % portfolioItems.length;
-      showImageByIndex(currentIndex);
-    }
-    
-    function hideImage() {
-      console.log('=== HIDING IMAGE ===');
-      if (lightbox) {
-        lightbox.style.display = 'none';
-        lightbox.style.visibility = 'hidden';
-        lightbox.style.opacity = '0';
-        
-        // Restore body scroll
-        document.body.style.overflow = '';
-        document.body.style.position = '';
-        document.body.style.width = '';
-        document.body.style.height = '';
-        
-        console.log('✅ Lightbox hidden');
-      } else {
-        console.log('❌ Lightbox not found for hiding');
-      }
-    }
-    
-    // Add click listeners to all portfolio buttons
-    document.addEventListener('DOMContentLoaded', function() {
-      console.log('DOM loaded, adding listeners...');
-      
-      // Get elements after DOM is ready
-      lightbox = document.getElementById('simpleLightbox');
-      lightboxImage = document.getElementById('simpleImage');
-      closeBtn = document.getElementById('simpleClose');
-      prevBtn = document.getElementById('simplePrev');
-      nextBtn = document.getElementById('simpleNext');
-      titleEl = document.getElementById('simpleTitle');
-      descEl = document.getElementById('simpleDescription');
-      
-      console.log('Lightbox elements:', {
-        lightbox: !!lightbox,
-        lightboxImage: !!lightboxImage,
-        closeBtn: !!closeBtn,
-        prevBtn: !!prevBtn,
-        nextBtn: !!nextBtn,
-        titleEl: !!titleEl,
-        descEl: !!descEl
-      });
-      
-      // Build portfolio items array
-      const buttons = document.querySelectorAll('.portfolio-btn');
-      console.log('Found buttons:', buttons.length);
-      
-      portfolioItems = Array.from(buttons).map(button => ({
-        image: button.getAttribute('data-image'),
-        title: button.getAttribute('data-title'),
-        description: button.getAttribute('data-description')
-      }));
-      
-      console.log('Portfolio items loaded:', portfolioItems.length);
-      
-      buttons.forEach((button, index) => {
-        button.addEventListener('click', function(e) {
-          e.preventDefault();
-          e.stopPropagation();
-          console.log('Button clicked:', index, 'Image:', button.getAttribute('data-image'));
-          
-          // Set current index and show image
-          currentIndex = index;
-          showImageByIndex(currentIndex);
-        });
-      });
-      
-      // Close button
-      if (closeBtn) {
-        closeBtn.addEventListener('click', function(e) {
-          e.preventDefault();
-          e.stopPropagation();
-          hideImage();
-        });
-      }
-      
-      // Previous button
-      if (prevBtn) {
-        prevBtn.addEventListener('click', function(e) {
-          e.preventDefault();
-          e.stopPropagation();
-          showPrevImage();
-        });
-      }
-      
-      // Next button
-      if (nextBtn) {
-        nextBtn.addEventListener('click', function(e) {
-          e.preventDefault();
-          e.stopPropagation();
-          showNextImage();
-        });
-      }
-      
-      // Click outside to close
-      if (lightbox) {
-        lightbox.addEventListener('click', function(e) {
-          if (e.target === lightbox) {
-            hideImage();
-          }
-        });
-      }
-      
-      // Keyboard navigation
-      document.addEventListener('keydown', function(e) {
-        if (lightbox && lightbox.style.display === 'flex') {
-          if (e.key === 'Escape') {
-            hideImage();
-          } else if (e.key === 'ArrowLeft') {
-            e.preventDefault();
-            showPrevImage();
-          } else if (e.key === 'ArrowRight') {
-            e.preventDefault();
-            showNextImage();
-          }
+    // Helper function to update element text
+    function updateElementText(selector, text) {
+      const elements = document.querySelectorAll(selector);
+      elements.forEach(element => {
+        if (element.tagName === "INPUT" && element.type === "text") {
+          element.placeholder = text;
+        } else if (element.tagName === "INPUT" && element.type === "email") {
+          element.placeholder = text;
+        } else if (element.tagName === "TEXTAREA") {
+          element.placeholder = text;
+        } else {
+          element.textContent = text;
         }
       });
-    });
+    }
     
-    // Test function
-    window.testSimpleLightbox = function() {
-      console.log('Testing simple lightbox...');
-      currentIndex = 0;
-      showImageByIndex(0);
-    };
-    
-    // Debug function to check if everything is working
-    window.debugLightbox = function() {
-      console.log('=== LIGHTBOX DEBUG ===');
-      console.log('Lightbox element:', lightbox);
-      console.log('Lightbox image element:', lightboxImage);
-      console.log('Close button element:', closeBtn);
-      console.log('Prev button element:', prevBtn);
-      console.log('Next button element:', nextBtn);
-      console.log('Portfolio buttons found:', document.querySelectorAll('.portfolio-btn').length);
-      console.log('Portfolio items loaded:', portfolioItems.length);
-      
-      if (lightbox && lightboxImage) {
-        console.log('✅ Lightbox elements found');
-        console.log('Testing with first portfolio image...');
-        currentIndex = 0;
-        showImageByIndex(0);
-      } else {
-        console.log('❌ Lightbox elements NOT found');
-      }
-    };
-    
-    // Navigation test functions
-    window.testNext = function() {
-      showNextImage();
-    };
-    
-    window.testPrev = function() {
-      showPrevImage();
-    };
-    
-    // Debug function for lightbox state
-    window.debugLightboxState = function() {
-      console.log('=== LIGHTBOX STATE DEBUG ===');
-      console.log('Lightbox element:', lightbox);
-      console.log('Lightbox image:', lightboxImage);
-      console.log('Close button:', closeBtn);
-      console.log('Prev button:', prevBtn);
-      console.log('Next button:', nextBtn);
-      console.log('Title element:', titleEl);
-      console.log('Description element:', descEl);
-      
-      if (lightbox) {
-        console.log('Lightbox styles:', {
-          display: lightbox.style.display,
-          visibility: lightbox.style.visibility,
-          opacity: lightbox.style.opacity,
-          zIndex: lightbox.style.zIndex,
-          position: lightbox.style.position,
-          top: lightbox.style.top,
-          left: lightbox.style.left,
-          width: lightbox.style.width,
-          height: lightbox.style.height
-        });
-        
-        console.log('Lightbox computed styles:', {
-          display: window.getComputedStyle(lightbox).display,
-          visibility: window.getComputedStyle(lightbox).visibility,
-          opacity: window.getComputedStyle(lightbox).opacity,
-          zIndex: window.getComputedStyle(lightbox).zIndex
-        });
-      }
-      
-      console.log('Portfolio items count:', portfolioItems.length);
-      console.log('Current index:', currentIndex);
-    };
-    
-    // Force close lightbox and clean up
-    window.forceCloseLightbox = function() {
-      console.log('=== FORCE CLOSING LIGHTBOX ===');
-      if (lightbox) {
-        lightbox.style.display = 'none';
-        lightbox.style.visibility = 'hidden';
-        lightbox.style.opacity = '0';
-      }
-      
-      // Force restore body scroll
-      document.body.style.overflow = '';
-      document.body.style.position = '';
-      document.body.style.width = '';
-      document.body.style.height = '';
-      
-      // Remove any problematic styles
-      document.documentElement.style.overflow = '';
-      document.documentElement.style.overflowX = '';
-      
-      console.log('✅ Lightbox force closed and body restored');
-    };
-    
-    // Test image expansion
-    window.testImageExpansion = function() {
-      console.log('=== TESTING IMAGE EXPANSION ===');
-      const firstButton = document.querySelector('.portfolio-btn');
-      if (firstButton) {
-        const imageSrc = firstButton.getAttribute('data-image');
-        const title = firstButton.getAttribute('data-title');
-        const description = firstButton.getAttribute('data-description');
-        
-        console.log('Testing with:', { imageSrc, title, description });
-        showImage(imageSrc, title, description);
-      } else {
-        console.log('❌ No portfolio buttons found');
-      }
-    };
-    
-    console.log('Simple lightbox ready!');
+    // Language selector is now handled by epic.js
     </script>
   </body>
 </html>

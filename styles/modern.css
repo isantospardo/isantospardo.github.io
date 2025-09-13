@@ -287,12 +287,18 @@ p {
 }
 
 /* Professional Navigation */
-.navbar {
+.navbar:not(.navbar-transparent) {
   backdrop-filter: blur(20px);
   background: rgba(255, 255, 255, 0.8) !important;
   border-bottom: 1px solid var(--neutral-200);
   transition: var(--transition-normal);
   padding: var(--space-md) 0;
+}
+
+.navbar.navbar-transparent {
+  background: transparent !important;
+  backdrop-filter: none;
+  border-bottom: none;
 }
 
 .navbar-brand {

@@ -18,61 +18,61 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="css/aos.css" rel="stylesheet">
     <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="styles/main.css" rel="stylesheet">
-    <link href="styles/epic.css" rel="stylesheet">
+    <link href="styles/epic.min.css" rel="stylesheet">
   </head>
   <body id="top">
-    <!-- NEW HEADER -->
-    <header class="main-header" id="mainHeader">
-      <div class="header-container">
-        <!-- Logo/Brand -->
-        <div class="header-brand">
-          <a href="#" class="brand-link">Iago S. Pardo</a>
-        </div>
-        
-        <!-- Desktop Navigation -->
-        <nav class="desktop-nav">
-          <ul class="nav-list">
-            <li class="nav-item"><a href="#about" class="nav-link smooth-scroll" data-translate="about">About</a></li>
-            <li class="nav-item"><a href="#experience" class="nav-link smooth-scroll" data-translate="experience">Experience</a></li>
-            <li class="nav-item"><a href="#education" class="nav-link smooth-scroll" data-translate="education">Education</a></li>
-            <li class="nav-item"><a href="#skill" class="nav-link smooth-scroll" data-translate="skills">Skills</a></li>
-            <li class="nav-item"><a href="#portfolio" class="nav-link smooth-scroll" data-translate="portfolio">Portfolio</a></li>
-            <li class="nav-item"><a href="#contact" class="nav-link smooth-scroll" data-translate="contact">Contact</a></li>
-            <li class="nav-item language-item">
-              <a href="javascript:void(0)" class="nav-link language-btn" id="languageBtn" data-current="en">
-                <span class="flag-emoji">🇬🇧</span>
-              </a>
-            </li>
-          </ul>
+    <header>
+      <div class="profile-page sidebar-collapse">
+        <nav class="navbar navbar-expand-lg fixed-top navbar-transparent bg-primary" color-on-scroll="400">
+          <div class="container">
+            <div class="navbar-translate">
+              <a class="navbar-brand" href="#" rel="tooltip">Iago S. Pardo</a>
+              <!-- Language Selector -->
+              <div class="language-selector">
+                <button class="language-btn" id="languageBtn" data-current="en">
+                  <span class="flag-emoji">🇬🇧</span>
+                  <span class="language-text">EN</span>
+                  <i class="fas fa-chevron-down"></i>
+                </button>
+                <div class="language-dropdown" id="languageDropdown">
+                  <div class="language-option" data-lang="en">
+                    <span class="flag-emoji">🇬🇧</span>
+                    <span>English</span>
+                  </div>
+                  <div class="language-option" data-lang="es">
+                    <span class="flag-emoji">🇪🇸</span>
+                    <span>Español</span>
+                  </div>
+                  <div class="language-option" data-lang="gl">
+                    <span class="flag-emoji">🏴‍☠️</span>
+                    <span>Galego</span>
+                  </div>
+                  <div class="language-option" data-lang="fr">
+                    <span class="flag-emoji">🇫🇷</span>
+                    <span>Français</span>
+                  </div>
+                </div>
+              </div>
+              <button class="navbar-toggler navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-bar bar1"></span><span class="navbar-toggler-bar bar2"></span><span class="navbar-toggler-bar bar3"></span></button>
+            </div>
+            <div class="collapse navbar-collapse justify-content-end" id="navigation">
+              <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link smooth-scroll" href="#about" data-translate="about">About</a></li>
+                <li class="nav-item"><a class="nav-link smooth-scroll" href="#experience" data-translate="experience">Experience</a></li>
+                <li class="nav-item"><a class="nav-link smooth-scroll" href="#education" data-translate="education">Education</a></li>
+                <li class="nav-item"><a class="nav-link smooth-scroll" href="#skill" data-translate="skills">Skills</a></li>
+                <li class="nav-item"><a class="nav-link smooth-scroll" href="#portfolio" data-translate="portfolio">Portfolio</a></li>
+                <li class="nav-item"><a class="nav-link smooth-scroll" href="#contact" data-translate="contact">Contact</a></li>
+              </ul>
+            </div>
+          </div>
         </nav>
-        
-        <!-- Mobile Menu Button -->
-        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle mobile menu">
-          <span class="hamburger-line"></span>
-          <span class="hamburger-line"></span>
-          <span class="hamburger-line"></span>
-        </button>
       </div>
-      
-      <!-- Mobile Navigation -->
-      <nav class="mobile-nav" id="mobileNav">
-        <ul class="mobile-nav-list">
-          <li class="mobile-nav-item"><a href="#about" class="mobile-nav-link smooth-scroll" data-translate="about">About</a></li>
-          <li class="mobile-nav-item"><a href="#experience" class="mobile-nav-link smooth-scroll" data-translate="experience">Experience</a></li>
-          <li class="mobile-nav-item"><a href="#education" class="mobile-nav-link smooth-scroll" data-translate="education">Education</a></li>
-          <li class="mobile-nav-item"><a href="#skill" class="mobile-nav-link smooth-scroll" data-translate="skills">Skills</a></li>
-          <li class="mobile-nav-item"><a href="#portfolio" class="mobile-nav-link smooth-scroll" data-translate="portfolio">Portfolio</a></li>
-          <li class="mobile-nav-item"><a href="#contact" class="mobile-nav-link smooth-scroll" data-translate="contact">Contact</a></li>
-          <li class="mobile-nav-item language-item">
-            <a href="javascript:void(0)" class="mobile-nav-link language-btn" id="mobileLanguageBtn" data-current="en">
-              <span class="flag-emoji">🇬🇧</span>
-              <span class="language-text">English</span>
-            </a>
-          </li>
-        </ul>
-      </nav>
     </header>
+    <div class="page-content">
+      <div>
 
 <!--////////////////////////////////////////////////////-->
 <!--HEAD-->
@@ -107,15 +107,15 @@
               <div class="profile-stats">
                 <div class="stat-item">
                   <span class="stat-number" data-count="8+">0</span>
-                  <span class="stat-label" data-translate="yearsExperience">Years Experience</span>
+                  <span class="stat-label">Years Experience</span>
                 </div>
                 <div class="stat-item">
                   <span class="stat-number" data-count="50+">0</span>
-                  <span class="stat-label" data-translate="projectsCompleted">Projects</span>
+                  <span class="stat-label">Projects</span>
                 </div>
                 <div class="stat-item">
                   <span class="stat-number" data-count="4+">0</span>
-                  <span class="stat-label" data-translate="languages">Languages</span>
+                  <span class="stat-label">Languages</span>
                 </div>
               </div>
             </div>
@@ -128,9 +128,9 @@
               <span class="title-line">Pardo</span>
             </h1>
             <div class="hero-subtitle">
-              <span class="subtitle-text" data-translate="heroSubtitle">Senior DevOps Engineer</span>
+              <span class="subtitle-text">Senior DevOps Engineer</span>
               <div class="typing-container">
-                <span class="typewriter-text" id="typewriter-text" data-translate="heroDescription"></span>
+                <span class="typewriter-text" id="typewriter-text"></span>
                 <span class="cursor">|</span>
               </div>
             </div>
@@ -138,12 +138,12 @@
             <!-- Action Buttons -->
             <div class="hero-actions">
               <a href="#contact" class="btn btn-primary btn-hero smooth-scroll">
-                <span class="btn-text" data-translate="hireMe">Hire Me</span>
+                <span class="btn-text">Hire Me</span>
                 <span class="btn-icon"><i class="fa fas fa-rocket"></i></span>
                 <div class="btn-ripple"></div>
               </a>
               <a href="/CV/ISP_CV_Original.pdf" class="btn btn-secondary btn-hero">
-                <span class="btn-text" data-translate="downloadCV">Download CV</span>
+                <span class="btn-text">Download CV</span>
                 <span class="btn-icon"><i class="fa fa-download"></i></span>
                 <div class="btn-ripple"></div>
               </a>
@@ -169,7 +169,7 @@
         
         <!-- Scroll Indicator -->
         <div class="scroll-indicator">
-          <div class="scroll-text" data-translate="scrollToExplore">Scroll to explore</div>
+          <div class="scroll-text">Scroll to explore</div>
           <div class="scroll-arrow">
             <i class="fas fa-chevron-down"></i>
           </div>
@@ -191,17 +191,17 @@
       <div class="col-lg-6 col-md-12 mb-4">
         <div class="card" data-aos="fade-up" data-aos-offset="10">
           <div class="card-body">
-            <div class="h4 mt-0 title" data-translate="aboutTitle">Professional Summary</div>
-            <p data-translate="aboutText">I am an attentive and efficient professional seeking solutions to provide the best results, while constantly trying to create a conductive and positive atmosphere through an optimistic and constructive attitude. I regularly propose activities to improve the team environment and am committed to working overtime when required by the needs of the company.</p>
+            <div class="h4 mt-0 title">Professional Summary</div>
+            <p>I am an attentive and efficient professional seeking solutions to provide the best results, while constantly trying to create a conductive and positive atmosphere through an optimistic and constructive attitude. I regularly propose activities to improve the team environment and am committed to working overtime when required by the needs of the company.</p>
             <div class="mt-4">
               <div class="row">
                 <div class="col-6 text-center">
                   <div class="h3 text-primary">8+</div>
-                  <p class="text-muted" data-translate="yearsExperience">Years Experience</p>
+                  <p class="text-muted">Years Experience</p>
                 </div>
                 <div class="col-6 text-center">
                   <div class="h3 text-primary">50+</div>
-                  <p class="text-muted" data-translate="projectsCompleted">Projects Completed</p>
+                  <p class="text-muted">Projects Completed</p>
                 </div>
               </div>
             </div>
@@ -211,9 +211,9 @@
       <div class="col-lg-6 col-md-12 mb-4">
         <div class="card" data-aos="fade-up" data-aos-offset="10" data-aos-delay="100">
           <div class="card-body">
-            <div class="h4 mt-0 title" data-translate="contactInfo">Contact Information</div>
+            <div class="h4 mt-0 title">Contact Information</div>
             <div class="row mb-3">
-              <div class="col-sm-4"><strong data-translate="email">Email:</strong></div>
+              <div class="col-sm-4"><strong>Email:</strong></div>
               <div class="col-sm-8">
                 <a href="mailto:isantosp@protonmail.com" class="text-decoration-none">
                   <i class="fa fa-envelope mr-2"></i>isantosp@protonmail.com
@@ -221,20 +221,20 @@
               </div>
             </div>
             <div class="row mb-3">
-              <div class="col-sm-4"><strong data-translate="phone">Phone:</strong></div>
+              <div class="col-sm-4"><strong>Phone:</strong></div>
               <div class="col-sm-8">
                 <i class="fa fa-phone mr-2"></i>+34 627 215 065<br>
                 <i class="fa fa-phone mr-2"></i>+41 79 855 29 32
               </div>
             </div>
             <div class="row mb-3">
-              <div class="col-sm-4"><strong data-translate="location">Location:</strong></div>
+              <div class="col-sm-4"><strong>Location:</strong></div>
               <div class="col-sm-8">
                 <i class="fa fa-map-marker mr-2"></i>Rue du Jura, Geneva, Switzerland
               </div>
             </div>
             <div class="row mb-3">
-              <div class="col-sm-4"><strong data-translate="languages">Languages:</strong></div>
+              <div class="col-sm-4"><strong>Languages:</strong></div>
               <div class="col-sm-8">
                 <i class="fa fas fa-globe mr-2"></i>English, French, Spanish, Galician, Portuguese
               </div>
@@ -252,8 +252,8 @@
 <div class="section experience-section" id="experience">
   <div class="container">
     <div class="section-header">
-      <h2 class="section-title" data-translate="experienceTitle">Professional Journey</h2>
-      <p class="section-subtitle" data-translate="experienceSubtitle">Building the future of DevOps, one project at a time</p>
+      <h2 class="section-title">Professional Journey</h2>
+      <p class="section-subtitle">Building the future of DevOps, one project at a time</p>
     </div>
     
     <div class="epic-timeline">
@@ -271,16 +271,16 @@
               <div class="company-info">
                 <h3 class="company-name">Adfinis A.G.</h3>
                 <span class="company-location">🇨🇭 Switzerland</span>
-                <div class="current-badge" data-translate="currentPosition">Current Position</div>
+                <div class="current-badge">Current Position</div>
               </div>
               <div class="company-logo">
                 <i class="fa fa-building"></i>
               </div>
             </div>
             <div class="card-body">
-              <h4 class="position-title">Senior DevOps Project Manager & <span data-translate="deputyPeopleLead">Deputy People Lead</span></h4>
+              <h4 class="position-title">Senior DevOps Project Manager & Deputy People Lead</h4>
               <div class="experience-description">
-                <p class="role-summary" data-translate="roleSummaryAdfinis">Leading DevOps transformation initiatives and managing complex infrastructure projects across multiple clients in Switzerland.</p>
+                <p class="role-summary">Leading DevOps transformation initiatives and managing complex infrastructure projects across multiple clients in Switzerland.</p>
                 
                 <div class="achievements-grid">
                   <div class="achievement-item">
@@ -288,8 +288,8 @@
                       <i class="fas fa-road"></i>
                     </div>
                     <div class="achievement-content">
-                      <h5 data-translate="devopsRoadmaps">DevOps Roadmaps</h5>
-                      <p data-translate="devopsRoadmapsDesc">Defining and managing comprehensive roadmaps for DevOps implementation across multiple Swiss clients, ensuring scalable and efficient cloud infrastructure adoption</p>
+                      <h5>DevOps Roadmaps</h5>
+                      <p>Defining and managing comprehensive roadmaps for DevOps implementation across multiple Swiss clients, ensuring scalable and efficient cloud infrastructure adoption</p>
                     </div>
                   </div>
                   
@@ -298,8 +298,8 @@
                       <i class="fas fa-cloud"></i>
                     </div>
                     <div class="achievement-content">
-                      <h5 data-translate="infrastructureProjects">Infrastructure Projects</h5>
-                      <p data-translate="infrastructureProjectsDesc">Leading end-to-end infrastructure projects from initial planning to deployment, managing budgets up to €500K and teams of 5-8 engineers</p>
+                      <h5>Infrastructure Projects</h5>
+                      <p>Leading end-to-end infrastructure projects from initial planning to deployment, managing budgets up to €500K and teams of 5-8 engineers</p>
                     </div>
                   </div>
                   
@@ -308,8 +308,8 @@
                       <i class="fas fa-shield-alt"></i>
                     </div>
                     <div class="achievement-content">
-                      <h5 data-translate="cloudSlasCompliance">Cloud SLAs & Compliance</h5>
-                      <p data-translate="cloudSlasComplianceDesc">Providing 99.9% SLA for AWS, Azure, Cloudscale, Exoscale, and GCP platforms, ensuring GDPR compliance and security standards</p>
+                      <h5>Cloud SLAs & Compliance</h5>
+                      <p>Providing 99.9% SLA for AWS, Azure, Cloudscale, Exoscale, and GCP platforms, ensuring GDPR compliance and security standards</p>
                     </div>
                   </div>
                   
@@ -318,8 +318,8 @@
                       <i class="fa fas fa-graduation-cap"></i>
                     </div>
                     <div class="achievement-content">
-                      <h5 data-translate="technicalTraining">Technical Training</h5>
-                      <p data-translate="technicalTrainingDesc">Conducting advanced CI/CD training sessions for 50+ engineers using Terraform, Azure, Vault, ArgoCD, and GitOps methodologies</p>
+                      <h5>Technical Training</h5>
+                      <p>Conducting advanced CI/CD training sessions for 50+ engineers using Terraform, Azure, Vault, ArgoCD, and GitOps methodologies</p>
                     </div>
                   </div>
                   
@@ -328,8 +328,8 @@
                       <i class="fa fas fa-chart-line"></i>
                     </div>
                     <div class="achievement-content">
-                      <h5 data-translate="performanceOptimization">Performance Optimization</h5>
-                      <p data-translate="performanceOptimizationDesc">Reducing infrastructure costs by 30% through automated scaling and resource optimization across client environments</p>
+                      <h5>Performance Optimization</h5>
+                      <p>Reducing infrastructure costs by 30% through automated scaling and resource optimization across client environments</p>
                     </div>
                   </div>
                   
@@ -338,8 +338,8 @@
                       <i class="fa fas fas fa-users-cog"></i>
                     </div>
                     <div class="achievement-content">
-                      <h5 data-translate="teamLeadership">Team Leadership</h5>
-                      <p data-translate="teamLeadershipDesc">Managing cross-functional teams of DevOps engineers, implementing Agile methodologies and mentoring junior developers</p>
+                      <h5>Team Leadership</h5>
+                      <p>Managing cross-functional teams of DevOps engineers, implementing Agile methodologies and mentoring junior developers</p>
                     </div>
                   </div>
                 </div>
@@ -347,24 +347,24 @@
                 <div class="leadership-section">
                   <h5 class="leadership-title">
                     <i class="fa fas fa-users"></i>
-                    <span data-translate="deputyPeopleLeadResponsibilities">Deputy People Lead Responsibilities</span>
+                    Deputy People Lead Responsibilities
                   </h5>
                   <div class="leadership-grid">
                     <div class="leadership-item">
                       <i class="fa fas fa-check-circle"></i>
-                      <span data-translate="teamDevelopmentManagement">Team development and management oversight</span>
+                      <span>Team development and management oversight</span>
                     </div>
                     <div class="leadership-item">
                       <i class="fa fas fa-check-circle"></i>
-                      <span data-translate="communicationCoordination">Communication coordination between teams and management</span>
+                      <span>Communication coordination between teams and management</span>
                     </div>
                     <div class="leadership-item">
                       <i class="fa fas fa-check-circle"></i>
-                      <span data-translate="performanceMetricsTracking">Performance metrics tracking for development teams</span>
+                      <span>Performance metrics tracking for development teams</span>
                     </div>
                     <div class="leadership-item">
                       <i class="fa fas fa-check-circle"></i>
-                      <span data-translate="hiringOnboardingTraining">Hiring, onboarding, and training new team members</span>
+                      <span>Hiring, onboarding, and training new team members</span>
                     </div>
                   </div>
                 </div>
@@ -405,9 +405,9 @@
               </div>
             </div>
             <div class="card-body">
-              <h4 class="position-title" data-translate="openShiftCloudEngineering">OpenShift Cloud Engineering</h4>
+              <h4 class="position-title">OpenShift Cloud Engineering</h4>
               <div class="experience-description">
-                <p class="role-summary" data-translate="roleSummaryCernOpenshift">Main responsible engineer for OpenShift PaaS serving more than 3000 users with advanced container orchestration.</p>
+                <p class="role-summary">Main responsible engineer for OpenShift PaaS serving more than 3000 users with advanced container orchestration.</p>
                 
                 <div class="achievements-grid">
                   <div class="achievement-item">
@@ -415,8 +415,8 @@
                       <i class="fa fas fa-server"></i>
                     </div>
                     <div class="achievement-content">
-                      <h5 data-translate="openShiftPaaSPlatform">OpenShift PaaS Platform</h5>
-                      <p data-translate="openShiftPaaSPlatformDesc">Main responsible engineer for OpenShift PaaS serving 3000+ researchers and scientists worldwide, managing 500+ applications</p>
+                      <h5>OpenShift PaaS Platform</h5>
+                      <p>Main responsible engineer for OpenShift PaaS serving 3000+ researchers and scientists worldwide, managing 500+ applications</p>
                     </div>
                   </div>
                   
@@ -425,8 +425,8 @@
                       <i class="fa fas fa-cogs"></i>
                     </div>
                     <div class="achievement-content">
-                      <h5 data-translate="containerOrchestration">Container Orchestration</h5>
-                      <p data-translate="containerOrchestrationDesc">Designing and implementing enterprise-grade PaaS based on Docker containers and Kubernetes, handling 10TB+ of data daily</p>
+                      <h5>Container Orchestration</h5>
+                      <p>Designing and implementing enterprise-grade PaaS based on Docker containers and Kubernetes, handling 10TB+ of data daily</p>
                     </div>
                   </div>
                   
@@ -435,8 +435,8 @@
                       <i class="fa fas fa-sync-alt"></i>
                     </div>
                     <div class="achievement-content">
-                      <h5 data-translate="cicdAutomation">CI/CD Automation</h5>
-                      <p data-translate="cicdAutomationDesc">Managing automated deployments with CI and ArgoCD for 17,000+ users across multiple research projects and experiments</p>
+                      <h5>CI/CD Automation</h5>
+                      <p>Managing automated deployments with CI and ArgoCD for 17,000+ users across multiple research projects and experiments</p>
                     </div>
                   </div>
                   
@@ -445,8 +445,8 @@
                       <i class="fa fas fa-tools"></i>
                     </div>
                     <div class="achievement-content">
-                      <h5 data-translate="platformManagement">Platform Management</h5>
-                      <p data-translate="platformManagementDesc">Responsible for Jenkins, Nexus, Rundeck and SSO proxy platforms, ensuring 99.95% uptime for critical research infrastructure</p>
+                      <h5>Platform Management</h5>
+                      <p>Responsible for Jenkins, Nexus, Rundeck and SSO proxy platforms, ensuring 99.95% uptime for critical research infrastructure</p>
                     </div>
                   </div>
                   
@@ -455,8 +455,8 @@
                       <i class="fa fas fa-code"></i>
                     </div>
                     <div class="achievement-content">
-                      <h5 data-translate="kubernetesOperators">Kubernetes Operators</h5>
-                      <p data-translate="kubernetesOperatorsDesc">Developing custom Kubernetes Operators and APBs (Ansible Playbook Bundles) for automated application deployment and management</p>
+                      <h5>Kubernetes Operators</h5>
+                      <p>Developing custom Kubernetes Operators and APBs (Ansible Playbook Bundles) for automated application deployment and management</p>
                     </div>
                   </div>
                   
@@ -465,8 +465,8 @@
                       <i class="fa fas fa-graduation-cap"></i>
                     </div>
                     <div class="achievement-content">
-                      <h5 data-translate="trainingMentoring">Training & Mentoring</h5>
-                      <p data-translate="trainingMentoringDesc">Providing technical training to end-users and mentoring team members, implementing SCRUM methodology for cross-team collaboration</p>
+                      <h5>Training & Mentoring</h5>
+                      <p>Providing technical training to end-users and mentoring team members, implementing SCRUM methodology for cross-team collaboration</p>
                     </div>
                   </div>
                 </div>
@@ -507,9 +507,9 @@
               </div>
             </div>
             <div class="card-body">
-              <h4 class="position-title" data-translate="openStackCloudEngineering">OpenStack Cloud Engineering</h4>
+              <h4 class="position-title">OpenStack Cloud Engineering</h4>
               <div class="experience-description">
-                <p class="role-summary" data-translate="roleSummaryCernOpenstack">Responsible for Nova network migration to Neutron, improving scalability across 35,000 virtual machines with 300k+ cores.</p>
+                <p class="role-summary">Responsible for Nova network migration to Neutron, improving scalability across 35,000 virtual machines with 300k+ cores.</p>
                 
                 <div class="achievements-grid">
                   <div class="achievement-item">
@@ -588,7 +588,7 @@
               </div>
             </div>
             <div class="card-body">
-              <h4 class="position-title" data-translate="softwareDeveloper">Software Developer</h4>
+              <h4 class="position-title">Software Developer</h4>
               <div class="experience-description">
                 <p class="role-summary">Main responsible for developing tools for My Service Quality Portal for Volkswagen group, improving UX for 3000+ people.</p>
                 
@@ -668,7 +668,7 @@
               </div>
             </div>
             <div class="card-body">
-              <h4 class="position-title" data-translate="educationalActivitiesInstructor">Educational Activities Instructor</h4>
+              <h4 class="position-title">Educational Activities Instructor</h4>
               <div class="experience-description">
                 <p class="role-summary">Engaging students in IT activities and chess instruction to stimulate learning in technology fields.</p>
                 
@@ -727,7 +727,7 @@
               </div>
             </div>
             <div class="card-body">
-              <h4 class="position-title" data-translate="itTelecommunicationsInternship">IT Telecommunications Internship</h4>
+              <h4 class="position-title">IT Telecommunications Internship</h4>
               <div class="experience-description">
                 <p class="role-summary">Technical competencies for optical fiber installations and network configurations in partnership with Telefonica S.A.</p>
                 
@@ -786,8 +786,8 @@
 <div class="section education-section" id="education">
   <div class="container">
     <div class="section-header">
-      <h2 class="section-title" data-translate="educationTitle">🎓 Academic Journey</h2>
-      <p class="section-subtitle" data-translate="educationSubtitle">From Engineering to Business Leadership</p>
+      <h2 class="section-title">🎓 Academic Journey</h2>
+      <p class="section-subtitle">From Engineering to Business Leadership</p>
     </div>
 
     <div class="education-timeline">
@@ -1064,14 +1064,14 @@
 <div class="section skills-section" id="skill">
   <div class="container">
     <div class="section-header">
-      <h2 class="section-title" data-translate="skillsTitle">Technical Expertise</h2>
-      <p class="section-subtitle" data-translate="skillsSubtitle">Mastering the tools that power modern DevOps</p>
+      <h2 class="section-title">Technical Expertise</h2>
+      <p class="section-subtitle">Mastering the tools that power modern DevOps</p>
     </div>
     
     <div class="skills-grid">
       <!-- Programming Languages -->
       <div class="skill-category">
-        <h3 class="category-title" data-translate="programmingLanguages">Programming Languages</h3>
+        <h3 class="category-title">Programming Languages</h3>
         <div class="skill-items">
           <div class="skill-item" data-skill="90">
             <div class="skill-info">
@@ -1114,7 +1114,7 @@
       
       <!-- DevOps & CI/CD -->
       <div class="skill-category">
-        <h3 class="category-title" data-translate="devopsCicd">DevOps & CI/CD</h3>
+        <h3 class="category-title">DevOps & CI/CD</h3>
         <div class="skill-items">
           <div class="skill-item" data-skill="95">
             <div class="skill-info">
@@ -1157,7 +1157,7 @@
       
       <!-- Containerization & Orchestration -->
       <div class="skill-category">
-        <h3 class="category-title" data-translate="containerizationOrchestration">Containerization & Orchestration</h3>
+        <h3 class="category-title">Containerization & Orchestration</h3>
         <div class="skill-items">
           <div class="skill-item" data-skill="90">
             <div class="skill-info">
@@ -1200,7 +1200,7 @@
       
       <!-- Infrastructure as Code -->
       <div class="skill-category">
-        <h3 class="category-title" data-translate="infrastructureAsCode">Infrastructure as Code</h3>
+        <h3 class="category-title">Infrastructure as Code</h3>
         <div class="skill-items">
           <div class="skill-item" data-skill="85">
             <div class="skill-info">
@@ -1234,7 +1234,7 @@
       
       <!-- Cloud Platforms -->
       <div class="skill-category">
-        <h3 class="category-title" data-translate="cloudPlatforms">Cloud Platforms</h3>
+        <h3 class="category-title">Cloud Platforms</h3>
         <div class="skill-items">
           <div class="skill-item" data-skill="85">
             <div class="skill-info">
@@ -1286,7 +1286,7 @@
       
       <!-- Monitoring & Observability -->
       <div class="skill-category">
-        <h3 class="category-title" data-translate="monitoringObservability">Monitoring & Observability</h3>
+        <h3 class="category-title">Monitoring & Observability</h3>
         <div class="skill-items">
           <div class="skill-item" data-skill="85">
             <div class="skill-info">
@@ -1329,7 +1329,7 @@
       
       <!-- Security & DevSecOps -->
       <div class="skill-category">
-        <h3 class="category-title" data-translate="securityDevsecops">Security & DevSecOps</h3>
+        <h3 class="category-title">Security & DevSecOps</h3>
         <div class="skill-items">
           <div class="skill-item" data-skill="65">
             <div class="skill-info">
@@ -1345,7 +1345,7 @@
       
       <!-- Agile & Project Tracking -->
       <div class="skill-category">
-        <h3 class="category-title" data-translate="agileProjectTracking">Agile & Project Tracking</h3>
+        <h3 class="category-title">Agile & Project Tracking</h3>
         <div class="skill-items">
           <div class="skill-item" data-skill="90">
             <div class="skill-info">
@@ -1377,16 +1377,16 @@
 <div class="section portfolio-section" id="portfolio">
   <div class="container">
     <div class="section-header">
-      <h2 class="section-title" data-translate="portfolioTitle">🏆 Certifications & Achievements</h2>
-      <p class="section-subtitle" data-translate="portfolioSubtitle">Professional certifications and technical achievements</p>
+      <h2 class="section-title">🏆 Certifications & Achievements</h2>
+      <p class="section-subtitle">Professional certifications and technical achievements</p>
     </div>
 
     <!-- Filter Buttons -->
     <div class="portfolio-filters">
-      <button class="filter-btn active" data-filter="all" data-translate="all">All</button>
-      <button class="filter-btn" data-filter="cisco" data-translate="cisco">Cisco</button>
-      <button class="filter-btn" data-filter="microsoft" data-translate="microsoft">Microsoft</button>
-      <button class="filter-btn" data-filter="gitlab" data-translate="gitlab">GitLab</button>
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="cisco">Cisco</button>
+      <button class="filter-btn" data-filter="microsoft">Microsoft</button>
+      <button class="filter-btn" data-filter="gitlab">GitLab</button>
     </div>
 
     <!-- Portfolio Grid -->
@@ -1870,8 +1870,8 @@
   
   <div class="container">
     <div class="section-header">
-      <h2 class="section-title" data-translate="contactTitle">🚀 Let's Connect</h2>
-      <p class="section-subtitle" data-translate="contactSubtitle">Ready to build something amazing together?</p>
+      <h2 class="section-title">🚀 Let's Connect</h2>
+      <p class="section-subtitle">Ready to build something amazing together?</p>
     </div>
     
     <div class="contact-content">
@@ -1882,7 +1882,7 @@
             <div class="form-header">
               <h3 class="form-title">
                 <i class="fas fa-rocket"></i>
-                <span data-translate="sendMessage">Send me a message</span>
+                Send me a message
               </h3>
               <p class="form-subtitle">I'm always excited to discuss new opportunities and innovative projects!</p>
             </div>
@@ -1892,14 +1892,14 @@
                 <div class="form-group">
                   <div class="input-container">
                     <i class="fas fa-user input-icon"></i>
-                    <input type="text" name="name" class="form-input" placeholder="Your Name" data-translate="yourName" required>
+                    <input type="text" name="name" class="form-input" placeholder="Your Name" required>
                     <div class="input-focus-line"></div>
                   </div>
                 </div>
                 <div class="form-group">
                   <div class="input-container">
                     <i class="fas fa-envelope input-icon"></i>
-                    <input type="email" name="email" class="form-input" placeholder="Your Email" data-translate="yourEmail" required>
+                    <input type="email" name="email" class="form-input" placeholder="Your Email" required>
                     <div class="input-focus-line"></div>
                   </div>
                 </div>
@@ -1908,7 +1908,7 @@
               <div class="form-group">
                 <div class="input-container">
                   <i class="fas fa-tag input-icon"></i>
-                  <input type="text" name="subject" class="form-input" placeholder="Subject" data-translate="subject" required>
+                  <input type="text" name="subject" class="form-input" placeholder="Subject" required>
                   <div class="input-focus-line"></div>
                 </div>
               </div>
@@ -1916,14 +1916,14 @@
               <div class="form-group">
                 <div class="input-container textarea-container">
                   <i class="fas fa-comment input-icon"></i>
-                  <textarea name="message" class="form-input form-textarea" placeholder="Your Message" data-translate="yourMessage" rows="5" required></textarea>
+                  <textarea name="message" class="form-input form-textarea" placeholder="Your Message" rows="5" required></textarea>
                   <div class="input-focus-line"></div>
                 </div>
               </div>
               
               <div class="form-actions">
                 <button type="submit" class="btn-epic-send">
-                  <span class="btn-text" data-translate="send">Send Message</span>
+                  <span class="btn-text">Send Message</span>
                   <span class="btn-icon">
                     <i class="fas fa-paper-plane"></i>
                   </span>
@@ -1940,7 +1940,7 @@
             <div class="contact-info-header">
               <h3 class="info-title">
                 <i class="fas fa-map-marker-alt"></i>
-                <span data-translate="getInTouch">Get in Touch</span>
+                Get in Touch
               </h3>
               <p class="info-subtitle">Multiple ways to reach me</p>
             </div>
@@ -2014,7 +2014,7 @@
           <a class="cc-gitlabb btn btn-link" href="https://gitlab.cern.ch/isantosp" target="_blank" rel="noopener noreferrer"><i class="fab fa-gitlab fa-2x" aria-hidden="true"></i></a>
       <div class="h4 title text-center">Iago Santos Pardo</div>
       <div class="text-center text-muted">
-        <p>&copy; Iago S. Pardo. <span data-translate="allRightsReserved">All rights reserved.</span><br></p>
+        <p>&copy; Iago S. Pardo. All rights reserved.<br></p>
       </div>
     </footer>
     <script src="js/core/jquery.3.2.1.min.js"></script>
@@ -2023,366 +2023,7 @@
     <script src="js/now-ui-kit.js?v=1.1.0"></script>
     <script src="js/aos.js"></script>
     <script src="scripts/main.js"></script>
-    <script src="scripts/epic.js"></script>
-    
-    <!-- SIMPLE LIGHTBOX HTML -->
-    <div id="simpleLightbox" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.9); z-index: 9999; display: none; align-items: center; justify-content: center; overflow: hidden;">
-      <div style="position: relative; max-width: 90%; max-height: 90%; background: white; padding: 20px; border-radius: 10px; display: flex; flex-direction: column; align-items: center; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
-        <button id="simpleClose" style="position: absolute; top: 10px; right: 10px; background: #ff4444; color: white; border: none; border-radius: 50%; width: 30px; height: 30px; cursor: pointer; z-index: 10000; font-size: 18px;">×</button>
-        
-        <!-- Navigation buttons -->
-        <button id="simplePrev" style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.7); color: white; border: none; border-radius: 50%; width: 40px; height: 40px; cursor: pointer; z-index: 10000; font-size: 18px; display: flex; align-items: center; justify-content: center;">‹</button>
-        <button id="simpleNext" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.7); color: white; border: none; border-radius: 50%; width: 40px; height: 40px; cursor: pointer; z-index: 10000; font-size: 18px; display: flex; align-items: center; justify-content: center;">›</button>
-        
-        <img id="simpleImage" src="" alt="" style="max-width: 100%; max-height: 80vh; display: block; object-fit: contain; border-radius: 8px; box-shadow: 0 4px 20px rgba(0,0,0,0.3);">
-        
-        <!-- Image info -->
-        <div id="simpleInfo" style="margin-top: 15px; text-align: center;">
-          <h3 id="simpleTitle" style="margin: 0 0 5px 0; font-size: 18px; color: #333;"></h3>
-          <p id="simpleDescription" style="margin: 0; font-size: 14px; color: #666;"></p>
-        </div>
-      </div>
-    </div>
-    
-    <style>
-    /* Prevent horizontal scroll without affecting element sizes */
-    html, body {
-      overflow-x: hidden !important;
-    }
-    
-    /* Ensure lightbox doesn't cause horizontal scroll */
-    #simpleLightbox {
-      overflow-x: hidden !important;
-    }
-    
-    /* Fix for any elements that might cause horizontal overflow without changing container sizes */
-    .container {
-      overflow-x: hidden !important;
-    }
-    </style>
-    
-    <script>
-    // SIMPLE LIGHTBOX SCRIPT
-    console.log('Simple lightbox script starting...');
-    
-    let lightbox, lightboxImage, closeBtn, prevBtn, nextBtn, titleEl, descEl;
-    let currentIndex = 0;
-    let portfolioItems = [];
-    
-    function showImage(src, title = '', description = '') {
-      console.log('=== SHOWING IMAGE ===');
-      console.log('Image src:', src);
-      console.log('Title:', title);
-      console.log('Description:', description);
-      console.log('Lightbox element:', lightbox);
-      console.log('Lightbox image element:', lightboxImage);
-      
-      if (!lightbox || !lightboxImage) {
-        console.error('❌ Lightbox elements not found!');
-        console.log('Lightbox:', lightbox);
-        console.log('LightboxImage:', lightboxImage);
-        return;
-      }
-      
-      // Set image source
-      lightboxImage.src = src;
-      lightboxImage.alt = title;
-      
-      // Set title and description
-      if (titleEl) {
-        titleEl.textContent = title;
-        console.log('Title set:', title);
-      }
-      if (descEl) {
-        descEl.textContent = description;
-        console.log('Description set:', description);
-      }
-      
-      // Show the lightbox
-      lightbox.style.display = 'flex';
-      lightbox.style.visibility = 'visible';
-      lightbox.style.opacity = '1';
-      lightbox.style.position = 'fixed';
-      lightbox.style.top = '0';
-      lightbox.style.left = '0';
-      lightbox.style.width = '100vw';
-      lightbox.style.height = '100vh';
-      lightbox.style.zIndex = '9999';
-      
-      // Prevent body scroll
-      document.body.style.overflow = 'hidden';
-      document.body.style.position = 'fixed';
-      document.body.style.width = '100%';
-      document.body.style.height = '100%';
-      
-      console.log('✅ Lightbox should be visible now');
-      console.log('Lightbox styles:', {
-        display: lightbox.style.display,
-        visibility: lightbox.style.visibility,
-        opacity: lightbox.style.opacity,
-        zIndex: lightbox.style.zIndex
-      });
-    }
-    
-    // Make showImage globally available
-    window.showImage = showImage;
-    
-    function showImageByIndex(index) {
-      if (portfolioItems.length === 0) return;
-      
-      const item = portfolioItems[index];
-      if (item) {
-        showImage(item.image, item.title, item.description);
-        currentIndex = index;
-        
-        // Update navigation button states
-        if (prevBtn) prevBtn.style.display = portfolioItems.length > 1 ? 'flex' : 'none';
-        if (nextBtn) nextBtn.style.display = portfolioItems.length > 1 ? 'flex' : 'none';
-      }
-    }
-    
-    function showNextImage() {
-      if (portfolioItems.length === 0) return;
-      currentIndex = (currentIndex + 1) % portfolioItems.length;
-      showImageByIndex(currentIndex);
-    }
-    
-    function showPrevImage() {
-      if (portfolioItems.length === 0) return;
-      currentIndex = (currentIndex - 1 + portfolioItems.length) % portfolioItems.length;
-      showImageByIndex(currentIndex);
-    }
-    
-    function hideImage() {
-      console.log('=== HIDING IMAGE ===');
-      if (lightbox) {
-        lightbox.style.display = 'none';
-        lightbox.style.visibility = 'hidden';
-        lightbox.style.opacity = '0';
-        
-        // Restore body scroll
-        document.body.style.overflow = '';
-        document.body.style.position = '';
-        document.body.style.width = '';
-        document.body.style.height = '';
-        
-        console.log('✅ Lightbox hidden');
-      } else {
-        console.log('❌ Lightbox not found for hiding');
-      }
-    }
-    
-    // Add click listeners to all portfolio buttons
-    document.addEventListener('DOMContentLoaded', function() {
-      console.log('DOM loaded, adding listeners...');
-      
-      // Get elements after DOM is ready
-      lightbox = document.getElementById('simpleLightbox');
-      lightboxImage = document.getElementById('simpleImage');
-      closeBtn = document.getElementById('simpleClose');
-      prevBtn = document.getElementById('simplePrev');
-      nextBtn = document.getElementById('simpleNext');
-      titleEl = document.getElementById('simpleTitle');
-      descEl = document.getElementById('simpleDescription');
-      
-      console.log('Lightbox elements:', {
-        lightbox: !!lightbox,
-        lightboxImage: !!lightboxImage,
-        closeBtn: !!closeBtn,
-        prevBtn: !!prevBtn,
-        nextBtn: !!nextBtn,
-        titleEl: !!titleEl,
-        descEl: !!descEl
-      });
-      
-      // Build portfolio items array
-      const buttons = document.querySelectorAll('.portfolio-btn');
-      console.log('Found buttons:', buttons.length);
-      
-      portfolioItems = Array.from(buttons).map(button => ({
-        image: button.getAttribute('data-image'),
-        title: button.getAttribute('data-title'),
-        description: button.getAttribute('data-description')
-      }));
-      
-      console.log('Portfolio items loaded:', portfolioItems.length);
-      
-      buttons.forEach((button, index) => {
-        button.addEventListener('click', function(e) {
-          e.preventDefault();
-          e.stopPropagation();
-          console.log('Button clicked:', index, 'Image:', button.getAttribute('data-image'));
-          
-          // Set current index and show image
-          currentIndex = index;
-          showImageByIndex(currentIndex);
-        });
-      });
-      
-      // Close button
-      if (closeBtn) {
-        closeBtn.addEventListener('click', function(e) {
-          e.preventDefault();
-          e.stopPropagation();
-          hideImage();
-        });
-      }
-      
-      // Previous button
-      if (prevBtn) {
-        prevBtn.addEventListener('click', function(e) {
-          e.preventDefault();
-          e.stopPropagation();
-          showPrevImage();
-        });
-      }
-      
-      // Next button
-      if (nextBtn) {
-        nextBtn.addEventListener('click', function(e) {
-          e.preventDefault();
-          e.stopPropagation();
-          showNextImage();
-        });
-      }
-      
-      // Click outside to close
-      if (lightbox) {
-        lightbox.addEventListener('click', function(e) {
-          if (e.target === lightbox) {
-            hideImage();
-          }
-        });
-      }
-      
-      // Keyboard navigation
-      document.addEventListener('keydown', function(e) {
-        if (lightbox && lightbox.style.display === 'flex') {
-          if (e.key === 'Escape') {
-            hideImage();
-          } else if (e.key === 'ArrowLeft') {
-            e.preventDefault();
-            showPrevImage();
-          } else if (e.key === 'ArrowRight') {
-            e.preventDefault();
-            showNextImage();
-          }
-        }
-      });
-    });
-    
-    // Test function
-    window.testSimpleLightbox = function() {
-      console.log('Testing simple lightbox...');
-      currentIndex = 0;
-      showImageByIndex(0);
-    };
-    
-    // Debug function to check if everything is working
-    window.debugLightbox = function() {
-      console.log('=== LIGHTBOX DEBUG ===');
-      console.log('Lightbox element:', lightbox);
-      console.log('Lightbox image element:', lightboxImage);
-      console.log('Close button element:', closeBtn);
-      console.log('Prev button element:', prevBtn);
-      console.log('Next button element:', nextBtn);
-      console.log('Portfolio buttons found:', document.querySelectorAll('.portfolio-btn').length);
-      console.log('Portfolio items loaded:', portfolioItems.length);
-      
-      if (lightbox && lightboxImage) {
-        console.log('✅ Lightbox elements found');
-        console.log('Testing with first portfolio image...');
-        currentIndex = 0;
-        showImageByIndex(0);
-      } else {
-        console.log('❌ Lightbox elements NOT found');
-      }
-    };
-    
-    // Navigation test functions
-    window.testNext = function() {
-      showNextImage();
-    };
-    
-    window.testPrev = function() {
-      showPrevImage();
-    };
-    
-    // Debug function for lightbox state
-    window.debugLightboxState = function() {
-      console.log('=== LIGHTBOX STATE DEBUG ===');
-      console.log('Lightbox element:', lightbox);
-      console.log('Lightbox image:', lightboxImage);
-      console.log('Close button:', closeBtn);
-      console.log('Prev button:', prevBtn);
-      console.log('Next button:', nextBtn);
-      console.log('Title element:', titleEl);
-      console.log('Description element:', descEl);
-      
-      if (lightbox) {
-        console.log('Lightbox styles:', {
-          display: lightbox.style.display,
-          visibility: lightbox.style.visibility,
-          opacity: lightbox.style.opacity,
-          zIndex: lightbox.style.zIndex,
-          position: lightbox.style.position,
-          top: lightbox.style.top,
-          left: lightbox.style.left,
-          width: lightbox.style.width,
-          height: lightbox.style.height
-        });
-        
-        console.log('Lightbox computed styles:', {
-          display: window.getComputedStyle(lightbox).display,
-          visibility: window.getComputedStyle(lightbox).visibility,
-          opacity: window.getComputedStyle(lightbox).opacity,
-          zIndex: window.getComputedStyle(lightbox).zIndex
-        });
-      }
-      
-      console.log('Portfolio items count:', portfolioItems.length);
-      console.log('Current index:', currentIndex);
-    };
-    
-    // Force close lightbox and clean up
-    window.forceCloseLightbox = function() {
-      console.log('=== FORCE CLOSING LIGHTBOX ===');
-      if (lightbox) {
-        lightbox.style.display = 'none';
-        lightbox.style.visibility = 'hidden';
-        lightbox.style.opacity = '0';
-      }
-      
-      // Force restore body scroll
-      document.body.style.overflow = '';
-      document.body.style.position = '';
-      document.body.style.width = '';
-      document.body.style.height = '';
-      
-      // Remove any problematic styles
-      document.documentElement.style.overflow = '';
-      document.documentElement.style.overflowX = '';
-      
-      console.log('✅ Lightbox force closed and body restored');
-    };
-    
-    // Test image expansion
-    window.testImageExpansion = function() {
-      console.log('=== TESTING IMAGE EXPANSION ===');
-      const firstButton = document.querySelector('.portfolio-btn');
-      if (firstButton) {
-        const imageSrc = firstButton.getAttribute('data-image');
-        const title = firstButton.getAttribute('data-title');
-        const description = firstButton.getAttribute('data-description');
-        
-        console.log('Testing with:', { imageSrc, title, description });
-        showImage(imageSrc, title, description);
-      } else {
-        console.log('❌ No portfolio buttons found');
-      }
-    };
-    
-    console.log('Simple lightbox ready!');
-    </script>
+    <script src="scripts/epic.min.js"></script>
+    <script src="scripts/lightbox-simple.min.js"></script>
   </body>
 </html>
