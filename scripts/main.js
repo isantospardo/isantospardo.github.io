@@ -6,6 +6,26 @@ $(document).ready(function() {
     // uncomment below for on-scroll animations to played only once
     // once: true  
   }); // initialize animate on scroll library
+  
+  // Typewriter effect for the description text
+  const typewriterText = "Hard-working, conscientious, committed and pragmatic";
+  const typewriterElement = document.getElementById('typewriter-text');
+  
+  if (typewriterElement) {
+    let i = 0;
+    const typeSpeed = 100; // milliseconds per character
+    
+    function typeWriter() {
+      if (i < typewriterText.length) {
+        typewriterElement.textContent += typewriterText.charAt(i);
+        i++;
+        setTimeout(typeWriter, typeSpeed);
+      }
+    }
+    
+    // Start typewriter effect after a short delay
+    setTimeout(typeWriter, 1000);
+  }
 });
 
 // Smooth scroll for links with hashes

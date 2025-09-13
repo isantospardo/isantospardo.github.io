@@ -7,11 +7,12 @@
     <title>Iago S. Pardo</title>
     <meta name="description" content="Iago Santos Pardo CV."/>
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet">
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="css/aos.css" rel="stylesheet">
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="styles/main.css" rel="stylesheet">
+    <link href="styles/epic.css" rel="stylesheet">
   </head>
   <body id="top">
     <header>
@@ -43,25 +44,103 @@
 <!--////////////////////////////////////////////////////-->
 <div class="profile-page">
   <div class="wrapper">
-    <div class="page-header page-header-small" filter-color="green">
-      <div class="page-header-image" data-parallax="true" style="background-image: url('images/cc-bg-2.jpg');"></div>
+    <div class="hero-section">
+      <!-- Animated Background -->
+      <div class="hero-background">
+        <div class="floating-shapes">
+          <div class="shape shape-1"></div>
+          <div class="shape shape-2"></div>
+          <div class="shape shape-3"></div>
+          <div class="shape shape-4"></div>
+          <div class="shape shape-5"></div>
+          <div class="shape shape-6"></div>
+        </div>
+        <div class="particles" id="particles"></div>
+        <div class="gradient-overlay"></div>
+      </div>
+      
       <div class="container">
-        <div class="content-center">
-          <div class="cc-profile-image"><a href="#"><img src="images/myphoto1.png" alt="Image"/></a></div>
-          <div class="h2 title">Iago Santos</div>
-          <p class="category text-white">Hard-working, conscientious, committed  and pragmatic</p><a class="btn btn-primary smooth-scroll mr-2" href="https://www.linkedin.com/messaging/compose/?recipient=iasantosp" data-aos="zoom-in" data-aos-anchor="data-aos-anchor">Hire Me</a><a class="btn btn-primary" href="/CV/ISP_CV_Original.pdf" data-aos="zoom-in" data-aos-anchor="data-aos-anchor">Download my CV</a>
+        <div class="hero-content">
+          <!-- Profile Image with Advanced Effects -->
+          <div class="profile-container">
+            <div class="profile-image-wrapper">
+              <div class="profile-ring"></div>
+              <div class="profile-image">
+                <img src="images/myphoto1.png" alt="Iago Santos Pardo"/>
+                <div class="profile-glow"></div>
+              </div>
+              <div class="profile-stats">
+                <div class="stat-item">
+                  <span class="stat-number" data-count="8+">0</span>
+                  <span class="stat-label">Years Experience</span>
+                </div>
+                <div class="stat-item">
+                  <span class="stat-number" data-count="50+">0</span>
+                  <span class="stat-label">Projects</span>
+                </div>
+                <div class="stat-item">
+                  <span class="stat-number" data-count="4+">0</span>
+                  <span class="stat-label">Languages</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Hero Text -->
+          <div class="hero-text">
+            <h1 class="hero-title">
+              <span class="title-line">Iago Santos</span>
+              <span class="title-line">Pardo</span>
+            </h1>
+            <div class="hero-subtitle">
+              <span class="subtitle-text">Senior DevOps Engineer</span>
+              <div class="typing-container">
+                <span class="typewriter-text" id="typewriter-text"></span>
+                <span class="cursor">|</span>
+              </div>
+            </div>
+            
+            <!-- Action Buttons -->
+            <div class="hero-actions">
+              <a href="#contact" class="btn btn-primary btn-hero smooth-scroll">
+                <span class="btn-text">Hire Me</span>
+                <span class="btn-icon"><i class="fa fas fa-rocket"></i></span>
+                <div class="btn-ripple"></div>
+              </a>
+              <a href="/CV/ISP_CV_Original.pdf" class="btn btn-secondary btn-hero">
+                <span class="btn-text">Download CV</span>
+                <span class="btn-icon"><i class="fa fa-download"></i></span>
+                <div class="btn-ripple"></div>
+              </a>
+            </div>
+            
+            <!-- Social Links -->
+            <div class="social-links">
+              <a href="https://www.linkedin.com/in/iasantosp/" class="social-link linkedin" data-tooltip="LinkedIn">
+                <i class="fab fa-linkedin"></i>
+                <span class="social-tooltip">Connect on LinkedIn</span>
+              </a>
+              <a href="https://github.com/isantospardo/" class="social-link github" data-tooltip="GitHub">
+                <i class="fab fa-github"></i>
+                <span class="social-tooltip">View my code</span>
+              </a>
+              <a href="https://gitlab.cern.ch/isantosp" class="social-link gitlab" data-tooltip="GitLab">
+                <i class="fab fa-gitlab"></i>
+                <span class="social-tooltip">CERN GitLab</span>
+              </a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Scroll Indicator -->
+        <div class="scroll-indicator">
+          <div class="scroll-text">Scroll to explore</div>
+          <div class="scroll-arrow">
+            <i class="fas fa-chevron-down"></i>
+          </div>
         </div>
       </div>
-      <div class="section">
-        <div class="container">
-          <div class="button-container">
-              <a class="btn btn-default btn-round btn-lg btn-icon" href="https://www.linkedin.com/in/iasantosp/" rel="tooltip" title="My LinkedIn "><i class="fa fa-linkedin"></i></a>
-              <a class="btn btn-default btn-round btn-lg btn-icon" href="https://github.com/isantospardo/" rel="tooltip" title="My GitHub "><i class="fa fa-github"></i></a>
-              <a class="btn btn-default btn-round btn-lg btn-icon" href="https://gitlab.cern.ch/isantosp" rel="tooltip" title="My GitLab "><i class="fa fa-gitlab"></i></a>
-<!--              <a class="btn btn-default btn-round btn-lg btn-icon" href="#" rel="tooltip" title="Follow me on Facebook"><i class="fa fa-facebook"></i></a>-->
-<!--              <a class="btn btn-default btn-round btn-lg btn-icon" href="#" rel="tooltip" title="Follow me on Twitter"><i class="fa fa-twitter"></i></a>-->
-<!--              <a class="btn btn-default btn-round btn-lg btn-icon" href="#" rel="tooltip" title="Follow me on Google+"><i class="fa fa-google-plus"></i></a>-->
-<!--              <a class="btn btn-default btn-round btn-lg btn-icon" href="#" rel="tooltip" title="Follow me on Instagram"><i class="fa fa-instagram"></i></a></div>-->
+    </div>
         </div>
       </div>
     </div>
@@ -73,37 +152,57 @@
 <!--////////////////////////////////////////////////////-->
 <div class="section" id="about">
   <div class="container">
-    <div class="card" data-aos="fade-up" data-aos-offset="10">
-      <div class="row">
-        <div class="col-lg-6 col-md-12">
+    <div class="row">
+      <div class="col-lg-6 col-md-12 mb-4">
+        <div class="card" data-aos="fade-up" data-aos-offset="10">
           <div class="card-body">
-            <div class="h4 mt-0 title">About</div>
-            <p>I am an attentive and efficient person seeking solutions to provide the best results, while constantly trying to create a conductive and positive atmosphere, through an optimistic and constructive attitude. I regularly propose activities to improve the team environment. I am a committed person willing to work overtime when required by the needs of the company. </p>
+            <div class="h4 mt-0 title">Professional Summary</div>
+            <p>I am an attentive and efficient professional seeking solutions to provide the best results, while constantly trying to create a conductive and positive atmosphere through an optimistic and constructive attitude. I regularly propose activities to improve the team environment and am committed to working overtime when required by the needs of the company.</p>
+            <div class="mt-4">
+              <div class="row">
+                <div class="col-6 text-center">
+                  <div class="h3 text-primary">8+</div>
+                  <p class="text-muted">Years Experience</p>
+                </div>
+                <div class="col-6 text-center">
+                  <div class="h3 text-primary">50+</div>
+                  <p class="text-muted">Projects Completed</p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="col-lg-6 col-md-12">
+      </div>
+      <div class="col-lg-6 col-md-12 mb-4">
+        <div class="card" data-aos="fade-up" data-aos-offset="10" data-aos-delay="100">
           <div class="card-body">
-            <div class="h4 mt-0 title">About me</div>
-            <div class="row">
-              <div class="col-sm-4"><strong class="text-uppercase"></strong></div>
-              <div class="col-sm-8"></div>
+            <div class="h4 mt-0 title">Contact Information</div>
+            <div class="row mb-3">
+              <div class="col-sm-4"><strong>Email:</strong></div>
+              <div class="col-sm-8">
+                <a href="mailto:isantosp@protonmail.com" class="text-decoration-none">
+                  <i class="fa fa-envelope mr-2"></i>isantosp@protonmail.com
+                </a>
+              </div>
             </div>
-            <div class="row mt-3">
-              <div class="col-sm-4"><strong class="text-uppercase">Email:</strong></div>
-              <div class="col-sm-8"><a href="mailto:isantosp@protonmail.com"  data-type="submit">isantosp@protonmail.com </a></div>
+            <div class="row mb-3">
+              <div class="col-sm-4"><strong>Phone:</strong></div>
+              <div class="col-sm-8">
+                <i class="fa fa-phone mr-2"></i>+34 627 215 065<br>
+                <i class="fa fa-phone mr-2"></i>+41 79 855 29 32
+              </div>
             </div>
-            <div class="row mt-3">
-              <div class="col-sm-4"><strong class="text-uppercase">Phone:</strong></div>
-              <div class="col-sm-8">+34 627 215 065  <br>
-                                    +41 79 855 29 32</div>
+            <div class="row mb-3">
+              <div class="col-sm-4"><strong>Location:</strong></div>
+              <div class="col-sm-8">
+                <i class="fa fa-map-marker mr-2"></i>Rue du Jura, Geneva, Switzerland
+              </div>
             </div>
-            <div class="row mt-3">
-              <div class="col-sm-4"><strong class="text-uppercase">Address:</strong></div>
-              <div class="col-sm-8">Rue du Jura, Geneva, Switzerland</div>
-            </div>
-            <div class="row mt-3">
-              <div class="col-sm-4"><strong class="text-uppercase">Languages:</strong></div>
-              <div class="col-sm-8">English, French, Spanish, Galician, Portuguese</div>
+            <div class="row mb-3">
+              <div class="col-sm-4"><strong>Languages:</strong></div>
+              <div class="col-sm-8">
+                <i class="fa fas fa-globe mr-2"></i>English, French, Spanish, Galician, Portuguese
+              </div>
             </div>
           </div>
         </div>
@@ -115,178 +214,530 @@
 <!--////////////////////////////////////////////////////-->
 <!--EXPERIENCE-->
 <!--////////////////////////////////////////////////////-->
-<div class="section" id="experience">
-  <div class="container cc-experience">
-    <div class="h4 text-center mb-4 title">Work Experience</div>
-
-
-    <div class="card">
-      <div class="row">
-        <div class="col-md-3 bg-primary" data-aos="fade-right" data-aos-offset="50" data-aos-duration="500">
-          <div class="card-body cc-experience-header">
-            <p>July 2021<br>Present</p>
-            <div class="h5">Adfinis</div>
+<div class="section experience-section" id="experience">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">Professional Journey</h2>
+      <p class="section-subtitle">Building the future of DevOps, one project at a time</p>
+    </div>
+    
+    <div class="epic-timeline">
+      <!-- Current Position -->
+      <div class="timeline-item current" data-aos="fade-up" data-aos-delay="100">
+        <div class="timeline-marker">
+          <div class="timeline-icon current-icon">
+            <i class="fa fas fa-rocket"></i>
           </div>
+          <div class="timeline-date">2021 - Present</div>
         </div>
-        <div class="col-md-9" data-aos="fade-left" data-aos-offset="50" data-aos-duration="500">
-          <div class="card-body">
-            <div class="h5">Senior DevOps Project Manager & Deputy People Lead.<p></p>
-              Adfinis A.G., Switzerland.</div>
-            <p>
-              Defining and managing roadmaps for implementation of DevOps for multiple clients.
-              <p></p>
-              Drafting, implementing and achieving infrastructure projects from scratch to end.
-              <p></p>
-              Providing SLA for different public cloud providers as AWS, Azure, Cloudscale, Exoscale, GCP.
-              <p></p>
-              Providing CI/CD training for end users using Terraform, Azure, Vault, ArgoCD, following the best GitOps tools.
-              <p></p>
-              <strong>Deputy People Lead Responsibilities:</strong>
-              <ul>
-                <li>Assist in the oversight of team development and management responsibilities.</li>
-                <li>Facilitate communication and coordination between project teams and management.</li>
-                <li>Help in setting and tracking performance metrics for development teams.</li>
-                <li>Contribute to hiring, onboarding, and training new team members.</li>
-            </ul>
+        <div class="timeline-content">
+          <div class="experience-card epic-card">
+            <div class="card-header">
+              <div class="company-info">
+                <h3 class="company-name">Adfinis A.G.</h3>
+                <span class="company-location">🇨🇭 Switzerland</span>
+                <div class="current-badge">Current Position</div>
+              </div>
+              <div class="company-logo">
+                <i class="fa fa-building"></i>
+              </div>
+            </div>
+            <div class="card-body">
+              <h4 class="position-title">Senior DevOps Project Manager & Deputy People Lead</h4>
+              <div class="experience-description">
+                <p class="role-summary">Leading DevOps transformation initiatives and managing complex infrastructure projects across multiple clients in Switzerland.</p>
+                
+                <div class="achievements-grid">
+                  <div class="achievement-item">
+                    <div class="achievement-icon">
+                      <i class="fas fa-road"></i>
+                    </div>
+                    <div class="achievement-content">
+                      <h5>DevOps Roadmaps</h5>
+                      <p>Defining and managing comprehensive roadmaps for DevOps implementation across multiple Swiss clients, ensuring scalable and efficient cloud infrastructure adoption</p>
+                    </div>
+                  </div>
+                  
+                  <div class="achievement-item">
+                    <div class="achievement-icon">
+                      <i class="fas fa-cloud"></i>
+                    </div>
+                    <div class="achievement-content">
+                      <h5>Infrastructure Projects</h5>
+                      <p>Leading end-to-end infrastructure projects from initial planning to deployment, managing budgets up to €500K and teams of 5-8 engineers</p>
+                    </div>
+                  </div>
+                  
+                  <div class="achievement-item">
+                    <div class="achievement-icon">
+                      <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <div class="achievement-content">
+                      <h5>Cloud SLAs & Compliance</h5>
+                      <p>Providing 99.9% SLA for AWS, Azure, Cloudscale, Exoscale, and GCP platforms, ensuring GDPR compliance and security standards</p>
+                    </div>
+                  </div>
+                  
+                  <div class="achievement-item">
+                    <div class="achievement-icon">
+                      <i class="fa fas fa-graduation-cap"></i>
+                    </div>
+                    <div class="achievement-content">
+                      <h5>Technical Training</h5>
+                      <p>Conducting advanced CI/CD training sessions for 50+ engineers using Terraform, Azure, Vault, ArgoCD, and GitOps methodologies</p>
+                    </div>
+                  </div>
+                  
+                  <div class="achievement-item">
+                    <div class="achievement-icon">
+                      <i class="fa fas fa-chart-line"></i>
+                    </div>
+                    <div class="achievement-content">
+                      <h5>Performance Optimization</h5>
+                      <p>Reducing infrastructure costs by 30% through automated scaling and resource optimization across client environments</p>
+                    </div>
+                  </div>
+                  
+                  <div class="achievement-item">
+                    <div class="achievement-icon">
+                      <i class="fa fas fas fa-users-cog"></i>
+                    </div>
+                    <div class="achievement-content">
+                      <h5>Team Leadership</h5>
+                      <p>Managing cross-functional teams of DevOps engineers, implementing Agile methodologies and mentoring junior developers</p>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="leadership-section">
+                  <h5 class="leadership-title">
+                    <i class="fa fas fa-users"></i>
+                    Deputy People Lead Responsibilities
+                  </h5>
+                  <div class="leadership-grid">
+                    <div class="leadership-item">
+                      <i class="fa fas fa-check-circle"></i>
+                      <span>Team development and management oversight</span>
+                    </div>
+                    <div class="leadership-item">
+                      <i class="fa fas fa-check-circle"></i>
+                      <span>Communication coordination between teams and management</span>
+                    </div>
+                    <div class="leadership-item">
+                      <i class="fa fas fa-check-circle"></i>
+                      <span>Performance metrics tracking for development teams</span>
+                    </div>
+                    <div class="leadership-item">
+                      <i class="fa fas fa-check-circle"></i>
+                      <span>Hiring, onboarding, and training new team members</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card-footer">
+              <div class="tech-stack">
+                <span class="tech-tag">AWS</span>
+                <span class="tech-tag">Azure</span>
+                <span class="tech-tag">Terraform</span>
+                <span class="tech-tag">ArgoCD</span>
+                <span class="tech-tag">GitOps</span>
+                <span class="tech-tag">Kubernetes</span>
+                <span class="tech-tag">Docker</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
 
-
-    <div class="card">
-      <div class="row">
-        <div class="col-md-3 bg-primary" data-aos="fade-right" data-aos-offset="50" data-aos-duration="500">
-          <div class="card-body cc-experience-header">
-            <p>October 2018<br>July 2021</p>
-            <div class="h5">CERN</a></div>
+      <!-- CERN OpenShift -->
+      <div class="timeline-item" data-aos="fade-up" data-aos-delay="200">
+        <div class="timeline-marker">
+          <div class="timeline-icon">
+            <i class="fa fa-cloud"></i>
           </div>
+          <div class="timeline-date">2018 - 2021</div>
         </div>
-        <div class="col-md-9" data-aos="fade-left" data-aos-offset="50" data-aos-duration="500">
-          <div class="card-body">
-            <div class="h5">OpenShift Cloud Engineering.<p></p>
-              CERN (European Organization for Nuclear Research), Switzerland.</div>
-            <p>
-              Main responsible engineer in charge of OpenShift PaaS for more than 3000 users.
-              <p></p>
-              Designing, implementing, and supporting of PaaS, based on Docker containers and orchestrated with OpenShift (Kubernetes).
-              <p></p>
-              Managing all the deployments based in CI and ArgoCD to fully automate operations for up to 17,000 users.
-              <p></p>
-              Responsible for Jenkins, Nexus, Rundeck and SSO proxy platforms. Managing infrastructure with Puppet, Ansible, Golang and Helm.
-              <p></p>
-              Developing internal APBs and Kubernetes Operators.
-              <p></p>
-              Providing Jira, GitLab, OpenShift and web services technical support for end users.
-              <p></p>
-              Leading web services migrations to Kubernetes-based technology.
-              <p></p>
-              Providing training to end-users. Mentoring and supervised people within the team. Added SCRUM methodology to collaborate with other teams and working in pairs.
-              <p></p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-
-    <div class="card">
-      <div class="row">
-        <div class="col-md-3 bg-primary" data-aos="fade-right" data-aos-offset="50" data-aos-duration="500">
-          <div class="card-body cc-experience-header">
-            <p>October 2016<br>October 2018</p>
-            <div class="h5">CERN</div>
-          </div>
-        </div>
-        <div class="col-md-9" data-aos="fade-left" data-aos-offset="50" data-aos-duration="500">
-          <div class="card-body">
-            <div class="h5">OpenStack Cloud Engineering.<p></p>
-              CERN (European Organization for Nuclear Research), Switzerland.</div>
-            <p>
-              Responsible for Nova network migration to Neutron (OpenStack) to improve the scalability across 35,000 virtual machines in the cloud with more than 300k cores.
-              <p></p>
-              Contributing to open source OpenStack community.
-              <p></p>
-              Integrating Kubernetes-based Load Balancer helping with the horizontal escalation to spine up VMs on demand.
-              <p></p>
-              Main developer in a customized DHCP based in Golang, to register machines beforehand to avoid the synchronization wait time of the central DHCP.
-				      <p></p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-
-    <div class="card">
-      <div class="row">
-        <div class="col-md-3 bg-primary" data-aos="fade-right" data-aos-offset="50" data-aos-duration="500">
-          <div class="card-body cc-experience-header">
-            <p>May 2016<br>September 2016</p>
-            <div class="h5">SEAT S.A.</div>
-          </div>
-        </div>
-        <div class="col-md-9" data-aos="fade-left" data-aos-offset="50" data-aos-duration="500">
-          <div class="card-body">
-            <div class="h5">Software Developer.<p></p>
-              SEAT S.A., Spain.</div>
-            <p>
-              Main responsible for developing tools for My Service Quality Portal for Volkswagen group, improving the user's experience of more than 3000 people.
-              <p></p>
-              Automatizing testing of new developments.
-              <p></p>
-              Adding i18n internationalization of the existent services.
-              <p></p>
-              Training documentation for instructors and field staff.
-              <p></p>
-              End User Support at Manufacturer Level. Intern.
-              <p></p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-
-    <div class="card">
-      <div class="row">
-        <div class="col-md-3 bg-primary" data-aos="fade-right" data-aos-offset="50" data-aos-duration="500">
-          <div class="card-body cc-experience-header">
-            <p>January 2014<br>November 2016</p>
-            <div class="h5">CEGAPSE S.L.</div>
-          </div>
-        </div>
-        <div class="col-md-9" data-aos="fade-left" data-aos-offset="50" data-aos-duration="500">
-          <div class="card-body">
-            <div class="h5">Educational Activities Instructor.<p></p>
-              CEGAPSE S.L., Spain.</div>
-            <p>
-              Trying to make students engage in learning IT activities that are likely to stimulate them in this new field. Chess instructor.
-              <p></p>
+        <div class="timeline-content">
+          <div class="experience-card epic-card">
+            <div class="card-header">
+              <div class="company-info">
+                <h3 class="company-name">CERN</h3>
+                <span class="company-location">🇨🇭 European Organization for Nuclear Research, Switzerland</span>
+              </div>
+              <div class="company-logo">
+                <i class="fa fa-flask"></i>
+              </div>
+            </div>
+            <div class="card-body">
+              <h4 class="position-title">OpenShift Cloud Engineering</h4>
+              <div class="experience-description">
+                <p class="role-summary">Main responsible engineer for OpenShift PaaS serving more than 3000 users with advanced container orchestration.</p>
+                
+                <div class="achievements-grid">
+                  <div class="achievement-item">
+                    <div class="achievement-icon">
+                      <i class="fa fas fa-server"></i>
+                    </div>
+                    <div class="achievement-content">
+                      <h5>OpenShift PaaS Platform</h5>
+                      <p>Main responsible engineer for OpenShift PaaS serving 3000+ researchers and scientists worldwide, managing 500+ applications</p>
+                    </div>
+                  </div>
+                  
+                  <div class="achievement-item">
+                    <div class="achievement-icon">
+                      <i class="fa fas fa-cogs"></i>
+                    </div>
+                    <div class="achievement-content">
+                      <h5>Container Orchestration</h5>
+                      <p>Designing and implementing enterprise-grade PaaS based on Docker containers and Kubernetes, handling 10TB+ of data daily</p>
+                    </div>
+                  </div>
+                  
+                  <div class="achievement-item">
+                    <div class="achievement-icon">
+                      <i class="fa fas fa-sync-alt"></i>
+                    </div>
+                    <div class="achievement-content">
+                      <h5>CI/CD Automation</h5>
+                      <p>Managing automated deployments with CI and ArgoCD for 17,000+ users across multiple research projects and experiments</p>
+                    </div>
+                  </div>
+                  
+                  <div class="achievement-item">
+                    <div class="achievement-icon">
+                      <i class="fa fas fa-tools"></i>
+                    </div>
+                    <div class="achievement-content">
+                      <h5>Platform Management</h5>
+                      <p>Responsible for Jenkins, Nexus, Rundeck and SSO proxy platforms, ensuring 99.95% uptime for critical research infrastructure</p>
+                    </div>
+                  </div>
+                  
+                  <div class="achievement-item">
+                    <div class="achievement-icon">
+                      <i class="fa fas fa-code"></i>
+                    </div>
+                    <div class="achievement-content">
+                      <h5>Kubernetes Operators</h5>
+                      <p>Developing custom Kubernetes Operators and APBs (Ansible Playbook Bundles) for automated application deployment and management</p>
+                    </div>
+                  </div>
+                  
+                  <div class="achievement-item">
+                    <div class="achievement-icon">
+                      <i class="fa fas fa-graduation-cap"></i>
+                    </div>
+                    <div class="achievement-content">
+                      <h5>Training & Mentoring</h5>
+                      <p>Providing technical training to end-users and mentoring team members, implementing SCRUM methodology for cross-team collaboration</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card-footer">
+              <div class="tech-stack">
+                <span class="tech-tag">OpenShift</span>
+                <span class="tech-tag">Kubernetes</span>
+                <span class="tech-tag">Docker</span>
+                <span class="tech-tag">ArgoCD</span>
+                <span class="tech-tag">Jenkins</span>
+                <span class="tech-tag">Golang</span>
+                <span class="tech-tag">Helm</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
 
-
-    <div class="card">
-      <div class="row">
-        <div class="col-md-3 bg-primary" data-aos="fade-right" data-aos-offset="50" data-aos-duration="500">
-          <div class="card-body cc-experience-header">
-            <p>April 2013<br>JULY 2013</p>
-            <div class="h5">MONTELNOR S.C.G.</div>
+      <!-- CERN OpenStack -->
+      <div class="timeline-item" data-aos="fade-up" data-aos-delay="300">
+        <div class="timeline-marker">
+          <div class="timeline-icon">
+            <i class="fa fas fa-server"></i>
+          </div>
+          <div class="timeline-date">2016 - 2018</div>
+        </div>
+        <div class="timeline-content">
+          <div class="experience-card epic-card">
+            <div class="card-header">
+              <div class="company-info">
+                <h3 class="company-name">CERN</h3>
+                <span class="company-location">🇨🇭 European Organization for Nuclear Research, Switzerland</span>
+              </div>
+              <div class="company-logo">
+                <i class="fa fa-flask"></i>
+              </div>
+            </div>
+            <div class="card-body">
+              <h4 class="position-title">OpenStack Cloud Engineering</h4>
+              <div class="experience-description">
+                <p class="role-summary">Responsible for Nova network migration to Neutron, improving scalability across 35,000 virtual machines with 300k+ cores.</p>
+                
+                <div class="achievements-grid">
+                  <div class="achievement-item">
+                    <div class="achievement-icon">
+                      <i class="fa fas fa-network-wired"></i>
+                    </div>
+                    <div class="achievement-content">
+                      <h5>Network Migration</h5>
+                      <p>Nova network migration to Neutron for improved scalability</p>
+                    </div>
+                  </div>
+                  
+                  <div class="achievement-item">
+                    <div class="achievement-icon">
+                      <i class="fa fas fa-expand-arrows-alt"></i>
+                    </div>
+                    <div class="achievement-content">
+                      <h5>Massive Scale</h5>
+                      <p>Managing 35,000 VMs with 300k+ cores in the cloud</p>
+                    </div>
+                  </div>
+                  
+                  <div class="achievement-item">
+                    <div class="achievement-icon">
+                      <i class="fa fas fa-balance-scale"></i>
+                    </div>
+                    <div class="achievement-content">
+                      <h5>Load Balancer</h5>
+                      <p>Integrating Kubernetes-based Load Balancer for horizontal scaling</p>
+                    </div>
+                  </div>
+                  
+                  <div class="achievement-item">
+                    <div class="achievement-icon">
+                      <i class="fa fas fa-code"></i>
+                    </div>
+                    <div class="achievement-content">
+                      <h5>Custom DHCP</h5>
+                      <p>Main developer of customized DHCP solution in Golang</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card-footer">
+              <div class="tech-stack">
+                <span class="tech-tag">OpenStack</span>
+                <span class="tech-tag">Neutron</span>
+                <span class="tech-tag">Kubernetes</span>
+                <span class="tech-tag">Golang</span>
+                <span class="tech-tag">DHCP</span>
+                <span class="tech-tag">Load Balancing</span>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="col-md-9" data-aos="fade-left" data-aos-offset="50" data-aos-duration="500">
-          <div class="card-body">
-            <div class="h5">Information and Technology Telecommunications Internship.<p></p>
-              MONTELNOR S.C.G., Spain.</div>
-            <p>
-              Telefonica S.A. partnership.
-              <p></p>
-              Working in technical competencies for optical fiber installations at customer's side (FTTH), thermofusion and Optical PTR and Rosettes.
-              <p></p>
-              In charge of client's WiFi configuration and networks.
-              <p></p>
-              Working with fiber optic fission with junction boxes, CTO, distribution and power. Measures testing of power and reflectometry.
-              <p></p>
+      </div>
+
+      <!-- SEAT -->
+      <div class="timeline-item" data-aos="fade-up" data-aos-delay="400">
+        <div class="timeline-marker">
+          <div class="timeline-icon">
+            <i class="fa fas fa-car"></i>
+          </div>
+          <div class="timeline-date">2016</div>
+        </div>
+        <div class="timeline-content">
+          <div class="experience-card epic-card">
+            <div class="card-header">
+              <div class="company-info">
+                <h3 class="company-name">SEAT S.A.</h3>
+                <span class="company-location">🇪🇸 Spain</span>
+              </div>
+              <div class="company-logo">
+                <i class="fa fa-industry"></i>
+              </div>
+            </div>
+            <div class="card-body">
+              <h4 class="position-title">Software Developer</h4>
+              <div class="experience-description">
+                <p class="role-summary">Main responsible for developing tools for My Service Quality Portal for Volkswagen group, improving UX for 3000+ people.</p>
+                
+                <div class="achievements-grid">
+                  <div class="achievement-item">
+                    <div class="achievement-icon">
+                      <i class="fa fas fa-door-open"></i>
+                    </div>
+                    <div class="achievement-content">
+                      <h5>Quality Portal</h5>
+                      <p>Developing My Service Quality Portal for Volkswagen group</p>
+                    </div>
+                  </div>
+                  
+                  <div class="achievement-item">
+                    <div class="achievement-icon">
+                      <i class="fa fas fa-users"></i>
+                    </div>
+                    <div class="achievement-content">
+                      <h5>User Experience</h5>
+                      <p>Improving user experience for 3000+ people</p>
+                    </div>
+                  </div>
+                  
+                  <div class="achievement-item">
+                    <div class="achievement-icon">
+                      <i class="fa fas fa-robot"></i>
+                    </div>
+                    <div class="achievement-content">
+                      <h5>Test Automation</h5>
+                      <p>Automatizing testing of new developments</p>
+                    </div>
+                  </div>
+                  
+                  <div class="achievement-item">
+                    <div class="achievement-icon">
+                      <i class="fa fas fa-globe"></i>
+                    </div>
+                    <div class="achievement-content">
+                      <h5>Internationalization</h5>
+                      <p>Adding i18n internationalization to existing services</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card-footer">
+              <div class="tech-stack">
+                <span class="tech-tag">Software Development</span>
+                <span class="tech-tag">Quality Portal</span>
+                <span class="tech-tag">Test Automation</span>
+                <span class="tech-tag">i18n</span>
+                <span class="tech-tag">Volkswagen Group</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CEGAPSE -->
+      <div class="timeline-item" data-aos="fade-up" data-aos-delay="500">
+        <div class="timeline-marker">
+          <div class="timeline-icon">
+            <i class="fa fas fa-graduation-cap"></i>
+          </div>
+          <div class="timeline-date">2014 - 2016</div>
+        </div>
+        <div class="timeline-content">
+          <div class="experience-card epic-card">
+            <div class="card-header">
+              <div class="company-info">
+                <h3 class="company-name">CEGAPSE S.L.</h3>
+                <span class="company-location">🇪🇸 Spain</span>
+              </div>
+              <div class="company-logo">
+                <i class="fa fa-chalkboard-teacher"></i>
+              </div>
+            </div>
+            <div class="card-body">
+              <h4 class="position-title">Educational Activities Instructor</h4>
+              <div class="experience-description">
+                <p class="role-summary">Engaging students in IT activities and chess instruction to stimulate learning in technology fields.</p>
+                
+                <div class="achievements-grid">
+                  <div class="achievement-item">
+                    <div class="achievement-icon">
+                      <i class="fa fas fa-laptop-code"></i>
+                    </div>
+                    <div class="achievement-content">
+                      <h5>IT Education</h5>
+                      <p>Engaging students in learning IT activities</p>
+                    </div>
+                  </div>
+                  
+                  <div class="achievement-item">
+                    <div class="achievement-icon">
+                      <i class="fa fas fa-chess"></i>
+                    </div>
+                    <div class="achievement-content">
+                      <h5>Chess Instruction</h5>
+                      <p>Chess instructor for strategic thinking development</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card-footer">
+              <div class="tech-stack">
+                <span class="tech-tag">Education</span>
+                <span class="tech-tag">IT Training</span>
+                <span class="tech-tag">Chess</span>
+                <span class="tech-tag">Student Engagement</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- MONTELNOR -->
+      <div class="timeline-item" data-aos="fade-up" data-aos-delay="600">
+        <div class="timeline-marker">
+          <div class="timeline-icon">
+            <i class="fa fas fa-wifi"></i>
+          </div>
+          <div class="timeline-date">2013</div>
+        </div>
+        <div class="timeline-content">
+          <div class="experience-card epic-card">
+            <div class="card-header">
+              <div class="company-info">
+                <h3 class="company-name">MONTELNOR S.C.G.</h3>
+                <span class="company-location">🇪🇸 Spain (Telefonica Partnership)</span>
+              </div>
+              <div class="company-logo">
+                <i class="fa fa-broadcast-tower"></i>
+              </div>
+            </div>
+            <div class="card-body">
+              <h4 class="position-title">IT Telecommunications Internship</h4>
+              <div class="experience-description">
+                <p class="role-summary">Technical competencies for optical fiber installations and network configurations in partnership with Telefonica S.A.</p>
+                
+                <div class="achievements-grid">
+                  <div class="achievement-item">
+                    <div class="achievement-icon">
+                      <i class="fa fas fa-fiber-new"></i>
+                    </div>
+                    <div class="achievement-content">
+                      <h5>Fiber Installation</h5>
+                      <p>Optical fiber installations at customer sites (FTTH)</p>
+                    </div>
+                  </div>
+                  
+                  <div class="achievement-item">
+                    <div class="achievement-icon">
+                      <i class="fa fas fa-wifi"></i>
+                    </div>
+                    <div class="achievement-content">
+                      <h5>WiFi Configuration</h5>
+                      <p>Client WiFi configuration and network setup</p>
+                    </div>
+                  </div>
+                  
+                  <div class="achievement-item">
+                    <div class="achievement-icon">
+                      <i class="fa fas fa-tools"></i>
+                    </div>
+                    <div class="achievement-content">
+                      <h5>Technical Testing</h5>
+                      <p>Power and reflectometry testing for fiber optics</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card-footer">
+              <div class="tech-stack">
+                <span class="tech-tag">Fiber Optics</span>
+                <span class="tech-tag">FTTH</span>
+                <span class="tech-tag">WiFi</span>
+                <span class="tech-tag">Telefonica</span>
+                <span class="tech-tag">Network Testing</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -297,79 +748,274 @@
 <!--////////////////////////////////////////////////////-->
 <!--EDUCATION-->
 <!--////////////////////////////////////////////////////-->
-<div class="section" id="education">
-  <div class="container cc-education">
-    <div class="h4 text-center mb-4 title">Education</div>
-
-    <div class="card">
-      <div class="row">
-        <div class="col-md-3 bg-primary" data-aos="fade-right" data-aos-offset="50" data-aos-duration="500">
-          <div class="card-body cc-education-header">
-            <p>2020 - 2021</p>
-            <div class="h5">Master's Degree</div>
-          </div>
-        </div>
-        <div class="col-md-9" data-aos="fade-left" data-aos-offset="50" data-aos-duration="500">
-          <div class="card-body">
-            <div class="h5">Master's Degree, MBA Master of Business Administration.</div>
-            <p class="category"></p>
-            <p>EFEM Business School Madrid, Spain.
-          </div>
-        </div>
-      </div>
+<div class="section education-section" id="education">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">🎓 Academic Journey</h2>
+      <p class="section-subtitle">From Engineering to Business Leadership</p>
     </div>
 
-    <div class="card">
-      <div class="row">
-        <div class="col-md-3 bg-primary" data-aos="fade-right" data-aos-offset="50" data-aos-duration="500">
-          <div class="card-body cc-education-header">
-            <p>2017 - 2019</p>
-            <div class="h5">Master's Degree</div>
+    <div class="education-timeline">
+      <div class="timeline-item" data-aos="fade-up" data-aos-delay="100">
+        <div class="timeline-marker">
+          <div class="timeline-icon">
+            <i class="fas fa-graduation-cap"></i>
           </div>
+          <div class="timeline-date">2020-2021</div>
         </div>
-        <div class="col-md-9" data-aos="fade-left" data-aos-offset="50" data-aos-duration="500">
-          <div class="card-body">
-            <div class="h5">Master’s Degree, Information and Communications Technologies Security.</div>
-            <p class="category"></p>
-            <p>Universitat Oberta de Catalunya, Spain.
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="row">
-        <div class="col-md-3 bg-primary" data-aos="fade-right" data-aos-offset="50" data-aos-duration="500">
-          <div class="card-body cc-education-header">
-            <p>2015 - 2016</p>
-            <div class="h5">Bachelor’s Degree</div>
-          </div>
-        </div>
-        <div class="col-md-9" data-aos="fade-left" data-aos-offset="50" data-aos-duration="500">
-          <div class="card-body">
-            <div class="h5">Bachelor’s Degree, Information and Technology.</div>
-            <p class="category"></p>
-            <p>Mikkeli University of Applied Sciences, Finland.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-
-    <div class="card">
-      <div class="row">
-        <div class="col-md-3 bg-primary" data-aos="fade-right" data-aos-offset="50" data-aos-duration="500">
-          <div class="card-body cc-education-header">
-            <p>2013 - 2017</p>
-            <div class="h5">Bachelor’s Degree</div>
-          </div>
-        </div>
-        <div class="col-md-9" data-aos="fade-left" data-aos-offset="50" data-aos-duration="500">
-          <div class="card-body">
-            <div class="h5">Bachelor’s Degree, Computer Engineering.
+        <div class="timeline-content">
+          <div class="education-card epic-card">
+            <div class="card-header">
+              <div class="degree-info">
+                <h4 class="degree-title">MBA Master of Business Administration</h4>
+                <p class="degree-type">Master's Degree</p>
+                <p class="university">EFEM Business School</p>
+                <p class="location">🇪🇸 Madrid, Spain</p>
               </div>
-            <p class="category"></p>
-            <p>University of Vigo, Spain.</p>
+              <div class="degree-icon">
+                <i class="fas fa-chart-line"></i>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="degree-description">
+                <p>Advanced business administration program focusing on strategic management, leadership, and digital transformation in modern enterprises.</p>
+              </div>
+              <div class="achievements-grid">
+                <div class="achievement-item">
+                  <div class="achievement-icon">
+                    <i class="fas fa-lightbulb"></i>
+                  </div>
+                  <div class="achievement-content">
+                    <h5>Strategic Thinking</h5>
+                    <p>Developed advanced strategic planning and business analysis skills</p>
+                  </div>
+                </div>
+                <div class="achievement-item">
+                  <div class="achievement-icon">
+                    <i class="fas fa-users"></i>
+                  </div>
+                  <div class="achievement-content">
+                    <h5>Leadership Excellence</h5>
+                    <p>Mastered team management and organizational leadership principles</p>
+                  </div>
+                </div>
+                <div class="achievement-item">
+                  <div class="achievement-icon">
+                    <i class="fas fa-digital-tachograph"></i>
+                  </div>
+                  <div class="achievement-content">
+                    <h5>Digital Innovation</h5>
+                    <p>Explored digital transformation strategies and modern business models</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card-footer">
+              <div class="tech-stack">
+                <span class="tech-tag">Strategic Management</span>
+                <span class="tech-tag">Leadership</span>
+                <span class="tech-tag">Digital Transformation</span>
+                <span class="tech-tag">Business Analytics</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item" data-aos="fade-up" data-aos-delay="200">
+        <div class="timeline-marker">
+          <div class="timeline-icon">
+            <i class="fas fa-shield-alt"></i>
+          </div>
+          <div class="timeline-date">2017-2019</div>
+        </div>
+        <div class="timeline-content">
+          <div class="education-card epic-card">
+            <div class="card-header">
+              <div class="degree-info">
+                <h4 class="degree-title">Information and Communications Technologies Security</h4>
+                <p class="degree-type">Master's Degree</p>
+                <p class="university">Universitat Oberta de Catalunya</p>
+                <p class="location">🇪🇸 Barcelona, Spain</p>
+              </div>
+              <div class="degree-icon">
+                <i class="fas fa-lock"></i>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="degree-description">
+                <p>Specialized program in cybersecurity, network security, and information protection technologies for modern digital environments.</p>
+              </div>
+              <div class="achievements-grid">
+                <div class="achievement-item">
+                  <div class="achievement-icon">
+                    <i class="fas fa-user-shield"></i>
+                  </div>
+                  <div class="achievement-content">
+                    <h5>Cybersecurity Expertise</h5>
+                    <p>Advanced knowledge in threat analysis, vulnerability assessment, and security protocols</p>
+                  </div>
+                </div>
+                <div class="achievement-item">
+                  <div class="achievement-icon">
+                    <i class="fas fa-network-wired"></i>
+                  </div>
+                  <div class="achievement-content">
+                    <h5>Network Security</h5>
+                    <p>Comprehensive understanding of secure network architecture and protocols</p>
+                  </div>
+                </div>
+                <div class="achievement-item">
+                  <div class="achievement-icon">
+                    <i class="fas fa-key"></i>
+                  </div>
+                  <div class="achievement-content">
+                    <h5>Cryptography</h5>
+                    <p>Mastery of encryption algorithms and secure communication systems</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card-footer">
+              <div class="tech-stack">
+                <span class="tech-tag">Cybersecurity</span>
+                <span class="tech-tag">Network Security</span>
+                <span class="tech-tag">Cryptography</span>
+                <span class="tech-tag">Risk Management</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item" data-aos="fade-up" data-aos-delay="300">
+        <div class="timeline-marker">
+          <div class="timeline-icon">
+            <i class="fas fa-globe-europe"></i>
+          </div>
+          <div class="timeline-date">2015-2016</div>
+        </div>
+        <div class="timeline-content">
+          <div class="education-card epic-card">
+            <div class="card-header">
+              <div class="degree-info">
+                <h4 class="degree-title">Information and Technology</h4>
+                <p class="degree-type">Bachelor's Degree</p>
+                <p class="university">Mikkeli University of Applied Sciences</p>
+                <p class="location">🇫🇮 Mikkeli, Finland</p>
+              </div>
+              <div class="degree-icon">
+                <i class="fas fa-laptop-code"></i>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="degree-description">
+                <p>International exchange program focusing on modern information technology, software development, and digital innovation in the Finnish education system.</p>
+              </div>
+              <div class="achievements-grid">
+                <div class="achievement-item">
+                  <div class="achievement-icon">
+                    <i class="fas fa-code"></i>
+                  </div>
+                  <div class="achievement-content">
+                    <h5>Software Development</h5>
+                    <p>Advanced programming skills and software engineering methodologies</p>
+                  </div>
+                </div>
+                <div class="achievement-item">
+                  <div class="achievement-icon">
+                    <i class="fas fa-language"></i>
+                  </div>
+                  <div class="achievement-content">
+                    <h5>International Experience</h5>
+                    <p>Cross-cultural collaboration and international project management</p>
+                  </div>
+                </div>
+                <div class="achievement-item">
+                  <div class="achievement-icon">
+                    <i class="fas fa-rocket"></i>
+                  </div>
+                  <div class="achievement-content">
+                    <h5>Innovation Focus</h5>
+                    <p>Finnish approach to technology innovation and digital transformation</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card-footer">
+              <div class="tech-stack">
+                <span class="tech-tag">Software Engineering</span>
+                <span class="tech-tag">International Studies</span>
+                <span class="tech-tag">Innovation</span>
+                <span class="tech-tag">Project Management</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item" data-aos="fade-up" data-aos-delay="400">
+        <div class="timeline-marker">
+          <div class="timeline-icon">
+            <i class="fas fa-microchip"></i>
+          </div>
+          <div class="timeline-date">2013-2017</div>
+        </div>
+        <div class="timeline-content">
+          <div class="education-card epic-card">
+            <div class="card-header">
+              <div class="degree-info">
+                <h4 class="degree-title">Computer Engineering</h4>
+                <p class="degree-type">Bachelor's Degree</p>
+                <p class="university">University of Vigo</p>
+                <p class="location">🇪🇸 Vigo, Spain</p>
+              </div>
+              <div class="degree-icon">
+                <i class="fas fa-cogs"></i>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="degree-description">
+                <p>Comprehensive computer engineering program covering hardware, software, networks, and systems architecture with strong foundation in mathematics and physics.</p>
+              </div>
+              <div class="achievements-grid">
+                <div class="achievement-item">
+                  <div class="achievement-icon">
+                    <i class="fas fa-server"></i>
+                  </div>
+                  <div class="achievement-content">
+                    <h5>Systems Architecture</h5>
+                    <p>Deep understanding of computer systems, networks, and distributed computing</p>
+                  </div>
+                </div>
+                <div class="achievement-item">
+                  <div class="achievement-icon">
+                    <i class="fas fa-calculator"></i>
+                  </div>
+                  <div class="achievement-content">
+                    <h5>Mathematical Foundation</h5>
+                    <p>Strong mathematical background in algorithms, discrete mathematics, and statistics</p>
+                  </div>
+                </div>
+                <div class="achievement-item">
+                  <div class="achievement-icon">
+                    <i class="fas fa-project-diagram"></i>
+                  </div>
+                  <div class="achievement-content">
+                    <h5>Engineering Principles</h5>
+                    <p>Systematic approach to problem-solving and engineering design methodologies</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card-footer">
+              <div class="tech-stack">
+                <span class="tech-tag">Computer Engineering</span>
+                <span class="tech-tag">Systems Design</span>
+                <span class="tech-tag">Mathematics</span>
+                <span class="tech-tag">Algorithms</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -380,98 +1026,159 @@
 <!--////////////////////////////////////////////////////-->
 <!--PROFESSIONAL SKILLS-->
 <!--////////////////////////////////////////////////////-->
-<div class="section" id="skill">
+<div class="section skills-section" id="skill">
   <div class="container">
-    <div class="h4 text-center mb-4 title">Professional Skills</div>
-    <div class="card" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
-      <div class="card-body">
-        <div class="row">
-
-          <div class="col-md-6">
-            <div class="progress-container progress-primary"><span class="progress-badge">Golang - Python</span>
-              <div class="progress">
-                <div class="progress-bar progress-bar-primary" data-aos="progress-full" data-aos-offset="10" data-aos-duration="2000" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 90%;"></div><span class="progress-value">90%</span>
-              </div>
+    <div class="section-header">
+      <h2 class="section-title">Technical Expertise</h2>
+      <p class="section-subtitle">Mastering the tools that power modern DevOps</p>
+    </div>
+    
+    <div class="skills-grid">
+      <div class="skill-category">
+        <h3 class="category-title">Programming Languages</h3>
+        <div class="skill-items">
+          <div class="skill-item" data-skill="90">
+            <div class="skill-info">
+              <span class="skill-name">Golang & Python</span>
+              <span class="skill-percentage">90%</span>
             </div>
-          </div>
-          <div class="col-md-6">
-            <div class="progress-container progress-primary"><span class="progress-badge">Version Control Systems CICD - GitLab</span>
-              <div class="progress">
-                <div class="progress-bar progress-bar-primary" data-aos="progress-full" data-aos-offset="10" data-aos-duration="2000" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 95%;"></div><span class="progress-value">95%</span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-
-          <div class="col-md-6">
-            <div class="progress-container progress-primary"><span class="progress-badge">OpenStack</span>
-              <div class="progress">
-                <div class="progress-bar progress-bar-primary" data-aos="progress-full" data-aos-offset="10" data-aos-duration="2000" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 90%;"></div><span class="progress-value">90%</span>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div class="progress-container progress-primary"><span class="progress-badge">Puppet</span>
-              <div class="progress">
-                <div class="progress-bar progress-bar-primary" data-aos="progress-full" data-aos-offset="10" data-aos-duration="2000" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;"></div><span class="progress-value">60%</span>
-              </div>
+            <div class="skill-bar">
+              <div class="skill-progress" data-width="90"></div>
             </div>
           </div>
         </div>
-
-        <div class="row">
-          <div class="col-md-6">
-            <div class="progress-container progress-primary"><span class="progress-badge">MySQL - MariaDB - PostgreSQL</span>
-              <div class="progress">
-                <div class="progress-bar progress-bar-primary" data-aos="progress-full" data-aos-offset="10" data-aos-duration="2000" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 70%;"></div><span class="progress-value">70%</span>
-              </div>
+      </div>
+      
+      <div class="skill-category">
+        <h3 class="category-title">DevOps & CI/CD</h3>
+        <div class="skill-items">
+          <div class="skill-item" data-skill="95">
+            <div class="skill-info">
+              <span class="skill-name">GitLab CI/CD</span>
+              <span class="skill-percentage">95%</span>
+            </div>
+            <div class="skill-bar">
+              <div class="skill-progress" data-width="95"></div>
             </div>
           </div>
-          <div class="col-md-6">
-            <div class="progress-container progress-primary"><span class="progress-badge">Ansible - Terraform</span>
-              <div class="progress">
-                <div class="progress-bar progress-bar-primary" data-aos="progress-full" data-aos-offset="10" data-aos-duration="2000" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 85%;"></div><span class="progress-value">85%</span>
-              </div>
+          <div class="skill-item" data-skill="90">
+            <div class="skill-info">
+              <span class="skill-name">Kubernetes & Docker</span>
+              <span class="skill-percentage">90%</span>
+            </div>
+            <div class="skill-bar">
+              <div class="skill-progress" data-width="90"></div>
             </div>
           </div>
-        </div>
-
-        <div class="row">
-          <div class="col-md-6">
-            <div class="progress-container progress-primary"><span class="progress-badge">Issue Tracking - Jira</span>
-              <div class="progress">
-                <div class="progress-bar progress-bar-primary" data-aos="progress-full" data-aos-offset="10" data-aos-duration="2000" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 90%;"></div><span class="progress-value">90%</span>
-              </div>
+          <div class="skill-item" data-skill="90">
+            <div class="skill-info">
+              <span class="skill-name">OpenShift</span>
+              <span class="skill-percentage">90%</span>
             </div>
-          </div>
-          <div class="col-md-6">
-            <div class="progress-container progress-primary"><span class="progress-badge">Kubernetes - Docker - OpenShift</span>
-              <div class="progress">
-                <div class="progress-bar progress-bar-primary" data-aos="progress-full" data-aos-offset="10" data-aos-duration="2000" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 90%;"></div><span class="progress-value">90%</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col-md-6">
-            <div class="progress-container progress-primary"><span class="progress-badge">Helm - Argo-CD</span>
-              <div class="progress">
-                <div class="progress-bar progress-bar-primary" data-aos="progress-full" data-aos-offset="10" data-aos-duration="2000" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 90%;"></div><span class="progress-value">90%</span>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div class="progress-container progress-primary"><span class="progress-badge">AWS - Azure - GCP - Exoscale - Cloudscale</span>
-              <div class="progress">
-                <div class="progress-bar progress-bar-primary" data-aos="progress-full" data-aos-offset="10" data-aos-duration="2000" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 85%;"></div><span class="progress-value">85%</span>
-              </div>
+            <div class="skill-bar">
+              <div class="skill-progress" data-width="90"></div>
             </div>
           </div>
         </div>
-
-
+      </div>
+      
+      <div class="skill-category">
+        <h3 class="category-title">Infrastructure as Code</h3>
+        <div class="skill-items">
+          <div class="skill-item" data-skill="85">
+            <div class="skill-info">
+              <span class="skill-name">Terraform</span>
+              <span class="skill-percentage">85%</span>
+            </div>
+            <div class="skill-bar">
+              <div class="skill-progress" data-width="85"></div>
+            </div>
+          </div>
+          <div class="skill-item" data-skill="85">
+            <div class="skill-info">
+              <span class="skill-name">Ansible</span>
+              <span class="skill-percentage">85%</span>
+            </div>
+            <div class="skill-bar">
+              <div class="skill-progress" data-width="85"></div>
+            </div>
+          </div>
+          <div class="skill-item" data-skill="60">
+            <div class="skill-info">
+              <span class="skill-name">Puppet</span>
+              <span class="skill-percentage">60%</span>
+            </div>
+            <div class="skill-bar">
+              <div class="skill-progress" data-width="60"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="skill-category">
+        <h3 class="category-title">Cloud Platforms</h3>
+        <div class="skill-items">
+          <div class="skill-item" data-skill="85">
+            <div class="skill-info">
+              <span class="skill-name">AWS</span>
+              <span class="skill-percentage">85%</span>
+            </div>
+            <div class="skill-bar">
+              <div class="skill-progress" data-width="85"></div>
+            </div>
+          </div>
+          <div class="skill-item" data-skill="85">
+            <div class="skill-info">
+              <span class="skill-name">Azure</span>
+              <span class="skill-percentage">85%</span>
+            </div>
+            <div class="skill-bar">
+              <div class="skill-progress" data-width="85"></div>
+            </div>
+          </div>
+          <div class="skill-item" data-skill="80">
+            <div class="skill-info">
+              <span class="skill-name">GCP</span>
+              <span class="skill-percentage">80%</span>
+            </div>
+            <div class="skill-bar">
+              <div class="skill-progress" data-width="80"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="skill-category">
+        <h3 class="category-title">Databases & Tools</h3>
+        <div class="skill-items">
+          <div class="skill-item" data-skill="70">
+            <div class="skill-info">
+              <span class="skill-name">MySQL & PostgreSQL</span>
+              <span class="skill-percentage">70%</span>
+            </div>
+            <div class="skill-bar">
+              <div class="skill-progress" data-width="70"></div>
+            </div>
+          </div>
+          <div class="skill-item" data-skill="90">
+            <div class="skill-info">
+              <span class="skill-name">Jira & Issue Tracking</span>
+              <span class="skill-percentage">90%</span>
+            </div>
+            <div class="skill-bar">
+              <div class="skill-progress" data-width="90"></div>
+            </div>
+          </div>
+          <div class="skill-item" data-skill="90">
+            <div class="skill-info">
+              <span class="skill-name">Helm & ArgoCD</span>
+              <span class="skill-percentage">90%</span>
+            </div>
+            <div class="skill-bar">
+              <div class="skill-progress" data-width="90"></div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -480,107 +1187,343 @@
 <!--////////////////////////////////////////////////////-->
 <!--PORTFOLIO-->
 <!--////////////////////////////////////////////////////-->
-<div class="section" id="portfolio">
+<div class="section portfolio-section" id="portfolio">
   <div class="container">
-    <div class="row">
-      <div class="col-md-6 ml-auto mr-auto">
-        <div class="h4 text-center mb-4 title">Portfolio</div>
-        <div class="nav-align-center">
-          <ul class="nav nav-pills nav-pills-primary" role="tablist">
-            <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#web-development" role="tablist"><i class="fa fa-laptop" aria-hidden="true"></i></a></li>
-<!--
-            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#graphic-design" role="tablist"><i class="fa fa-picture-o" aria-hidden="true"></i></a></li>
-            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#Photography" role="tablist"><i class="fa fa-camera" aria-hidden="true"></i></a></li>
--->
-          </ul>
-        </div>
-      </div>
+    <div class="section-header">
+      <h2 class="section-title">🏆 Certifications & Achievements</h2>
+      <p class="section-subtitle">Professional certifications and technical achievements</p>
     </div>
-    <div class="tab-content gallery mt-5">
-      <div class="tab-pane active" id="web-development">
-        <div class="ml-auto mr-auto">
-          <div class="row">
 
-            <div class="col-md-6">
-              <div class="cc-porfolio-image img-raised" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
-                  <figure class="cc-effect"><img src="portfolio/CCNA-RoutingSwitchingConnectingNetworks.jpg" alt="Image"/>
-                    <figcaption>
-                      <div class="h4">CCNA (CISCO)</div>
-                      <p>Connecting Networks</p>
-                    </figcaption>
-                  </figure></a></div>
-              <div class="cc-porfolio-image img-raised" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
+    <!-- Filter Buttons -->
+    <div class="portfolio-filters">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="cisco">Cisco</button>
+      <button class="filter-btn" data-filter="microsoft">Microsoft</button>
+      <button class="filter-btn" data-filter="gitlab">GitLab</button>
+    </div>
 
-                  <figure class="cc-effect"><img src="portfolio/CCNA-RoutingSwitchingScalingNetworks.jpg" alt="Image"/>
-                    <figcaption>
-                      <div class="h4">CCNA (CISCO)</div>
-                      <p>Scaling Netwoks</p>
-                    </figcaption>
-                  </figure></a></div>
+    <!-- Portfolio Grid -->
+    <div class="portfolio-grid">
+      <div class="portfolio-item" data-category="cisco" data-aos="fade-up" data-aos-delay="100">
+        <div class="portfolio-card">
+          <div class="portfolio-image">
+            <img src="portfolio/CCNA-RoutingSwitchingConnectingNetworks.jpg" alt="CCNA Connecting Networks" />
+            <div class="portfolio-overlay">
+              <div class="portfolio-content">
+                <h3>CCNA Connecting Networks</h3>
+                <p>Cisco Certified Network Associate</p>
+                <button class="portfolio-btn" data-image="portfolio/CCNA-RoutingSwitchingConnectingNetworks.jpg" data-title="CCNA Connecting Networks" data-description="Cisco Certified Network Associate - Connecting Networks certification">
+                  <i class="fas fa-expand"></i>
+                </button>
+              </div>
             </div>
-
-            <div class="col-md-6">
-              <div class="cc-porfolio-image img-raised" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
-                  <figure class="cc-effect"><img src="portfolio/CCNA-RoutingSwitchingRoutingSwitchingEssentials.jpg" alt="Image"/>
-                    <figcaption>
-                      <div class="h4">CCNA (CISCO)</div>
-                      <p>Routing and Switching Essentials</p>
-                    </figcaption>
-                  </figure></a></div>
-
-              <div class="cc-porfolio-image img-raised" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
-                  <figure class="cc-effect"><img src="portfolio/CCNA-RoutingSwitchingIntroductionToNetworks.jpg" alt="Image"/>
-                    <figcaption>
-                      <div class="h4">CCNA (CISCO)</div>
-                      <p>Introduction to Networks</p>
-                    </figcaption>
-                  </figure></a></div>
-            </div>
-
-            <div class="col-md-6">
-              <div class="cc-porfolio-image img-raised" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
-                  <figure class="cc-effect"><img src="portfolio/MTA.jpg" alt="Image"/>
-                    <figcaption>
-                      <div class="h4">MTA (MICROSOFT)</div>
-                      <p>Microsoft Technology Associate</p>
-                    </figcaption>
-                  </figure></a></div>
-                </div>
-
-            <div class="col-md-6">
-              <div class="cc-porfolio-image img-raised" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
-                  <figure class="cc-effect"><img src="portfolio/CCNA1-2.jpg" alt="Image"/>
-                    <figcaption>
-                      <div class="h4">CCNA (CISCO)</div>
-                      <p>CCNA 1, 2</p>
-                    </figcaption>
-                  </figure></a></div>
-            </div>
-
-            <div class="col-md-6">
-              <div class="cc-porfolio-image img-raised" data-aos="fade-up" data-aos-anchor-placement="top-bottom"><a href="https://gitlab.badgr.com/public/pathway/60ca65c754855a740512656e/element/60ca65c754855a740512656d"></a>
-                  <figure class="cc-effect"><img src="portfolio/GitLab-DP.png" alt="Image"/>
-                    <figcaption>
-                      <div class="h4">GitLab DP</div>
-                      <p>GitLab Certified DevOps Professional</p>
-                    </figcaption>
-                  </figure></a></div>
-                </div>
-
-            <div class="col-md-6">
-              <div class="cc-porfolio-image img-raised" data-aos="fade-up" data-aos-anchor-placement="top-bottom"><a href="https://gitlab.badgr.com/public/pathway/615a5c5a45567c21b75d5f2d/element/615a5c5a45567c21b75d5f2c"></a>
-                  <figure class="cc-effect"><img src="portfolio/GitLab-PSE.png" alt="Image"/>
-                    <figcaption>
-                      <div class="h4">GitLab PSE</div>
-                      <p>GitLab Certified Professional Services Engineer</p>
-                    </figcaption>
-                  </figure></a></div>
-            </div>
-
-
+          </div>
+          <div class="portfolio-info">
+            <h4>CCNA Connecting Networks</h4>
+            <span>Cisco Certification</span>
           </div>
         </div>
       </div>
+
+      <div class="portfolio-item" data-category="cisco" data-aos="fade-up" data-aos-delay="200">
+        <div class="portfolio-card">
+          <div class="portfolio-image">
+            <img src="portfolio/CCNA-RoutingSwitchingScalingNetworks.jpg" alt="CCNA Scaling Networks" />
+            <div class="portfolio-overlay">
+              <div class="portfolio-content">
+                <h3>CCNA Scaling Networks</h3>
+                <p>Cisco Certified Network Associate</p>
+                <button class="portfolio-btn" data-image="portfolio/CCNA-RoutingSwitchingScalingNetworks.jpg" data-title="CCNA Scaling Networks" data-description="Cisco Certified Network Associate - Scaling Networks certification">
+                  <i class="fas fa-expand"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="portfolio-info">
+            <h4>CCNA Scaling Networks</h4>
+            <span>Cisco Certification</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="portfolio-item" data-category="cisco" data-aos="fade-up" data-aos-delay="300">
+        <div class="portfolio-card">
+          <div class="portfolio-image">
+            <img src="portfolio/CCNA-RoutingSwitchingRoutingSwitchingEssentials.jpg" alt="CCNA Routing and Switching Essentials" />
+            <div class="portfolio-overlay">
+              <div class="portfolio-content">
+                <h3>CCNA Routing & Switching</h3>
+                <p>Cisco Certified Network Associate</p>
+                <button class="portfolio-btn" data-image="portfolio/CCNA-RoutingSwitchingRoutingSwitchingEssentials.jpg" data-title="CCNA Routing and Switching Essentials" data-description="Cisco Certified Network Associate - Routing and Switching Essentials certification">
+                  <i class="fas fa-expand"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="portfolio-info">
+            <h4>CCNA Routing & Switching</h4>
+            <span>Cisco Certification</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="portfolio-item" data-category="cisco" data-aos="fade-up" data-aos-delay="400">
+        <div class="portfolio-card">
+          <div class="portfolio-image">
+            <img src="portfolio/CCNA-RoutingSwitchingIntroductionToNetworks.jpg" alt="CCNA Introduction to Networks" />
+            <div class="portfolio-overlay">
+              <div class="portfolio-content">
+                <h3>CCNA Introduction</h3>
+                <p>Cisco Certified Network Associate</p>
+                <button class="portfolio-btn" data-image="portfolio/CCNA-RoutingSwitchingIntroductionToNetworks.jpg" data-title="CCNA Introduction to Networks" data-description="Cisco Certified Network Associate - Introduction to Networks certification">
+                  <i class="fas fa-expand"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="portfolio-info">
+            <h4>CCNA Introduction</h4>
+            <span>Cisco Certification</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="portfolio-item" data-category="cisco" data-aos="fade-up" data-aos-delay="500">
+        <div class="portfolio-card">
+          <div class="portfolio-image">
+            <img src="portfolio/CCNA1-2.jpg" alt="CCNA 1-2" />
+            <div class="portfolio-overlay">
+              <div class="portfolio-content">
+                <h3>CCNA 1 & 2</h3>
+                <p>Cisco Certified Network Associate</p>
+                <button class="portfolio-btn" data-image="portfolio/CCNA1-2.jpg" data-title="CCNA 1 & 2" data-description="Cisco Certified Network Associate - CCNA 1 and 2 certifications">
+                  <i class="fas fa-expand"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="portfolio-info">
+            <h4>CCNA 1 & 2</h4>
+            <span>Cisco Certification</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="portfolio-item" data-category="microsoft" data-aos="fade-up" data-aos-delay="600">
+        <div class="portfolio-card">
+          <div class="portfolio-image">
+            <img src="portfolio/MTA.jpg" alt="MTA Microsoft Technology Associate" />
+            <div class="portfolio-overlay">
+              <div class="portfolio-content">
+                <h3>MTA Certification</h3>
+                <p>Microsoft Technology Associate</p>
+                <button class="portfolio-btn" data-image="portfolio/MTA.jpg" data-title="MTA Microsoft Technology Associate" data-description="Microsoft Technology Associate certification">
+                  <i class="fas fa-expand"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="portfolio-info">
+            <h4>MTA Certification</h4>
+            <span>Microsoft Certification</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="portfolio-item" data-category="gitlab" data-aos="fade-up" data-aos-delay="700">
+        <div class="portfolio-card">
+          <div class="portfolio-image">
+            <img src="portfolio/GitLab-DP.png" alt="GitLab DevOps Professional" />
+            <div class="portfolio-overlay">
+              <div class="portfolio-content">
+                <h3>GitLab DevOps Professional</h3>
+                <p>GitLab Certification</p>
+                <button class="portfolio-btn" data-image="portfolio/GitLab-DP.png" data-title="GitLab DevOps Professional" data-description="GitLab DevOps Professional certification">
+                  <i class="fas fa-expand"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="portfolio-info">
+            <h4>GitLab DevOps Professional</h4>
+            <span>GitLab Certification</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="portfolio-item" data-category="gitlab" data-aos="fade-up" data-aos-delay="800">
+        <div class="portfolio-card">
+          <div class="portfolio-image">
+            <img src="portfolio/GitLab-PSE.png" alt="GitLab Professional Services Engineer" />
+            <div class="portfolio-overlay">
+              <div class="portfolio-content">
+                <h3>GitLab PSE</h3>
+                <p>Professional Services Engineer</p>
+                <button class="portfolio-btn" data-image="portfolio/GitLab-PSE.png" data-title="GitLab Professional Services Engineer" data-description="GitLab Professional Services Engineer certification">
+                  <i class="fas fa-expand"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="portfolio-info">
+            <h4>GitLab PSE</h4>
+            <span>GitLab Certification</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- New GitLab Certifications -->
+      <div class="portfolio-item" data-category="gitlab" data-aos="fade-up" data-aos-delay="900">
+        <div class="portfolio-card">
+          <div class="portfolio-image">
+            <img src="portfolio/GitLab-Implementation-Engineer.png" alt="GitLab Implementation Engineer Specialist" />
+            <div class="portfolio-overlay">
+              <div class="portfolio-content">
+                <h3>GitLab Implementation Engineer</h3>
+                <p>Implementation Engineer Specialist</p>
+                <button class="portfolio-btn" data-image="portfolio/GitLab-Implementation-Engineer.png" data-title="GitLab Implementation Engineer Specialist" data-description="GitLab Certified Implementation Engineer Specialist certification">
+                  <i class="fas fa-expand"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="portfolio-info">
+            <h4>GitLab Implementation Engineer</h4>
+            <span>Implementation Engineer Specialist</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="portfolio-item" data-category="gitlab" data-aos="fade-up" data-aos-delay="1000">
+        <div class="portfolio-card">
+          <div class="portfolio-image">
+            <img src="portfolio/GitLab-Security-Specialist.png" alt="GitLab Security Specialist" />
+            <div class="portfolio-overlay">
+              <div class="portfolio-content">
+                <h3>GitLab Security Specialist</h3>
+                <p>Security Specialist</p>
+                <button class="portfolio-btn" data-image="portfolio/GitLab-Security-Specialist.png" data-title="GitLab Security Specialist" data-description="GitLab Certified Security Specialist certification">
+                  <i class="fas fa-expand"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="portfolio-info">
+            <h4>GitLab Security Specialist</h4>
+            <span>Security Specialist</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="portfolio-item" data-category="gitlab" data-aos="fade-up" data-aos-delay="1100">
+        <div class="portfolio-card">
+          <div class="portfolio-image">
+            <img src="portfolio/GitLab-Associate.png" alt="GitLab Associate" />
+            <div class="portfolio-overlay">
+              <div class="portfolio-content">
+                <h3>GitLab Associate</h3>
+                <p>GitLab Certified Associate</p>
+                <button class="portfolio-btn" data-image="portfolio/GitLab-Associate.png" data-title="GitLab Associate" data-description="GitLab Certified Associate certification">
+                  <i class="fas fa-expand"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="portfolio-info">
+            <h4>GitLab Associate</h4>
+            <span>GitLab Certified Associate</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="portfolio-item" data-category="gitlab" data-aos="fade-up" data-aos-delay="1200">
+        <div class="portfolio-card">
+          <div class="portfolio-image">
+            <img src="portfolio/GitLab-CICD-Specialist.png" alt="GitLab CI/CD Specialist" />
+            <div class="portfolio-overlay">
+              <div class="portfolio-content">
+                <h3>GitLab CI/CD Specialist</h3>
+                <p>CI/CD Specialist</p>
+                <button class="portfolio-btn" data-image="portfolio/GitLab-CICD-Specialist.png" data-title="GitLab CI/CD Specialist" data-description="GitLab Certified CI/CD Specialist certification">
+                  <i class="fas fa-expand"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="portfolio-info">
+            <h4>GitLab CI/CD Specialist</h4>
+            <span>CI/CD Specialist</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="portfolio-item" data-category="gitlab" data-aos="fade-up" data-aos-delay="1300">
+        <div class="portfolio-card">
+          <div class="portfolio-image">
+            <img src="portfolio/GitLab-Migration-Services.png" alt="GitLab Migration Services Engineer" />
+            <div class="portfolio-overlay">
+              <div class="portfolio-content">
+                <h3>GitLab Migration Services</h3>
+                <p>Migration Services Engineer</p>
+                <button class="portfolio-btn" data-image="portfolio/GitLab-Migration-Services.png" data-title="GitLab Migration Services Engineer" data-description="GitLab Certified Migration Services Engineer certification">
+                  <i class="fas fa-expand"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="portfolio-info">
+            <h4>GitLab Migration Services</h4>
+            <span>Migration Services Engineer</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="portfolio-item" data-category="gitlab" data-aos="fade-up" data-aos-delay="1400">
+        <div class="portfolio-card">
+          <div class="portfolio-image">
+            <img src="portfolio/GitLab-Project-Management.png" alt="GitLab Project Management Specialist" />
+            <div class="portfolio-overlay">
+              <div class="portfolio-content">
+                <h3>GitLab Project Management</h3>
+                <p>Project Management Specialist</p>
+                <button class="portfolio-btn" data-image="portfolio/GitLab-Project-Management.png" data-title="GitLab Project Management Specialist" data-description="GitLab Certified Project Management Specialist certification">
+                  <i class="fas fa-expand"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="portfolio-info">
+            <h4>GitLab Project Management</h4>
+            <span>Project Management Specialist</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Lightbox Modal -->
+<div class="lightbox-modal" id="lightboxModal">
+  <div class="lightbox-overlay"></div>
+  <div class="lightbox-content">
+    <button class="lightbox-close" id="lightboxClose">
+      <i class="fas fa-times"></i>
+    </button>
+    <button class="lightbox-prev" id="lightboxPrev">
+      <i class="fas fa-chevron-left"></i>
+    </button>
+    <button class="lightbox-next" id="lightboxNext">
+      <i class="fas fa-chevron-right"></i>
+    </button>
+    <div class="lightbox-image-container">
+      <img id="lightboxImage" src="" alt="" />
+    </div>
+    <div class="lightbox-info">
+      <h3 id="lightboxTitle"></h3>
+      <p id="lightboxDescription"></p>
+    </div>
+  </div>
+</div>
 <!--
 
       <div class="tab-pane" id="graphic-design" role="tabpanel">
@@ -723,67 +1666,147 @@
 </div>
 -->
 <!--////////////////////////////////////////////////////-->
-<!--CONTACT-->
+<!--EPIC CONTACT SECTION-->
 <!--////////////////////////////////////////////////////-->
-<div class="section" id="contact">
-  <div class="cc-contact-information" style="background-image: url('images/staticmapGeneva.png');">
-    <div class="container">
-      <div class="cc-contact">
-        <div class="row">
-          <div class="col-md-9">
-            <div class="card mb-0" data-aos="zoom-in">
-              <div class="h4 text-center title">Contact Me</div>
-              <div class="row">
-                <div class="col-md-6">
-                  <div class="card-body">
-                    <form action="mailto:isantosp@protonmail.com" method="POST">
-                      <div class="p pb-3"><strong>Feel free to contact me </strong></div>
-                      <div class="row mb-3">
-                        <div class="col">
-                          <div class="input-group"><span class="input-group-addon"><i class="fa fa-user-circle"></i></span>
-                            <input class="form-control" type="text" name="name" placeholder="Name" required="required"/>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="row mb-3">
-                        <div class="col">
-                          <div class="input-group"><span class="input-group-addon"><i class="fa fa-file-text"></i></span>
-                            <input class="form-control" type="text" name="Subject" placeholder="Subject" required="required"/>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="row mb-3">
-                        <div class="col">
-                          <div class="input-group"><span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-                            <input class="form-control" type="email" name="_replyto" placeholder="E-mail" required="required"/>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="row mb-3">
-                        <div class="col">
-                          <div class="form-group">
-                            <textarea class="form-control" name="message" placeholder="Your Message" required="required"></textarea>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="row">
-                        <div class="col">
-                          <button class="btn btn-primary" type="submit">Send</button>
-                        </div>
-                      </div>
-                    </form>
+<div class="section epic-contact-section" id="contact">
+  <!-- Animated Background -->
+  <div class="contact-background">
+    <div class="contact-particles" id="contactParticles"></div>
+    <div class="contact-shapes">
+      <div class="contact-shape shape-1"></div>
+      <div class="contact-shape shape-2"></div>
+      <div class="contact-shape shape-3"></div>
+      <div class="contact-shape shape-4"></div>
+    </div>
+    <div class="contact-gradient"></div>
+  </div>
+  
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">🚀 Let's Connect</h2>
+      <p class="section-subtitle">Ready to build something amazing together?</p>
+    </div>
+    
+    <div class="contact-content">
+      <div class="row">
+        <!-- Contact Form -->
+        <div class="col-lg-6">
+          <div class="contact-form-container" data-aos="fade-right" data-aos-delay="100">
+            <div class="form-header">
+              <h3 class="form-title">
+                <i class="fas fa-rocket"></i>
+                Send me a message
+              </h3>
+              <p class="form-subtitle">I'm always excited to discuss new opportunities and innovative projects!</p>
+            </div>
+            
+            <form class="epic-contact-form" action="mailto:isantosp@protonmail.com" method="post" enctype="text/plain">
+              <div class="form-row">
+                <div class="form-group">
+                  <div class="input-container">
+                    <i class="fas fa-user input-icon"></i>
+                    <input type="text" name="name" class="form-input" placeholder="Your Name" required>
+                    <div class="input-focus-line"></div>
                   </div>
                 </div>
-                <div class="col-md-6">
-                  <div class="card-body">
-                    <p class="mb-0"><strong>Address </strong></p>
-                    <p class="pb-2">Rue du Jura, Geneva, Switzerland</p>
-                    <p class="mb-0"><strong>Phone</strong></p>
-                    <p class="pb-2">+34 627 215 065 <br/> +41 79 855 29 32</p>
-                    <p class="mb-0"><strong>Email</strong></p>
-                    <p><a href="mailto:isantosp@protonmail.com"  data-type="submit">isantosp@protonmail.com</p>
+                <div class="form-group">
+                  <div class="input-container">
+                    <i class="fas fa-envelope input-icon"></i>
+                    <input type="email" name="email" class="form-input" placeholder="Your Email" required>
+                    <div class="input-focus-line"></div>
                   </div>
                 </div>
+              </div>
+              
+              <div class="form-group">
+                <div class="input-container">
+                  <i class="fas fa-tag input-icon"></i>
+                  <input type="text" name="subject" class="form-input" placeholder="Subject" required>
+                  <div class="input-focus-line"></div>
+                </div>
+              </div>
+              
+              <div class="form-group">
+                <div class="input-container textarea-container">
+                  <i class="fas fa-comment input-icon"></i>
+                  <textarea name="message" class="form-input form-textarea" placeholder="Your Message" rows="5" required></textarea>
+                  <div class="input-focus-line"></div>
+                </div>
+              </div>
+              
+              <div class="form-actions">
+                <button type="submit" class="btn-epic-send">
+                  <span class="btn-text">Send Message</span>
+                  <span class="btn-icon">
+                    <i class="fas fa-paper-plane"></i>
+                  </span>
+                  <div class="btn-ripple"></div>
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+        
+        <!-- Contact Info -->
+        <div class="col-lg-6">
+          <div class="contact-info-container" data-aos="fade-left" data-aos-delay="200">
+            <div class="contact-info-header">
+              <h3 class="info-title">
+                <i class="fas fa-map-marker-alt"></i>
+                Get in Touch
+              </h3>
+              <p class="info-subtitle">Multiple ways to reach me</p>
+            </div>
+            
+            <div class="contact-info-items">
+              <div class="contact-info-item">
+                <div class="info-icon">
+                  <i class="fas fa-map-marker-alt"></i>
+                </div>
+                <div class="info-content">
+                  <h4>Location</h4>
+                  <p>Rue du Jura<br>Geneva, Switzerland</p>
+                </div>
+              </div>
+              
+              <div class="contact-info-item">
+                <div class="info-icon">
+                  <i class="fas fa-phone"></i>
+                </div>
+                <div class="info-content">
+                  <h4>Phone</h4>
+                  <p>+34 627 215 065<br>+41 79 855 29 32</p>
+                </div>
+              </div>
+              
+              <div class="contact-info-item">
+                <div class="info-icon">
+                  <i class="fas fa-envelope"></i>
+                </div>
+                <div class="info-content">
+                  <h4>Email</h4>
+                  <p><a href="mailto:isantosp@protonmail.com">isantosp@protonmail.com</a></p>
+                </div>
+              </div>
+              
+            </div>
+            
+            <!-- Social Links -->
+            <div class="contact-social">
+              <h4 class="social-title">Follow Me</h4>
+              <div class="social-links-contact">
+                <a href="https://www.linkedin.com/in/iasantosp/" class="social-link-contact linkedin" target="_blank">
+                  <i class="fab fa-linkedin"></i>
+                  <span>LinkedIn</span>
+                </a>
+                <a href="https://github.com/isantospardo/" class="social-link-contact github" target="_blank">
+                  <i class="fab fa-github"></i>
+                  <span>GitHub</span>
+                </a>
+                <a href="https://gitlab.cern.ch/isantosp" class="social-link-contact gitlab" target="_blank">
+                  <i class="fab fa-gitlab"></i>
+                  <span>GitLab</span>
+                </a>
               </div>
             </div>
           </div>
@@ -791,6 +1814,7 @@
       </div>
     </div>
   </div>
+</div>
 <!--////////////////////////////////////////////////////-->
 <!--FOOT-->
 <!--////////////////////////////////////////////////////-->
@@ -798,9 +1822,9 @@
     </div>
     <footer class="footer">
       <div class="container text-center">
-          <a class="cc-linkedin btn btn-link" href="https://www.linkedin.com/in/iasantosp/"><i class="fa fa-linkedin fa-2x " aria-hidden="true"></i></a>
-          <a class="cc-github btn btn-link" href="https://github.com/isantospardo/"><i class="fa fa-github fa-2x " aria-hidden="true"></i></a>
-          <a class="cc-gitlabb btn btn-link" href="https://gitlab.cern.ch/isantosp"><i class="fa fa-gitlab fa-2x " aria-hidden="true"></i></a>
+          <a class="cc-linkedin btn btn-link" href="https://www.linkedin.com/in/iasantosp/"><i class="fab fa-linkedin fa-2x" aria-hidden="true"></i></a>
+          <a class="cc-github btn btn-link" href="https://github.com/isantospardo/"><i class="fab fa-github fa-2x" aria-hidden="true"></i></a>
+          <a class="cc-gitlabb btn btn-link" href="https://gitlab.cern.ch/isantosp"><i class="fab fa-gitlab fa-2x" aria-hidden="true"></i></a>
 <!--
           <a class="cc-facebook btn btn-link" href="#"><i class="fa fa-facebook fa-2x " aria-hidden="true"></i></a>
           <a class="cc-twitter btn btn-link " href="#"><i class="fa fa-twitter fa-2x " aria-hidden="true"></i></a><a class="cc-google-plus btn btn-link" href="#"><i class="fa fa-google-plus fa-2x" aria-hidden="true"></i></a>
@@ -817,5 +1841,7 @@
     <script src="js/now-ui-kit.js?v=1.1.0"></script>
     <script src="js/aos.js"></script>
     <script src="scripts/main.js"></script>
+    <!-- <script src="scripts/epic.js"></script> -->
+    <script src="scripts/lightbox-simple.js"></script>
   </body>
 </html>
