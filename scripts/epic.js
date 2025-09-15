@@ -322,11 +322,12 @@ function initTypewriter() {
     clearTimeout(typewriterTimeout);
   }
   
-  // Get the text from the translation system
-  const typewriterText = typewriterElement.textContent || typewriterElement.getAttribute('data-translate');
+  // Get the text from the current translation
+  const currentTranslation = translations[currentLanguage];
+  const typewriterText = currentTranslation ? currentTranslation.heroDescription : '';
   
   if (!typewriterText) {
-    console.log("No typewriter text found");
+    console.log("No typewriter text found in translations");
     return;
   }
   
@@ -1689,8 +1690,8 @@ function updateTranslations() {
   updateElementText("[data-translate=\"downloadCV\"]", t.downloadCV);
   updateElementText("[data-translate=\"scrollToExplore\"]", t.scrollToExplore);
   
-  // Reset typewriter effect with new text - DISABLED TEMPORARILY
-  // resetTypewriter();
+  // Reset typewriter effect with new text
+  resetTypewriter();
   
   // Update about section
   updateElementText("[data-translate=\"aboutTitle\"]", t.aboutTitle);

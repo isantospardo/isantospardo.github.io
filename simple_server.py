@@ -32,10 +32,32 @@ class SimpleLanguageHandler(http.server.SimpleHTTPRequestHandler):
 if __name__ == "__main__":
     PORT = 8002
     
-    # Kill any existing process on port 8002
+    # Try to kill any existing process on port 8002
     os.system("pkill -f 'python3.*8002'")
     
-    with socketserver.TCPServer(("", PORT), SimpleLanguageHandler) as httpd:
+    # Try different ports if 8002 is busy
+    ports_to_try = [8002, 8003, 8004, 8005, 8006]
+    httpd = None
+    
+    for port in ports_to_try:
+        try:
+            print(f"Trying port {port}...")
+            httpd = socketserver.TCPServer(("", port), SimpleLanguageHandler)
+            PORT = port
+            print(f"Successfully bound to port {port}")
+            break
+        except OSError as e:
+            if e.errno == 98:  # Address already in use
+                print(f"Port {port} is already in use, trying next port...")
+                continue
+            else:
+                raise e
+    
+    if httpd is None:
+        print("Could not find an available port. Please check for running servers.")
+        exit(1)
+    
+    with httpd:
         print(f"Server running at http://localhost:{PORT}")
         print(f"Language routes:")
         print(f"  English: http://localhost:{PORT}/en")
