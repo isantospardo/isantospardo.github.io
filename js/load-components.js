@@ -28,11 +28,96 @@
           if (yearElement) {
             yearElement.textContent = new Date().getFullYear();
           }
+          
+          // Reinitialize i18n after footer is loaded
+          setTimeout(function() {
+            if (typeof initI18n === 'function') {
+              initI18n();
+            } else if (window.i18nInit) {
+              window.i18nInit();
+            }
+          }, 100);
         }
         
-        // Reinitialize Bootstrap components if needed
-        if (typeof bootstrap !== 'undefined') {
-          // Reinitialize dropdowns, modals, etc. if needed
+        // Reinitialize Bootstrap collapse for navbar after header is loaded
+        if (elementId === 'header-container') {
+          // Wait a bit for the HTML to be inserted
+          setTimeout(function() {
+            // Reinitialize Bootstrap collapse
+            if (typeof $ !== 'undefined') {
+              // Reinitialize collapse component
+              var collapseElements = document.querySelectorAll('[data-toggle="collapse"]');
+              collapseElements.forEach(function(element) {
+                // Remove existing event listeners and reinitialize
+                var $element = $(element);
+                var target = $element.data('target');
+                if (target) {
+                  // Initialize collapse manually if needed
+                  $element.off('click').on('click', function(e) {
+                    e.preventDefault();
+                    var $target = $(target);
+                    $target.collapse('toggle');
+                  });
+                }
+              });
+            }
+            
+            // Update translations for header after it's loaded
+            function updateHeaderTranslations() {
+              // Try multiple times to ensure translations are applied
+              var attempts = 0;
+              var maxAttempts = 10;
+              
+              function tryUpdate() {
+                attempts++;
+                
+                if (window.i18nextInstance && typeof window.updatePageContent === 'function') {
+                  // Force update all translations
+                  window.updatePageContent();
+                  
+                  // Verify navbar was translated
+                  var navLinks = document.querySelectorAll('#mainNav .nav-link[data-i18n]');
+                  var allTranslated = true;
+                  navLinks.forEach(function(link) {
+                    var key = link.getAttribute('data-i18n');
+                    var currentText = link.textContent.trim();
+                    var expectedText = window.i18nextInstance.t(key);
+                    if (currentText === key || (expectedText && currentText !== expectedText)) {
+                      allTranslated = false;
+                    }
+                  });
+                  
+                  if (allTranslated || attempts >= maxAttempts) {
+                    console.log('Navbar translations applied after', attempts, 'attempts');
+                    return;
+                  }
+                  
+                  // Try again
+                  setTimeout(tryUpdate, 200);
+                } else if (window.i18nInit) {
+                  // If i18n is not initialized yet, initialize it
+                  window.i18nInit();
+                  setTimeout(tryUpdate, 500);
+                } else if (attempts < maxAttempts) {
+                  // Wait a bit and try again
+                  setTimeout(tryUpdate, 300);
+                }
+              }
+              
+              // Start trying immediately
+              setTimeout(tryUpdate, 100);
+              
+              // Also try after longer delays
+              setTimeout(tryUpdate, 500);
+              setTimeout(tryUpdate, 1000);
+              setTimeout(tryUpdate, 2000);
+            }
+            
+            updateHeaderTranslations();
+            
+            // Dispatch event to notify that header is loaded
+            window.dispatchEvent(new CustomEvent('headerLoaded'));
+          }, 100);
         }
       })
       .catch(error => {

@@ -1,0 +1,131 @@
+{
+  "nav": {
+    "inicio": "Accueil",
+    "empresa": "Entreprise",
+    "fiscal": "Fiscal et Comptable",
+    "laboral": "Travail",
+    "legal": "Juridique",
+    "sucesiones": "Successions",
+    "contacto": "Contact",
+    "brandAriaLabel": "Sercon Gestoría - Accueil",
+    "toggleAriaLabel": "Basculer la navigation",
+    "menu": "Menu"
+  },
+  "home": {
+    "title": "Sercon Gestoría",
+    "subtitle": "Plus de 40 ans à votre service",
+    "description": "Chez Sercon Gestoría, nous avons un groupe de professionnels que nous mettons à votre service pour résoudre vos procédures administratives. Notre objectif est d'éviter les soucis et de vous faire gagner du temps et des maux de tête face à l'Administration.",
+    "contactText": "Si vous avez des questions que vous souhaitez clarifier, n'hésitez pas à contacter notre bureau. Nous vous répondrons dans les plus brefs délais.",
+    "fiscal": {
+      "title": "Fiscal et Comptable",
+      "description": "Nous avons une équipe de plus de 100 conseillers experts en matière comptable et fiscale pour les entreprises.",
+      "readMore": "Lire plus"
+    },
+    "laboral": {
+      "title": "Travail",
+      "description": "Nous offrons un service global qui comprend les questions du travail et l'administration des salaires, selon vos besoins. Dans notre bureau du travail, nous effectuons l'externalisation complète de l'administration du personnel et les conseils préventifs ou contentieux.",
+      "readMore": "Lire plus"
+    },
+    "legal": {
+      "title": "Juridique",
+      "description": "Nos services couvrent les conseils fiscaux, le remplissage et la présentation des déclarations fiscales, le soutien dans les procédures administratives et les conseils juridiques.",
+      "readMore": "Lire plus"
+    },
+    "sucesiones": {
+      "title": "Successions",
+      "description": "Conseils spécialisés en héritages et successions.",
+      "readMore": "Lire plus"
+    }
+  },
+  "about": {
+    "title": "À propos de nous",
+    "subtitle": "Plus de 40 ans d'expérience à votre service",
+    "founded": "Fondé en",
+    "welcome": "Bienvenue sur notre site. Nous sommes un bureau administratif prestigieux formé par une excellente équipe humaine qui couvre une large gamme de services pour simplifier votre relation avec l'Administration.",
+    "mission": "Notre mission est de vous garantir qualité, rigueur et professionnalisme dans chacun des services que nous offrons, résoudre vos doutes et vous aider à améliorer votre gestion, ainsi qu'à optimiser vos résultats.",
+    "experience": "Grâce à l'expérience, aux connaissances et aux moyens technologiques dont nous disposons, nous vous offrons une attention personnalisée basée sur le respect et la confidentialité de toutes vos données, conformément au secret professionnel.",
+    "objective": "Notre objectif est d'être une entreprise appréciée par les clients, dont les attentes sont satisfaites, engagée dans ses obligations envers l'Administration et cherchant toujours les meilleurs avantages législatifs.",
+    "advice": "Nous serons ravis de vous conseiller de manière complète sur toutes les procédures que vous devez effectuer.",
+    "visit": "Visitez-nous. Nous sommes à Ourense, Calle Peña Trevinca, 35 Bajo - 32005",
+    "team": {
+      "title": "Rencontrez notre équipe",
+      "subtitle": "Professionnels engagés dans votre succès",
+      "memberName": "Nom Prénom",
+      "memberPosition": "Poste / Spécialité"
+    }
+  },
+  "contact": {
+    "title": "Contactez-nous",
+    "subtitle": "Avez-vous des questions? Nous avons les réponses.",
+    "statusTitle": "Statut du bureau",
+    "statusChecking": "Vérification du statut...",
+    "statusOpen": "Ouvert maintenant",
+    "statusClosed": "Nous reviendrons bientôt",
+    "statusOpenNow": "Nous sommes ouverts maintenant. Nous fermons aujourd'hui à {{time}}",
+    "statusClosedToday": "En ce moment, nos bureaux sont fermés, mais nous ouvrons aujourd'hui à {{time}}",
+    "statusClosedMonday": "En ce moment, nos bureaux sont fermés, mais nous ouvrons lundi de 8h00 à 16h00",
+    "statusClosedTomorrow": "En ce moment, nos bureaux sont fermés, mais demain ({{day}}) nous ouvrons de 8h00 à 16h00",
+    "statusClosedWeekendMonday": "En ce moment, nos bureaux sont fermés, mais nous ouvrons lundi de 8h00 à 16h00",
+    "statusClosedWeekendTomorrow": "En ce moment, nos bureaux sont fermés, mais demain (lundi) nous ouvrons de 8h00 à 16h00",
+    "viewHours": "Voir les horaires",
+    "hoursTitle": "Heures d'ouverture",
+    "monday": "Lundi",
+    "tuesday": "Mardi",
+    "wednesday": "Mercredi",
+    "thursday": "Jeudi",
+    "friday": "Vendredi",
+    "saturday": "Samedi",
+    "sunday": "Dimanche",
+    "closed": "Fermé",
+    "hours": "8:00 - 16:00",
+    "form": {
+      "name": "Nom",
+      "namePlaceholder": "Votre nom complet",
+      "nameRequired": "Veuillez entrer votre nom.",
+      "email": "Adresse e-mail",
+      "emailPlaceholder": "votre.email@exemple.com",
+      "emailRequired": "Veuillez entrer votre adresse e-mail.",
+      "phone": "Numéro de téléphone",
+      "phonePlaceholder": "+34 600 000 000",
+      "phoneRequired": "Veuillez entrer votre numéro de téléphone.",
+      "message": "Message",
+      "messagePlaceholder": "Écrivez votre message ici...",
+      "messageRequired": "Veuillez entrer un message.",
+      "send": "Envoyer le message"
+    },
+    "location": "Notre emplacement"
+  },
+  "fiscal": {
+    "title": "Fiscal et Comptable",
+    "subtitle": "Services professionnels de conseil fiscal et comptable"
+  },
+  "laboral": {
+    "title": "Travail",
+    "subtitle": "Administration des salaires et conseil du travail complet"
+  },
+  "legal": {
+    "title": "Juridique",
+    "subtitle": "Conseil juridique et procédures administratives"
+  },
+  "sucesiones": {
+    "title": "Successions",
+    "subtitle": "Conseil complet sur les processus d'héritage et de succession"
+  },
+  "footer": {
+    "title": "Sercon Gestoría",
+    "description": "Plus de 40 ans d'expérience dans les services de gestion administrative, fiscale, comptable, du travail et juridique à Ourense.",
+    "servicios": "Services",
+    "empresa": "Entreprise",
+    "sobreNosotros": "À propos de nous",
+    "siguenos": "Suivez-nous",
+    "horario": "Horaires: Lundi à Vendredi 8:00 - 16:00",
+    "copyright": "Copyright &copy; Sercon Gestoría {{year}}. Tous droits réservés."
+  },
+  "languages": {
+    "es": "Español",
+    "en": "English",
+    "fr": "Français",
+    "gl": "Galego",
+    "pt": "Português"
+  }
+}

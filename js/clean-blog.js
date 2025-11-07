@@ -48,5 +48,43 @@
       }
     });
   }
+  
+  // Ensure navbar toggle works correctly
+  $(document).on('click', '.navbar-toggler[data-toggle="collapse"]', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    var $toggler = $(this);
+    var target = $toggler.data('target');
+    if (target) {
+      var $target = $(target);
+      
+      // Toggle the collapse
+      $target.collapse('toggle');
+      
+      // Update aria-expanded after a short delay to ensure it's accurate
+      setTimeout(function() {
+        var isExpanded = $target.hasClass('show');
+        $toggler.attr('aria-expanded', isExpanded);
+      }, 100);
+    }
+  });
+  
+  // Also handle when header is loaded dynamically
+  $(document).ready(function() {
+    // Reinitialize navbar toggle after a short delay to ensure it works
+    setTimeout(function() {
+      $('.navbar-toggler[data-toggle="collapse"]').each(function() {
+        var $toggler = $(this);
+        var target = $toggler.data('target');
+        if (target) {
+          // Ensure Bootstrap collapse is initialized
+          var $target = $(target);
+          if (!$target.data('bs.collapse')) {
+            $target.collapse({ toggle: false });
+          }
+        }
+      });
+    }, 500);
+  });
 
 })(jQuery); // End of use strict

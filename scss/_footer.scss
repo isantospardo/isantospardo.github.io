@@ -10,4 +10,128 @@ footer {
     margin-bottom: 0;
     text-align: center;
   }
+  
+  // Language Selector in Footer - Microsoft Learn style
+  .language-selector-footer {
+    position: relative;
+    display: inline-block;
+    margin-top: 1rem;
+    
+    .lang-link-footer {
+      background: none;
+      border: none;
+      color: #adb5bd;
+      font-size: 0.875rem;
+      font-weight: 400;
+      padding: 0.25rem 0.5rem;
+      cursor: pointer;
+      transition: color 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      text-decoration: none;
+      
+      .lang-name-current {
+        text-decoration: underline;
+        text-decoration-color: rgba(173, 181, 189, 0.3);
+        text-underline-offset: 0.2em;
+      }
+      
+      i {
+        font-size: 0.65rem;
+        transition: transform 0.3s ease;
+        opacity: 0.7;
+      }
+      
+      &:hover {
+        color: white;
+        
+        .lang-name-current {
+          text-decoration-color: rgba(255, 255, 255, 0.5);
+        }
+        
+        i {
+          opacity: 1;
+        }
+      }
+      
+      &:focus {
+        outline: none;
+        color: white;
+      }
+    }
+    
+    .lang-dropdown-footer {
+      position: absolute;
+      bottom: calc(100% + 0.5rem);
+      left: 50%;
+      background: #2a2a2a;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 4px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      min-width: 120px;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateX(-50%) translateY(-10px);
+      transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+      overflow: hidden;
+      z-index: 10000;
+      pointer-events: none;
+      
+      &.show {
+        opacity: 1 !important;
+        visibility: visible !important;
+        transform: translateX(-50%) translateY(0) !important;
+        pointer-events: auto;
+      }
+      
+      &.show ~ .lang-link-footer i,
+      .language-selector-footer:has(.lang-dropdown-footer.show) .lang-link-footer i {
+        transform: rotate(180deg);
+      }
+      
+      .lang-option-footer {
+        display: block;
+        width: 100%;
+        padding: 0.6rem 1rem;
+        background: transparent;
+        border: none;
+        color: #adb5bd;
+        font-size: 0.875rem;
+        font-weight: 400;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        text-align: left;
+        
+        .lang-name {
+          color: #adb5bd;
+          font-weight: 400;
+        }
+        
+        &:hover {
+          background: rgba(255, 255, 255, 0.1);
+          color: white;
+          
+          .lang-name {
+            color: white;
+          }
+        }
+        
+        &.active {
+          background: rgba(0, 127, 126, 0.15);
+          color: #007f7e;
+          font-weight: 500;
+          
+          .lang-name {
+            color: #007f7e;
+            font-weight: 500;
+          }
+        }
+        
+        &:not(:last-child) {
+          border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+      }
+    }
+  }
 }

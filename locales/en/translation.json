@@ -1,0 +1,131 @@
+{
+  "nav": {
+    "inicio": "Home",
+    "empresa": "Company",
+    "fiscal": "Tax and Accounting",
+    "laboral": "Labor",
+    "legal": "Legal",
+    "sucesiones": "Inheritance",
+    "contacto": "Contact",
+    "brandAriaLabel": "Sercon Gestoría - Home",
+    "toggleAriaLabel": "Toggle navigation",
+    "menu": "Menu"
+  },
+  "home": {
+    "title": "Sercon Gestoría",
+    "subtitle": "More than 40 years at your service",
+    "description": "At Sercon Gestoría we have a group of professionals that we put at your service to resolve your administrative procedures. Our objective is to avoid worries and save you time and headaches when dealing with the Administration.",
+    "contactText": "If you have any questions you would like to clarify, do not hesitate to contact our office. We will respond as soon as possible.",
+    "fiscal": {
+      "title": "Tax and Accounting",
+      "description": "We have a team of more than 100 expert advisors in accounting and tax matters for companies.",
+      "readMore": "Read more"
+    },
+    "laboral": {
+      "title": "Labor",
+      "description": "We offer a global service that includes labor matters and payroll administration, according to your needs. In our labor office we carry out the complete outsourcing of personnel administration and preventive or contentious advice.",
+      "readMore": "Read more"
+    },
+    "legal": {
+      "title": "Legal",
+      "description": "Our services cover tax advice, filling out and filing tax returns, support in administrative procedures and legal advice.",
+      "readMore": "Read more"
+    },
+    "sucesiones": {
+      "title": "Inheritance",
+      "description": "Specialized advice on inheritances and successions.",
+      "readMore": "Read more"
+    }
+  },
+  "about": {
+    "title": "About Us",
+    "subtitle": "More than 40 years of experience at your service",
+    "founded": "Founded in",
+    "welcome": "Welcome to our website. We are a prestigious administrative office formed by an excellent human team that covers a wide range of services to make your relationship with the Administration simpler.",
+    "mission": "Our mission is to guarantee you quality, rigor and professionalism in each of the services we offer, resolve your doubts and help you improve your management, as well as optimize your results.",
+    "experience": "From the experience, knowledge and technological means we have, we offer you personalized attention based on respect and confidentiality of all your data, in accordance with professional secrecy.",
+    "objective": "Our objective is to be a company valued by clients, whose expectations are met, committed to its obligations before the Administration and always seeking the best legislative advantages.",
+    "advice": "We will be happy to advise you comprehensively on all the procedures you need to carry out.",
+    "visit": "Visit us. We are in Ourense, Calle Peña Trevinca, 35 Bajo - 32005",
+    "team": {
+      "title": "Meet Our Team",
+      "subtitle": "Professionals committed to your success",
+      "memberName": "Name Surname",
+      "memberPosition": "Position / Specialty"
+    }
+  },
+  "contact": {
+    "title": "Contact Us",
+    "subtitle": "Do you have questions? We have the answers.",
+    "statusTitle": "Office Status",
+    "statusChecking": "Checking status...",
+    "statusOpen": "Open Now",
+    "statusClosed": "We'll Be Back Soon",
+    "statusOpenNow": "We are open now. We close today at {{time}}",
+    "statusClosedToday": "At the moment our offices are closed, but we open today at {{time}}",
+    "statusClosedMonday": "At the moment our offices are closed, but we open on Monday from 8:00 to 16:00",
+    "statusClosedTomorrow": "At the moment our offices are closed, but tomorrow ({{day}}) we open from 8:00 to 16:00",
+    "statusClosedWeekendMonday": "At the moment our offices are closed, but we open on Monday from 8:00 to 16:00",
+    "statusClosedWeekendTomorrow": "At the moment our offices are closed, but tomorrow (Monday) we open from 8:00 to 16:00",
+    "viewHours": "View Hours",
+    "hoursTitle": "Business Hours",
+    "monday": "Monday",
+    "tuesday": "Tuesday",
+    "wednesday": "Wednesday",
+    "thursday": "Thursday",
+    "friday": "Friday",
+    "saturday": "Saturday",
+    "sunday": "Sunday",
+    "closed": "Closed",
+    "hours": "8:00 - 16:00",
+    "form": {
+      "name": "Name",
+      "namePlaceholder": "Your full name",
+      "nameRequired": "Please enter your name.",
+      "email": "Email Address",
+      "emailPlaceholder": "your.email@example.com",
+      "emailRequired": "Please enter your email address.",
+      "phone": "Phone Number",
+      "phonePlaceholder": "+34 600 000 000",
+      "phoneRequired": "Please enter your phone number.",
+      "message": "Message",
+      "messagePlaceholder": "Write your message here...",
+      "messageRequired": "Please enter a message.",
+      "send": "Send Message"
+    },
+    "location": "Our Location"
+  },
+  "fiscal": {
+    "title": "Tax and Accounting",
+    "subtitle": "Professional tax and accounting advisory services"
+  },
+  "laboral": {
+    "title": "Labor",
+    "subtitle": "Payroll administration and comprehensive labor advice"
+  },
+  "legal": {
+    "title": "Legal",
+    "subtitle": "Legal advice and administrative procedures"
+  },
+  "sucesiones": {
+    "title": "Inheritance",
+    "subtitle": "Complete advice on inheritance and succession processes"
+  },
+  "footer": {
+    "title": "Sercon Gestoría",
+    "description": "More than 40 years of experience in administrative, tax, accounting, labor and legal management services in Ourense.",
+    "servicios": "Services",
+    "empresa": "Company",
+    "sobreNosotros": "About Us",
+    "siguenos": "Follow Us",
+    "horario": "Schedule: Monday to Friday 8:00 - 16:00",
+    "copyright": "Copyright &copy; Sercon Gestoría {{year}}. All rights reserved."
+  },
+  "languages": {
+    "es": "Español",
+    "en": "English",
+    "fr": "Français",
+    "gl": "Galego",
+    "pt": "Português"
+  }
+}

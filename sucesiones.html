@@ -11,6 +11,9 @@
 
   <title>Servicios de Sucesiones - Sercon Gestoría</title>
 
+  <!-- Custom favicon -->
+  <link rel="icon" href="favicon_io/favicon.ico" type="image/x-icon">
+
   <!-- Bootstrap core CSS -->
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
@@ -18,6 +21,7 @@
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
   <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
   <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&display=swap' rel='stylesheet' type='text/css'>
  
 
   <!-- Custom styles for this template -->
@@ -30,7 +34,9 @@
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
     <div class="container">
-      <a class="navbar-brand" href="index.html" aria-label="Sercon Gestoría - Inicio"><img src="img/main-logo2.png" width="200" height="90" alt="Sercon Gestoría Logo"></a>
+      <a class="navbar-brand" href="index.html" aria-label="Sercon Gestoría - Inicio">
+        <img src="img/main-logo2.png" alt="Sercon Gestoría Logo" style="height: 60px; width: auto; max-width: 180px;">
+      </a>
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         Menu
         <i class="fas fa-bars"></i>
@@ -70,8 +76,11 @@
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
           <div class="site-heading">
-            <h1><img src="img/main-title-logo2.png" width="70" height="70" class="center" alt="Sercon Gestoría"> <span class="display-4">Sucesiones</span></h1>
-            <span class="subheading"></span>
+            <h1>
+              <img src="img/main-title-logo2.png" width="90" height="90" class="center" alt="Sercon Gestoría">
+              <span class="display-4" data-i18n="sucesiones.title">Sucesiones</span>
+            </h1>
+            <span class="subheading" data-i18n="sucesiones.subtitle">Asesoramiento completo en procesos de herencias y sucesiones</span>
           </div>
         </div>
       </div>
@@ -79,45 +88,109 @@
   </header>
 
   <!-- Main Content -->
-  <div class="container">
+  <div class="container my-5">
     <div class="row">
-      <div class="col-lg-8 col-md-10 mx-auto">
+      <div class="col-lg-10 col-md-12 mx-auto">
         
+        <!-- Blog Accordion -->
+        <div class="accordion elegant-accordion" id="blogAccordion">
           
-          <div class="post-preview">
-          <a href="posts/post-sucesiones/20200425-sucesiones.html">    
-            <h2 class="post-title">
-              Plazos sucesiones 2020
-            </h2>
-            <h3 class="post-subtitle">
-              Información sobre temas sucesiones 2020
-            </h3>
-          </a>
-          <p class="post-meta">Posteado por
-            <a href="index.html"> Sercon Gestoría</a>
-            el 25 abril, 2020</p>
-        </div>
-        <hr>
+          <!-- Post 1 -->
+          <div class="card elegant-card">
+            <div class="card-header elegant-card-header" id="headingOne">
+              <button class="btn btn-link elegant-accordion-button collapsed w-100 text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne" data-parent="#blogAccordion">
+                <div class="accordion-header-content">
+                  <div class="accordion-title-wrapper">
+                    <h3 class="accordion-title">Plazos sucesiones 2020</h3>
+                    <p class="accordion-subtitle">Información sobre temas sucesiones 2020</p>
+                    <small class="accordion-meta"><i class="far fa-calendar-alt"></i> Posteado por Sercon Gestoría el 25 abril, 2020</small>
+                  </div>
+                  <i class="fas fa-chevron-down accordion-icon"></i>
+                </div>
+              </button>
+            </div>
+            <div id="collapseOne" class="collapse" aria-labelledby="headingOne">
+              <div class="card-body elegant-card-body">
+                <p>El año 2020 trajo consigo importantes cambios en la normativa sobre sucesiones y herencias que afectan a diversos aspectos del proceso sucesorio. A continuación, le proporcionamos información detallada sobre los aspectos más relevantes.</p>
+                
+                <h4>Novedades en Sucesiones 2020</h4>
+                <p>Durante 2020 se implementaron diversas modificaciones en la legislación sobre sucesiones que han tenido un impacto significativo en el proceso sucesorio:</p>
+                <ul>
+                  <li><strong>Cambios en la normativa fiscal de sucesiones:</strong> Se actualizaron las normas sobre el Impuesto de Sucesiones y Donaciones, incluyendo modificaciones en los tramos impositivos y las deducciones aplicables.</li>
+                  <li><strong>Actualizaciones en los plazos de aceptación y partición:</strong> Se establecieron nuevos plazos y procedimientos para la aceptación de herencias y la partición de bienes.</li>
+                  <li><strong>Nuevas regulaciones sobre testamentos:</strong> Se introdujeron modificaciones en la normativa sobre testamentos, incluyendo actualizaciones en los requisitos formales y procedimientos de otorgamiento.</li>
+                  <li><strong>Modificaciones en la legítima:</strong> Se actualizaron las normas sobre la legítima y las porciones hereditarias, afectando a la distribución de la herencia.</li>
+                  <li><strong>Nuevas disposiciones sobre aceptación a beneficio de inventario:</strong> Se establecieron nuevas normas sobre la aceptación de herencias a beneficio de inventario y sus efectos.</li>
+                </ul>
+                
+                <h4>Plazos y Obligaciones en Sucesiones</h4>
+                <p>Es fundamental cumplir con todos los plazos y obligaciones establecidos en materia de sucesiones:</p>
+                <ul>
+                  <li><strong>Plazos para aceptación de herencia:</strong> Respeto de los plazos establecidos para la aceptación o renuncia de la herencia, que pueden variar según las circunstancias del caso.</li>
+                  <li><strong>Obligaciones fiscales:</strong> Cumplimiento de todas las obligaciones en materia del Impuesto de Sucesiones y Donaciones, incluyendo la presentación de la declaración dentro de los plazos establecidos.</li>
+                  <li><strong>Actualizaciones en la partición de bienes:</strong> Conocimiento y aplicación de las nuevas normas sobre la partición de bienes hereditarios y la distribución de la herencia.</li>
+                  <li><strong>Cambios en procedimientos notariales:</strong> Adaptación a las nuevas normas sobre procedimientos notariales y registrales en materia de sucesiones.</li>
+                  <li><strong>Obligaciones de información:</strong> Cumplimiento de las nuevas obligaciones de información y documentación en los procesos sucesorios.</li>
+                </ul>
+                
+                <h4>Asesoramiento en Sucesiones</h4>
+                <p>Nuestro equipo de asesores está especializado en ayudar a familias y herederos a cumplir con todas sus obligaciones en materia de sucesiones, ofreciendo asesoramiento integral y personalizado. Ofrecemos servicios completos de asesoramiento en sucesiones, desde la gestión de la aceptación de herencias hasta la liquidación del Impuesto de Sucesiones y Donaciones.</p>
+                
+                <p>Si necesita ayuda con cualquier aspecto del proceso sucesorio o tiene dudas sobre las nuevas normativas, nuestros profesionales están disponibles para proporcionarle el asesoramiento necesario.</p>
+                
+                <p class="mt-4 mb-0"><strong>Para más información o para solicitar una consulta personalizada, no dude en contactarnos. Estamos a su disposición para ayudarle con todas sus necesidades en materia de sucesiones.</strong></p>
+              </div>
+            </div>
+          </div>
           
-        <div class="post-preview">
-          <a href="posts/post-sucesiones/20200424-sucesiones.html">    
-            <h2 class="post-title">
-              Plazos sucesiones 2019
-            </h2>
-            <h3 class="post-subtitle">
-              Información sobre temas sucesiones 2019
-            </h3>
-          </a>
-          <p class="post-meta">Posteado por
-            <a href="index.html"> Sercon Gestoría</a>
-            el 25 abril, 2019</p>
+          <!-- Post 2 -->
+          <div class="card elegant-card">
+            <div class="card-header elegant-card-header" id="headingTwo">
+              <button class="btn btn-link elegant-accordion-button collapsed w-100 text-left" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" data-parent="#blogAccordion">
+                <div class="accordion-header-content">
+                  <div class="accordion-title-wrapper">
+                    <h3 class="accordion-title">Plazos sucesiones 2019</h3>
+                    <p class="accordion-subtitle">Información sobre temas sucesiones 2019</p>
+                    <small class="accordion-meta"><i class="far fa-calendar-alt"></i> Posteado por Sercon Gestoría el 25 abril, 2019</small>
+                  </div>
+                  <i class="fas fa-chevron-down accordion-icon"></i>
+                </div>
+              </button>
+            </div>
+            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo">
+              <div class="card-body elegant-card-body">
+                <p>El año 2019 presentó importantes actualizaciones en la normativa sobre sucesiones y herencias que afectaron a diversos aspectos del proceso sucesorio.</p>
+                
+                <h4>Cambios Normativos 2019</h4>
+                <p>Durante 2019 se produjeron modificaciones significativas en la legislación sobre sucesiones que han tenido un impacto importante en el proceso sucesorio:</p>
+                <ul>
+                  <li><strong>Actualizaciones en la normativa fiscal de sucesiones:</strong> Se modificaron diversas normas sobre el Impuesto de Sucesiones y Donaciones, incluyendo cambios en los tramos impositivos, deducciones y bonificaciones aplicables.</li>
+                  <li><strong>Cambios en los plazos de aceptación y partición:</strong> Se introdujeron modificaciones en los plazos y procedimientos para la aceptación de herencias y la partición de bienes hereditarios.</li>
+                  <li><strong>Nuevas disposiciones sobre testamentos:</strong> Se actualizaron las normas sobre testamentos, incluyendo cambios en los requisitos formales y procedimientos de otorgamiento y protocolización.</li>
+                  <li><strong>Modificaciones en la legítima:</strong> Se actualizaron las normas sobre la legítima y las porciones hereditarias, afectando a la distribución de la herencia y los derechos de los herederos forzosos.</li>
+                  <li><strong>Nuevas normativas sobre aceptación a beneficio de inventario:</strong> Se establecieron nuevas normas sobre la aceptación de herencias a beneficio de inventario y sus efectos sobre la responsabilidad de los herederos.</li>
+                </ul>
+                
+                <h4>Aspectos Relevantes de la Normativa 2019</h4>
+                <p>La normativa sobre sucesiones vigente en 2019 estableció diversos aspectos importantes:</p>
+                <ul>
+                  <li><strong>Normativa legal vigente:</strong> Aplicación de todas las normas legales en vigor durante 2019, incluyendo el Código Civil, leyes fiscales y normativa autonómica aplicable.</li>
+                  <li><strong>Obligaciones fiscales para herederos:</strong> Cumplimiento de todas las obligaciones en materia del Impuesto de Sucesiones y Donaciones, incluyendo la presentación de declaraciones y el pago de las cuotas correspondientes.</li>
+                  <li><strong>Derechos y deberes de herederos:</strong> Conocimiento y ejercicio de todos los derechos y deberes establecidos en la normativa vigente, incluyendo derechos de aceptación, renuncia y partición.</li>
+                  <li><strong>Procedimientos notariales y registrales:</strong> Conocimiento y aplicación correcta de los procedimientos notariales y registrales establecidos en la normativa vigente para la gestión de sucesiones.</li>
+                  <li><strong>Obligaciones de información:</strong> Cumplimiento de las obligaciones de información y documentación establecidas en la normativa aplicable para los procesos sucesorios.</li>
+                </ul>
+                
+                <h4>Servicios de Asesoramiento</h4>
+                <p>Nuestro equipo está preparado para ofrecer asesoramiento completo en materia de sucesiones, ayudando a nuestros clientes a cumplir con todas sus obligaciones de manera eficiente. Ofrecemos servicios completos de asesoramiento en sucesiones, desde la gestión de la aceptación de herencias hasta la liquidación del Impuesto de Sucesiones y Donaciones y la partición de bienes.</p>
+                
+                <p>Si necesita ayuda con cualquier aspecto del proceso sucesorio o tiene dudas sobre la normativa aplicable, nuestros profesionales están disponibles para proporcionarle el asesoramiento necesario.</p>
+              </div>
+            </div>
+          </div>
+          
         </div>
-        <hr>
-  
-        <!-- Pager -->
-        <div class="clearfix">
-          <a class="btn btn-primary float-right" href="#">Posts más antiguos &rarr;</a>
-        </div>
+        
       </div>
     </div>
   </div>
@@ -136,8 +209,323 @@
   <!-- Custom scripts for this template -->
   <script src="js/clean-blog.min.js"></script>
   
+  <!-- i18next for internationalization -->
+  <script src="https://cdn.jsdelivr.net/npm/i18next@23.7.6/dist/umd/i18next.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/i18next-browser-languagedetector@7.2.0/dist/umd/i18nextBrowserLanguageDetector.min.js"></script>
+  
   <!-- Load reusable components (header and footer) -->
   <script src="js/load-components.js"></script>
+  <script src="js/i18n.js"></script>
+
+  <!-- Blog Accordion Script -->
+  <script>
+    $(document).ready(function() {
+      // Ensure all accordions are closed by default
+      $('.collapse').removeClass('show');
+      $('.elegant-accordion-button').addClass('collapsed');
+      $('.accordion-icon').css('transform', 'rotate(0deg)');
+      
+      // Handle accordion toggle with proper parent behavior
+      $('[data-toggle="collapse"]').on('click', function(e) {
+        var target = $(this).data('target');
+        var $target = $(target);
+        var $parent = $(this).closest('.accordion');
+        var $accordionCard = $(this).closest('.card');
+        var $button = $(this);
+        
+        // If clicking on an already open accordion, close it
+        if ($target.hasClass('show')) {
+          $target.collapse('hide');
+        } else {
+          // Close all other accordions in the same parent
+          $parent.find('.collapse.show').not(target).collapse('hide');
+          
+          // Open the clicked accordion
+          $target.collapse('show');
+          
+          // Scroll to the beginning of the accordion card after it opens
+          $target.on('shown.bs.collapse', function scrollToAccordion() {
+            if ($accordionCard.length) {
+              var cardTop = $accordionCard.offset().top;
+              var scrollOffset = cardTop - 100; // 100px offset from top
+              
+              $('html, body').stop().animate({
+                scrollTop: scrollOffset
+              }, 400);
+            }
+            // Remove the event listener after it fires once
+            $target.off('shown.bs.collapse', scrollToAccordion);
+          });
+        }
+      });
+      
+      // Rotate chevron on accordion toggle
+      $('.collapse').on('show.bs.collapse', function() {
+        $(this).prev().find('.accordion-icon').css('transform', 'rotate(180deg)');
+        $(this).prev().find('.elegant-accordion-button').removeClass('collapsed').attr('aria-expanded', 'true');
+      });
+      
+      $('.collapse').on('hide.bs.collapse', function() {
+        $(this).prev().find('.accordion-icon').css('transform', 'rotate(0deg)');
+        $(this).prev().find('.elegant-accordion-button').addClass('collapsed').attr('aria-expanded', 'false');
+      });
+    });
+  </script>
+
+  <style>
+    /* Professional Accordion Styles - Law Firm Elegance */
+    .elegant-accordion {
+      margin-top: 3rem;
+    }
+    
+    .elegant-card {
+      background: #ffffff;
+      border: 1px solid #d0d0d0;
+      border-left: 4px solid #007f7e;
+      border-radius: 0;
+      margin-bottom: 2.5rem;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12), 0 3px 6px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.04);
+      transition: all 0.3s ease;
+      overflow: hidden;
+      position: relative;
+    }
+    
+    .elegant-card:hover {
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.16), 0 6px 12px rgba(0, 0, 0, 0.12), 0 2px 4px rgba(0, 0, 0, 0.08);
+      border-left-color: #005f5e;
+      transform: translateY(-3px);
+      border-color: #c0c0c0;
+    }
+    
+    .elegant-card-header {
+      background: linear-gradient(to bottom, #ffffff 0%, #f5f5f5 100%);
+      border: none;
+      border-bottom: 2px solid #d0d0d0;
+      border-top: 1px solid #e8e8e8;
+      padding: 0;
+      position: relative;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04) inset;
+    }
+    
+    .elegant-accordion-button {
+      width: 100%;
+      padding: 0 !important;
+      border: none !important;
+      background: transparent !important;
+      text-align: left;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none !important;
+      position: relative;
+      z-index: 10;
+      color: inherit !important;
+    }
+    
+    .elegant-accordion-button:hover,
+    .elegant-accordion-button:focus {
+      text-decoration: none !important;
+      color: inherit !important;
+      outline: none !important;
+      box-shadow: none !important;
+    }
+    
+    .elegant-accordion-button * {
+      pointer-events: none;
+    }
+    
+    .elegant-accordion-button:not(.collapsed) {
+      background: #ffffff;
+    }
+    
+    .elegant-accordion-button:not(.collapsed) .accordion-title {
+      color: #007f7e;
+    }
+    
+    .elegant-accordion-button:hover {
+      background: #f8f9fa;
+      text-decoration: none !important;
+    }
+    
+    .elegant-accordion-button:not(.collapsed):hover {
+      background: #ffffff;
+    }
+    
+    .elegant-accordion-button:focus {
+      box-shadow: none;
+      outline: none;
+    }
+    
+    .accordion-header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 2.25rem 2.5rem;
+      gap: 2rem;
+      position: relative;
+      background: linear-gradient(to right, rgba(0, 127, 126, 0.02) 0%, transparent 100%);
+    }
+    
+    .accordion-title-wrapper {
+      flex: 1;
+      position: relative;
+    }
+    
+    .accordion-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #0a0a0a;
+      margin: 0 0 0.6rem 0;
+      letter-spacing: 0.01em;
+      line-height: 1.4;
+      position: relative;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    }
+    
+    .accordion-subtitle {
+      font-family: 'Lora', serif;
+      font-size: 0.95rem;
+      font-weight: 400;
+      font-style: italic;
+      color: #666;
+      margin: 0 0 0.5rem 0;
+      line-height: 1.5;
+    }
+    
+    .accordion-meta {
+      font-family: 'Open Sans', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 400;
+      color: #888;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      letter-spacing: 0.01em;
+      margin-top: 0.5rem;
+    }
+    
+    .accordion-meta i {
+      font-size: 0.8rem;
+      opacity: 0.7;
+    }
+    
+    .accordion-icon {
+      font-size: 1.1rem;
+      color: #007f7e;
+      transition: transform 0.3s ease;
+      flex-shrink: 0;
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: transparent;
+      border: 1px solid #e0e0e0;
+      border-radius: 0;
+    }
+    
+    .elegant-card:hover .accordion-icon {
+      border-color: #007f7e;
+      background: #f8f9fa;
+    }
+    
+    .elegant-card-body {
+      padding: 2.5rem;
+      background: #ffffff;
+      font-family: 'Lora', serif;
+      font-size: 1rem;
+      line-height: 1.8;
+      color: #333;
+      border-top: 1px solid #f0f0f0;
+    }
+    
+    .elegant-card-body p {
+      margin-bottom: 1.25rem;
+      color: #333;
+      text-align: left;
+    }
+    
+    .elegant-card-body p:first-child {
+      font-size: 1.05rem;
+      color: #1a1a1a;
+      font-weight: 400;
+      line-height: 1.8;
+    }
+    
+    .elegant-card-body h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: #1a1a1a;
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+      letter-spacing: 0.01em;
+      border-bottom: 1px solid #e0e0e0;
+      padding-bottom: 0.5rem;
+    }
+    
+    .elegant-card-body h4:first-of-type {
+      margin-top: 0;
+    }
+    
+    .elegant-card-body ul {
+      padding-left: 1.5rem;
+      margin-bottom: 1.5rem;
+      list-style: disc;
+    }
+    
+    .elegant-card-body ul li {
+      margin-bottom: 0.75rem;
+      color: #333;
+      line-height: 1.7;
+    }
+    
+    .elegant-card-body strong {
+      color: #1a1a1a;
+      font-weight: 600;
+    }
+    
+    .elegant-card-body p:last-child {
+      background: #f8f9fa;
+      padding: 1.25rem;
+      border-left: 3px solid #007f7e;
+      margin-top: 2rem;
+      font-weight: 400;
+      font-style: italic;
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .accordion-header-content {
+        padding: 1.5rem;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+      }
+      
+      .accordion-title {
+        font-size: 1.5rem;
+      }
+      
+      .accordion-subtitle {
+        font-size: 1rem;
+      }
+      
+      .elegant-card-body {
+        padding: 1.75rem;
+        font-size: 1rem;
+      }
+      
+      .accordion-icon {
+        position: absolute;
+        top: 1.75rem;
+        right: 1.75rem;
+        width: 32px;
+        height: 32px;
+        font-size: 1rem;
+      }
+    }
+  </style>
 
 </body>
 

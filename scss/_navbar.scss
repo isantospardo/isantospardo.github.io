@@ -1,49 +1,671 @@
-// Styling for the navbar
+@use "sass:color";
+@use "variables.scss" as *;
+@use "mixins.scss" as *;
+
+// Styling for the navbar - Elegant Design
 #mainNav {
   position: absolute;
-  border-bottom: 1px solid $gray-200;
-  background-color: white;
-  @include sans-serif-font;
+  border-bottom: 1px solid rgba($gray-200, 0.3);
+  background-color: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  font-family: 'Lora', 'Times New Roman', serif;
+  padding: 0.5rem 0;
+  
+  // Language Selector Styles - Visible in desktop navbar, positioned on the left
+  .language-selector {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-right: 1rem;
+    
+    .lang-btn-current {
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid rgba($gray-300, 0.5);
+      color: $gray-700;
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 0.35rem 0.75rem;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: 'Lora', 'Times New Roman', serif;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      min-width: 50px;
+      
+      .lang-code {
+        display: inline-block;
+      }
+      
+      i {
+        font-size: 0.65rem;
+        transition: transform 0.3s ease;
+      }
+      
+      &:hover {
+        background: rgba($primary, 0.1);
+        border-color: $primary;
+        color: $primary;
+        transform: translateY(-1px);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+      
+      &:active {
+        transform: translateY(0);
+      }
+    }
+    
+    .lang-dropdown {
+      position: absolute;
+      top: calc(100% + 0.5rem);
+      left: 0;
+      background: white;
+      border: 1px solid rgba($gray-300, 0.5);
+      border-radius: 4px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      min-width: 150px;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-10px);
+      transition: all 0.3s ease;
+      overflow: hidden;
+      
+      &.show {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+      }
+      
+      .lang-option {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        padding: 0.75rem 1rem;
+        background: transparent;
+        border: none;
+        color: $gray-700;
+        font-size: 0.875rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        text-align: left;
+        font-family: 'Lora', 'Times New Roman', serif;
+        
+        span:first-child {
+          font-weight: 600;
+          text-transform: uppercase;
+          letter-spacing: 0.05em;
+          min-width: 30px;
+        }
+        
+        .lang-name {
+          font-size: 0.8rem;
+          color: $gray-600;
+          font-weight: 400;
+        }
+        
+        &:hover {
+          background: rgba($primary, 0.1);
+          color: $primary;
+          
+          .lang-name {
+            color: $primary;
+          }
+        }
+        
+        &.active {
+          background: rgba($primary, 0.15);
+          color: $primary;
+          font-weight: 600;
+          
+          .lang-name {
+            color: $primary;
+            font-weight: 500;
+          }
+        }
+        
+        &:not(:last-child) {
+          border-bottom: 1px solid rgba($gray-200, 0.5);
+        }
+      }
+    }
+  }
+  
   .navbar-brand {
-    font-weight: 800;
+    font-weight: 600;
     color: $gray-800;
+    padding: 1rem 2rem;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    border-left: 5px solid transparent;
+    padding-left: 1.75rem;
+    overflow: visible;
+    
+    &::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 5px;
+      background: linear-gradient(180deg, 
+        rgba(0, 0, 0, 0.7) 0%, 
+        rgba(0, 0, 0, 0.4) 25%,
+        rgba(0, 0, 0, 0.25) 50%,
+        rgba(0, 0, 0, 0.4) 75%,
+        rgba(0, 0, 0, 0.7) 100%);
+      opacity: 0.8;
+      z-index: 1;
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 3px 0 12px rgba(0, 0, 0, 0.2),
+                  0 0 20px rgba(0, 0, 0, 0.1);
+      border-radius: 0 2px 2px 0;
+    }
+    
+    &::after {
+      content: '';
+      position: absolute;
+      left: -4px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 12px;
+      height: 70%;
+      background: linear-gradient(90deg, 
+        rgba(0, 127, 126, 0.4) 0%, 
+        rgba(0, 127, 126, 0.2) 50%,
+        transparent 100%);
+      border-radius: 0 6px 6px 0;
+      opacity: 0;
+      z-index: 2;
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 0 15px rgba(0, 127, 126, 0.3);
+    }
+    
+    img {
+      height: 70px;
+      width: auto;
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      filter: drop-shadow(0 3px 12px rgba(0, 0, 0, 0.25)) 
+              drop-shadow(0 0 25px rgba(0, 0, 0, 0.15))
+              drop-shadow(0 0 40px rgba(0, 127, 126, 0.1))
+              brightness(0.97)
+              contrast(1.08)
+              saturate(1.05);
+      position: relative;
+      z-index: 3;
+      opacity: 0.96;
+      padding: 0.25rem;
+      background: linear-gradient(135deg, 
+        rgba(255, 255, 255, 0.05) 0%, 
+        transparent 50%,
+        rgba(255, 255, 255, 0.05) 100%);
+      border-radius: 4px;
+    }
+    
+    &:hover {
+      transform: translateX(3px);
+      
+      &::before {
+        opacity: 1;
+        width: 6px;
+        box-shadow: 4px 0 18px rgba(0, 0, 0, 0.3),
+                    0 0 30px rgba(0, 0, 0, 0.15);
+      }
+      
+      &::after {
+        opacity: 1;
+        left: -5px;
+        width: 14px;
+        box-shadow: 0 0 20px rgba(0, 127, 126, 0.4);
+      }
+      
+      img {
+        filter: drop-shadow(0 6px 24px rgba(0, 0, 0, 0.3)) 
+                drop-shadow(0 0 40px rgba(0, 0, 0, 0.2))
+                drop-shadow(0 0 60px rgba(0, 127, 126, 0.2))
+                brightness(1.02)
+                contrast(1.12)
+                saturate(1.1);
+        opacity: 1;
+        transform: scale(1.03);
+        background: linear-gradient(135deg, 
+          rgba(255, 255, 255, 0.1) 0%, 
+          transparent 50%,
+          rgba(255, 255, 255, 0.1) 100%);
+      }
+    }
+    
+    &:active {
+      transform: translateX(2px);
+    }
   }
+  
   .navbar-toggler {
-    font-size: 12px;
-    font-weight: 800;
-    padding: 13px;
-    text-transform: uppercase;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 10px 15px;
+    text-transform: none;
     color: $gray-800;
+    border: 1px solid rgba($gray-300, 0.5);
+    border-radius: 4px;
+    font-family: 'Lora', 'Times New Roman', serif;
+    transition: all 0.3s ease;
+    z-index: 1050;
+    position: relative;
+    cursor: pointer;
+    
+    .navbar-toggler-icon {
+      display: inline-block;
+      width: 1.5em;
+      height: 1.5em;
+      vertical-align: middle;
+      
+      i {
+        font-size: 1.2em;
+        line-height: 1;
+      }
+    }
+    
+    &:hover,
+    &:focus {
+      background-color: rgba($primary, 0.1);
+      border-color: $primary;
+      outline: none;
+    }
+    
+    &:focus {
+      box-shadow: 0 0 0 0.2rem rgba($primary, 0.25);
+    }
   }
+  
   .navbar-nav {
     > li.nav-item {
       > a {
-        font-size: 12px;
-        font-weight: 800;
-        letter-spacing: 1px;
-        text-transform: uppercase;
+        font-size: 15px;
+        font-weight: 500;
+        letter-spacing: 0.03em;
+        text-transform: none;
+        font-family: 'Lora', 'Times New Roman', serif;
+        padding: 0.75rem 1.25rem;
+        transition: all 0.3s ease;
+        position: relative;
+        color: $gray-800;
+        
+        &::after {
+          content: '';
+          position: absolute;
+          bottom: 0;
+          left: 50%;
+          transform: translateX(-50%) scaleX(0);
+          width: 60%;
+          height: 2px;
+          background-color: $primary;
+          transition: transform 0.3s ease;
+        }
+        
+        &:hover {
+          color: $primary;
+          
+          &::after {
+            transform: translateX(-50%) scaleX(1);
+          }
+        }
+      }
+    }
+  }
+  
+  // Mobile responsive menu styles
+  @media only screen and (max-width: 991px) {
+    position: relative;
+    z-index: 1030;
+    background-color: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    
+    .language-selector {
+      display: none !important; // Oculto en mobile
+    }
+    
+    .language-selector-mobile {
+      display: block;
+      padding: 0.75rem 1.5rem 1rem;
+      border-top: 1px solid rgba($gray-200, 0.3);
+      margin-top: 0.25rem;
+      background: rgba(248, 249, 250, 0.5);
+      
+      .lang-btn-current {
+        width: 100%;
+        font-size: 0.8rem;
+        font-weight: 500;
+        padding: 0.5rem 0.75rem;
+        justify-content: space-between;
+        background: transparent;
+        border: 1px solid rgba($gray-300, 0.3);
+        border-radius: 6px;
+        color: $gray-700;
+        transition: all 0.25s ease;
+        
+        .lang-code {
+          font-weight: 600;
+          letter-spacing: 0.05em;
+        }
+        
+        i {
+          font-size: 0.65rem;
+          opacity: 0.6;
+          transition: transform 0.25s ease, opacity 0.25s ease;
+        }
+        
+        &:hover {
+          background: rgba($primary, 0.04);
+          border-color: rgba($primary, 0.3);
+          color: $primary;
+          
+          i {
+            opacity: 1;
+          }
+        }
+        
+        &:active {
+          transform: scale(0.98);
+        }
+      }
+      
+      .lang-dropdown {
+        position: static;
+        margin-top: 0.5rem;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        border: 1px solid rgba($gray-200, 0.5);
+        border-radius: 8px;
+        background: white;
+        transform: none;
+        overflow: hidden;
+        display: none;
+        opacity: 0;
+        visibility: hidden;
+        max-height: 0;
+        transition: all 0.3s ease;
+        
+        &.show {
+          display: block;
+          opacity: 1;
+          visibility: visible;
+          max-height: 500px;
+          transform: none;
+          
+          .lang-btn-current i {
+            transform: rotate(180deg);
+          }
+        }
+        
+        .lang-option {
+          padding: 0.65rem 0.75rem;
+          font-size: 0.8rem;
+          font-weight: 400;
+          transition: all 0.2s ease;
+          border: none;
+          background: transparent;
+          
+          span:first-child {
+            font-weight: 600;
+            font-size: 0.75rem;
+            min-width: 28px;
+            letter-spacing: 0.08em;
+          }
+          
+          .lang-name {
+            font-size: 0.75rem;
+            color: $gray-600;
+            font-weight: 400;
+          }
+          
+          &:first-child {
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+          }
+          
+          &:last-child {
+            border-bottom-left-radius: 8px;
+            border-bottom-right-radius: 8px;
+          }
+          
+          &:hover {
+            background: rgba($primary, 0.06);
+            color: $primary;
+            padding-left: 0.9rem;
+            
+            .lang-name {
+              color: $primary;
+            }
+          }
+          
+          &.active {
+            background: rgba($primary, 0.08);
+            color: $primary;
+            font-weight: 500;
+            
+            .lang-name {
+              color: $primary;
+              font-weight: 500;
+            }
+            
+            &:hover {
+              background: rgba($primary, 0.12);
+            }
+          }
+          
+          &:not(:last-child) {
+            border-bottom: 1px solid rgba($gray-200, 0.3);
+          }
+        }
+      }
+    }
+    
+    .navbar-collapse {
+      background: rgba(255, 255, 255, 0.98);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      border-top: 1px solid rgba($primary, 0.15);
+      margin-top: 0.75rem;
+      padding: 0.25rem 0;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+      z-index: 1029;
+      position: relative;
+      
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: linear-gradient(90deg, $primary 0%, color.scale($primary, $lightness: 10%) 50%, $primary 100%);
+        opacity: 0.5;
+      }
+    }
+    
+    .navbar-collapse.show {
+      display: block !important;
+      animation: slideDown 0.3s ease-out;
+    }
+    
+    @keyframes slideDown {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .navbar-nav {
+      padding: 0.25rem 0;
+      
+      > li.nav-item {
+        margin: 0;
+        
+        > a {
+          color: $gray-800;
+          padding: 0.75rem 1.5rem;
+          border-bottom: 1px solid rgba($gray-200, 0.4);
+          font-size: 14px;
+          font-weight: 500;
+          letter-spacing: 0.01em;
+          transition: all 0.25s ease;
+          position: relative;
+          display: flex;
+          align-items: center;
+          
+          &:last-child {
+            border-bottom: none;
+          }
+          
+          &::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: $primary;
+            transform: scaleY(0);
+            transition: transform 0.25s ease;
+          }
+          
+          &::after {
+            display: none;
+          }
+          
+          &:hover,
+          &:focus {
+            color: $primary;
+            background: rgba($primary, 0.06);
+            padding-left: 1.75rem;
+            
+            &::before {
+              transform: scaleY(1);
+            }
+          }
+          
+          &:active {
+            background: rgba($primary, 0.1);
+          }
+        }
+      }
+    }
+    
+    .navbar-toggler {
+      background: rgba(255, 255, 255, 0.95);
+      border: 1.5px solid rgba($primary, 0.2);
+      padding: 8px 12px;
+      border-radius: 6px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+      transition: all 0.25s ease;
+      
+      .navbar-toggler-icon {
+        i {
+          font-size: 18px;
+          color: $primary;
+          transition: transform 0.25s ease;
+        }
+      }
+      
+      &[aria-expanded="true"] {
+        background: rgba($primary, 0.08);
+        border-color: $primary;
+        box-shadow: 0 3px 10px rgba($primary, 0.15);
+        
+        .navbar-toggler-icon i {
+          transform: rotate(90deg);
+        }
+      }
+      
+      &:hover,
+      &:focus {
+        background: rgba($primary, 0.1);
+        border-color: $primary;
+        color: $primary;
+        box-shadow: 0 3px 10px rgba($primary, 0.2);
+        transform: translateY(-1px);
+      }
+      
+      &:active {
+        transform: translateY(0);
       }
     }
   }
   @media only screen and (min-width: 992px) {
     border-bottom: 1px solid transparent;
-    background: transparent;
-    .navbar-brand {
-      padding: 10px 20px;
-      color: $white;
-      &:focus,
-      &:hover {
-        color: fade-out($white, .2);
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    
+    .language-selector {
+      display: flex; // Visible in desktop navbar
+      
+      .lang-btn-current {
+        background: rgba(255, 255, 255, 0.2);
+        border-color: rgba(255, 255, 255, 0.3);
+        color: rgba(255, 255, 255, 0.9);
+        
+        &:hover {
+          background: rgba(255, 255, 255, 0.3);
+          border-color: rgba(255, 255, 255, 0.5);
+          color: white;
+        }
+      }
+      
+      .lang-dropdown {
+        background: rgba(255, 255, 255, 0.98);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
       }
     }
+    
+    .navbar-brand {
+      padding: 0.75rem 1.5rem;
+      color: $white;
+      
+      img {
+        filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.3));
+      }
+      
+      &:focus,
+      &:hover {
+        color: rgba($white, 0.9);
+        
+        img {
+          filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.4));
+        }
+      }
+    }
+    
     .navbar-nav {
       > li.nav-item {
         > a {
-          padding: 10px 20px;
-          color: $white;
+          padding: 0.75rem 1.25rem;
+          color: rgba($white, 0.95);
+          
+          &::after {
+            background-color: rgba($white, 0.8);
+          }
+          
           &:focus,
           &:hover {
-            color: fade-out($white, .2);
+            color: $white;
+            
+            &::after {
+              background-color: $white;
+            }
           }
         }
       }
@@ -70,27 +692,120 @@
       -webkit-transition: all 0.3s ease;
       -moz-transition: all 0.3s ease;
       transition: all 0.3s ease;
-      border-bottom: 1px solid rgba($gray-300, 0.5);
+      border-bottom: 1px solid rgba($gray-300, 0.3);
       background-color: rgba($white, 0.98);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
+      padding: 0.75rem 0;
       
       .navbar-brand {
         color: $gray-900;
+        border-left: 5px solid transparent;
+        
+        &::before {
+          background: linear-gradient(180deg, 
+            rgba(0, 0, 0, 0.7) 0%, 
+            rgba(0, 0, 0, 0.4) 25%,
+            rgba(0, 0, 0, 0.25) 50%,
+            rgba(0, 0, 0, 0.4) 75%,
+            rgba(0, 0, 0, 0.7) 100%);
+          opacity: 0.8;
+          width: 5px;
+          box-shadow: 3px 0 12px rgba(0, 0, 0, 0.2),
+                      0 0 20px rgba(0, 0, 0, 0.1);
+          border-radius: 0 2px 2px 0;
+        }
+        
+        &::after {
+          background: linear-gradient(90deg, 
+            rgba(0, 127, 126, 0.4) 0%, 
+            rgba(0, 127, 126, 0.2) 50%,
+            transparent 100%);
+          opacity: 0;
+          box-shadow: 0 0 15px rgba(0, 127, 126, 0.3);
+        }
+        
+        img {
+          height: 65px;
+          filter: drop-shadow(0 3px 12px rgba(0, 0, 0, 0.25)) 
+                  drop-shadow(0 0 25px rgba(0, 0, 0, 0.15))
+                  drop-shadow(0 0 40px rgba(0, 127, 126, 0.1))
+                  brightness(0.97)
+                  contrast(1.08)
+                  saturate(1.05);
+          opacity: 0.96;
+          padding: 0.25rem;
+          background: linear-gradient(135deg, 
+            rgba(255, 255, 255, 0.05) 0%, 
+            transparent 50%,
+            rgba(255, 255, 255, 0.05) 100%);
+          border-radius: 4px;
+        }
+        
         &:focus,
         &:hover {
           color: $primary;
+          transform: translateX(3px);
+          
+          &::before {
+            opacity: 1;
+            width: 6px;
+            box-shadow: 4px 0 18px rgba(0, 0, 0, 0.3),
+                        0 0 30px rgba(0, 0, 0, 0.15);
+          }
+          
+          &::after {
+            opacity: 1;
+            left: -5px;
+            width: 14px;
+            box-shadow: 0 0 20px rgba(0, 127, 126, 0.4);
+          }
+          
+          img {
+            filter: drop-shadow(0 6px 24px rgba(0, 0, 0, 0.3)) 
+                    drop-shadow(0 0 40px rgba(0, 0, 0, 0.2))
+                    drop-shadow(0 0 60px rgba(0, 127, 126, 0.2))
+                    brightness(1.02)
+                    contrast(1.12)
+                    saturate(1.1);
+            opacity: 1;
+            transform: scale(1.03);
+            background: linear-gradient(135deg, 
+              rgba(255, 255, 255, 0.1) 0%, 
+              transparent 50%,
+              rgba(255, 255, 255, 0.1) 100%);
+          }
         }
       }
+      
       .navbar-nav {
         > li.nav-item {
           > a {
             color: $gray-900;
+            
+            &::after {
+              background-color: $primary;
+            }
+            
             &:focus,
             &:hover {
               color: $primary;
             }
+          }
+        }
+      }
+      
+      .language-selector {
+        .lang-btn-current {
+          background: rgba(255, 255, 255, 0.9);
+          border-color: rgba($gray-300, 0.5);
+          color: $gray-700;
+          
+          &:hover {
+            background: rgba($primary, 0.1);
+            border-color: $primary;
+            color: $primary;
           }
         }
       }

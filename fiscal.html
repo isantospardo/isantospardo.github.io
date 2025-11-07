@@ -11,6 +11,9 @@
 
   <title>Servicios Fiscales y Contables - Sercon Gestoría</title>
 
+  <!-- Custom favicon -->
+  <link rel="icon" href="favicon_io/favicon.ico" type="image/x-icon">
+
   <!-- Bootstrap core CSS -->
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
@@ -30,7 +33,7 @@
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
     <div class="container">
-      <a class="navbar-brand" href="index.html" aria-label="Sercon Gestoría - Inicio"><img src="img/main-logo2.png" width="200" height="90" alt="Sercon Gestoría Logo"></a>
+      <a class="navbar-brand" href="index.html" aria-label="Sercon Gestoría - Inicio"><img src="img/main-logo2.png" width="200" height="90" alt="Sercon Gestoría Logo">      </a>
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         Menu
         <i class="fas fa-bars"></i>
@@ -71,8 +74,11 @@
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
           <div class="site-heading">
-            <h1><img src="img/main-title-logo2.png" width="70" height="70" class="center" alt="Sercon Gestoría"> <span class="display-4">Fiscal y Contable</span></h1>
-            <span class="subheading"></span>
+            <h1>
+              <img src="img/main-title-logo2.png" width="90" height="90" class="center" alt="Sercon Gestoría">
+              <span class="display-4" data-i18n="fiscal.title">Fiscal y Contable</span>
+            </h1>
+            <span class="subheading" data-i18n="fiscal.subtitle">Servicios profesionales de asesoría fiscal y contable</span>
           </div>
         </div>
       </div>
@@ -80,46 +86,95 @@
   </header>
 
   <!-- Main Content -->
-  <div class="container">
+  <div class="container my-5">
     <div class="row">
-      <div class="col-lg-8 col-md-10 mx-auto">
+      <div class="col-lg-10 col-md-12 mx-auto">
         
+        <!-- Blog Accordion -->
+        <div class="accordion elegant-accordion" id="blogAccordion">
           
-          <div class="post-preview">
-          <a href="posts/post-fiscal/20200425-fiscal.html">    
-            <h2 class="post-title">
-              Plazos renta 2020
-            </h2>
-            <h3 class="post-subtitle">
-              Información sobre la renta 2020
-            </h3>
-          </a>
-          <p class="post-meta">Posteado por
-            <a href="index.html"> Sercon Gestoría</a>
-            el 25 abril, 2020</p>
+          <!-- Post 1 -->
+          <div class="card elegant-card">
+            <div class="card-header elegant-card-header" id="headingOne">
+              <button class="btn btn-link elegant-accordion-button collapsed w-100 text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne" data-parent="#blogAccordion">
+                <div class="accordion-header-content">
+                  <div class="accordion-title-wrapper">
+                    <h3 class="accordion-title">Plazos renta 2020</h3>
+                    <p class="accordion-subtitle">Información sobre la renta 2020</p>
+                    <small class="accordion-meta"><i class="far fa-calendar-alt"></i> Posteado por Sercon Gestoría el 25 abril, 2020</small>
+                  </div>
+                  <i class="fas fa-chevron-down accordion-icon"></i>
+                </div>
+              </button>
+            </div>
+            <div id="collapseOne" class="collapse" aria-labelledby="headingOne">
+              <div class="card-body elegant-card-body">
+                <p>La declaración de la renta 2020 presenta importantes novedades y plazos que deben ser conocidos por todos los contribuyentes. A continuación, le ofrecemos información detallada sobre los aspectos más relevantes.</p>
+                
+                <h4>Plazos de Presentación</h4>
+                <p>El plazo general para presentar la declaración de la renta 2020 se extiende desde el 7 de abril hasta el 30 de junio de 2021. Es importante tener en cuenta que estos plazos pueden variar según diferentes circunstancias, como la presentación telemática o en papel, y según el lugar de residencia del contribuyente.</p>
+                
+                <h4>Novedades Fiscales 2020</h4>
+                <p>Durante el ejercicio fiscal 2020 se implementaron diversas modificaciones normativas que afectan a la declaración de la renta:</p>
+                <ul>
+                  <li><strong>Cambios en los tramos del IRPF:</strong> Se actualizaron los tramos impositivos con nuevas escalas que afectan a la tributación de los rendimientos del trabajo y del capital.</li>
+                  <li><strong>Nuevas deducciones familiares:</strong> Se introdujeron deducciones adicionales para familias numerosas y situaciones especiales de dependencia.</li>
+                  <li><strong>Modificaciones en la tributación de rendimientos del trabajo:</strong> Se ajustaron los límites de exención y las retenciones aplicables a diferentes tipos de rendimientos.</li>
+                  <li><strong>Actualización de los mínimos personales y familiares:</strong> Se incrementaron los importes de los mínimos personales y familiares aplicables en la declaración.</li>
+                  <li><strong>Nuevas deducciones por inversión:</strong> Se mantuvieron y actualizaron las deducciones por inversión en vivienda habitual y otras inversiones elegibles.</li>
+                </ul>
+                
+                <h4>Recomendaciones para la Presentación</h4>
+                <p>Le recomendamos que consulte con nuestros asesores fiscales para asegurarse de aprovechar todas las deducciones y beneficios fiscales a los que tiene derecho. Nuestro equipo está preparado para ayudarle en todo el proceso, desde la recopilación de documentación hasta la presentación final de la declaración.</p>
+                
+                <p>Es fundamental presentar la declaración dentro de los plazos establecidos para evitar sanciones y recargos. Nuestros profesionales pueden ayudarle a optimizar su situación fiscal y garantizar el cumplimiento de todas las obligaciones tributarias.</p>
+                
+                <p class="mt-4 mb-0"><strong>Para más información o para solicitar una consulta personalizada, no dude en contactarnos. Estamos a su disposición para resolver cualquier duda sobre su declaración de la renta 2020.</strong></p>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Post 2 -->
+          <div class="card elegant-card">
+            <div class="card-header elegant-card-header" id="headingTwo">
+              <button class="btn btn-link elegant-accordion-button collapsed w-100 text-left" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" data-parent="#blogAccordion">
+                <div class="accordion-header-content">
+                  <div class="accordion-title-wrapper">
+                    <h3 class="accordion-title">Plazos renta 2019</h3>
+                    <p class="accordion-subtitle">Información sobre la renta 2019</p>
+                    <small class="accordion-meta"><i class="far fa-calendar-alt"></i> Posteado por Sercon Gestoría el 25 abril, 2019</small>
+                  </div>
+                  <i class="fas fa-chevron-down accordion-icon"></i>
+                </div>
+              </button>
+            </div>
+            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo">
+              <div class="card-body elegant-card-body">
+                <p>La declaración de la renta 2019 incluyó importantes cambios normativos y plazos específicos que todos los contribuyentes debían conocer. A continuación, le proporcionamos un resumen de la información más relevante.</p>
+                
+                <h4>Plazos de Presentación</h4>
+                <p>El plazo para presentar la declaración de la renta 2019 se extendió desde el 2 de abril hasta el 30 de junio de 2020. Este plazo aplicaba tanto para la presentación telemática como para la presentación en papel. Fue importante respetar estos plazos para evitar sanciones y recargos por presentación fuera de término.</p>
+                
+                <h4>Aspectos Importantes de la Renta 2019</h4>
+                <p>Durante el ejercicio fiscal 2019 se mantuvieron y actualizaron diversos aspectos normativos:</p>
+                <ul>
+                  <li><strong>Normativa fiscal vigente:</strong> Se aplicaron las disposiciones del IRPF vigentes durante 2019, incluyendo las modificaciones introducidas por la Ley de Presupuestos Generales del Estado.</li>
+                  <li><strong>Deducciones aplicables:</strong> Se mantuvieron las deducciones por inversión en vivienda habitual, por donativos, y otras deducciones específicas según la normativa autonómica aplicable.</li>
+                  <li><strong>Régimen fiscal para diferentes tipos de contribuyentes:</strong> Se aplicaron diferentes tratamientos fiscales según el tipo de contribuyente (trabajador por cuenta ajena, autónomo, empresario, etc.).</li>
+                  <li><strong>Obligaciones de presentación:</strong> Todos los contribuyentes con obligación de presentar declaración debían cumplir con los plazos establecidos y presentar toda la documentación necesaria.</li>
+                  <li><strong>Actualizaciones en retenciones:</strong> Se aplicaron las retenciones actualizadas según los nuevos tramos y tipos impositivos.</li>
+                </ul>
+                
+                <h4>Asesoramiento Especializado</h4>
+                <p>Nuestro equipo de asesores fiscales está especializado en ayudar a nuestros clientes a cumplir con todas sus obligaciones fiscales de manera eficiente y optimizada. Ofrecemos asesoramiento personalizado para cada situación particular, ayudando a maximizar las deducciones aplicables y minimizar la carga fiscal dentro del marco legal vigente.</p>
+                
+                <p>Si tiene dudas sobre su declaración de la renta 2019 o necesita ayuda para su presentación, nuestros profesionales están disponibles para proporcionarle el asesoramiento necesario.</p>
+              </div>
+            </div>
+          </div>
+          
         </div>
-        <hr>
-          
-        <div class="post-preview">
-          <a href="posts/post-fiscal/20200424-fiscal.html">    
-            <h2 class="post-title">
-              Plazos renta 2019
-            </h2>
-            <h3 class="post-subtitle">
-              Información sobre la renta 2019
-            </h3>
-          </a>
-          <p class="post-meta">Posteado por
-            <a href="index.html"> Sercon Gestoría</a>
-            el 25 abril, 2019</p>
-        </div>
-        <hr>
-          
-          
-        <!-- Pager -->
-        <div class="clearfix">
-          <a class="btn btn-primary float-right" href="#">Posts más antiguos &rarr;</a>
-        </div>
+        
       </div>
     </div>
   </div>
@@ -138,8 +193,323 @@
   <!-- Custom scripts for this template -->
   <script src="js/clean-blog.min.js"></script>
   
+  <!-- i18next for internationalization -->
+  <script src="https://cdn.jsdelivr.net/npm/i18next@23.7.6/dist/umd/i18next.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/i18next-browser-languagedetector@7.2.0/dist/umd/i18nextBrowserLanguageDetector.min.js"></script>
+  
   <!-- Load reusable components (header and footer) -->
   <script src="js/load-components.js"></script>
+  <script src="js/i18n.js"></script>
+
+  <!-- Blog Accordion Script -->
+  <script>
+    $(document).ready(function() {
+      // Ensure all accordions are closed by default
+      $('.collapse').removeClass('show');
+      $('.elegant-accordion-button').addClass('collapsed');
+      $('.accordion-icon').css('transform', 'rotate(0deg)');
+      
+      // Handle accordion toggle with proper parent behavior
+      $('[data-toggle="collapse"]').on('click', function(e) {
+        var target = $(this).data('target');
+        var $target = $(target);
+        var $parent = $(this).closest('.accordion');
+        var $accordionCard = $(this).closest('.card');
+        var $button = $(this);
+        
+        // If clicking on an already open accordion, close it
+        if ($target.hasClass('show')) {
+          $target.collapse('hide');
+        } else {
+          // Close all other accordions in the same parent
+          $parent.find('.collapse.show').not(target).collapse('hide');
+          
+          // Open the clicked accordion
+          $target.collapse('show');
+          
+          // Scroll to the beginning of the accordion card after it opens
+          $target.on('shown.bs.collapse', function scrollToAccordion() {
+            if ($accordionCard.length) {
+              var cardTop = $accordionCard.offset().top;
+              var scrollOffset = cardTop - 100; // 100px offset from top
+              
+              $('html, body').stop().animate({
+                scrollTop: scrollOffset
+              }, 400);
+            }
+            // Remove the event listener after it fires once
+            $target.off('shown.bs.collapse', scrollToAccordion);
+          });
+        }
+      });
+      
+      // Rotate chevron on accordion toggle
+      $('.collapse').on('show.bs.collapse', function() {
+        $(this).prev().find('.accordion-icon').css('transform', 'rotate(180deg)');
+        $(this).prev().find('.elegant-accordion-button').removeClass('collapsed').attr('aria-expanded', 'true');
+      });
+      
+      $('.collapse').on('hide.bs.collapse', function() {
+        $(this).prev().find('.accordion-icon').css('transform', 'rotate(0deg)');
+        $(this).prev().find('.elegant-accordion-button').addClass('collapsed').attr('aria-expanded', 'false');
+      });
+    });
+  </script>
+
+  <style>
+    /* Professional Accordion Styles - Law Firm Elegance */
+    .elegant-accordion {
+      margin-top: 3rem;
+    }
+    
+    .elegant-card {
+      background: #ffffff;
+      border: 1px solid #d0d0d0;
+      border-left: 4px solid #007f7e;
+      border-radius: 0;
+      margin-bottom: 2.5rem;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12), 0 3px 6px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.04);
+      transition: all 0.3s ease;
+      overflow: hidden;
+      position: relative;
+    }
+    
+    .elegant-card:hover {
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.16), 0 6px 12px rgba(0, 0, 0, 0.12), 0 2px 4px rgba(0, 0, 0, 0.08);
+      border-left-color: #005f5e;
+      transform: translateY(-3px);
+      border-color: #c0c0c0;
+    }
+    
+    .elegant-card-header {
+      background: linear-gradient(to bottom, #ffffff 0%, #f5f5f5 100%);
+      border: none;
+      border-bottom: 2px solid #d0d0d0;
+      border-top: 1px solid #e8e8e8;
+      padding: 0;
+      position: relative;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04) inset;
+    }
+    
+    .elegant-accordion-button {
+      width: 100%;
+      padding: 0 !important;
+      border: none !important;
+      background: transparent !important;
+      text-align: left;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none !important;
+      position: relative;
+      z-index: 10;
+      color: inherit !important;
+    }
+    
+    .elegant-accordion-button:hover,
+    .elegant-accordion-button:focus {
+      text-decoration: none !important;
+      color: inherit !important;
+      outline: none !important;
+      box-shadow: none !important;
+    }
+    
+    .elegant-accordion-button * {
+      pointer-events: none;
+    }
+    
+    .elegant-accordion-button:not(.collapsed) {
+      background: #ffffff;
+    }
+    
+    .elegant-accordion-button:not(.collapsed) .accordion-title {
+      color: #007f7e;
+    }
+    
+    .elegant-accordion-button:hover {
+      background: #f8f9fa;
+      text-decoration: none !important;
+    }
+    
+    .elegant-accordion-button:not(.collapsed):hover {
+      background: #ffffff;
+    }
+    
+    .elegant-accordion-button:focus {
+      box-shadow: none;
+      outline: none;
+    }
+    
+    .accordion-header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 2.25rem 2.5rem;
+      gap: 2rem;
+      position: relative;
+      background: linear-gradient(to right, rgba(0, 127, 126, 0.02) 0%, transparent 100%);
+    }
+    
+    .accordion-title-wrapper {
+      flex: 1;
+      position: relative;
+    }
+    
+    .accordion-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #0a0a0a;
+      margin: 0 0 0.6rem 0;
+      letter-spacing: 0.01em;
+      line-height: 1.4;
+      position: relative;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    }
+    
+    .accordion-subtitle {
+      font-family: 'Lora', serif;
+      font-size: 0.95rem;
+      font-weight: 400;
+      font-style: italic;
+      color: #666;
+      margin: 0 0 0.5rem 0;
+      line-height: 1.5;
+    }
+    
+    .accordion-meta {
+      font-family: 'Open Sans', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 400;
+      color: #888;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      letter-spacing: 0.01em;
+      margin-top: 0.5rem;
+    }
+    
+    .accordion-meta i {
+      font-size: 0.8rem;
+      opacity: 0.7;
+    }
+    
+    .accordion-icon {
+      font-size: 1.1rem;
+      color: #007f7e;
+      transition: transform 0.3s ease;
+      flex-shrink: 0;
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: transparent;
+      border: 1px solid #e0e0e0;
+      border-radius: 0;
+    }
+    
+    .elegant-card:hover .accordion-icon {
+      border-color: #007f7e;
+      background: #f8f9fa;
+    }
+    
+    .elegant-card-body {
+      padding: 2.5rem;
+      background: #ffffff;
+      font-family: 'Lora', serif;
+      font-size: 1rem;
+      line-height: 1.8;
+      color: #333;
+      border-top: 1px solid #f0f0f0;
+    }
+    
+    .elegant-card-body p {
+      margin-bottom: 1.25rem;
+      color: #333;
+      text-align: left;
+    }
+    
+    .elegant-card-body p:first-child {
+      font-size: 1.05rem;
+      color: #1a1a1a;
+      font-weight: 400;
+      line-height: 1.8;
+    }
+    
+    .elegant-card-body h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: #1a1a1a;
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+      letter-spacing: 0.01em;
+      border-bottom: 1px solid #e0e0e0;
+      padding-bottom: 0.5rem;
+    }
+    
+    .elegant-card-body h4:first-of-type {
+      margin-top: 0;
+    }
+    
+    .elegant-card-body ul {
+      padding-left: 1.5rem;
+      margin-bottom: 1.5rem;
+      list-style: disc;
+    }
+    
+    .elegant-card-body ul li {
+      margin-bottom: 0.75rem;
+      color: #333;
+      line-height: 1.7;
+    }
+    
+    .elegant-card-body strong {
+      color: #1a1a1a;
+      font-weight: 600;
+    }
+    
+    .elegant-card-body p:last-child {
+      background: #f8f9fa;
+      padding: 1.25rem;
+      border-left: 3px solid #007f7e;
+      margin-top: 2rem;
+      font-weight: 400;
+      font-style: italic;
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .accordion-header-content {
+        padding: 1.75rem;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1.25rem;
+      }
+      
+      .accordion-title {
+        font-size: 1.5rem;
+      }
+      
+      .accordion-subtitle {
+        font-size: 1rem;
+      }
+      
+      .elegant-card-body {
+        padding: 2rem;
+        font-size: 1rem;
+      }
+      
+      .accordion-icon {
+        position: absolute;
+        top: 1.75rem;
+        right: 1.75rem;
+        width: 32px;
+        height: 32px;
+        font-size: 1rem;
+      }
+    }
+  </style>
 
 </body>
 

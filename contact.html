@@ -11,6 +11,9 @@
 
   <title>Contacto - Sercon Gestoría</title>
 
+  <!-- Custom favicon -->
+  <link rel="icon" href="favicon_io/favicon.ico" type="image/x-icon">
+
   <!-- Bootstrap core CSS -->
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
@@ -30,7 +33,7 @@
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
     <div class="container">
-      <a class="navbar-brand" href="index.html" aria-label="Sercon Gestoría - Inicio"><img src="img/main-logo2.png" width="200" height="90" alt="Sercon Gestoría Logo"></a>
+      <a class="navbar-brand" href="index.html" aria-label="Sercon Gestoría - Inicio"><img src="img/main-logo2.png" width="200" height="90" alt="Sercon Gestoría Logo">      </a>
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         Menu
         <i class="fas fa-bars"></i>
@@ -70,8 +73,11 @@
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
           <div class="page-heading">
-              <h1><img src="img/main-title-logo2.png" width="70" height="70" class="center" alt="Sercon Gestoría"> <span class="display-4">Contáctanos</span></h1>
-            <span class="subheading">¿Tienes preguntas? Nosotros tenemos las respuestas.</span>
+            <h1>
+              <img src="img/main-title-logo2.png" width="90" height="90" class="center" alt="Sercon Gestoría">
+              <span class="display-4" data-i18n="contact.title">Contáctanos</span>
+            </h1>
+            <span class="subheading" data-i18n="contact.subtitle">¿Tienes preguntas? Nosotros tenemos las respuestas.</span>
           </div>
         </div>
       </div>
@@ -88,13 +94,13 @@
             <i class="fas fa-circle"></i>
           </div>
           <div class="status-text">
-            <h4 id="statusTitle" class="status-title mb-1">Estado de la Oficina</h4>
-            <p id="statusMessage" class="status-message mb-0">Verificando estado...</p>
+            <h4 id="statusTitle" class="status-title mb-1" data-i18n="contact.statusTitle">Estado de la Oficina</h4>
+            <p id="statusMessage" class="status-message mb-0" data-i18n="contact.statusChecking">Verificando estado...</p>
           </div>
         </div>
         <div class="status-right">
           <button type="button" class="btn btn-sm" data-toggle="modal" data-target="#hoursModal">
-            <span><i class="far fa-clock mr-2"></i>Ver Horarios</span>
+            <span><i class="far fa-clock mr-2"></i><span data-i18n="contact.viewHours">Ver Horarios</span></span>
           </button>
         </div>
       </div>
@@ -105,9 +111,9 @@
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
           <div class="modal-header elegant-modal-header">
-            <h5 class="modal-title" id="hoursModalLabel">
-              <i class="far fa-clock mr-2"></i>Horario de Atención
-            </h5>
+              <h5 class="modal-title" id="hoursModalLabel">
+                <i class="far fa-clock mr-2"></i><span data-i18n="contact.hoursTitle">Horario de Atención</span>
+              </h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -115,32 +121,32 @@
           <div class="modal-body">
             <div class="hours-list">
               <div class="hours-item">
-                <div class="day-name">Lunes</div>
-                <div class="day-hours">8:00 - 16:00</div>
+                <div class="day-name" data-i18n="contact.monday">Lunes</div>
+                <div class="day-hours" data-i18n="contact.hours">8:00 - 16:00</div>
               </div>
               <div class="hours-item">
-                <div class="day-name">Martes</div>
-                <div class="day-hours">8:00 - 16:00</div>
+                <div class="day-name" data-i18n="contact.tuesday">Martes</div>
+                <div class="day-hours" data-i18n="contact.hours">8:00 - 16:00</div>
               </div>
               <div class="hours-item">
-                <div class="day-name">Miércoles</div>
-                <div class="day-hours">8:00 - 16:00</div>
+                <div class="day-name" data-i18n="contact.wednesday">Miércoles</div>
+                <div class="day-hours" data-i18n="contact.hours">8:00 - 16:00</div>
               </div>
               <div class="hours-item">
-                <div class="day-name">Jueves</div>
-                <div class="day-hours">8:00 - 16:00</div>
+                <div class="day-name" data-i18n="contact.thursday">Jueves</div>
+                <div class="day-hours" data-i18n="contact.hours">8:00 - 16:00</div>
               </div>
               <div class="hours-item">
-                <div class="day-name">Viernes</div>
-                <div class="day-hours">8:00 - 16:00</div>
+                <div class="day-name" data-i18n="contact.friday">Viernes</div>
+                <div class="day-hours" data-i18n="contact.hours">8:00 - 16:00</div>
               </div>
               <div class="hours-item closed">
-                <div class="day-name">Sábado</div>
-                <div class="day-hours text-muted">Cerrado</div>
+                <div class="day-name" data-i18n="contact.saturday">Sábado</div>
+                <div class="day-hours text-muted" data-i18n="contact.closed">Cerrado</div>
               </div>
               <div class="hours-item closed">
-                <div class="day-name">Domingo</div>
-                <div class="day-hours text-muted">Cerrado</div>
+                <div class="day-name" data-i18n="contact.sunday">Domingo</div>
+                <div class="day-hours text-muted" data-i18n="contact.closed">Cerrado</div>
               </div>
             </div>
           </div>
@@ -152,29 +158,37 @@
       <div class="col-lg-8 col-md-10 mx-auto">
         <form name="sentMessage" id="contactForm" novalidate>
               <div class="form-group">
-                <label for="name">Nombre <span class="text-danger">*</span></label>
-                <input type="text" class="form-control" id="name" placeholder="Su nombre completo" required data-validation-required-message="Por favor, introduzca su nombre.">
-                <p class="help-block text-danger"></p>
+                <label for="name" class="d-flex align-items-center justify-content-between flex-wrap">
+                  <span><span data-i18n="contact.form.name">Nombre</span> <span class="text-danger">*</span></span>
+                  <span class="help-block text-danger ml-2"></span>
+                </label>
+                <input type="text" class="form-control" id="name" data-i18n="contact.form.namePlaceholder" data-i18n-validation="contact.form.nameRequired" placeholder="Su nombre completo" required data-validation-required-message="Por favor, introduzca su nombre.">
               </div>
               <div class="form-group">
-                <label for="email">Dirección de Email <span class="text-danger">*</span></label>
-                <input type="email" class="form-control" id="email" placeholder="su.email@ejemplo.com" required data-validation-required-message="Por favor, introduzca su dirección de email.">
-                <p class="help-block text-danger"></p>
+                <label for="email" class="d-flex align-items-center justify-content-between flex-wrap">
+                  <span><span data-i18n="contact.form.email">Dirección de Email</span> <span class="text-danger">*</span></span>
+                  <span class="help-block text-danger ml-2"></span>
+                </label>
+                <input type="email" class="form-control" id="email" data-i18n="contact.form.emailPlaceholder" data-i18n-validation="contact.form.emailRequired" placeholder="su.email@ejemplo.com" required data-validation-required-message="Por favor, introduzca su dirección de email.">
               </div>
               <div class="form-group">
-                <label for="phone">Número de Teléfono <span class="text-danger">*</span></label>
-                <input type="tel" class="form-control" id="phone" placeholder="+34 600 000 000" required data-validation-required-message="Por favor, introduzca su número de teléfono.">
-                <p class="help-block text-danger"></p>
+                <label for="phone" class="d-flex align-items-center justify-content-between flex-wrap">
+                  <span><span data-i18n="contact.form.phone">Número de Teléfono</span> <span class="text-danger">*</span></span>
+                  <span class="help-block text-danger ml-2"></span>
+                </label>
+                <input type="tel" class="form-control" id="phone" data-i18n="contact.form.phonePlaceholder" data-i18n-validation="contact.form.phoneRequired" placeholder="+34 600 000 000" required data-validation-required-message="Por favor, introduzca su número de teléfono.">
               </div>
               <div class="form-group">
-                <label for="message">Mensaje <span class="text-danger">*</span></label>
-                <textarea rows="6" class="form-control" id="message" placeholder="Escriba su mensaje aquí..." required data-validation-required-message="Por favor, introduzca un mensaje."></textarea>
-                <p class="help-block text-danger"></p>
+                <label for="message" class="d-flex align-items-center justify-content-between flex-wrap">
+                  <span><span data-i18n="contact.form.message">Mensaje</span> <span class="text-danger">*</span></span>
+                  <span class="help-block text-danger ml-2"></span>
+                </label>
+                <textarea rows="6" class="form-control" id="message" data-i18n="contact.form.messagePlaceholder" data-i18n-validation="contact.form.messageRequired" placeholder="Escriba su mensaje aquí..." required data-validation-required-message="Por favor, introduzca un mensaje."></textarea>
               </div>
               <div id="success"></div>
               <div class="form-group text-center">
                 <button type="submit" class="btn btn-primary btn-lg px-5" id="sendMessageButton">
-                  <i class="fas fa-paper-plane mr-2"></i>Enviar Mensaje
+                  <i class="fas fa-paper-plane mr-2"></i><span data-i18n="contact.form.send">Enviar Mensaje</span>
                 </button>
               </div>
         </form>
@@ -188,7 +202,7 @@
           <div class="card-body p-0">
             <h5 class="card-header text-white mb-0" style="background: linear-gradient(135deg, #007f7e 0%, #005f5e 100%);">
               <a href="https://goo.gl/maps/oFaB6mK31Yiytuvn7" target="_blank" rel="noopener" style="color: white; text-decoration: none; display: inline-flex; align-items: center; transition: opacity 0.3s ease;" onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">
-                <i class="fas fa-map-marker-alt mr-2"></i>Nuestra Ubicación
+                <i class="fas fa-map-marker-alt mr-2"></i><span data-i18n="contact.location">Nuestra Ubicación</span>
               </a>
             </h5>
             <div class="map-container" style="height: 400px; overflow: hidden;">
@@ -244,8 +258,13 @@
   <!-- Custom scripts for this template -->
   <script src="js/clean-blog.min.js"></script>
   
+  <!-- i18next for internationalization -->
+  <script src="https://cdn.jsdelivr.net/npm/i18next@23.7.6/dist/umd/i18next.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/i18next-browser-languagedetector@7.2.0/dist/umd/i18nextBrowserLanguageDetector.min.js"></script>
+  
   <!-- Load reusable components (header and footer) -->
   <script src="js/load-components.js"></script>
+  <script src="js/i18n.js"></script>
 
   <!-- Scroll to Top Button -->
   <button id="scrollToTop" class="scroll-to-top" aria-label="Volver arriba">
@@ -273,6 +292,49 @@
       let isOpen = false;
       let message = '';
       
+      // Obtener traducciones de i18next si está disponible
+      const i18n = window.i18nextInstance;
+      const currentLang = i18n ? i18n.language : 'es';
+      
+      // Función para obtener el nombre del día traducido
+      function getDayName(dayIndex) {
+        if (!i18n) {
+          const days = ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'];
+          return days[dayIndex];
+        }
+        // Mapeo de índices de día a claves de traducción
+        const dayKeys = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
+        const key = dayKeys[dayIndex];
+        return i18n.t('contact.' + key);
+      }
+      
+      // Función para obtener el próximo día laboral traducido
+      function getNextBusinessDay(currentDay) {
+        if (currentDay === 5) { // Viernes
+          return getDayName(1); // Lunes
+        } else if (currentDay === 6) { // Sábado
+          return getDayName(1); // Lunes
+        } else if (currentDay === 0) { // Domingo
+          return getDayName(1); // Lunes
+        } else {
+          // Lunes a Jueves, el próximo día es mañana
+          return getDayName(currentDay + 1);
+        }
+      }
+      
+      // Función para formatear la hora según el idioma
+      function formatTime(date) {
+        const localeMap = {
+          'es': 'es-ES',
+          'en': 'en-US',
+          'fr': 'fr-FR',
+          'gl': 'gl-ES',
+          'pt': 'pt-PT'
+        };
+        const locale = localeMap[currentLang] || 'es-ES';
+        return date.toLocaleTimeString(locale, { hour: '2-digit', minute: '2-digit' });
+      }
+      
       // Verificar si es día laboral (Lunes a Viernes)
       if (day >= 1 && day <= 5) {
         // Verificar si está dentro del horario
@@ -280,49 +342,100 @@
           isOpen = true;
           const nextClose = new Date();
           nextClose.setHours(Math.floor(closeTime / 60), closeTime % 60, 0, 0);
-          const timeStr = nextClose.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' });
-          message = `Estamos abiertos ahora. Cerramos hoy a las ${timeStr}`;
+          const timeStr = formatTime(nextClose);
+          message = i18n ? i18n.t('contact.statusOpenNow', { time: timeStr }) : `Estamos abiertos ahora. Cerramos hoy a las ${timeStr}`;
         } else if (currentTime < openTime) {
           const nextOpen = new Date();
           nextOpen.setHours(Math.floor(openTime / 60), openTime % 60, 0, 0);
-          const timeStr = nextOpen.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' });
-          message = `En estos momentos nuestras oficinas están cerradas, pero hoy abrimos a las ${timeStr}`;
+          const timeStr = formatTime(nextOpen);
+          message = i18n ? i18n.t('contact.statusClosedToday', { time: timeStr }) : `En estos momentos nuestras oficinas están cerradas, pero hoy abrimos a las ${timeStr}`;
         } else {
-          message = 'En estos momentos nuestras oficinas están cerradas, pero mañana abrimos de 8:00 a 16:00';
+          // Ya cerró hoy, verificar el próximo día laboral
+          const nextDayIndex = day === 5 ? 1 : (day + 1); // Viernes -> Lunes, otros -> mañana
+          const nextDay = getNextBusinessDay(day);
+          if (nextDayIndex === 1) { // Lunes
+            message = i18n ? i18n.t('contact.statusClosedMonday') : 'En estos momentos nuestras oficinas están cerradas, pero el lunes abrimos de 8:00 a 16:00';
+          } else {
+            message = i18n ? i18n.t('contact.statusClosedTomorrow', { day: nextDay }) : `En estos momentos nuestras oficinas están cerradas, pero mañana (${nextDay}) abrimos de 8:00 a 16:00`;
+          }
         }
       } else {
         // Fin de semana
         if (day === 6) { // Sábado
-          message = 'En estos momentos nuestras oficinas están cerradas, pero el lunes abrimos de 8:00 a 16:00';
+          message = i18n ? i18n.t('contact.statusClosedWeekendMonday') : 'En estos momentos nuestras oficinas están cerradas, pero el lunes abrimos de 8:00 a 16:00';
         } else { // Domingo
-          message = 'En estos momentos nuestras oficinas están cerradas, pero mañana (lunes) abrimos de 8:00 a 16:00';
+          const mondayName = getDayName(1); // Lunes
+          message = i18n ? i18n.t('contact.statusClosedWeekendTomorrow', { day: mondayName }) : 'En estos momentos nuestras oficinas están cerradas, pero mañana (lunes) abrimos de 8:00 a 16:00';
         }
       }
       
       // Formatear mensaje con mejor presentación
       let formattedMessage = message;
       
+      // Obtener traducciones de i18next si está disponible
+      let openText = 'Abierto Ahora';
+      let closedText = 'Volveremos Pronto';
+      
+      if (window.i18nextInstance) {
+        openText = window.i18nextInstance.t('contact.statusOpen');
+        closedText = window.i18nextInstance.t('contact.statusClosed');
+      }
+      
       // Actualizar UI
       if (isOpen) {
         statusBanner.classList.remove('status-closed');
         statusBanner.classList.add('status-open');
         statusIndicator.innerHTML = '<div class="pulse-dot"></div><i class="fas fa-check-circle"></i>';
-        statusTitle.textContent = 'Abierto Ahora';
+        statusTitle.textContent = openText;
         statusMessage.textContent = formattedMessage;
       } else {
         statusBanner.classList.remove('status-open');
         statusBanner.classList.add('status-closed');
         statusIndicator.innerHTML = '<i class="far fa-clock"></i>';
-        statusTitle.textContent = 'Volveremos Pronto';
+        statusTitle.textContent = closedText;
         statusMessage.textContent = formattedMessage;
       }
     }
     
-    // Verificar estado al cargar la página
-    checkOfficeStatus();
+    // Función para inicializar el estado de la oficina después de que i18next esté listo
+    function initOfficeStatus() {
+      // Esperar a que i18next esté inicializado
+      if (window.i18nextInstance) {
+        checkOfficeStatus();
+        // Actualizar cada minuto
+        setInterval(checkOfficeStatus, 60000);
+      } else {
+        // Si i18next no está listo, intentar de nuevo en un momento
+        setTimeout(initOfficeStatus, 500);
+      }
+    }
     
-    // Actualizar cada minuto
-    setInterval(checkOfficeStatus, 60000);
+    // Verificar estado al cargar la página (después de que i18next esté listo)
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', function() {
+        setTimeout(initOfficeStatus, 1000);
+      });
+    } else {
+      setTimeout(initOfficeStatus, 1000);
+    }
+    
+    // Escuchar cambios de idioma para actualizar el estado
+    function setupLanguageChangeListener() {
+      if (window.i18nextInstance) {
+        window.i18nextInstance.on('languageChanged', function() {
+          checkOfficeStatus();
+        });
+      } else {
+        // Si i18next no está listo, intentar de nuevo
+        setTimeout(setupLanguageChangeListener, 500);
+      }
+    }
+    setupLanguageChangeListener();
+    
+    // También escuchar el evento personalizado
+    window.addEventListener('i18nLanguageChanged', function() {
+      checkOfficeStatus();
+    });
     
     // Scroll to Top Button
     const scrollToTopBtn = document.getElementById('scrollToTop');
@@ -619,6 +732,11 @@
       font-weight: 700;
       letter-spacing: -0.02em;
       margin: 0;
+      color: white;
+    }
+    
+    .elegant-modal-header .modal-title i {
+      color: white;
     }
     
     .elegant-modal-header .close {
@@ -764,9 +882,146 @@
       border-radius: 0 0 0.25rem 0.25rem;
     }
     
-    .form-control:focus {
+    /* Elegant Contact Form Styles */
+    #contactForm {
+      background: #ffffff;
+      padding: 2.5rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+      border: 1px solid #e8e8e8;
+    }
+    
+    #contactForm .form-group {
+      margin-bottom: 1.75rem;
+    }
+    
+    #contactForm label {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      font-weight: 600;
+      color: #1a1a1a;
+      margin-bottom: 0.75rem;
+      letter-spacing: 0.01em;
+      display: block;
+    }
+    
+    #contactForm label .text-danger {
+      color: #dc3545;
+      font-weight: 600;
+      margin-left: 2px;
+    }
+    
+    #contactForm .form-control {
+      border: 1.5px solid #d0d0d0;
+      border-radius: 6px;
+      padding: 0.875rem 1.25rem;
+      font-size: 15px;
+      font-family: 'Lora', serif;
+      color: #333;
+      transition: all 0.3s ease;
+      background-color: #ffffff;
+    }
+    
+    #contactForm .form-control:focus {
       border-color: #007f7e;
-      box-shadow: 0 0 0 0.2rem rgba(0, 127, 126, 0.25);
+      box-shadow: 0 0 0 0.2rem rgba(0, 127, 126, 0.15);
+      outline: none;
+      background-color: #ffffff;
+    }
+    
+    #contactForm .form-control::placeholder {
+      color: #999;
+      font-style: italic;
+    }
+    
+    #contactForm textarea.form-control {
+      resize: vertical;
+      min-height: 150px;
+      line-height: 1.6;
+    }
+    
+    #contactForm .help-block {
+      font-size: 0.875rem;
+      color: #dc3545;
+      font-family: 'Open Sans', sans-serif;
+      font-weight: 500;
+      display: none;
+      white-space: nowrap;
+      animation: slideIn 0.3s ease-out;
+      margin: 0;
+      padding: 0;
+      flex-shrink: 0;
+    }
+    
+    #contactForm .help-block:not(:empty) {
+      display: inline-block;
+    }
+    
+    #contactForm label {
+      position: relative;
+    }
+    
+    @media (max-width: 576px) {
+      #contactForm label {
+        flex-direction: column;
+        align-items: flex-start !important;
+      }
+      
+      #contactForm .help-block {
+        margin-top: 0.25rem;
+        white-space: normal;
+      }
+    }
+    
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(-5px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    #contactForm .form-control.is-invalid {
+      border-color: #dc3545;
+      background-color: rgba(220, 53, 69, 0.02);
+    }
+    
+    #contactForm .form-control.is-valid {
+      border-color: #28a745;
+      background-color: rgba(40, 167, 69, 0.02);
+    }
+    
+    #contactForm #success {
+      padding: 1rem 1.5rem;
+      margin-bottom: 1.5rem;
+      border-radius: 8px;
+      background-color: rgba(40, 167, 69, 0.1);
+      border-left: 4px solid #28a745;
+      color: #155724;
+      font-weight: 500;
+      display: none;
+    }
+    
+    #contactForm #success:not(:empty) {
+      display: block;
+    }
+    
+    #contactForm button[type="submit"] {
+      font-family: 'Lora', serif;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      padding: 0.875rem 2.5rem;
+      font-size: 1rem;
+      border-radius: 6px;
+      transition: all 0.3s ease;
+    }
+    
+    #contactForm button[type="submit"]:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0, 127, 126, 0.3);
     }
     
     .scroll-to-top {
