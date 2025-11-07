@@ -1,0 +1,33 @@
+# Admin Panel Access Configuration
+# This ensures the admin panel is accessible at /admin/
+
+# Enable directory browsing (optional, for debugging)
+Options -Indexes
+
+# Set default file
+DirectoryIndex index.html
+
+# Allow access to admin files
+<Files "*.html">
+    Order allow,deny
+    Allow from all
+</Files>
+
+<Files "*.js">
+    Order allow,deny
+    Allow from all
+</Files>
+
+# Security: Prevent access to config files
+<FilesMatch "\.(md|txt|log)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# CORS headers for Firebase (if needed)
+<IfModule mod_headers.c>
+    Header set Access-Control-Allow-Origin "*"
+    Header set Access-Control-Allow-Methods "GET, POST, OPTIONS"
+    Header set Access-Control-Allow-Headers "Content-Type"
+</IfModule>
+

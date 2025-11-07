@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel de Administración - Sercon Gestoría</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" href="../favicon_io/favicon.ico" type="image/x-icon">
+  
+  <!-- Bootstrap CSS -->
+  <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  
+  <!-- Font Awesome -->
+  <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+  
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-storage-compat.js"></script>
+  
+  <!-- Quill Editor -->
+  <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+  <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+  
+  <style>
+    body {
+      background-color: #f5f5f5;
+    }
+    .sidebar {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #007f7e 0%, #005a5a 100%);
+      color: white;
+      padding: 0;
+    }
+    .sidebar .nav-link {
+      color: rgba(255, 255, 255, 0.8);
+      padding: 1rem 1.5rem;
+      border-left: 3px solid transparent;
+      transition: all 0.3s;
+    }
+    .sidebar .nav-link:hover,
+    .sidebar .nav-link.active {
+      background-color: rgba(255, 255, 255, 0.1);
+      border-left-color: white;
+      color: white;
+    }
+    .main-content {
+      padding: 2rem;
+    }
+    .card {
+      border: none;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      margin-bottom: 2rem;
+    }
+    .btn-primary {
+      background-color: #007f7e;
+      border-color: #007f7e;
+    }
+    .btn-primary:hover {
+      background-color: #005a5a;
+      border-color: #005a5a;
+    }
+    .editable-content {
+      position: relative;
+      cursor: pointer;
+      padding: 0.5rem;
+      border-radius: 4px;
+      transition: background-color 0.2s;
+    }
+    .editable-content:hover {
+      background-color: #f0f0f0;
+    }
+    .editable-content.editing {
+      background-color: #fff3cd;
+      border: 2px dashed #ffc107;
+    }
+    .edit-btn {
+      position: absolute;
+      top: 0;
+      right: 0;
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+    .editable-content:hover .edit-btn {
+      opacity: 1;
+    }
+    #loginForm {
+      max-width: 400px;
+      margin: 100px auto;
+    }
+    .ql-editor {
+      min-height: 300px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Login Screen -->
+  <div id="loginScreen" class="container">
+    <div class="card" id="loginForm">
+      <div class="card-body p-5">
+        <h2 class="text-center mb-4">Panel de Administración</h2>
+        <form id="loginFormElement">
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" id="email" required>
+          </div>
+          <div class="form-group">
+            <label for="password">Contraseña</label>
+            <input type="password" class="form-control" id="password" required>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">Iniciar Sesión</button>
+          <div id="loginError" class="alert alert-danger mt-3" style="display: none;"></div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Admin Panel -->
+  <div id="adminPanel" style="display: none;">
+    <div class="container-fluid">
+      <div class="row">
+        <!-- Sidebar -->
+        <div class="col-md-2 sidebar">
+          <div class="p-3">
+            <h4 class="mb-4">Sercon Admin</h4>
+            <nav class="nav flex-column">
+              <a class="nav-link active" href="#" data-section="dashboard">
+                <i class="fas fa-tachometer-alt mr-2"></i> Dashboard
+              </a>
+              <a class="nav-link" href="#" data-section="blogs">
+                <i class="fas fa-blog mr-2"></i> Blogs
+              </a>
+              <a class="nav-link" href="#" data-section="pages">
+                <i class="fas fa-file-alt mr-2"></i> Páginas
+              </a>
+              <a class="nav-link" href="#" data-section="media">
+                <i class="fas fa-images mr-2"></i> Imágenes
+              </a>
+              <a class="nav-link" href="#" id="logoutBtn">
+                <i class="fas fa-sign-out-alt mr-2"></i> Cerrar Sesión
+              </a>
+            </nav>
+          </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="col-md-10 main-content">
+          <!-- Dashboard Section -->
+          <div id="dashboardSection" class="content-section">
+            <h1 class="mb-4">Dashboard</h1>
+            <div class="row">
+              <div class="col-md-4">
+                <div class="card">
+                  <div class="card-body">
+                    <h5 class="card-title">Total Blogs</h5>
+                    <h2 id="totalBlogs">0</h2>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="card">
+                  <div class="card-body">
+                    <h5 class="card-title">Blogs Publicados</h5>
+                    <h2 id="publishedBlogs">0</h2>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="card">
+                  <div class="card-body">
+                    <h5 class="card-title">Imágenes</h5>
+                    <h2 id="totalImages">0</h2>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Blogs Section -->
+          <div id="blogsSection" class="content-section" style="display: none;">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+              <h1>Gestión de Blogs</h1>
+              <button class="btn btn-primary" id="newBlogBtn">
+                <i class="fas fa-plus mr-2"></i> Nuevo Blog
+              </button>
+            </div>
+            <div id="blogsList" class="card">
+              <div class="card-body">
+                <p class="text-muted">Cargando blogs...</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Pages Section -->
+          <div id="pagesSection" class="content-section" style="display: none;">
+            <h1 class="mb-4">Editar Páginas</h1>
+            <div class="card">
+              <div class="card-body">
+                <div class="form-group">
+                  <label>Seleccionar Página</label>
+                  <select class="form-control" id="pageSelector">
+                    <option value="index">Inicio</option>
+                    <option value="about">Sobre Nosotros</option>
+                    <option value="contact">Contacto</option>
+                    <option value="fiscal">Fiscal</option>
+                    <option value="laboral">Laboral</option>
+                    <option value="legal">Legal</option>
+                    <option value="sucesiones">Sucesiones</option>
+                  </select>
+                </div>
+                <div id="pageContentEditor"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Media Section -->
+          <div id="mediaSection" class="content-section" style="display: none;">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+              <h1>Gestor de Imágenes</h1>
+              <button class="btn btn-primary" id="uploadImageBtn">
+                <i class="fas fa-upload mr-2"></i> Subir Imagen
+              </button>
+            </div>
+            <input type="file" id="imageUpload" accept="image/*" style="display: none;" multiple>
+            <div id="mediaGrid" class="row"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Blog Editor Modal -->
+  <div class="modal fade" id="blogEditorModal" tabindex="-1">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Editor de Blog</h5>
+          <button type="button" class="close" data-dismiss="modal">
+            <span>&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form id="blogForm">
+            <input type="hidden" id="blogId">
+            <div class="form-group">
+              <label>Título (Español)</label>
+              <input type="text" class="form-control" id="blogTitleEs" required>
+            </div>
+            <div class="form-group">
+              <label>Contenido (Español)</label>
+              <div id="blogContentEs"></div>
+            </div>
+            <div class="form-group">
+              <label>Categoría</label>
+              <select class="form-control" id="blogCategory">
+                <option value="fiscal">Fiscal</option>
+                <option value="laboral">Laboral</option>
+                <option value="legal">Legal</option>
+                <option value="sucesiones">Sucesiones</option>
+                <option value="general">General</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Imagen Destacada</label>
+              <input type="file" class="form-control" id="blogFeaturedImage" accept="image/*">
+              <img id="blogFeaturedImagePreview" src="" style="max-width: 200px; margin-top: 10px; display: none;">
+            </div>
+            <div class="form-group">
+              <label>Estado</label>
+              <select class="form-control" id="blogStatus">
+                <option value="draft">Borrador</option>
+                <option value="published">Publicado</option>
+              </select>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-primary" id="saveBlogBtn">Guardar Blog</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- jQuery and Bootstrap JS -->
+  <script src="../vendor/jquery/jquery.min.js"></script>
+  <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  
+  <!-- Firebase Config -->
+  <!-- IMPORTANTE: Cargar firebase-config.local.js primero (no en git) -->
+  <!-- Este archivo contiene tus credenciales reales y NO se sube a git -->
+  <script src="firebase-config.local.js" onerror="console.info('firebase-config.local.js not found - create it from firebase-config.example.js')"></script>
+  <script src="firebase-config.js"></script>
+  
+  <!-- Admin Scripts -->
+  <script src="admin-auth.js"></script>
+  <script src="admin-blogs.js"></script>
+  <script src="admin-pages.js"></script>
+  <script src="admin-media.js"></script>
+  <script src="admin-main.js"></script>
+  
+  <!-- Firebase Initialization Script (runs on page load) -->
+  <script src="init-firebase.js"></script>
+</body>
+</html>
+

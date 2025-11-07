@@ -1,0 +1,33 @@
+// REGLAS DE PRODUCCIÓN
+// Copia y pega esto en Firebase Console > Firestore Database > Rules
+// ✅ SEGURAS PARA PRODUCCIÓN
+
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Blogs: lectura pública solo de publicados, escritura solo autenticados
+    match /blogs/{blogId} {
+      allow read: if resource.data.status == 'published' || request.auth != null;
+      allow create, update, delete: if request.auth != null;
+    }
+    
+    // Page Content: lectura pública, escritura solo autenticados
+    match /pageContent/{contentId} {
+      allow read: if true;
+      allow write: if request.auth != null;
+    }
+    
+    // Media: lectura pública, escritura solo autenticados
+    match /media/{mediaId} {
+      allow read: if true;
+      allow write: if request.auth != null;
+    }
+    
+    // Todo lo demás requiere autenticación
+    match /{document=**} {
+      allow read, write: if request.auth != null;
+    }
+  }
+}
+

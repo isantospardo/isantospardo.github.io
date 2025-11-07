@@ -486,6 +486,33 @@
     </div>
   </section>
 
+  <!-- Blogs Section (Dynamic from Firebase) -->
+  <section class="blogs-section py-5" style="background: linear-gradient(to bottom, #ffffff 0%, #f8f9fa 100%);">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 text-center mb-5">
+          <h2 class="section-title mb-3" data-aos="fade-up" style="font-size: 2.5rem; font-weight: 700; color: #2c3e50;">
+            Últimas Noticias y Artículos
+          </h2>
+          <p class="lead text-muted mb-4" data-aos="fade-up" data-aos-delay="100" style="font-size: 1.1rem; max-width: 700px; margin: 0 auto;">
+            Mantente informado sobre las últimas novedades fiscales, laborales y legales
+          </p>
+          <div class="divider mx-auto mb-4" data-aos="fade-up" data-aos-delay="200" style="width: 80px; height: 4px; background: linear-gradient(90deg, #007f7e 0%, #005f5e 100%); border-radius: 2px;"></div>
+        </div>
+      </div>
+      <div class="row">
+        <div id="blogsContainer" class="col-lg-12">
+          <div class="text-center py-4">
+            <div class="spinner-border text-primary mb-3" role="status">
+              <span class="sr-only">Cargando...</span>
+            </div>
+            <p class="text-muted">Cargando artículos...</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Call to Action Section -->
   <section class="cta-section py-5" style="background: linear-gradient(135deg, #007f7e 0%, #005f5e 100%); color: white;">
     <div class="container">
@@ -577,9 +604,39 @@
   <script src="https://cdn.jsdelivr.net/npm/i18next@23.7.6/dist/umd/i18next.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/i18next-browser-languagedetector@7.2.0/dist/umd/i18nextBrowserLanguageDetector.min.js"></script>
   
+  <!-- Firebase SDK (for dynamic content) -->
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+  
+  <!-- Firebase Config Local (NO en git) -->
+  <script src="js/firebase-config.local.js" onerror="console.info('firebase-config.local.js not found - create it')"></script>
+  
+  <!-- Firebase Initialization -->
+  <script src="js/firebase-init.js"></script>
+  
   <!-- Load reusable components (header and footer) -->
   <script src="js/load-components.js"></script>
   <script src="js/i18n.js"></script>
+  
+  <!-- Firebase Content Loader -->
+  <script src="js/firebase-content.js"></script>
+  
+  <!-- Load Blogs Dynamically -->
+  <script>
+    // Wait for Firebase to initialize, then load blogs
+    document.addEventListener('DOMContentLoaded', function() {
+      // Wait a bit for Firebase to initialize
+      setTimeout(function() {
+        if (window.firebaseContent && window.firebaseContent.renderBlogs) {
+          window.firebaseContent.renderBlogs('blogsContainer');
+        } else {
+          console.warn('Firebase content loader not available');
+          document.getElementById('blogsContainer').innerHTML = 
+            '<div class="col-12 text-center"><p class="text-muted">Los blogs se cargarán cuando Firebase esté configurado.</p></div>';
+        }
+      }, 1000);
+    });
+  </script>
 
   <!-- Scroll to Top Button -->
   <button id="scrollToTop" class="scroll-to-top" aria-label="Volver arriba">

@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Debug Firebase - Sercon Gestoría</title>
+  
+  <!-- Bootstrap CSS -->
+  <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  
+  <!-- Font Awesome -->
+  <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+  
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-storage-compat.js"></script>
+  
+  <style>
+    body {
+      background-color: #f5f5f5;
+      padding: 2rem;
+    }
+    .debug-card {
+      margin-bottom: 1rem;
+    }
+    .status {
+      display: inline-block;
+      padding: 0.25rem 0.75rem;
+      border-radius: 12px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      margin-left: 1rem;
+    }
+    .status.success { background-color: #d4edda; color: #155724; }
+    .status.error { background-color: #f8d7da; color: #721c24; }
+    .status.warning { background-color: #fff3cd; color: #856404; }
+    .status.info { background-color: #d1ecf1; color: #0c5460; }
+    .log-box {
+      background-color: #f8f9fa;
+      border: 1px solid #dee2e6;
+      border-radius: 4px;
+      padding: 1rem;
+      max-height: 400px;
+      overflow-y: auto;
+      font-family: monospace;
+      font-size: 0.875rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <h1 class="mb-4">Debug Firebase - Diagnóstico</h1>
+        
+        <div class="card debug-card">
+          <div class="card-body">
+            <h5>
+              Estado de Firebase
+              <span id="firebaseStatus" class="status warning">Verificando...</span>
+            </h5>
+            <div id="firebaseInfo"></div>
+          </div>
+        </div>
+
+        <div class="card debug-card">
+          <div class="card-body">
+            <h5>
+              Autenticación
+              <span id="authStatus" class="status warning">Verificando...</span>
+            </h5>
+            <div id="authInfo"></div>
+            <button class="btn btn-primary mt-2" id="testAuthBtn">Probar Autenticación</button>
+          </div>
+        </div>
+
+        <div class="card debug-card">
+          <div class="card-body">
+            <h5>
+              Firestore - Probar Escritura
+              <span id="writeStatus" class="status warning">Pendiente</span>
+            </h5>
+            <button class="btn btn-success" id="testWriteBtn">Probar Escritura en Blogs</button>
+            <div id="writeResult" class="mt-2"></div>
+          </div>
+        </div>
+
+        <div class="card debug-card">
+          <div class="card-body">
+            <h5>
+              Firestore - Probar Lectura
+              <span id="readStatus" class="status warning">Pendiente</span>
+            </h5>
+            <button class="btn btn-info" id="testReadBtn">Probar Lectura de Blogs</button>
+            <div id="readResult" class="mt-2"></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-body">
+            <h5>Log de Operaciones</h5>
+            <div id="logBox" class="log-box"></div>
+            <button class="btn btn-secondary mt-2" id="clearLogBtn">Limpiar Log</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- jQuery and Bootstrap JS -->
+  <script src="../vendor/jquery/jquery.min.js"></script>
+  <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  
+  <!-- Firebase Config -->
+  <script src="firebase-config.local.js"></script>
+  <script src="firebase-config.js"></script>
+  
+  <!-- Debug Script -->
+  <script>
+    function log(message, type = 'info') {
+      const timestamp = new Date().toLocaleTimeString();
+      const logBox = document.getElementById('logBox');
+      const entry = document.createElement('div');
+      entry.className = `text-${type === 'error' ? 'danger' : type === 'success' ? 'success' : 'info'}`;
+      entry.textContent = `[${timestamp}] ${message}`;
+      logBox.appendChild(entry);
+      logBox.scrollTop = logBox.scrollHeight;
+      console.log(`[${type.toUpperCase()}] ${message}`);
+    }
+
+    function updateStatus(elementId, status, message) {
+      const element = document.getElementById(elementId);
+      element.className = `status ${status}`;
+      element.textContent = message;
+    }
+
+    // Check Firebase Status
+    function checkFirebaseStatus() {
+      const infoDiv = document.getElementById('firebaseInfo');
+      
+      if (typeof firebase === 'undefined') {
+        updateStatus('firebaseStatus', 'error', '❌ No cargado');
+        infoDiv.innerHTML = '<p class="text-danger">Firebase SDK no está cargado. Verifica los scripts.</p>';
+        log('Firebase SDK no está cargado', 'error');
+        return false;
+      }
+
+      if (!window.firebaseServices) {
+        updateStatus('firebaseStatus', 'error', '❌ No inicializado');
+        infoDiv.innerHTML = '<p class="text-danger">Firebase no está inicializado. Verifica firebase-config.js</p>';
+        log('Firebase no está inicializado', 'error');
+        return false;
+      }
+
+      const { db, auth, storage } = window.firebaseServices;
+      
+      updateStatus('firebaseStatus', 'success', '✅ Inicializado');
+      infoDiv.innerHTML = `
+        <p class="text-success">✅ Firebase inicializado correctamente</p>
+        <ul>
+          <li>Firestore: ${db ? '✅' : '❌'}</li>
+          <li>Auth: ${auth ? '✅' : '❌'}</li>
+          <li>Storage: ${storage ? '✅' : '❌'}</li>
+        </ul>
+      `;
+      log('Firebase inicializado correctamente', 'success');
+      return true;
+    }
+
+    // Check Auth Status
+    function checkAuthStatus() {
+      const { auth } = window.firebaseServices;
+      const infoDiv = document.getElementById('authInfo');
+      
+      if (!auth) {
+        updateStatus('authStatus', 'error', '❌ No disponible');
+        infoDiv.innerHTML = '<p class="text-danger">Auth no está disponible</p>';
+        return;
+      }
+
+      const user = auth.currentUser;
+      if (user) {
+        updateStatus('authStatus', 'success', '✅ Autenticado');
+        infoDiv.innerHTML = `
+          <p class="text-success">✅ Usuario autenticado</p>
+          <ul>
+            <li>Email: ${user.email}</li>
+            <li>UID: ${user.uid}</li>
+          </ul>
+        `;
+        log(`Usuario autenticado: ${user.email}`, 'success');
+      } else {
+        updateStatus('authStatus', 'warning', '⚠️ No autenticado');
+        infoDiv.innerHTML = '<p class="text-warning">⚠️ No hay usuario autenticado. Inicia sesión primero.</p>';
+        log('No hay usuario autenticado', 'warning');
+      }
+    }
+
+    // Test Write
+    document.getElementById('testWriteBtn').addEventListener('click', async function() {
+      updateStatus('writeStatus', 'warning', 'Probando...');
+      log('Probando escritura en Firestore...', 'info');
+
+      try {
+        const { db, auth } = window.firebaseServices;
+        
+        if (!db) {
+          throw new Error('Firestore no está disponible');
+        }
+
+        const user = auth.currentUser;
+        if (!user) {
+          throw new Error('No estás autenticado. Inicia sesión primero.');
+        }
+
+        log('Usuario autenticado:', user.email, 'info');
+        log('Intentando escribir en colección "blogs"...', 'info');
+
+        const testBlog = {
+          titleEs: 'Test Blog - ' + new Date().toLocaleString(),
+          contentEs: { ops: [{ insert: 'Este es un blog de prueba\n' }] },
+          category: 'general',
+          status: 'draft',
+          authorId: user.uid,
+          createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+          updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+        };
+
+        const docRef = await db.collection('blogs').add(testBlog);
+        log(`✅ Blog creado exitosamente con ID: ${docRef.id}`, 'success');
+        
+        updateStatus('writeStatus', 'success', '✅ Exitoso');
+        document.getElementById('writeResult').innerHTML = `
+          <div class="alert alert-success">
+            ✅ Blog de prueba creado exitosamente<br>
+            <small>ID: ${docRef.id}</small>
+          </div>
+        `;
+
+      } catch (error) {
+        log(`❌ Error al escribir: ${error.message}`, 'error');
+        log(`   Código: ${error.code || 'N/A'}`, 'error');
+        
+        updateStatus('writeStatus', 'error', '❌ Error');
+        document.getElementById('writeResult').innerHTML = `
+          <div class="alert alert-danger">
+            ❌ Error al escribir<br>
+            <strong>${error.message}</strong><br>
+            <small>Código: ${error.code || 'N/A'}</small>
+          </div>
+        `;
+      }
+    });
+
+    // Test Read
+    document.getElementById('testReadBtn').addEventListener('click', async function() {
+      updateStatus('readStatus', 'warning', 'Probando...');
+      log('Probando lectura de Firestore...', 'info');
+
+      try {
+        const { db } = window.firebaseServices;
+        
+        if (!db) {
+          throw new Error('Firestore no está disponible');
+        }
+
+        log('Intentando leer colección "blogs"...', 'info');
+        const snapshot = await db.collection('blogs').limit(5).get();
+        
+        log(`✅ Lectura exitosa: ${snapshot.size} blog(s) encontrado(s)`, 'success');
+        
+        updateStatus('readStatus', 'success', `✅ ${snapshot.size} blogs`);
+        
+        let resultHtml = `<div class="alert alert-success">✅ Lectura exitosa: ${snapshot.size} blog(s)</div>`;
+        
+        if (snapshot.empty) {
+          resultHtml += '<p class="text-muted">No hay blogs en la base de datos.</p>';
+        } else {
+          resultHtml += '<ul>';
+          snapshot.forEach(doc => {
+            const blog = doc.data();
+            resultHtml += `<li><strong>${blog.titleEs || 'Sin título'}</strong> (${doc.id})</li>`;
+          });
+          resultHtml += '</ul>';
+        }
+        
+        document.getElementById('readResult').innerHTML = resultHtml;
+
+      } catch (error) {
+        log(`❌ Error al leer: ${error.message}`, 'error');
+        log(`   Código: ${error.code || 'N/A'}`, 'error');
+        
+        updateStatus('readStatus', 'error', '❌ Error');
+        document.getElementById('readResult').innerHTML = `
+          <div class="alert alert-danger">
+            ❌ Error al leer<br>
+            <strong>${error.message}</strong><br>
+            <small>Código: ${error.code || 'N/A'}</small>
+          </div>
+        `;
+      }
+    });
+
+    // Test Auth
+    document.getElementById('testAuthBtn').addEventListener('click', function() {
+      checkAuthStatus();
+    });
+
+    // Clear Log
+    document.getElementById('clearLogBtn').addEventListener('click', function() {
+      document.getElementById('logBox').innerHTML = '';
+      log('Log limpiado', 'info');
+    });
+
+    // Auto-check on load
+    window.addEventListener('load', function() {
+      setTimeout(function() {
+        checkFirebaseStatus();
+        checkAuthStatus();
+        
+        // Listen for auth state changes
+        if (window.firebaseServices && window.firebaseServices.auth) {
+          window.firebaseServices.auth.onAuthStateChanged(function(user) {
+            checkAuthStatus();
+          });
+        }
+      }, 1000);
+    });
+  </script>
+</body>
+</html>
+

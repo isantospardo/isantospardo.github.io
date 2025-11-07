@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Setup Firebase - Sercon Gestoría</title>
+  
+  <!-- Bootstrap CSS -->
+  <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  
+  <!-- Font Awesome -->
+  <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+  
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-storage-compat.js"></script>
+  
+  <style>
+    body {
+      background-color: #f5f5f5;
+      padding: 2rem;
+    }
+    .setup-card {
+      margin-bottom: 2rem;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .status-badge {
+      display: inline-block;
+      padding: 0.25rem 0.75rem;
+      border-radius: 12px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      margin-left: 1rem;
+    }
+    .status-badge.success {
+      background-color: #d4edda;
+      color: #155724;
+    }
+    .status-badge.error {
+      background-color: #f8d7da;
+      color: #721c24;
+    }
+    .status-badge.pending {
+      background-color: #fff3cd;
+      color: #856404;
+    }
+    .log-box {
+      background-color: #f8f9fa;
+      border: 1px solid #dee2e6;
+      border-radius: 4px;
+      padding: 1rem;
+      max-height: 500px;
+      overflow-y: auto;
+      font-family: 'Courier New', monospace;
+      font-size: 0.875rem;
+      margin-top: 1rem;
+    }
+    .log-entry {
+      margin-bottom: 0.5rem;
+      padding: 0.25rem 0;
+    }
+    .log-entry.success { color: #28a745; }
+    .log-entry.error { color: #dc3545; }
+    .log-entry.info { color: #17a2b8; }
+    .log-entry.warning { color: #ffc107; }
+    .progress-section {
+      margin: 1rem 0;
+    }
+    .step-item {
+      padding: 0.75rem;
+      margin: 0.5rem 0;
+      border-left: 3px solid #dee2e6;
+      background-color: #fff;
+    }
+    .step-item.success {
+      border-left-color: #28a745;
+      background-color: #d4edda;
+    }
+    .step-item.error {
+      border-left-color: #dc3545;
+      background-color: #f8d7da;
+    }
+    .step-item.pending {
+      border-left-color: #ffc107;
+      background-color: #fff3cd;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="setup-card card">
+          <div class="card-header bg-primary text-white">
+            <h3 class="mb-0">
+              <i class="fas fa-cog mr-2"></i>
+              Configuración Inicial de Firebase
+            </h3>
+          </div>
+          <div class="card-body">
+            <p class="lead">Este script probará la conexión con Firebase y creará las estructuras necesarias.</p>
+            
+            <div class="progress-section">
+              <h5>Progreso de Configuración</h5>
+              <div id="progressSteps"></div>
+            </div>
+
+            <div class="mt-4">
+              <button class="btn btn-primary btn-lg" id="startSetupBtn">
+                <i class="fas fa-play mr-2"></i>
+                Iniciar Configuración
+              </button>
+              <button class="btn btn-secondary btn-lg ml-2" id="clearLogBtn">
+                <i class="fas fa-trash mr-2"></i>
+                Limpiar Log
+              </button>
+            </div>
+
+            <div class="log-box" id="logBox">
+              <div class="log-entry info">Esperando inicio de configuración...</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- jQuery and Bootstrap JS -->
+  <script src="../vendor/jquery/jquery.min.js"></script>
+  <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  
+  <!-- Firebase Config -->
+  <script src="firebase-config.local.js"></script>
+  <script src="firebase-config.js"></script>
+  
+  <!-- Setup Script -->
+  <script>
+    const steps = [
+      { id: 'connection', name: 'Probar Conexión Firebase', status: 'pending' },
+      { id: 'collections', name: 'Verificar/Crear Colecciones', status: 'pending' },
+      { id: 'pageContent', name: 'Inicializar Contenido de Páginas', status: 'pending' },
+      { id: 'verify', name: 'Verificar Estructuras', status: 'pending' }
+    ];
+
+    function log(message, type = 'info') {
+      const timestamp = new Date().toLocaleTimeString();
+      const logBox = document.getElementById('logBox');
+      const entry = document.createElement('div');
+      entry.className = `log-entry ${type}`;
+      entry.textContent = `[${timestamp}] ${message}`;
+      logBox.appendChild(entry);
+      logBox.scrollTop = logBox.scrollHeight;
+      console.log(`[${type.toUpperCase()}] ${message}`);
+    }
+
+    function updateStepStatus(stepId, status) {
+      const step = steps.find(s => s.id === stepId);
+      if (step) {
+        step.status = status;
+        renderSteps();
+      }
+    }
+
+    function renderSteps() {
+      const container = document.getElementById('progressSteps');
+      container.innerHTML = '';
+      steps.forEach(step => {
+        const stepDiv = document.createElement('div');
+        stepDiv.className = `step-item ${step.status}`;
+        const icon = step.status === 'success' ? '✅' : 
+                     step.status === 'error' ? '❌' : 
+                     step.status === 'pending' ? '⏳' : '🔄';
+        stepDiv.innerHTML = `${icon} ${step.name}`;
+        container.appendChild(stepDiv);
+      });
+    }
+
+    async function testConnection() {
+      updateStepStatus('connection', 'running');
+      log('Probando conexión con Firebase...', 'info');
+
+      try {
+        if (!window.firebaseServices || !window.firebaseServices.db) {
+          throw new Error('Firebase no está inicializado. Verifica firebase-config.local.js');
+        }
+
+        const { db } = window.firebaseServices;
+        
+        // Test write
+        log('Intentando escribir en Firestore...', 'info');
+        const testRef = db.collection('_test').doc('connection');
+        await testRef.set({
+          timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+          message: 'Test de conexión exitoso',
+          test: true
+        });
+        log('✅ Escritura exitosa', 'success');
+
+        // Test read
+        log('Intentando leer de Firestore...', 'info');
+        const doc = await testRef.get();
+        if (doc.exists) {
+          log('✅ Lectura exitosa', 'success');
+        }
+
+        // Cleanup
+        await testRef.delete();
+        log('🧹 Documento de prueba eliminado', 'info');
+
+        updateStepStatus('connection', 'success');
+        log('✅ Conexión con Firebase exitosa!', 'success');
+        return true;
+
+      } catch (error) {
+        updateStepStatus('connection', 'error');
+        log(`❌ Error de conexión: ${error.message}`, 'error');
+        log(`   Código: ${error.code || 'N/A'}`, 'error');
+        return false;
+      }
+    }
+
+    async function createCollections() {
+      updateStepStatus('collections', 'running');
+      log('Verificando colecciones necesarias...', 'info');
+
+      try {
+        const { db } = window.firebaseServices;
+        const collections = ['blogs', 'pageContent', 'media'];
+
+        for (const collection of collections) {
+          try {
+            // Intentar leer la colección para verificar que existe
+            const snapshot = await db.collection(collection).limit(1).get();
+            log(`✅ Colección '${collection}' existe (${snapshot.size} documento(s))`, 'success');
+          } catch (error) {
+            log(`⚠️  Colección '${collection}': ${error.message}`, 'warning');
+            // Las colecciones se crean automáticamente al escribir el primer documento
+            log(`   (Se creará automáticamente al agregar el primer documento)`, 'info');
+          }
+        }
+
+        updateStepStatus('collections', 'success');
+        log('✅ Colecciones verificadas', 'success');
+        return true;
+
+      } catch (error) {
+        updateStepStatus('collections', 'error');
+        log(`❌ Error al verificar colecciones: ${error.message}`, 'error');
+        return false;
+      }
+    }
+
+    async function initializePageContent() {
+      updateStepStatus('pageContent', 'running');
+      log('Inicializando contenido de páginas...', 'info');
+
+      try {
+        const { db } = window.firebaseServices;
+
+        const pages = [
+          { page: 'index', sections: [
+            { section: 'Título Principal', fieldKey: 'main_title', order: 1 },
+            { section: 'Subtítulo', fieldKey: 'subtitle', order: 2 },
+            { section: 'Descripción', fieldKey: 'description', order: 3 }
+          ]},
+          { page: 'about', sections: [
+            { section: 'Título', fieldKey: 'title', order: 1 },
+            { section: 'Subtítulo', fieldKey: 'subtitle', order: 2 },
+            { section: 'Contenido Principal', fieldKey: 'main_content', order: 3 }
+          ]},
+          { page: 'contact', sections: [
+            { section: 'Título', fieldKey: 'title', order: 1 },
+            { section: 'Subtítulo', fieldKey: 'subtitle', order: 2 }
+          ]},
+          { page: 'fiscal', sections: [
+            { section: 'Título', fieldKey: 'title', order: 1 },
+            { section: 'Subtítulo', fieldKey: 'subtitle', order: 2 }
+          ]},
+          { page: 'laboral', sections: [
+            { section: 'Título', fieldKey: 'title', order: 1 },
+            { section: 'Subtítulo', fieldKey: 'subtitle', order: 2 }
+          ]},
+          { page: 'legal', sections: [
+            { section: 'Título', fieldKey: 'title', order: 1 },
+            { section: 'Subtítulo', fieldKey: 'subtitle', order: 2 }
+          ]},
+          { page: 'sucesiones', sections: [
+            { section: 'Título', fieldKey: 'title', order: 1 },
+            { section: 'Subtítulo', fieldKey: 'subtitle', order: 2 }
+          ]}
+        ];
+
+        let created = 0;
+        let skipped = 0;
+
+        for (const pageData of pages) {
+          log(`Procesando página: ${pageData.page}...`, 'info');
+          for (const section of pageData.sections) {
+            try {
+              // Check if already exists
+              const existing = await db.collection('pageContent')
+                .where('page', '==', pageData.page)
+                .where('fieldKey', '==', section.fieldKey)
+                .limit(1)
+                .get();
+
+              if (existing.empty) {
+                await db.collection('pageContent').add({
+                  page: pageData.page,
+                  section: section.section,
+                  fieldKey: section.fieldKey,
+                  contentEs: '',
+                  order: section.order,
+                  type: 'text',
+                  createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+                  updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+                });
+                created++;
+                log(`   ✅ Creado: ${section.section}`, 'success');
+              } else {
+                skipped++;
+                log(`   ⏭️  Ya existe: ${section.section}`, 'info');
+              }
+            } catch (error) {
+              log(`   ❌ Error en ${section.section}: ${error.message}`, 'error');
+            }
+          }
+        }
+
+        updateStepStatus('pageContent', 'success');
+        log(`✅ Contenido de páginas inicializado: ${created} nuevos, ${skipped} existentes`, 'success');
+        return true;
+
+      } catch (error) {
+        updateStepStatus('pageContent', 'error');
+        log(`❌ Error al inicializar contenido: ${error.message}`, 'error');
+        return false;
+      }
+    }
+
+    async function verifyStructures() {
+      updateStepStatus('verify', 'running');
+      log('Verificando estructuras finales...', 'info');
+
+      try {
+        const { db } = window.firebaseServices;
+
+        const [blogsCount, pagesCount, mediaCount] = await Promise.all([
+          db.collection('blogs').get().then(s => s.size),
+          db.collection('pageContent').get().then(s => s.size),
+          db.collection('media').get().then(s => s.size)
+        ]);
+
+        log(`📊 Resumen de estructuras:`, 'info');
+        log(`   - Blogs: ${blogsCount}`, 'info');
+        log(`   - Contenido de páginas: ${pagesCount}`, 'info');
+        log(`   - Imágenes: ${mediaCount}`, 'info');
+
+        updateStepStatus('verify', 'success');
+        log('✅ Verificación completada exitosamente!', 'success');
+        return true;
+
+      } catch (error) {
+        updateStepStatus('verify', 'error');
+        log(`❌ Error al verificar: ${error.message}`, 'error');
+        return false;
+      }
+    }
+
+    async function runSetup() {
+      const btn = document.getElementById('startSetupBtn');
+      btn.disabled = true;
+      btn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Configurando...';
+
+      // Clear log
+      document.getElementById('logBox').innerHTML = '';
+      log('🚀 Iniciando configuración de Firebase...', 'info');
+
+      // Reset steps
+      steps.forEach(step => step.status = 'pending');
+      renderSteps();
+
+      try {
+        // Step 1: Test Connection
+        const connectionOk = await testConnection();
+        if (!connectionOk) {
+          throw new Error('Conexión fallida. Verifica la configuración de Firebase.');
+        }
+
+        // Step 2: Create Collections
+        const collectionsOk = await createCollections();
+        if (!collectionsOk) {
+          log('⚠️  Advertencia: Algunas colecciones no se pudieron verificar', 'warning');
+        }
+
+        // Step 3: Initialize Page Content
+        const pageContentOk = await initializePageContent();
+        if (!pageContentOk) {
+          log('⚠️  Advertencia: Error al inicializar contenido de páginas', 'warning');
+        }
+
+        // Step 4: Verify
+        await verifyStructures();
+
+        log('', 'info');
+        log('🎉 ¡Configuración completada exitosamente!', 'success');
+        log('✅ Firebase está listo para usar', 'success');
+        log('', 'info');
+        log('Próximos pasos:', 'info');
+        log('1. Ve a Firebase Console > Authentication y crea un usuario administrador', 'info');
+        log('2. Accede a /admin/index.html e inicia sesión', 'info');
+        log('3. Empieza a crear blogs y gestionar contenido', 'info');
+
+      } catch (error) {
+        log(`❌ Error durante la configuración: ${error.message}`, 'error');
+        log('Verifica la configuración de Firebase y las reglas de seguridad', 'error');
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = '<i class="fas fa-redo mr-2"></i> Ejecutar de Nuevo';
+      }
+    }
+
+    // Event listeners
+    document.getElementById('startSetupBtn').addEventListener('click', runSetup);
+    document.getElementById('clearLogBtn').addEventListener('click', function() {
+      document.getElementById('logBox').innerHTML = '';
+      log('Log limpiado', 'info');
+    });
+
+    // Auto-run on load
+    window.addEventListener('load', function() {
+      setTimeout(function() {
+        if (window.firebaseServices && window.firebaseServices.db) {
+          log('Firebase detectado correctamente', 'success');
+          log('Haz clic en "Iniciar Configuración" para comenzar', 'info');
+        } else {
+          log('⚠️  Firebase no está inicializado', 'warning');
+          log('Verifica que firebase-config.local.js esté configurado correctamente', 'warning');
+        }
+      }, 1000);
+    });
+
+    // Initial render
+    renderSteps();
+  </script>
+</body>
+</html>
+
