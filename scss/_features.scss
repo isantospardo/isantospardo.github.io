@@ -1,0 +1,286 @@
+// Enhanced Features Styling
+
+// Statistics Section
+.statistics-section {
+  padding: 5rem 0;
+  
+  .stat-item {
+    padding: 2rem 1rem;
+    transition: transform 0.3s ease;
+    
+    &:hover {
+      transform: translateY(-10px);
+    }
+    
+    h2 {
+      font-size: 3rem;
+      font-weight: 700;
+      margin: 1rem 0;
+      color: white;
+    }
+    
+    p {
+      font-size: 1.1rem;
+      color: rgba(255, 255, 255, 0.9);
+      margin: 0;
+    }
+  }
+}
+
+// Why Choose Us Section
+.why-choose-us {
+  padding: 5rem 0;
+  background-color: white;
+  
+  .section-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: $primary;
+    margin-bottom: 1rem;
+  }
+  
+  .feature-box {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    border: 1px solid #f0f0f0;
+    
+    &:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+      border-color: $primary;
+    }
+    
+    h4 {
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: $primary;
+      margin: 1rem 0;
+    }
+    
+    p {
+      color: $gray-600;
+      line-height: 1.7;
+    }
+  }
+}
+
+// Testimonials Section
+.testimonials-section {
+  padding: 5rem 0;
+  
+  .section-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: $primary;
+    margin-bottom: 1rem;
+  }
+  
+  .testimonial-card {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    border: none;
+    
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+    }
+    
+    .testimonial-text {
+      font-style: italic;
+      color: $gray-700;
+      line-height: 1.8;
+      margin-bottom: 1.5rem;
+      font-size: 1rem;
+    }
+    
+    .testimonial-author {
+      border-top: 1px solid #f0f0f0;
+      padding-top: 1rem;
+      
+      strong {
+        color: $primary;
+        font-size: 1.1rem;
+      }
+    }
+  }
+}
+
+// Call to Action Section
+.cta-section {
+  padding: 5rem 0;
+  
+  h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 1.5rem;
+  }
+  
+  .lead {
+    font-size: 1.25rem;
+    color: rgba(255, 255, 255, 0.95);
+    margin-bottom: 2rem;
+  }
+  
+  .btn-light {
+    background-color: white;
+    color: $primary;
+    font-weight: 600;
+    padding: 1rem 2.5rem;
+    font-size: 1.1rem;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    
+    &:hover {
+      background-color: #f8f9fa;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+  }
+}
+
+// Scroll to Top Button
+.scroll-to-top {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 50px;
+  height: 50px;
+  background-color: $primary;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  font-size: 1.2rem;
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  z-index: 1000;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  
+  &.show {
+    opacity: 1;
+    visibility: visible;
+  }
+  
+  &:hover {
+    background-color: $primary-dark;
+    transform: translateY(-5px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+  }
+  
+  &:active {
+    transform: translateY(-2px);
+  }
+}
+
+// FAQ Section
+.faq-section {
+  padding: 5rem 0;
+  background-color: white;
+  
+  .section-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: $primary;
+    margin-bottom: 1rem;
+  }
+  
+  .card {
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    
+    &:hover {
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    }
+    
+    .card-header {
+      border: none;
+      border-radius: 8px 8px 0 0;
+      transition: background-color 0.3s ease;
+      
+      &:hover {
+        background-color: #e9ecef !important;
+      }
+      
+      h5 {
+        font-weight: 600;
+        font-size: 1.1rem;
+        
+        i {
+          transition: transform 0.3s ease;
+        }
+      }
+      
+      &[aria-expanded="true"] {
+        h5 i {
+          transform: rotate(180deg);
+        }
+      }
+    }
+    
+    .card-body {
+      color: $gray-700;
+      line-height: 1.8;
+      padding: 1.5rem;
+    }
+  }
+}
+
+// Footer link hover effects
+footer {
+  a {
+    transition: color 0.3s ease;
+    
+    &:hover {
+      color: $primary !important;
+      text-decoration: none;
+    }
+  }
+  
+  .fa-stack {
+    transition: transform 0.3s ease;
+    
+    &:hover {
+      transform: translateY(-3px) scale(1.1);
+    }
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+  .statistics-section {
+    padding: 3rem 0;
+    
+    .stat-item {
+      h2 {
+        font-size: 2.5rem;
+      }
+    }
+  }
+  
+  .why-choose-us,
+  .testimonials-section,
+  .cta-section,
+  .faq-section {
+    padding: 3rem 0;
+    
+    .section-title {
+      font-size: 2rem;
+    }
+  }
+  
+  .scroll-to-top {
+    bottom: 20px;
+    right: 20px;
+    width: 45px;
+    height: 45px;
+  }
+}
+

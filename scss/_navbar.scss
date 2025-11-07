@@ -61,14 +61,21 @@
     transform: translate3d(0, 0, 0);
     -webkit-backface-visibility: hidden;
     &.is-fixed {
-      /* when the user scrolls down, we hide the header right above the viewport */
+      /* Elegant fixed navbar - always visible when scrolling */
       position: fixed;
-      top: -67px;
-      -webkit-transition: -webkit-transform 0.2s;
-      -moz-transition: -moz-transform 0.2s;
-      transition: transform 0.2s;
-      border-bottom: 1px solid darken($white, .05);
-      background-color: fade-out($white, .1);
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1030;
+      -webkit-transition: all 0.3s ease;
+      -moz-transition: all 0.3s ease;
+      transition: all 0.3s ease;
+      border-bottom: 1px solid rgba($gray-300, 0.5);
+      background-color: rgba($white, 0.98);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      
       .navbar-brand {
         color: $gray-900;
         &:focus,
@@ -89,12 +96,8 @@
       }
     }
     &.is-visible {
-      /* if the user changes the scrolling direction, we show the header */
-      -webkit-transform: translate3d(0, 100%, 0);
-      -moz-transform: translate3d(0, 100%, 0);
-      -ms-transform: translate3d(0, 100%, 0);
-      -o-transform: translate3d(0, 100%, 0);
-      transform: translate3d(0, 100%, 0);
+      /* Keep it visible - no transform needed */
+      transform: translate3d(0, 0, 0);
     }
   }
 }

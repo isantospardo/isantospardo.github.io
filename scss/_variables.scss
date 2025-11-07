@@ -23,11 +23,15 @@ $green:   #28a745 !default;
 $teal:    #0085A1 !default;
 $cyan:    #17a2b8 !default;
 
-$primary:       $teal !default;
+// Professional color palette for management & consulting
+$primary:       #007f7e !default; // Corporate teal color from logo
+$primary-light: #00a5a4 !default;
+$primary-dark:  #005f5e !default;
+$accent:        #007f7e !default; // Corporate teal accent
 $secondary:     $gray-600 !default;
 $success:       $green !default;
 $info:          $cyan !default;
 $warning:       $yellow !default;
 $danger:        $red !default;
 $light:         $gray-100 !default;
-$dark:          $gray-800 !default;
+$dark:          #1a1a1a !default; // Deeper dark for elegance
