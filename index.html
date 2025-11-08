@@ -636,122 +636,85 @@
   <!-- Firebase Content Loader -->
   <script src="js/firebase-content.js?v=3"></script>
   
-  <!-- Load Featured News Dynamically -->
   <script>
-    console.log('🚀 INICIANDO CARGA DE NOTICIAS DESTACADAS');
-    console.log('🚀 Script ejecutándose...');
-    console.log('🚀 window.firebaseServices:', window.firebaseServices);
-    console.log('🚀 window.firebaseContent:', window.firebaseContent);
-    
-    // Bandera para evitar cargas múltiples
     let noticiasCargadas = false;
     let cargandoNoticias = false;
     
-    // Función directa para cargar y mostrar noticias
     async function cargarNoticias() {
-      // Evitar cargas múltiples
       if (noticiasCargadas || cargandoNoticias) {
-        console.log('⏭️ Noticias ya cargadas o cargando, saltando...');
         return;
       }
       
       cargandoNoticias = true;
-      console.log('🔄 cargarNoticias() ejecutada');
       
       const container = document.getElementById('blogsContainer');
       if (!container) {
-        console.error('❌ Contenedor no encontrado');
         cargandoNoticias = false;
         return;
       }
-      console.log('✅ Contenedor encontrado:', container);
       
-      // Verificar Firebase
       if (!window.firebaseServices || !window.firebaseServices.db) {
-        console.warn('⏳ Firebase no listo, reintentando...');
         cargandoNoticias = false;
         setTimeout(cargarNoticias, 500);
         return;
       }
-      console.log('✅ Firebase listo');
       
-      // Verificar firebaseContent
       if (!window.firebaseContent || !window.firebaseContent.renderBlogs) {
-        console.warn('⏳ firebaseContent no listo, reintentando...');
-        console.warn('⏳ firebaseContent:', window.firebaseContent);
         cargandoNoticias = false;
         setTimeout(cargarNoticias, 500);
         return;
       }
-      console.log('✅ firebaseContent listo');
-      console.log('✅ firebaseContent.renderBlogs:', typeof window.firebaseContent.renderBlogs);
       
-      // Renderizar
-      console.log('✅ Renderizando noticias...');
-      console.log('✅ Llamando a renderBlogs con:', { containerId: 'blogsContainer', category: null, useFeatured: true });
       try {
-        const result = await window.firebaseContent.renderBlogs('blogsContainer', null, true);
-        console.log('✅ COMPLETADO! Result:', result);
-        console.log('✅ Container después de render:', container.innerHTML.length, 'caracteres');
+        await window.firebaseContent.renderBlogs('blogsContainer', null, true);
         noticiasCargadas = true;
       } catch (error) {
-        console.error('❌ ERROR:', error);
-        console.error('❌ ERROR stack:', error.stack);
-        console.error('❌ ERROR message:', error.message);
-        container.innerHTML = '<div class="col-12 text-center"><p class="text-danger">Error: ' + error.message + '</p><pre>' + error.stack + '</pre></div>';
+        console.error('Error loading featured news:', error);
+        container.innerHTML = '<div class="col-12 text-center"><p class="text-danger">Error al cargar las noticias</p></div>';
       } finally {
         cargandoNoticias = false;
       }
     }
     
-    // Ejecutar cuando la página cargue (solo una vez)
     if (document.readyState === 'loading') {
       document.addEventListener('DOMContentLoaded', function() {
-        console.log('✅ DOMContentLoaded');
         setTimeout(cargarNoticias, 1000);
       });
     } else {
-      console.log('✅ DOM ya listo');
       setTimeout(cargarNoticias, 1000);
     }
     
-    // Debug function mejorada
     window.debugFeaturedNews = async function() {
-      console.log('🔍 DEBUG: Iniciando debugFeaturedNews...');
       if (!window.firebaseServices || !window.firebaseServices.db) {
-        console.error('❌ Firebase no inicializado');
-        console.error('❌ window.firebaseServices:', window.firebaseServices);
+        console.error('Firebase no inicializado');
         return;
       }
       try {
-        console.log('🔍 DEBUG: Obteniendo snapshot...');
         const snapshot = await window.firebaseServices.db.collection('featuredNews').get();
-        console.log('📦 Total en BD:', snapshot.size);
+        console.log('Total en BD:', snapshot.size);
         if (snapshot.size === 0) {
-          console.warn('⚠️ No hay noticias en la base de datos!');
+          console.warn('No hay noticias en la base de datos');
           return;
         }
         snapshot.forEach(doc => {
           const data = doc.data();
-          console.log('📄', doc.id, '-', data.title || 'Sin título');
-          console.log('   - draft:', data.draft);
-          console.log('   - status:', data.status);
-          console.log('   - hidden:', data.hidden);
-          console.log('   - archived:', data.archived);
+          console.log(doc.id, '-', data.title || 'Sin título', {
+            draft: data.draft,
+            status: data.status,
+            hidden: data.hidden,
+            archived: data.archived
+          });
         });
         
-        // También probar loadFeaturedNews
-        console.log('🔍 DEBUG: Probando loadFeaturedNews...');
         if (window.firebaseContent && window.firebaseContent.loadFeaturedNews) {
           const featured = await window.firebaseContent.loadFeaturedNews();
-          console.log('📦 loadFeaturedNews retornó:', featured.length, 'items');
+          console.log('loadFeaturedNews retornó:', featured.length, 'items');
           featured.forEach(item => {
-            console.log('   ✅', item.title || 'Sin título');
+            console.log('  -', item.title || 'Sin título');
           });
         }
       } catch (error) {
-        console.error('❌ Error:', error);
-        console.error('❌ Error stack:', error.stack);
+        console.error('Error:', error);
       }
     };
   </script>

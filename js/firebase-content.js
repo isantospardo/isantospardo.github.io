@@ -4,15 +4,9 @@
 (function() {
   'use strict';
   
-  console.log('📦 firebase-content.js cargado');
-
-  // Initialize Firebase (use same config as admin)
-  // Make sure to include this in your HTML pages that need dynamic content
-  
   // Load blogs dynamically
   async function loadBlogs(category = null) {
     if (!window.firebaseServices || !window.firebaseServices.db) {
-      console.warn('Firebase not initialized');
       return [];
     }
 
@@ -86,168 +80,66 @@
     return lang || 'es';
   }
 
-  // Load featured news
   async function loadFeaturedNews() {
-    console.log('🔍 loadFeaturedNews called');
     if (!window.firebaseServices || !window.firebaseServices.db) {
-      console.error('❌ Firebase not initialized');
-      console.log('firebaseServices:', window.firebaseServices);
       return [];
     }
 
     try {
-      console.log('📡 Querying featuredNews collection...');
-      // Try to get all featured news, then filter
       let snapshot;
       try {
-        // Try with orderBy first
         snapshot = await window.firebaseServices.db.collection('featuredNews')
           .orderBy('order', 'asc')
-          .limit(50) // Get more to filter
+          .limit(50)
           .get();
       } catch (orderByError) {
-        console.warn('⚠️ orderBy failed, trying without it:', orderByError);
-        // If orderBy fails (no index), get all and sort in memory
         snapshot = await window.firebaseServices.db.collection('featuredNews')
           .limit(50)
           .get();
       }
 
-      console.log('📦 Snapshot received:', snapshot.size, 'documents');
-
       const featuredNews = [];
       snapshot.forEach(doc => {
         const featured = doc.data();
-        
-        // Get all field values - be very explicit about checking
-        // Firebase may return undefined, null, false, or true
         const draftValue = featured.draft;
         const statusValue = featured.status;
         const hiddenValue = featured.hidden;
         const archivedValue = featured.archived;
         
-        // Check if explicitly excluded
-        // Match admin logic exactly: published = NOT archived AND NOT hidden AND NOT draft
         const isDraft = statusValue === 'draft' || draftValue === true;
         const isHidden = hiddenValue === true;
         const isArchived = archivedValue === true;
-        
-        // Include if NOT archived AND NOT hidden AND NOT draft
-        // This matches the admin logic exactly
         const shouldInclude = !isArchived && !isHidden && !isDraft;
         
-        console.log('🔍 FILTRO DEBUG:', {
-          title: featured.title || 'Sin título',
-          draftValue: draftValue,
-          statusValue: statusValue,
-          hiddenValue: hiddenValue,
-          archivedValue: archivedValue,
-          isDraft: isDraft,
-          isHidden: isHidden,
-          isArchived: isArchived,
-          shouldInclude: shouldInclude
-        });
-        
-        console.log('📄 News:', {
-          id: doc.id,
-          title: featured.title || 'Sin título',
-          draft: draftValue,
-          status: statusValue,
-          hidden: hiddenValue,
-          archived: archivedValue,
-          isDraft: isDraft,
-          isHidden: isHidden,
-          isArchived: isArchived,
-          shouldInclude: shouldInclude
-        });
-        
-        // Solo incluir noticias publicadas (no draft, no hidden, no archived)
         if (shouldInclude) {
-          console.log('✅ INCLUDING:', featured.title);
           featuredNews.push({
             id: doc.id,
             ...featured,
-            // Handle both Timestamp and Date formats
             createdAt: featured.createdAt 
               ? (featured.createdAt.toDate ? featured.createdAt.toDate() : featured.createdAt)
               : new Date()
           });
-        } else {
-          const reason = isDraft ? 'DRAFT' : isHidden ? 'HIDDEN' : isArchived ? 'ARCHIVED' : 'UNKNOWN';
-          console.log('❌ EXCLUDING:', featured.title, '- Reason:', reason, {
-            draft: draftValue,
-            status: statusValue,
-            hidden: hiddenValue,
-            archived: archivedValue
-          });
         }
       });
       
-      console.log('📊 Featured news before filtering:', snapshot.size);
-      console.log('📊 Featured news after filtering:', featuredNews.length);
-      
-      // Si no hay noticias después del filtro, mostrar información detallada
-      if (featuredNews.length === 0 && snapshot.size > 0) {
-        console.warn('⚠️ Todas las noticias fueron filtradas!');
-        console.log('📋 Detalles de las noticias filtradas:');
-        snapshot.forEach(doc => {
-          const data = doc.data();
-          console.log(`  - ${data.title || doc.id}:`, {
-            draft: data.draft,
-            status: data.status,
-            hidden: data.hidden,
-            archived: data.archived
-          });
-        });
-      }
-      
-      // Sort by order
       featuredNews.sort((a, b) => (a.order || 0) - (b.order || 0));
-      
-      // Limit to 6 after filtering
-      const result = featuredNews.slice(0, 6);
-      
-      console.log('📊 Final result:', result.length, 'items');
-      console.log('📊 Total in database:', snapshot.size);
-      console.log('📊 Featured news after filter:', featuredNews.length, 'items');
-      
-      if (result.length > 0) {
-        console.log('✅ Featured news to display:', result.map(n => n.title));
-      } else {
-        console.warn('⚠️ No featured news to display!');
-        console.log('📋 Total in database:', snapshot.size);
-        console.log('📋 Featured news after filter:', featuredNews.length);
-        if (snapshot.size > 0) {
-          console.warn('⚠️ Hay noticias en la BD pero todas fueron filtradas. Verifica los campos draft, hidden, archived.');
-        } else {
-          console.warn('⚠️ No hay noticias en la colección featuredNews. Agrega noticias desde el admin.');
-        }
-      }
-      
-      return result;
+      return featuredNews.slice(0, 6);
     } catch (error) {
-      console.error('❌ Error loading featured news:', error);
-      console.error('Error details:', error.message, error.stack);
+      console.error('Error loading featured news:', error);
       return [];
     }
   }
 
-  // Render blog list
   async function renderBlogs(containerId, category = null, useFeatured = false) {
-    console.log('🎨 renderBlogs called:', { containerId, category, useFeatured });
     const container = document.getElementById(containerId);
     if (!container) {
-      console.error('❌ Container not found:', containerId);
       return;
     }
 
-    console.log('📦 Container found, clearing content...');
-    // Clear container completely - remove all child nodes
     while (container.firstChild) {
       container.removeChild(container.firstChild);
     }
     
-    // Show loading state
     container.innerHTML = `
       <div class="col-12 text-center py-5">
         <div class="spinner-border text-primary mb-3" role="status" style="width: 3rem; height: 3rem;">
@@ -256,60 +148,17 @@
         <p class="text-muted">Cargando artículos...</p>
       </div>
     `;
-    console.log('⏳ Loading state set');
 
     try {
-      // Si useFeatured es true, cargar noticias destacadas
       let blogs = [];
       if (useFeatured) {
-        console.log('🔄 Loading featured news for rendering...');
         blogs = await loadFeaturedNews();
-        console.log('✅ Featured news loaded for rendering:', blogs.length, 'items');
-        console.log('📦 Full blogs array:', blogs);
-        console.log('📦 Full blogs array (JSON):', JSON.stringify(blogs, null, 2));
-        if (blogs.length > 0) {
-          console.log('📰 Titles:', blogs.map(b => b.title || b.titleEs));
-          console.log('📰 First blog:', blogs[0]);
-          console.log('📰 First blog (JSON):', JSON.stringify(blogs[0], null, 2));
-        } else {
-          console.warn('⚠️ NO BLOGS TO RENDER - showing empty state');
-          console.warn('⚠️ DEBUG: Verificando por qué no hay blogs...');
-          console.warn('⚠️ DEBUG: useFeatured =', useFeatured);
-          console.warn('⚠️ DEBUG: loadFeaturedNews returned:', blogs);
-        }
       } else {
         blogs = await loadBlogs(category);
       }
       
-      console.log('📊 Total blogs to render:', blogs.length);
-      console.log('📊 Blogs array type:', typeof blogs);
-      console.log('📊 Blogs is array?', Array.isArray(blogs));
-      
       if (blogs.length === 0) {
-        console.warn('⚠️ No blogs to display, showing empty state');
-        console.warn('⚠️ Debug info:', {
-          useFeatured,
-          containerId,
-          firebaseReady: !!window.firebaseServices?.db
-        });
-        
-        // Clear container completely
         container.innerHTML = '';
-        
-        // Show debug info (always show if useFeatured is true)
-        let debugInfo = '';
-        if (useFeatured) {
-          debugInfo = `
-            <div class="alert alert-info mt-3" style="max-width: 600px; margin: 0 auto;">
-              <small>
-                <strong>Debug:</strong> No se encontraron noticias destacadas publicadas.<br>
-                Ejecuta <code>window.debugFeaturedNews()</code> en la consola para ver todas las noticias en la base de datos.<br>
-                <strong>Nota:</strong> Las noticias deben estar publicadas (no marcadas como borrador, ocultas o archivadas).
-              </small>
-            </div>
-          `;
-        }
-        
         container.innerHTML = `
           <div class="col-12">
             <div class="empty-blogs-state text-center py-5">
@@ -321,7 +170,6 @@
                 Estamos preparando contenido interesante para ti.<br>
                 Vuelve pronto para leer nuestros últimos artículos sobre novedades fiscales, laborales y legales.
               </p>
-              ${debugInfo}
               <div class="mt-4">
                 <a href="contact.html" class="btn btn-outline-primary">
                   <i class="fas fa-envelope mr-2"></i> Contáctanos para más información
@@ -330,7 +178,6 @@
             </div>
           </div>
         `;
-        console.log('✅ Empty state rendered');
         return;
       }
 
@@ -475,22 +322,8 @@
       });
       html += '</div>';
       
-      console.log('✅ Rendering', blogs.length, 'blogs to container');
-      console.log('📝 HTML to render (first 500 chars):', html.substring(0, 500));
-      // Clear and set new content
       container.innerHTML = '';
       container.innerHTML = html;
-      console.log('✅ Content rendered successfully');
-      console.log('📦 Container innerHTML length:', container.innerHTML.length);
-      console.log('📦 Container children count:', container.children.length);
-      
-      // Verificar que el HTML se insertó correctamente
-      const renderedCards = container.querySelectorAll('.featured-news-card');
-      console.log('📦 Rendered cards count:', renderedCards.length);
-      if (renderedCards.length === 0) {
-        console.error('❌ ERROR: No se renderizaron cards!');
-        console.error('❌ HTML generado:', html);
-      }
 
       // Add hover effects to featured news cards
       const featuredCards = container.querySelectorAll('.featured-news-card');
@@ -533,9 +366,7 @@
       });
 
     } catch (error) {
-      console.error('❌ Error rendering blogs:', error);
-      console.error('Error stack:', error.stack);
-      // Clear container completely
+      console.error('Error rendering blogs:', error);
       container.innerHTML = '';
       container.innerHTML = `
         <div class="col-12">
@@ -547,11 +378,9 @@
           </div>
         </div>
       `;
-      console.log('✅ Error state rendered');
     }
   }
 
-  // Convert Quill Delta to HTML (simplified version)
   function convertQuillDeltaToHTML(delta) {
     if (!delta || !delta.ops) return '';
     
@@ -593,22 +422,17 @@
           
           currentParagraph += text;
         } else if (op.insert.image) {
-          // Close paragraph before image
           if (currentParagraph) {
             html += `<p>${currentParagraph}</p>`;
             currentParagraph = '';
           }
           
-          // Manejar tanto string como objeto para insert.image
           let imgSrc = '';
           let imgStyle = '';
           
-          // Obtener el src de la imagen
           if (typeof op.insert.image === 'string') {
-            // Formato estándar: string (URL)
             imgSrc = op.insert.image;
           } else if (typeof op.insert.image === 'object' && op.insert.image !== null) {
-            // Formato nuevo: objeto con src, width, height
             imgSrc = op.insert.image.src || op.insert.image || '';
             if (op.insert.image.width) {
               imgStyle += `width: ${op.insert.image.width}; `;
@@ -617,11 +441,9 @@
               imgStyle += `height: ${op.insert.image.height}; `;
             }
           } else {
-            // Fallback: intentar obtener el src de cualquier manera
             imgSrc = op.insert.image || '';
           }
           
-          // También verificar atributos (formato estándar donde se guardan los estilos)
           if (op.attributes) {
             if (op.attributes['data-width']) {
               imgStyle += `width: ${op.attributes['data-width']}; `;
@@ -631,11 +453,8 @@
             }
           }
           
-          // Solo agregar la imagen si tiene un src válido
           if (imgSrc) {
-            // Si hay estilos personalizados, usar !important y no usar img-fluid
             if (imgStyle) {
-              // Agregar !important a cada propiedad y también agregar object-fit: contain para mantener proporción
               const importantStyle = imgStyle
                 .split(';')
                 .filter(s => s.trim())
@@ -658,7 +477,6 @@
     return html || '<p>Sin contenido</p>';
   }
 
-  // Update page content dynamically
   async function updatePageContent(page) {
     const elements = document.querySelectorAll(`[data-firebase-page="${page}"]`);
     
@@ -677,24 +495,19 @@
     });
   }
 
-  // Show news modal
   function showNewsModal(title, subtitle, category, date, content) {
     const modal = document.getElementById('newsModal');
     const modalTitle = document.getElementById('newsModalLabel');
     const modalBody = document.getElementById('newsModalBody');
     
     if (!modal || !modalTitle || !modalBody) {
-      console.error('Modal elements not found');
       return;
     }
     
-    // Set title
     modalTitle.textContent = title;
     
-    // Build body content
     let bodyHtml = '';
     
-    // Category and date
     bodyHtml += '<div class="mb-3">';
     if (category) {
       const categoryColors = {
@@ -711,15 +524,12 @@
     }
     bodyHtml += '</div>';
     
-    // Subtitle
     if (subtitle) {
       bodyHtml += `<p class="lead text-muted mb-4">${subtitle}</p>`;
     }
     
-    // Content with better styling
     if (content) {
       try {
-        // Unescape HTML (reverse of escaping)
         let contentHtml = content
           .replace(/&quot;/g, '"')
           .replace(/&#39;/g, "'")
@@ -728,7 +538,6 @@
         
         bodyHtml += `<div class="news-content" style="line-height: 1.9; font-size: 1.05rem; color: #495057; text-align: justify;">${contentHtml}</div>`;
       } catch (e) {
-        console.error('Error processing content:', e);
         bodyHtml += `<div class="news-content" style="line-height: 1.9; font-size: 1.05rem; color: #495057; text-align: justify;">${content}</div>`;
       }
     } else {
@@ -737,18 +546,15 @@
     
     modalBody.innerHTML = bodyHtml;
     
-    // Show modal using Bootstrap
     if (typeof $ !== 'undefined' && $.fn.modal) {
       $(modal).modal('show');
     } else {
-      // Fallback if jQuery/Bootstrap not available
       modal.style.display = 'block';
       modal.classList.add('show');
       document.body.classList.add('modal-open');
     }
   }
 
-  // Close modal when clicking outside
   document.addEventListener('click', function(e) {
     const modal = document.getElementById('newsModal');
     if (modal && modal.classList.contains('show')) {
@@ -765,7 +571,6 @@
     }
   });
 
-  // Export functions
   window.firebaseContent = {
     loadBlogs,
     loadFeaturedNews,
@@ -774,10 +579,6 @@
     updatePageContent,
     showNewsModal
   };
-  
-  console.log('✅ firebaseContent exportado:', window.firebaseContent);
-  console.log('✅ firebaseContent.loadFeaturedNews:', typeof window.firebaseContent.loadFeaturedNews);
-  console.log('✅ firebaseContent.renderBlogs:', typeof window.firebaseContent.renderBlogs);
 
 })();
 

@@ -131,7 +131,6 @@ Consejo: Evalúa tus herramientas tecnológicas y asegúrate de cumplir con el R
     ];
 
     try {
-      console.log('Iniciando agregado de noticias destacadas...');
       let successCount = 0;
       let errorCount = 0;
 
@@ -144,13 +143,13 @@ Consejo: Evalúa tus herramientas tecnológicas y asegúrate de cumplir con el R
             order: news.order,
             title: news.title,
             subtitle: news.subtitle,
-            description: news.subtitle, // Also set description for compatibility
+            description: news.subtitle,
             category: news.category,
             contentEs: contentDelta,
-            status: 'published', // Explicitly set as published
-            draft: false, // Explicitly set as not draft
-            hidden: false, // Explicitly set as not hidden
-            archived: false, // Explicitly set as not archived
+            status: 'published',
+            draft: false,
+            hidden: false,
+            archived: false,
             createdAt: firebase.firestore.Timestamp.fromDate(news.date),
             updatedAt: firebase.firestore.Timestamp.now(),
             authorId: user.uid
@@ -158,14 +157,11 @@ Consejo: Evalúa tus herramientas tecnológicas y asegúrate de cumplir con el R
 
           await db.collection('featuredNews').add(featuredData);
           successCount++;
-          console.log(`✓ Agregada: ${news.title} (Orden: ${news.order})`);
         } catch (error) {
           errorCount++;
-          console.error(`✗ Error al agregar "${news.title}":`, error);
+          console.error(`Error al agregar "${news.title}":`, error);
         }
       }
-
-      console.log(`\n✅ Proceso completado: ${successCount} noticias agregadas, ${errorCount} errores`);
       if (successCount === featuredNewsData.length) {
         alert('¡Todas las noticias destacadas se agregaron correctamente!');
         if (window.loadFeaturedNews) {
@@ -477,7 +473,6 @@ Consejo: Evalúa tus herramientas tecnológicas y asegúrate de cumplir con el R
       });
 
       await Promise.all(updatePromises);
-      console.log('Orden actualizado correctamente');
     } catch (error) {
       console.error('Error actualizando orden:', error);
       alert('Error al actualizar el orden. Recargando...');
@@ -676,19 +671,15 @@ Consejo: Evalúa tus herramientas tecnológicas y asegúrate de cumplir con el R
       };
 
       if (publish) {
-        // Publicar: establecer como publicado
         updateData.status = 'published';
         updateData.draft = false;
         updateData.hidden = false;
         updateData.archived = false;
       } else {
-        // Despublicar: marcar como borrador
         updateData.status = 'draft';
         updateData.draft = true;
-        // Mantener hidden y archived si ya estaban marcados
       }
 
-      console.log('Toggling publish status:', featuredId, publish, updateData);
       await db.collection('featuredNews').doc(featuredId).update(updateData);
       
       // Reload the list to reflect changes
@@ -736,7 +727,6 @@ Consejo: Evalúa tus herramientas tecnológicas y asegúrate de cumplir con el R
       }
       updateData.updatedAt = firebase.firestore.FieldValue.serverTimestamp();
 
-      console.log('Updating featured news:', featuredId, updateData);
       await db.collection('featuredNews').doc(featuredId).update(updateData);
       
       // Reload the list to reflect changes
@@ -756,7 +746,6 @@ Consejo: Evalúa tus herramientas tecnológicas y asegúrate de cumplir con el R
         throw new Error('Firebase no está inicializado');
       }
 
-      console.log('🔧 Fixing featured news status fields...');
       const snapshot = await db.collection('featuredNews').get();
       let fixedCount = 0;
 
@@ -764,7 +753,6 @@ Consejo: Evalúa tus herramientas tecnológicas y asegúrate de cumplir con el R
         const data = doc.data();
         const updates = {};
 
-        // If draft field is missing or undefined, set it based on status
         if (data.draft === undefined) {
           if (data.status === 'draft') {
             updates.draft = true;
@@ -773,7 +761,6 @@ Consejo: Evalúa tus herramientas tecnológicas y asegúrate de cumplir con el R
           }
         }
 
-        // If status field is missing or undefined, set it based on draft
         if (!data.status) {
           if (data.draft === true) {
             updates.status = 'draft';
@@ -782,17 +769,14 @@ Consejo: Evalúa tus herramientas tecnológicas y asegúrate de cumplir con el R
           }
         }
 
-        // If hidden field is missing, set it to false
         if (data.hidden === undefined) {
           updates.hidden = false;
         }
 
-        // If archived field is missing, set it to false
         if (data.archived === undefined) {
           updates.archived = false;
         }
 
-        // If description field is missing, use subtitle
         if (!data.description && data.subtitle) {
           updates.description = data.subtitle;
         }
@@ -800,11 +784,8 @@ Consejo: Evalúa tus herramientas tecnológicas y asegúrate de cumplir con el R
         if (Object.keys(updates).length > 0) {
           await db.collection('featuredNews').doc(doc.id).update(updates);
           fixedCount++;
-          console.log(`✓ Fixed: ${data.title || doc.id}`, updates);
         }
       }
-
-      console.log(`✅ Fixed ${fixedCount} of ${snapshot.size} featured news items`);
       alert(`Se actualizaron ${fixedCount} noticias destacadas. Recarga la página para ver los cambios.`);
       
       if (window.loadFeaturedNews) {
@@ -915,53 +896,39 @@ Consejo: Evalúa tus herramientas tecnológicas y asegúrate de cumplir con el R
         authorId: user.uid
       };
 
-      // Handle date - parse correctly from YYYY-MM-DD format
       let newsDate;
       if (dateInput && dateInput.length > 0) {
-        // Parse date from YYYY-MM-DD format
         const dateParts = dateInput.split('-');
         if (dateParts.length === 3) {
           const year = parseInt(dateParts[0], 10);
-          const month = parseInt(dateParts[1], 10) - 1; // Month is 0-indexed
+          const month = parseInt(dateParts[1], 10) - 1;
           const day = parseInt(dateParts[2], 10);
-          newsDate = new Date(year, month, day, 12, 0, 0, 0); // Set to noon to avoid timezone issues
-          console.log('📅 Fecha seleccionada:', dateInput, '->', newsDate);
+          newsDate = new Date(year, month, day, 12, 0, 0, 0);
         } else {
-          // Fallback: try to parse as-is
           newsDate = new Date(dateInput);
           newsDate.setHours(12, 0, 0, 0);
-          console.log('📅 Fecha parseada (fallback):', dateInput, '->', newsDate);
         }
       } else {
-        // Use current date
         newsDate = new Date();
         newsDate.setHours(12, 0, 0, 0);
-        console.log('📅 Usando fecha actual:', newsDate);
       }
 
-      // Validate date
       if (isNaN(newsDate.getTime())) {
-        console.error('❌ Fecha inválida:', dateInput);
         alert('La fecha seleccionada no es válida. Se usará la fecha actual.');
         newsDate = new Date();
         newsDate.setHours(12, 0, 0, 0);
       }
 
-      // Convert to Firestore Timestamp
       const createdAtTimestamp = firebase.firestore.Timestamp.fromDate(newsDate);
-      console.log('📅 Timestamp de Firestore:', createdAtTimestamp.toDate());
 
       if (!featuredId) {
-        // New item - use selected date or current date
         featuredData.order = order;
         featuredData.createdAt = createdAtTimestamp;
       } else {
-        // Update existing - update createdAt with new date
         featuredData.createdAt = createdAtTimestamp;
       }
 
       if (featuredId) {
-        // Update existing - preserve order
         const existingDoc = await db.collection('featuredNews').doc(featuredId).get();
         if (existingDoc.exists) {
           featuredData.order = existingDoc.data().order || 0;
@@ -969,12 +936,10 @@ Consejo: Evalúa tus herramientas tecnológicas y asegúrate de cumplir con el R
         await db.collection('featuredNews').doc(featuredId).update(featuredData);
         alert('Noticia destacada actualizada correctamente');
       } else {
-        // Create new
         await db.collection('featuredNews').add(featuredData);
         alert('Noticia destacada agregada correctamente');
       }
 
-      // Close modal and reload
       $('#featuredNewsModal').modal('hide');
       loadFeaturedNews();
     } catch (error) {
