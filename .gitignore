@@ -1,6 +1,6 @@
-# Dependencies
+# Dependencies (NO NECESARIOS EN PRODUCCIÓN)
 node_modules/
-vendor/
+# vendor/ - SÍ NECESARIO EN PRODUCCIÓN (Bootstrap, jQuery, FontAwesome)
 
 # Build outputs
 dist/
@@ -49,3 +49,88 @@ firestore-debug.log
 # Backup files
 *.bak
 *.backup
+
+# ============================================
+# ARCHIVOS DE DESARROLLO (NO NECESARIOS EN PRODUCCIÓN)
+# ============================================
+
+# Archivos fuente SCSS (ya tienes CSS compilado)
+scss/
+
+# Herramientas de desarrollo
+gulpfile.js
+package.json
+package-lock.json
+
+# Source maps (no necesarios en producción)
+*.map
+**/*.map
+
+# Archivos fuente JS (ya tienes .min.js compilados)
+# NOTA: contact_me.js y jqBootstrapValidation.js NO tienen .min, así que SÍ se necesitan
+js/clean-blog.js
+js/firebase-content.js
+js/firebase-init.js
+js/i18n.js
+js/load-components.js
+
+# Archivos fuente CSS (ya tienes .min.css)
+css/clean-blog.css
+
+# ============================================
+# DOCUMENTACIÓN (NO NECESARIA EN PRODUCCIÓN)
+# ============================================
+
+# Documentación general
+README.md
+*.md
+!admin/README.md
+
+# Documentación del admin (opcional, comentar si quieres mantenerla)
+admin/*.md
+admin/README-ACCESS.md
+admin/README.md
+admin/ACTUALIZAR-REGLAS*.md
+admin/IMPORTAR-BLOGS.md
+admin/CONFIGURACION-SEGURA.md
+admin/SECURITY.md
+admin/SETUP.md
+admin/SOLUCION-PERMISOS.md
+admin/check-firestore-rules.md
+
+# Archivos de reglas de Firestore (documentación)
+admin/*.txt
+admin/REGLAS*.txt
+admin/firestore-rules*.txt
+
+# Archivos de ejemplo
+admin/firebase-config.example.js
+
+# ============================================
+# ARCHIVOS DE DESARROLLO/DEBUG (NO NECESARIOS)
+# ============================================
+
+# Archivos de debug y test
+admin/debug-firebase.html
+admin/test-firebase.html
+admin/setup-firebase.html
+
+# Archivos de importación (solo para setup inicial)
+admin/add-featured-news.html
+admin/import-blogs-once.html
+admin/import-from-pages-now.html
+admin/import-blogs.js
+admin/import-from-pages.js
+
+# ============================================
+# ARCHIVOS OPCIONALES (COMENTAR SI LOS NECESITAS)
+# ============================================
+
+# Posts estáticos (si no los usas, descomenta)
+# posts/
+
+# Archivos de configuración del admin (si quieres mantenerlos, comenta estas líneas)
+# admin/firebase-config.js
+# admin/init-firebase.js
+mail/contact_me.php
+mail/config.php

@@ -1,0 +1,18 @@
+<?php
+return [
+    'smtp' => [
+        'host' => 'smtp.dondominio.com',
+        'port' => 587,
+        'secure' => 'tls',
+        'username' => 'contacto@guestentry.es',
+        'password' => 'CHANGEME',
+        'from_email' => 'contacto@guestentry.es',
+        'from_name' => 'Sercon Gestoría',
+    ],
+    'to' => [
+        'email' => 'iagosantospardo@gmail.com',
+        'name' => 'Iago Santos Pardo',
+    ]
+];
+?>
+
