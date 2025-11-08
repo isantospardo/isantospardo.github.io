@@ -3,6 +3,8 @@
 
 (function() {
   'use strict';
+  
+  console.log('📦 firebase-content.js cargado');
 
   // Initialize Firebase (use same config as admin)
   // Make sure to include this in your HTML pages that need dynamic content
@@ -126,7 +128,6 @@
         
         // Check if explicitly excluded
         // Match admin logic exactly: published = NOT archived AND NOT hidden AND NOT draft
-        // Admin logic: if (isArchived) archived, else if (isHidden) hidden, else if (isDraft) drafts, else published
         const isDraft = statusValue === 'draft' || draftValue === true;
         const isHidden = hiddenValue === true;
         const isArchived = archivedValue === true;
@@ -134,6 +135,18 @@
         // Include if NOT archived AND NOT hidden AND NOT draft
         // This matches the admin logic exactly
         const shouldInclude = !isArchived && !isHidden && !isDraft;
+        
+        console.log('🔍 FILTRO DEBUG:', {
+          title: featured.title || 'Sin título',
+          draftValue: draftValue,
+          statusValue: statusValue,
+          hiddenValue: hiddenValue,
+          archivedValue: archivedValue,
+          isDraft: isDraft,
+          isHidden: isHidden,
+          isArchived: isArchived,
+          shouldInclude: shouldInclude
+        });
         
         console.log('📄 News:', {
           id: doc.id,
@@ -253,17 +266,24 @@
         blogs = await loadFeaturedNews();
         console.log('✅ Featured news loaded for rendering:', blogs.length, 'items');
         console.log('📦 Full blogs array:', blogs);
+        console.log('📦 Full blogs array (JSON):', JSON.stringify(blogs, null, 2));
         if (blogs.length > 0) {
           console.log('📰 Titles:', blogs.map(b => b.title || b.titleEs));
           console.log('📰 First blog:', blogs[0]);
+          console.log('📰 First blog (JSON):', JSON.stringify(blogs[0], null, 2));
         } else {
           console.warn('⚠️ NO BLOGS TO RENDER - showing empty state');
+          console.warn('⚠️ DEBUG: Verificando por qué no hay blogs...');
+          console.warn('⚠️ DEBUG: useFeatured =', useFeatured);
+          console.warn('⚠️ DEBUG: loadFeaturedNews returned:', blogs);
         }
       } else {
         blogs = await loadBlogs(category);
       }
       
       console.log('📊 Total blogs to render:', blogs.length);
+      console.log('📊 Blogs array type:', typeof blogs);
+      console.log('📊 Blogs is array?', Array.isArray(blogs));
       
       if (blogs.length === 0) {
         console.warn('⚠️ No blogs to display, showing empty state');
@@ -314,16 +334,52 @@
         return;
       }
 
+      // Determine column size based on number of blogs
+      let colClass = 'col-lg-4 col-md-6'; // Default: 3 per row
+      if (blogs.length === 1) {
+        colClass = 'col-lg-12 col-md-12'; // 1 per row (full width)
+      } else if (blogs.length === 2) {
+        colClass = 'col-lg-6 col-md-6'; // 2 per row
+      } else if (blogs.length === 3) {
+        colClass = 'col-lg-4 col-md-6'; // 3 per row
+      } else if (blogs.length === 4) {
+        colClass = 'col-lg-3 col-md-6'; // 4 per row on large, 2 per row on medium
+      } else if (blogs.length >= 5) {
+        colClass = 'col-lg-4 col-md-6'; // 3 per row for 5+
+      }
+      
       let html = '<div class="row">';
       blogs.forEach((blog, index) => {
         // Handle both blog format (titleEs) and featured news format (title)
         const title = blog.title || blog.titleEs || 'Sin título';
         const subtitle = blog.subtitle || blog.description || blog.subtitleEs || '';
-        const date = blog.createdAt ? blog.createdAt.toLocaleDateString('es-ES', {
-          year: 'numeric',
-          month: 'short',
-          day: 'numeric'
-        }) : '';
+        
+        // Convert Firestore Timestamp to Date and format
+        let date = '';
+        if (blog.createdAt) {
+          let dateObj;
+          if (blog.createdAt.toDate) {
+            // Firestore Timestamp
+            dateObj = blog.createdAt.toDate();
+          } else if (blog.createdAt instanceof Date) {
+            // Already a Date object
+            dateObj = blog.createdAt;
+          } else if (blog.createdAt.seconds) {
+            // Timestamp with seconds property
+            dateObj = new Date(blog.createdAt.seconds * 1000);
+          } else {
+            // Try to parse as Date
+            dateObj = new Date(blog.createdAt);
+          }
+          
+          if (dateObj && !isNaN(dateObj.getTime())) {
+            date = dateObj.toLocaleDateString('es-ES', {
+              year: 'numeric',
+              month: 'short',
+              day: 'numeric'
+            });
+          }
+        }
 
         // Convert Quill Delta to HTML (simplified)
         let contentHtml = '';
@@ -343,6 +399,9 @@
           excerpt = 'Sin descripción disponible.';
         }
         
+        // Escape HTML for data attributes
+        const escapedContentHtml = contentHtml.replace(/"/g, '&quot;').replace(/'/g, '&#39;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        
         // Category colors and icons
         const categoryInfo = {
           'fiscal': { color: 'primary', icon: 'calculator', name: 'Fiscal' },
@@ -353,35 +412,61 @@
         };
         const catInfo = categoryInfo[blog.category?.toLowerCase()] || categoryInfo.general;
         
-        // Render as small vignette/card
+        // Render as attractive card with gradient and better styling
+        const gradientColors = {
+          'primary': 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+          'success': 'linear-gradient(135deg, #11998e 0%, #38ef7d 100%)',
+          'warning': 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
+          'info': 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
+          'secondary': 'linear-gradient(135deg, #fa709a 0%, #fee140 100%)'
+        };
+        const gradient = gradientColors[catInfo.color] || gradientColors.secondary;
+        
         html += `
-          <div class="col-lg-4 col-md-6 mb-3" data-aos="fade-up" data-aos-delay="${index * 100}">
-            <article class="featured-news-card card h-100 shadow-sm border-0" style="transition: transform 0.2s ease, box-shadow 0.2s ease; cursor: pointer;" onclick="window.location.href='blog.html?id=${blog.id}'">
-              <div class="card-body p-3">
-                <div class="d-flex align-items-start mb-2">
-                  <div class="flex-grow-1">
-                    <div class="d-flex align-items-center mb-2">
-                      <span class="badge badge-${catInfo.color} px-2 py-1 mr-2" style="font-size: 0.7rem; font-weight: 600;">
-                        <i class="fas fa-${catInfo.icon} mr-1"></i> ${catInfo.name}
-                      </span>
-                      ${date ? `
-                      <small class="text-muted" style="font-size: 0.75rem;">
-                        <i class="far fa-calendar-alt mr-1"></i>${date}
-                      </small>
-                      ` : ''}
-                    </div>
-                    <h5 class="card-title mb-2" style="font-size: 1rem; font-weight: 600; line-height: 1.3; color: #2c3e50; margin: 0;">
-                      ${title}
-                    </h5>
-                  </div>
+          <div class="${colClass} mb-4" data-aos="fade-up" data-aos-delay="${index * 100}">
+            <article class="featured-news-card card h-100 shadow-lg border-0 overflow-hidden" style="transition: all 0.3s ease; border-radius: 15px;">
+              <!-- Card Header with Gradient -->
+              <div class="card-header border-0 p-0" style="background: ${gradient}; height: 8px;"></div>
+              
+              <!-- Card Body -->
+              <div class="card-body p-4">
+                <!-- Category Badge -->
+                <div class="mb-3">
+                  <span class="badge badge-${catInfo.color} px-3 py-2" style="font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; border-radius: 20px;">
+                    <i class="fas fa-${catInfo.icon} mr-1"></i> ${catInfo.name}
+                  </span>
                 </div>
-                <p class="card-text text-muted mb-2" style="font-size: 0.85rem; line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">
+                
+                <!-- Title -->
+                <h4 class="card-title mb-3" style="font-size: 1.15rem; font-weight: 700; line-height: 1.4; color: #2c3e50; min-height: 3.2em;">
+                  ${title}
+                </h4>
+                
+                <!-- Date -->
+                ${date ? `
+                <div class="mb-3">
+                  <small class="text-muted" style="font-size: 0.8rem;">
+                    <i class="far fa-calendar-alt mr-1"></i>${date}
+                  </small>
+                </div>
+                ` : ''}
+                
+                <!-- Excerpt -->
+                <p class="card-text text-muted mb-4" style="font-size: 0.9rem; line-height: 1.6; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; min-height: 4.8em;">
                   ${excerpt}
                 </p>
-                <div class="d-flex justify-content-between align-items-center mt-2">
-                  <a href="blog.html?id=${blog.id}" class="btn btn-sm btn-outline-${catInfo.color}" style="font-size: 0.8rem; padding: 0.25rem 0.75rem; border-radius: 15px;" onclick="event.stopPropagation();">
-                    Leer más <i class="fas fa-arrow-right ml-1" style="font-size: 0.7rem;"></i>
-                  </a>
+                
+                <!-- Read More Button -->
+                <div class="mt-auto">
+                  <button class="btn btn-${catInfo.color} leer-mas-btn w-100" style="font-size: 0.9rem; padding: 0.6rem 1.5rem; border-radius: 25px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(0,0,0,0.1);" 
+                          data-news-id="${blog.id}" 
+                          data-news-title="${title.replace(/"/g, '&quot;')}" 
+                          data-news-subtitle="${subtitle.replace(/"/g, '&quot;')}" 
+                          data-news-category="${catInfo.name}" 
+                          data-news-date="${date}" 
+                          data-news-content="${escapedContentHtml}">
+                    Leer más <i class="fas fa-arrow-right ml-2"></i>
+                  </button>
                 </div>
               </div>
             </article>
@@ -391,21 +476,59 @@
       html += '</div>';
       
       console.log('✅ Rendering', blogs.length, 'blogs to container');
+      console.log('📝 HTML to render (first 500 chars):', html.substring(0, 500));
       // Clear and set new content
       container.innerHTML = '';
       container.innerHTML = html;
       console.log('✅ Content rendered successfully');
+      console.log('📦 Container innerHTML length:', container.innerHTML.length);
+      console.log('📦 Container children count:', container.children.length);
+      
+      // Verificar que el HTML se insertó correctamente
+      const renderedCards = container.querySelectorAll('.featured-news-card');
+      console.log('📦 Rendered cards count:', renderedCards.length);
+      if (renderedCards.length === 0) {
+        console.error('❌ ERROR: No se renderizaron cards!');
+        console.error('❌ HTML generado:', html);
+      }
 
       // Add hover effects to featured news cards
       const featuredCards = container.querySelectorAll('.featured-news-card');
       featuredCards.forEach(card => {
         card.addEventListener('mouseenter', function() {
-          this.style.transform = 'translateY(-3px)';
-          this.style.boxShadow = '0 4px 12px rgba(0,0,0,0.15)';
+          this.style.transform = 'translateY(-8px) scale(1.02)';
+          this.style.boxShadow = '0 12px 30px rgba(0,0,0,0.2)';
+          const btn = this.querySelector('.leer-mas-btn');
+          if (btn) {
+            btn.style.transform = 'scale(1.05)';
+            btn.style.boxShadow = '0 6px 20px rgba(0,0,0,0.2)';
+          }
         });
         card.addEventListener('mouseleave', function() {
-          this.style.transform = 'translateY(0)';
+          this.style.transform = 'translateY(0) scale(1)';
           this.style.boxShadow = '';
+          const btn = this.querySelector('.leer-mas-btn');
+          if (btn) {
+            btn.style.transform = 'scale(1)';
+            btn.style.boxShadow = '0 4px 15px rgba(0,0,0,0.1)';
+          }
+        });
+      });
+
+      // Add click handlers to "Leer más" buttons
+      const leerMasButtons = container.querySelectorAll('.leer-mas-btn');
+      leerMasButtons.forEach(btn => {
+        btn.addEventListener('click', function(e) {
+          e.stopPropagation();
+          const newsId = this.getAttribute('data-news-id');
+          const newsTitle = this.getAttribute('data-news-title');
+          const newsSubtitle = this.getAttribute('data-news-subtitle');
+          const newsCategory = this.getAttribute('data-news-category');
+          const newsDate = this.getAttribute('data-news-date');
+          const newsContent = this.getAttribute('data-news-content');
+          
+          // Show modal with news content
+          showNewsModal(newsTitle, newsSubtitle, newsCategory, newsDate, newsContent);
         });
       });
 
@@ -554,14 +677,107 @@
     });
   }
 
+  // Show news modal
+  function showNewsModal(title, subtitle, category, date, content) {
+    const modal = document.getElementById('newsModal');
+    const modalTitle = document.getElementById('newsModalLabel');
+    const modalBody = document.getElementById('newsModalBody');
+    
+    if (!modal || !modalTitle || !modalBody) {
+      console.error('Modal elements not found');
+      return;
+    }
+    
+    // Set title
+    modalTitle.textContent = title;
+    
+    // Build body content
+    let bodyHtml = '';
+    
+    // Category and date
+    bodyHtml += '<div class="mb-3">';
+    if (category) {
+      const categoryColors = {
+        'Fiscal': 'primary',
+        'Laboral': 'success',
+        'Legal': 'warning',
+        'Sucesiones': 'info'
+      };
+      const categoryColor = categoryColors[category] || 'secondary';
+      bodyHtml += `<span class="badge badge-${categoryColor} mr-2">${category}</span>`;
+    }
+    if (date) {
+      bodyHtml += `<small class="text-muted"><i class="far fa-calendar-alt mr-1"></i>${date}</small>`;
+    }
+    bodyHtml += '</div>';
+    
+    // Subtitle
+    if (subtitle) {
+      bodyHtml += `<p class="lead text-muted mb-4">${subtitle}</p>`;
+    }
+    
+    // Content with better styling
+    if (content) {
+      try {
+        // Unescape HTML (reverse of escaping)
+        let contentHtml = content
+          .replace(/&quot;/g, '"')
+          .replace(/&#39;/g, "'")
+          .replace(/&lt;/g, '<')
+          .replace(/&gt;/g, '>');
+        
+        bodyHtml += `<div class="news-content" style="line-height: 1.9; font-size: 1.05rem; color: #495057; text-align: justify;">${contentHtml}</div>`;
+      } catch (e) {
+        console.error('Error processing content:', e);
+        bodyHtml += `<div class="news-content" style="line-height: 1.9; font-size: 1.05rem; color: #495057; text-align: justify;">${content}</div>`;
+      }
+    } else {
+      bodyHtml += '<p class="text-muted">No hay contenido disponible.</p>';
+    }
+    
+    modalBody.innerHTML = bodyHtml;
+    
+    // Show modal using Bootstrap
+    if (typeof $ !== 'undefined' && $.fn.modal) {
+      $(modal).modal('show');
+    } else {
+      // Fallback if jQuery/Bootstrap not available
+      modal.style.display = 'block';
+      modal.classList.add('show');
+      document.body.classList.add('modal-open');
+    }
+  }
+
+  // Close modal when clicking outside
+  document.addEventListener('click', function(e) {
+    const modal = document.getElementById('newsModal');
+    if (modal && modal.classList.contains('show')) {
+      // Check if click is outside modal content
+      if (e.target === modal) {
+        if (typeof $ !== 'undefined' && $.fn.modal) {
+          $(modal).modal('hide');
+        } else {
+          modal.style.display = 'none';
+          modal.classList.remove('show');
+          document.body.classList.remove('modal-open');
+        }
+      }
+    }
+  });
+
   // Export functions
   window.firebaseContent = {
     loadBlogs,
     loadFeaturedNews,
     loadPageContent,
     renderBlogs,
-    updatePageContent
+    updatePageContent,
+    showNewsModal
   };
+  
+  console.log('✅ firebaseContent exportado:', window.firebaseContent);
+  console.log('✅ firebaseContent.loadFeaturedNews:', typeof window.firebaseContent.loadFeaturedNews);
+  console.log('✅ firebaseContent.renderBlogs:', typeof window.firebaseContent.renderBlogs);
 
 })();
 

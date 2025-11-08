@@ -14,6 +14,20 @@ service cloud.firestore {
       allow create, update, delete: if request.auth != null;
     }
     
+    // Featured News: lectura pública de publicadas, escritura solo autenticados
+    match /featuredNews/{newsId} {
+      // Permitir lectura pública de noticias publicadas
+      // Permite leer si: status='published' O (no está draft Y no está hidden Y no está archived)
+      allow read: if resource.data.status == 'published' || 
+                     (!resource.data.draft && 
+                      !resource.data.hidden && 
+                      !resource.data.archived) ||
+                     request.auth != null;
+      
+      // Permitir escritura solo a usuarios autenticados
+      allow create, update, delete: if request.auth != null;
+    }
+    
     // Page Content: lectura pública, escritura solo autenticados
     match /pageContent/{contentId} {
       allow read: if true; // Lectura pública

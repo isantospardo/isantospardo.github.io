@@ -508,6 +508,26 @@
     </div>
   </section>
 
+  <!-- Modal para mostrar noticia completa -->
+  <div class="modal fade" id="newsModal" tabindex="-1" role="dialog" aria-labelledby="newsModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document" style="max-width: 800px;">
+      <div class="modal-content" style="border-radius: 15px; border: none; box-shadow: 0 10px 40px rgba(0,0,0,0.2);">
+        <div class="modal-header border-0 pb-0" style="padding: 2rem 2rem 1rem 2rem;">
+          <h4 class="modal-title" id="newsModalLabel" style="font-weight: 700; color: #2c3e50;"></h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="font-size: 1.5rem; opacity: 0.5;">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body" id="newsModalBody" style="padding: 0 2rem 2rem 2rem; max-height: 70vh; overflow-y: auto;">
+          <!-- Contenido se carga dinámicamente -->
+        </div>
+        <div class="modal-footer border-0 pt-0" style="padding: 0 2rem 2rem 2rem;">
+          <button type="button" class="btn btn-secondary btn-lg" data-dismiss="modal" style="border-radius: 25px; padding: 0.6rem 2rem; font-weight: 600;">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Call to Action Section -->
   <section class="cta-section py-5" style="background: linear-gradient(135deg, #007f7e 0%, #005f5e 100%); color: white;">
     <div class="container">
@@ -614,26 +634,42 @@
   <script src="js/i18n.js"></script>
   
   <!-- Firebase Content Loader -->
-  <script src="js/firebase-content.js?v=2"></script>
+  <script src="js/firebase-content.js?v=3"></script>
   
   <!-- Load Featured News Dynamically -->
   <script>
     console.log('🚀 INICIANDO CARGA DE NOTICIAS DESTACADAS');
+    console.log('🚀 Script ejecutándose...');
+    console.log('🚀 window.firebaseServices:', window.firebaseServices);
+    console.log('🚀 window.firebaseContent:', window.firebaseContent);
+    
+    // Bandera para evitar cargas múltiples
+    let noticiasCargadas = false;
+    let cargandoNoticias = false;
     
     // Función directa para cargar y mostrar noticias
     async function cargarNoticias() {
+      // Evitar cargas múltiples
+      if (noticiasCargadas || cargandoNoticias) {
+        console.log('⏭️ Noticias ya cargadas o cargando, saltando...');
+        return;
+      }
+      
+      cargandoNoticias = true;
       console.log('🔄 cargarNoticias() ejecutada');
       
       const container = document.getElementById('blogsContainer');
       if (!container) {
         console.error('❌ Contenedor no encontrado');
+        cargandoNoticias = false;
         return;
       }
-      console.log('✅ Contenedor encontrado');
+      console.log('✅ Contenedor encontrado:', container);
       
       // Verificar Firebase
       if (!window.firebaseServices || !window.firebaseServices.db) {
         console.warn('⏳ Firebase no listo, reintentando...');
+        cargandoNoticias = false;
         setTimeout(cargarNoticias, 500);
         return;
       }
@@ -642,23 +678,33 @@
       // Verificar firebaseContent
       if (!window.firebaseContent || !window.firebaseContent.renderBlogs) {
         console.warn('⏳ firebaseContent no listo, reintentando...');
+        console.warn('⏳ firebaseContent:', window.firebaseContent);
+        cargandoNoticias = false;
         setTimeout(cargarNoticias, 500);
         return;
       }
       console.log('✅ firebaseContent listo');
+      console.log('✅ firebaseContent.renderBlogs:', typeof window.firebaseContent.renderBlogs);
       
       // Renderizar
       console.log('✅ Renderizando noticias...');
+      console.log('✅ Llamando a renderBlogs con:', { containerId: 'blogsContainer', category: null, useFeatured: true });
       try {
-        await window.firebaseContent.renderBlogs('blogsContainer', null, true);
-        console.log('✅ COMPLETADO!');
+        const result = await window.firebaseContent.renderBlogs('blogsContainer', null, true);
+        console.log('✅ COMPLETADO! Result:', result);
+        console.log('✅ Container después de render:', container.innerHTML.length, 'caracteres');
+        noticiasCargadas = true;
       } catch (error) {
         console.error('❌ ERROR:', error);
-        container.innerHTML = '<div class="col-12 text-center"><p class="text-danger">Error: ' + error.message + '</p></div>';
+        console.error('❌ ERROR stack:', error.stack);
+        console.error('❌ ERROR message:', error.message);
+        container.innerHTML = '<div class="col-12 text-center"><p class="text-danger">Error: ' + error.message + '</p><pre>' + error.stack + '</pre></div>';
+      } finally {
+        cargandoNoticias = false;
       }
     }
     
-    // Ejecutar cuando la página cargue
+    // Ejecutar cuando la página cargue (solo una vez)
     if (document.readyState === 'loading') {
       document.addEventListener('DOMContentLoaded', function() {
         console.log('✅ DOMContentLoaded');
@@ -669,26 +715,43 @@
       setTimeout(cargarNoticias, 1000);
     }
     
-    window.addEventListener('load', function() {
-      console.log('✅ Window load');
-      setTimeout(cargarNoticias, 2000);
-    });
-    
-    // Debug function
+    // Debug function mejorada
     window.debugFeaturedNews = async function() {
+      console.log('🔍 DEBUG: Iniciando debugFeaturedNews...');
       if (!window.firebaseServices || !window.firebaseServices.db) {
         console.error('❌ Firebase no inicializado');
+        console.error('❌ window.firebaseServices:', window.firebaseServices);
         return;
       }
       try {
+        console.log('🔍 DEBUG: Obteniendo snapshot...');
         const snapshot = await window.firebaseServices.db.collection('featuredNews').get();
-        console.log('📦 Total:', snapshot.size);
+        console.log('📦 Total en BD:', snapshot.size);
+        if (snapshot.size === 0) {
+          console.warn('⚠️ No hay noticias en la base de datos!');
+          return;
+        }
         snapshot.forEach(doc => {
           const data = doc.data();
-          console.log('📄', doc.id, '-', data.title);
+          console.log('📄', doc.id, '-', data.title || 'Sin título');
+          console.log('   - draft:', data.draft);
+          console.log('   - status:', data.status);
+          console.log('   - hidden:', data.hidden);
+          console.log('   - archived:', data.archived);
         });
+        
+        // También probar loadFeaturedNews
+        console.log('🔍 DEBUG: Probando loadFeaturedNews...');
+        if (window.firebaseContent && window.firebaseContent.loadFeaturedNews) {
+          const featured = await window.firebaseContent.loadFeaturedNews();
+          console.log('📦 loadFeaturedNews retornó:', featured.length, 'items');
+          featured.forEach(item => {
+            console.log('   ✅', item.title || 'Sin título');
+          });
+        }
       } catch (error) {
         console.error('❌ Error:', error);
+        console.error('❌ Error stack:', error.stack);
       }
     };
   </script>

@@ -529,6 +529,11 @@ Consejo: Evalúa tus herramientas tecnológicas y asegúrate de cumplir con el R
                   </select>
                 </div>
                 <div class="form-group">
+                  <label for="featuredNewsDate">Fecha de Publicación</label>
+                  <input type="date" class="form-control" id="featuredNewsDate">
+                  <small class="form-text text-muted">Si no se especifica, se usará la fecha actual</small>
+                </div>
+                <div class="form-group">
                   <label for="featuredNewsContent">Texto</label>
                   <div id="featuredNewsContent" style="height: 300px;"></div>
                 </div>
@@ -582,6 +587,17 @@ Consejo: Evalúa tus herramientas tecnológicas y asegúrate de cumplir con el R
       document.getElementById('featuredNewsDescription').value = '';
       document.getElementById('featuredNewsCategory').value = 'fiscal';
       document.getElementById('featuredNewsDraft').checked = false; // Default to published (not draft)
+      
+      // Set date to today
+      const dateInput = document.getElementById('featuredNewsDate');
+      if (dateInput) {
+        const today = new Date();
+        const year = today.getFullYear();
+        const month = String(today.getMonth() + 1).padStart(2, '0');
+        const day = String(today.getDate()).padStart(2, '0');
+        dateInput.value = `${year}-${month}-${day}`;
+      }
+      
       featuredNewsQuillEditor.setContents([]);
     }
 
@@ -610,6 +626,27 @@ Consejo: Evalúa tus herramientas tecnológicas y asegúrate de cumplir con el R
       document.getElementById('featuredNewsDescription').value = data.subtitle || data.description || '';
       document.getElementById('featuredNewsCategory').value = data.category || 'fiscal';
       document.getElementById('featuredNewsDraft').checked = data.draft === true || data.status === 'draft';
+      
+      // Set date field
+      const dateInput = document.getElementById('featuredNewsDate');
+      if (dateInput) {
+        if (data.createdAt) {
+          // Convert Firestore Timestamp to Date
+          const date = data.createdAt.toDate ? data.createdAt.toDate() : new Date(data.createdAt);
+          // Format as YYYY-MM-DD for date input
+          const year = date.getFullYear();
+          const month = String(date.getMonth() + 1).padStart(2, '0');
+          const day = String(date.getDate()).padStart(2, '0');
+          dateInput.value = `${year}-${month}-${day}`;
+        } else {
+          // Default to today
+          const today = new Date();
+          const year = today.getFullYear();
+          const month = String(today.getMonth() + 1).padStart(2, '0');
+          const day = String(today.getDate()).padStart(2, '0');
+          dateInput.value = `${year}-${month}-${day}`;
+        }
+      }
       
       if (featuredNewsQuillEditor && data.contentEs) {
         featuredNewsQuillEditor.setContents(data.contentEs);
@@ -812,6 +849,8 @@ Consejo: Evalúa tus herramientas tecnológicas y asegúrate de cumplir con el R
     const description = document.getElementById('featuredNewsDescription').value.trim();
     const category = document.getElementById('featuredNewsCategory').value;
     const draft = document.getElementById('featuredNewsDraft').checked;
+    const dateInputElement = document.getElementById('featuredNewsDate');
+    const dateInput = dateInputElement ? dateInputElement.value.trim() : '';
     
     // Get Quill Delta and convert to plain object for Firebase
     let contentEs = { ops: [] };
@@ -876,9 +915,49 @@ Consejo: Evalúa tus herramientas tecnológicas y asegúrate de cumplir con el R
         authorId: user.uid
       };
 
+      // Handle date - parse correctly from YYYY-MM-DD format
+      let newsDate;
+      if (dateInput && dateInput.length > 0) {
+        // Parse date from YYYY-MM-DD format
+        const dateParts = dateInput.split('-');
+        if (dateParts.length === 3) {
+          const year = parseInt(dateParts[0], 10);
+          const month = parseInt(dateParts[1], 10) - 1; // Month is 0-indexed
+          const day = parseInt(dateParts[2], 10);
+          newsDate = new Date(year, month, day, 12, 0, 0, 0); // Set to noon to avoid timezone issues
+          console.log('📅 Fecha seleccionada:', dateInput, '->', newsDate);
+        } else {
+          // Fallback: try to parse as-is
+          newsDate = new Date(dateInput);
+          newsDate.setHours(12, 0, 0, 0);
+          console.log('📅 Fecha parseada (fallback):', dateInput, '->', newsDate);
+        }
+      } else {
+        // Use current date
+        newsDate = new Date();
+        newsDate.setHours(12, 0, 0, 0);
+        console.log('📅 Usando fecha actual:', newsDate);
+      }
+
+      // Validate date
+      if (isNaN(newsDate.getTime())) {
+        console.error('❌ Fecha inválida:', dateInput);
+        alert('La fecha seleccionada no es válida. Se usará la fecha actual.');
+        newsDate = new Date();
+        newsDate.setHours(12, 0, 0, 0);
+      }
+
+      // Convert to Firestore Timestamp
+      const createdAtTimestamp = firebase.firestore.Timestamp.fromDate(newsDate);
+      console.log('📅 Timestamp de Firestore:', createdAtTimestamp.toDate());
+
       if (!featuredId) {
+        // New item - use selected date or current date
         featuredData.order = order;
-        featuredData.createdAt = firebase.firestore.FieldValue.serverTimestamp();
+        featuredData.createdAt = createdAtTimestamp;
+      } else {
+        // Update existing - update createdAt with new date
+        featuredData.createdAt = createdAtTimestamp;
       }
 
       if (featuredId) {
