@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Importar Blogs desde Páginas HTML - Sercon Gestoría</title>
+  
+  <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+  
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+  
+  <style>
+    body { background-color: #f5f5f5; padding: 2rem; }
+    .card { border: none; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); margin-bottom: 2rem; }
+    .log-container { max-height: 500px; overflow-y: auto; background: #f8f9fa; padding: 1rem; border-radius: 4px; font-family: monospace; font-size: 0.9rem; }
+    .log-success { color: #28a745; }
+    .log-error { color: #dc3545; }
+    .log-info { color: #007bff; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-10">
+        <div class="card">
+          <div class="card-header bg-primary text-white">
+            <h3 class="mb-0"><i class="fas fa-download mr-2"></i> Importar Blogs desde Páginas HTML</h3>
+          </div>
+          <div class="card-body">
+            <p class="lead">Este script extraerá el contenido hardcodeado de las páginas HTML y lo importará a Firebase.</p>
+            
+            <div id="loginSection" class="mb-4">
+              <h5>Iniciar Sesión</h5>
+              <form id="loginForm">
+                <div class="form-group">
+                  <label>Email</label>
+                  <input type="email" class="form-control" id="email" required>
+                </div>
+                <div class="form-group">
+                  <label>Contraseña</label>
+                  <input type="password" class="form-control" id="password" required>
+                </div>
+                <button type="submit" class="btn btn-primary">
+                  <i class="fas fa-sign-in-alt mr-2"></i> Iniciar Sesión
+                </button>
+              </form>
+              <div id="loginError" class="alert alert-danger mt-3" style="display: none;"></div>
+            </div>
+            
+            <div id="importSection" style="display: none;">
+              <button id="startImportBtn" class="btn btn-success btn-lg mb-4">
+                <i class="fas fa-play mr-2"></i> Iniciar Importación
+              </button>
+              
+              <div class="log-container" id="logContainer">
+                <div class="log-info">Esperando inicio de importación...</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <script src="firebase-config.local.js" onerror="console.info('firebase-config.local.js not found')"></script>
+  <script src="firebase-config.js"></script>
+  
+  <script>
+    const { auth, db } = window.firebaseServices;
+    
+    // Login
+    document.getElementById('loginForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      const errorDiv = document.getElementById('loginError');
+      
+      try {
+        await auth.signInWithEmailAndPassword(email, password);
+        errorDiv.style.display = 'none';
+        document.getElementById('loginSection').style.display = 'none';
+        document.getElementById('importSection').style.display = 'block';
+        addLog('✅ Sesión iniciada correctamente', 'success');
+      } catch (error) {
+        errorDiv.textContent = error.message;
+        errorDiv.style.display = 'block';
+      }
+    });
+    
+    function addLog(message, type = 'info') {
+      const logContainer = document.getElementById('logContainer');
+      const logClass = `log-${type}`;
+      const timestamp = new Date().toLocaleTimeString();
+      logContainer.innerHTML += `<div class="${logClass}">[${timestamp}] ${message}</div>`;
+      logContainer.scrollTop = logContainer.scrollHeight;
+    }
+    
+    // HTML to Quill Delta
+    function htmlToQuillDelta(html) {
+      if (!html || html.trim() === '') {
+        return { ops: [{ insert: '\n' }] };
+      }
+      
+      const tempDiv = document.createElement('div');
+      tempDiv.innerHTML = html;
+      
+      const ops = [];
+      
+      function processNode(node) {
+        if (node.nodeType === 3) {
+          const text = node.textContent;
+          if (text.trim()) {
+            ops.push({ insert: text });
+          }
+        } else if (node.nodeType === 1) {
+          const tagName = node.tagName.toLowerCase();
+          
+          if (tagName === 'p') {
+            if (ops.length > 0 && ops[ops.length - 1].insert !== '\n') {
+              ops.push({ insert: '\n' });
+            }
+            Array.from(node.childNodes).forEach(processNode);
+            ops.push({ insert: '\n' });
+          } else if (tagName === 'h1' || tagName === 'h2' || tagName === 'h3' || tagName === 'h4') {
+            if (ops.length > 0 && ops[ops.length - 1].insert !== '\n') {
+              ops.push({ insert: '\n' });
+            }
+            const level = parseInt(tagName.charAt(1));
+            Array.from(node.childNodes).forEach(processNode);
+            ops.push({ insert: '\n', attributes: { header: level } });
+          } else if (tagName === 'strong' || tagName === 'b') {
+            const text = node.textContent;
+            if (text) {
+              ops.push({ insert: text, attributes: { bold: true } });
+            }
+          } else if (tagName === 'em' || tagName === 'i') {
+            const text = node.textContent;
+            if (text) {
+              ops.push({ insert: text, attributes: { italic: true } });
+            }
+          } else if (tagName === 'ul' || tagName === 'ol') {
+            Array.from(node.querySelectorAll('li')).forEach((li) => {
+              if (ops.length > 0 && ops[ops.length - 1].insert !== '\n') {
+                ops.push({ insert: '\n' });
+              }
+              Array.from(li.childNodes).forEach(processNode);
+              ops.push({ insert: '\n', attributes: { list: tagName === 'ul' ? 'bullet' : 'ordered' } });
+            });
+          } else if (tagName === 'blockquote') {
+            if (ops.length > 0 && ops[ops.length - 1].insert !== '\n') {
+              ops.push({ insert: '\n' });
+            }
+            Array.from(node.childNodes).forEach(processNode);
+            ops.push({ insert: '\n', attributes: { blockquote: true } });
+          } else {
+            Array.from(node.childNodes).forEach(processNode);
+          }
+        }
+      }
+      
+      Array.from(tempDiv.childNodes).forEach(processNode);
+      
+      const cleanedOps = [];
+      for (let i = 0; i < ops.length; i++) {
+        const op = ops[i];
+        if (op.insert && op.insert !== '\n') {
+          cleanedOps.push(op);
+        } else if (op.insert === '\n') {
+          if (cleanedOps.length === 0 || cleanedOps[cleanedOps.length - 1].insert !== '\n') {
+            cleanedOps.push(op);
+          }
+        }
+      }
+      
+      if (cleanedOps.length === 0 || cleanedOps[cleanedOps.length - 1].insert !== '\n') {
+        cleanedOps.push({ insert: '\n' });
+      }
+      
+      return { ops: cleanedOps };
+    }
+    
+    // Extraer blogs de una página
+    async function extractBlogsFromPage(url, category) {
+      try {
+        const response = await fetch(url);
+        if (!response.ok) throw new Error(`No se pudo cargar ${url}`);
+        
+        const htmlContent = await response.text();
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(htmlContent, 'text/html');
+        
+        const blogs = [];
+        const cards = doc.querySelectorAll('.elegant-card');
+        
+        cards.forEach((card) => {
+          const titleEl = card.querySelector('.accordion-title');
+          const subtitleEl = card.querySelector('.accordion-subtitle');
+          const metaEl = card.querySelector('.accordion-meta');
+          const bodyEl = card.querySelector('.elegant-card-body');
+          
+          if (!titleEl || !bodyEl) return;
+          
+          const title = titleEl.textContent.trim();
+          const subtitle = subtitleEl ? subtitleEl.textContent.trim() : '';
+          
+          let date = null;
+          if (metaEl) {
+            const metaText = metaEl.textContent;
+            const dateMatch = metaText.match(/el\s+(\d+)\s+de\s+(\w+),\s+(\d+)/i);
+            if (dateMatch) {
+              const day = parseInt(dateMatch[1]);
+              const monthName = dateMatch[2].toLowerCase();
+              const year = parseInt(dateMatch[3]);
+              
+              const months = {
+                'enero': 0, 'febrero': 1, 'marzo': 2, 'abril': 3, 'mayo': 4, 'junio': 5,
+                'julio': 6, 'agosto': 7, 'septiembre': 8, 'octubre': 9, 'noviembre': 10, 'diciembre': 11
+              };
+              
+              if (months[monthName] !== undefined) {
+                date = new Date(year, months[monthName], day);
+              }
+            }
+          }
+          
+          const contentHtml = bodyEl.innerHTML;
+          
+          blogs.push({ title, subtitle, content: contentHtml, date, category });
+        });
+        
+        return blogs;
+      } catch (error) {
+        addLog(`❌ Error al extraer blogs de ${url}: ${error.message}`, 'error');
+        return [];
+      }
+    }
+    
+    // Importar
+    document.getElementById('startImportBtn').addEventListener('click', async function() {
+      const btn = this;
+      btn.disabled = true;
+      btn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Importando...';
+      
+      const user = auth.currentUser;
+      if (!user) {
+        addLog('❌ No estás autenticado', 'error');
+        btn.disabled = false;
+        btn.innerHTML = '<i class="fas fa-play mr-2"></i> Iniciar Importación';
+        return;
+      }
+      
+      const pages = [
+        { url: '../fiscal.html', category: 'fiscal' },
+        { url: '../laboral.html', category: 'laboral' },
+        { url: '../legal.html', category: 'legal' },
+        { url: '../sucesiones.html', category: 'sucesiones' }
+      ];
+      
+      let totalImported = 0;
+      let totalErrors = 0;
+      
+      addLog(`📦 Iniciando importación desde ${pages.length} páginas...`, 'info');
+      
+      for (const page of pages) {
+        addLog(`\n📄 Procesando: ${page.url} (${page.category})`, 'info');
+        
+        try {
+          const blogs = await extractBlogsFromPage(page.url, page.category);
+          addLog(`   Encontrados ${blogs.length} blog(s)`, 'info');
+          
+          for (const blog of blogs) {
+            try {
+              addLog(`   📝 Importando: ${blog.title}`, 'info');
+              
+              const contentDelta = htmlToQuillDelta(blog.content);
+              
+              const blogData = {
+                titleEs: blog.title,
+                contentEs: contentDelta,
+                category: blog.category,
+                status: 'published',
+                createdAt: blog.date ? firebase.firestore.Timestamp.fromDate(blog.date) : firebase.firestore.FieldValue.serverTimestamp(),
+                updatedAt: firebase.firestore.FieldValue.serverTimestamp(),
+                authorId: user.uid,
+                imported: true,
+                source: 'html-page'
+              };
+              
+              await db.collection('blogs').add(blogData);
+              addLog(`   ✅ Importado exitosamente`, 'success');
+              totalImported++;
+              
+            } catch (error) {
+              addLog(`   ❌ Error: ${error.message}`, 'error');
+              totalErrors++;
+            }
+          }
+          
+        } catch (error) {
+          addLog(`   ❌ Error al procesar página: ${error.message}`, 'error');
+          totalErrors++;
+        }
+      }
+      
+      addLog('\n', 'info');
+      addLog(`✅ Importación completada!`, 'success');
+      addLog(`   ✅ Importados: ${totalImported}`, 'success');
+      addLog(`   ❌ Errores: ${totalErrors}`, totalErrors > 0 ? 'error' : 'info');
+      
+      btn.disabled = false;
+      btn.innerHTML = '<i class="fas fa-check mr-2"></i> Importación Completada';
+      btn.classList.remove('btn-success');
+      btn.classList.add('btn-secondary');
+    });
+  </script>
+</body>
+</html>
+
+

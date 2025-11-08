@@ -1,5 +1,6 @@
 // Firebase Initialization and Setup Script
 // Este script prueba la conexión y crea las estructuras necesarias en Firestore
+// IMPORTANTE: Solo se ejecuta después de que el usuario esté autenticado
 
 (function() {
   'use strict';
@@ -16,20 +17,39 @@
     const { db, auth } = window.firebaseServices;
     console.log('✅ Firebase inicializado correctamente');
 
-    // Probar conexión con Firestore
-    testConnection(db, auth);
+    // Esperar a que el usuario esté autenticado antes de probar la conexión
+    // Esto evita errores de permisos al intentar escribir sin autenticación
+    auth.onAuthStateChanged(function(user) {
+      if (user) {
+        console.log('✅ Usuario autenticado:', user.email);
+        // Solo probar conexión cuando el usuario esté autenticado
+        testConnection(db, auth);
+      } else {
+        console.log('ℹ️  Esperando autenticación...');
+        // No hacer nada si no hay usuario autenticado
+        // El usuario verá la pantalla de login
+      }
+    });
   }
 
-  // Probar conexión
+  // Probar conexión (solo se ejecuta cuando el usuario está autenticado)
   async function testConnection(db, auth) {
     try {
       console.log('🔍 Probando conexión con Firestore...');
       
-      // Intentar leer una colección de prueba
+      // Verificar que el usuario esté autenticado
+      const currentUser = auth.currentUser;
+      if (!currentUser) {
+        console.warn('⚠️  No hay usuario autenticado. Saltando prueba de conexión.');
+        return;
+      }
+      
+      // Intentar escribir una colección de prueba
       const testRef = db.collection('_test').doc('connection');
       await testRef.set({
         timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-        message: 'Conexión exitosa'
+        message: 'Conexión exitosa',
+        userId: currentUser.uid
       });
       
       console.log('✅ Conexión con Firestore exitosa');
@@ -43,7 +63,12 @@
       
     } catch (error) {
       console.error('❌ Error al conectar con Firestore:', error);
-      alert('Error al conectar con Firebase: ' + error.message);
+      // Solo mostrar alerta si el error no es de permisos (para evitar spam)
+      if (error.code !== 'permission-denied') {
+        alert('Error al conectar con Firebase: ' + error.message);
+      } else {
+        console.warn('⚠️  Error de permisos. Asegúrate de estar autenticado.');
+      }
     }
   }
 

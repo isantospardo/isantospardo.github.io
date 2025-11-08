@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Importar Blogs Existentes - Sercon Gestoría</title>
+  
+  <!-- Bootstrap CSS -->
+  <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  
+  <!-- Font Awesome -->
+  <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+  
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+  
+  <style>
+    body {
+      background-color: #f5f5f5;
+      padding: 2rem;
+    }
+    .card {
+      border: none;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      margin-bottom: 2rem;
+    }
+    .log-container {
+      max-height: 400px;
+      overflow-y: auto;
+      background: #f8f9fa;
+      padding: 1rem;
+      border-radius: 4px;
+      font-family: monospace;
+      font-size: 0.9rem;
+    }
+    .log-success { color: #28a745; }
+    .log-error { color: #dc3545; }
+    .log-info { color: #007bff; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-10">
+        <div class="card">
+          <div class="card-header bg-primary text-white">
+            <h3 class="mb-0"><i class="fas fa-download mr-2"></i> Importar Blogs Existentes</h3>
+          </div>
+          <div class="card-body">
+            <p class="lead">Este script importará todos los blogs existentes desde la carpeta <code>posts/</code> a Firebase.</p>
+            
+            <div class="alert alert-info">
+              <strong>Instrucciones:</strong>
+              <ol class="mb-0">
+                <li>Inicia sesión con tus credenciales de administrador</li>
+                <li>Haz clic en "Iniciar Importación"</li>
+                <li>Espera a que se completen todas las importaciones</li>
+                <li>Una vez completado, puedes cerrar esta página</li>
+              </ol>
+            </div>
+            
+            <div id="loginSection" class="mb-4">
+              <h5>Iniciar Sesión</h5>
+              <form id="loginForm">
+                <div class="form-group">
+                  <label>Email</label>
+                  <input type="email" class="form-control" id="email" required>
+                </div>
+                <div class="form-group">
+                  <label>Contraseña</label>
+                  <input type="password" class="form-control" id="password" required>
+                </div>
+                <button type="submit" class="btn btn-primary">
+                  <i class="fas fa-sign-in-alt mr-2"></i> Iniciar Sesión
+                </button>
+              </form>
+              <div id="loginError" class="alert alert-danger mt-3" style="display: none;"></div>
+            </div>
+            
+            <div id="importSection" style="display: none;">
+              <button id="startImportBtn" class="btn btn-success btn-lg mb-4">
+                <i class="fas fa-play mr-2"></i> Iniciar Importación
+              </button>
+              
+              <div class="log-container" id="logContainer">
+                <div class="log-info">Esperando inicio de importación...</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Firebase Config -->
+  <script src="firebase-config.local.js" onerror="console.info('firebase-config.local.js not found')"></script>
+  <script src="firebase-config.js"></script>
+  
+  <script>
+    const { auth, db } = window.firebaseServices;
+    
+    // Login
+    document.getElementById('loginForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      const errorDiv = document.getElementById('loginError');
+      
+      try {
+        await auth.signInWithEmailAndPassword(email, password);
+        errorDiv.style.display = 'none';
+        document.getElementById('loginSection').style.display = 'none';
+        document.getElementById('importSection').style.display = 'block';
+        addLog('✅ Sesión iniciada correctamente', 'success');
+      } catch (error) {
+        errorDiv.textContent = error.message;
+        errorDiv.style.display = 'block';
+      }
+    });
+    
+    // Log function
+    function addLog(message, type = 'info') {
+      const logContainer = document.getElementById('logContainer');
+      const logClass = `log-${type}`;
+      const timestamp = new Date().toLocaleTimeString();
+      logContainer.innerHTML += `<div class="${logClass}">[${timestamp}] ${message}</div>`;
+      logContainer.scrollTop = logContainer.scrollHeight;
+    }
+    
+    // HTML to Quill Delta converter
+    function htmlToQuillDelta(html) {
+      if (!html || html.trim() === '') {
+        return { ops: [{ insert: '\n' }] };
+      }
+      
+      const tempDiv = document.createElement('div');
+      tempDiv.innerHTML = html;
+      
+      const ops = [];
+      
+      function processNode(node) {
+        if (node.nodeType === 3) { // Text node
+          const text = node.textContent;
+          if (text.trim()) {
+            ops.push({ insert: text });
+          }
+        } else if (node.nodeType === 1) { // Element node
+          const tagName = node.tagName.toLowerCase();
+          
+          if (tagName === 'p') {
+            if (ops.length > 0 && ops[ops.length - 1].insert !== '\n') {
+              ops.push({ insert: '\n' });
+            }
+            Array.from(node.childNodes).forEach(processNode);
+            ops.push({ insert: '\n' });
+          } else if (tagName === 'h1' || tagName === 'h2' || tagName === 'h3' || tagName === 'h4') {
+            if (ops.length > 0 && ops[ops.length - 1].insert !== '\n') {
+              ops.push({ insert: '\n' });
+            }
+            const level = parseInt(tagName.charAt(1));
+            Array.from(node.childNodes).forEach(processNode);
+            ops.push({ insert: '\n', attributes: { header: level } });
+          } else if (tagName === 'strong' || tagName === 'b') {
+            const text = node.textContent;
+            if (text) {
+              ops.push({ insert: text, attributes: { bold: true } });
+            }
+          } else if (tagName === 'em' || tagName === 'i') {
+            const text = node.textContent;
+            if (text) {
+              ops.push({ insert: text, attributes: { italic: true } });
+            }
+          } else if (tagName === 'ul' || tagName === 'ol') {
+            Array.from(node.querySelectorAll('li')).forEach((li) => {
+              if (ops.length > 0 && ops[ops.length - 1].insert !== '\n') {
+                ops.push({ insert: '\n' });
+              }
+              Array.from(li.childNodes).forEach(processNode);
+              ops.push({ insert: '\n', attributes: { list: tagName === 'ul' ? 'bullet' : 'ordered' } });
+            });
+          } else if (tagName === 'blockquote') {
+            if (ops.length > 0 && ops[ops.length - 1].insert !== '\n') {
+              ops.push({ insert: '\n' });
+            }
+            Array.from(node.childNodes).forEach(processNode);
+            ops.push({ insert: '\n', attributes: { blockquote: true } });
+          } else {
+            Array.from(node.childNodes).forEach(processNode);
+          }
+        }
+      }
+      
+      Array.from(tempDiv.childNodes).forEach(processNode);
+      
+      // Clean and normalize
+      const cleanedOps = [];
+      for (let i = 0; i < ops.length; i++) {
+        const op = ops[i];
+        if (op.insert && op.insert !== '\n') {
+          cleanedOps.push(op);
+        } else if (op.insert === '\n') {
+          if (cleanedOps.length === 0 || cleanedOps[cleanedOps.length - 1].insert !== '\n') {
+            cleanedOps.push(op);
+          }
+        }
+      }
+      
+      if (cleanedOps.length === 0 || cleanedOps[cleanedOps.length - 1].insert !== '\n') {
+        cleanedOps.push({ insert: '\n' });
+      }
+      
+      return { ops: cleanedOps };
+    }
+    
+    // Extract blog info from HTML
+    function extractBlogInfo(htmlContent, filePath) {
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(htmlContent, 'text/html');
+      
+      let title = 'Sin título';
+      let subtitle = '';
+      
+      const postHeading = doc.querySelector('.post-heading');
+      if (postHeading) {
+        const h1 = postHeading.querySelector('h1');
+        if (h1) {
+          const clone = h1.cloneNode(true);
+          const logo = clone.querySelector('img');
+          if (logo) logo.remove();
+          const font = clone.querySelector('font');
+          if (font) {
+            title = font.textContent.trim() || 'Sin título';
+          } else {
+            title = clone.textContent.trim() || 'Sin título';
+          }
+        }
+        
+        const h2 = postHeading.querySelector('h2.subheading');
+        if (h2) {
+          subtitle = h2.textContent.trim();
+        }
+      }
+      
+      let date = null;
+      const meta = doc.querySelector('.meta');
+      if (meta) {
+        const metaText = meta.textContent;
+        const dateMatch = metaText.match(/el\s+(\d+)\s+de\s+(\w+),\s+(\d+)/i);
+        if (dateMatch) {
+          const day = parseInt(dateMatch[1]);
+          const monthName = dateMatch[2].toLowerCase();
+          const year = parseInt(dateMatch[3]);
+          
+          const months = {
+            'enero': 0, 'febrero': 1, 'marzo': 2, 'abril': 3, 'mayo': 4, 'junio': 5,
+            'julio': 6, 'agosto': 7, 'septiembre': 8, 'octubre': 9, 'noviembre': 10, 'diciembre': 11
+          };
+          
+          if (months[monthName] !== undefined) {
+            date = new Date(year, months[monthName], day);
+          }
+        }
+      }
+      
+      const article = doc.querySelector('article .col-lg-8, article .col-md-10');
+      let content = '';
+      if (article) {
+        const clone = article.cloneNode(true);
+        const lastP = clone.querySelector('p:last-child');
+        if (lastP && lastP.textContent.includes('Placeholder text')) {
+          lastP.remove();
+        }
+        content = clone.innerHTML;
+      }
+      
+      let category = 'general';
+      if (filePath.includes('post-fiscal')) {
+        category = 'fiscal';
+      } else if (filePath.includes('post-laboral')) {
+        category = 'laboral';
+      } else if (filePath.includes('post-legal')) {
+        category = 'legal';
+      } else if (filePath.includes('post-sucesiones')) {
+        category = 'sucesiones';
+      }
+      
+      return { title, subtitle, content, date, category };
+    }
+    
+    // Start import
+    document.getElementById('startImportBtn').addEventListener('click', async function() {
+      const btn = this;
+      btn.disabled = true;
+      btn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Importando...';
+      
+      const postsToImport = [
+        { file: '../posts/post-fiscal/20200424-fiscal.html', category: 'fiscal' },
+        { file: '../posts/post-fiscal/20200425-fiscal.html', category: 'fiscal' },
+        { file: '../posts/post-laboral/20200424-laboral.html', category: 'laboral' },
+        { file: '../posts/post-laboral/20200425-laboral.html', category: 'laboral' },
+        { file: '../posts/post-legal/20200424-legal.html', category: 'legal' },
+        { file: '../posts/post-legal/20200425-legal.html', category: 'legal' },
+        { file: '../posts/post-sucesiones/20200424-sucesiones.html', category: 'sucesiones' },
+        { file: '../posts/post-sucesiones/20200425-sucesiones.html', category: 'sucesiones' }
+      ];
+      
+      let imported = 0;
+      let errors = 0;
+      
+      const user = auth.currentUser;
+      if (!user) {
+        addLog('❌ No estás autenticado', 'error');
+        btn.disabled = false;
+        btn.innerHTML = '<i class="fas fa-play mr-2"></i> Iniciar Importación';
+        return;
+      }
+      
+      addLog(`📦 Iniciando importación de ${postsToImport.length} blogs...`, 'info');
+      
+      for (const post of postsToImport) {
+        try {
+          addLog(`📄 Procesando: ${post.file}`, 'info');
+          
+          const response = await fetch(post.file);
+          if (!response.ok) {
+            throw new Error(`No se pudo cargar ${post.file}`);
+          }
+          
+          const htmlContent = await response.text();
+          const blogInfo = extractBlogInfo(htmlContent, post.file);
+          
+          addLog(`   Título: ${blogInfo.title}`, 'info');
+          addLog(`   Categoría: ${blogInfo.category}`, 'info');
+          
+          const contentDelta = htmlToQuillDelta(blogInfo.content);
+          
+          const blogData = {
+            titleEs: blogInfo.title,
+            contentEs: contentDelta,
+            category: blogInfo.category,
+            status: 'published',
+            createdAt: blogInfo.date ? firebase.firestore.Timestamp.fromDate(blogInfo.date) : firebase.firestore.FieldValue.serverTimestamp(),
+            updatedAt: firebase.firestore.FieldValue.serverTimestamp(),
+            authorId: user.uid,
+            imported: true,
+            originalFile: post.file.split('/').pop()
+          };
+          
+          await db.collection('blogs').add(blogData);
+          imported++;
+          addLog(`   ✅ Importado exitosamente`, 'success');
+          
+        } catch (error) {
+          errors++;
+          addLog(`   ❌ Error: ${error.message}`, 'error');
+          console.error(`Error al importar ${post.file}:`, error);
+        }
+      }
+      
+      addLog('', 'info');
+      addLog(`✅ Importación completada!`, 'success');
+      addLog(`   ✅ Importados: ${imported}`, 'success');
+      addLog(`   ❌ Errores: ${errors}`, errors > 0 ? 'error' : 'info');
+      
+      btn.disabled = false;
+      btn.innerHTML = '<i class="fas fa-check mr-2"></i> Importación Completada';
+      btn.classList.remove('btn-success');
+      btn.classList.add('btn-secondary');
+    });
+  </script>
+</body>
+</html>
+
+

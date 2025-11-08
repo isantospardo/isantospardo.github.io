@@ -17,16 +17,23 @@
   };
 
   // Initialize Firebase only if not already initialized
-  if (typeof firebase !== 'undefined' && !firebase.apps.length) {
-    firebase.initializeApp(firebaseConfig);
+  if (typeof firebase !== 'undefined') {
+    if (!firebase.apps || firebase.apps.length === 0) {
+      firebase.initializeApp(firebaseConfig);
+    }
 
     // Initialize Firestore (read-only for public)
     const db = firebase.firestore();
     
-    // Configure Firestore settings
-    db.settings({
-      timestampsInSnapshots: true
-    });
+    // Configure Firestore settings (deprecated but still works in compat mode)
+    try {
+      db.settings({
+        timestampsInSnapshots: true
+      });
+    } catch (e) {
+      // Settings may not be needed in newer versions
+      console.log('Firestore settings skipped (not needed in this version)');
+    }
 
     // Export for use in other files
     window.firebaseServices = {
@@ -34,7 +41,9 @@
       // Note: auth and storage not needed for public pages
     };
 
-    console.log('Firebase initialized for frontend');
+    console.log('✅ Firebase initialized for frontend');
+  } else {
+    console.error('❌ Firebase SDK not loaded. Make sure Firebase scripts are loaded before firebase-init.js');
   }
 })();
 
