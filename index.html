@@ -683,40 +683,6 @@
     } else {
       setTimeout(cargarNoticias, 1000);
     }
-    
-    window.debugFeaturedNews = async function() {
-      if (!window.firebaseServices || !window.firebaseServices.db) {
-        console.error('Firebase no inicializado');
-        return;
-      }
-      try {
-        const snapshot = await window.firebaseServices.db.collection('featuredNews').get();
-        console.log('Total en BD:', snapshot.size);
-        if (snapshot.size === 0) {
-          console.warn('No hay noticias en la base de datos');
-          return;
-        }
-        snapshot.forEach(doc => {
-          const data = doc.data();
-          console.log(doc.id, '-', data.title || 'Sin título', {
-            draft: data.draft,
-            status: data.status,
-            hidden: data.hidden,
-            archived: data.archived
-          });
-        });
-        
-        if (window.firebaseContent && window.firebaseContent.loadFeaturedNews) {
-          const featured = await window.firebaseContent.loadFeaturedNews();
-          console.log('loadFeaturedNews retornó:', featured.length, 'items');
-          featured.forEach(item => {
-            console.log('  -', item.title || 'Sin título');
-          });
-        }
-      } catch (error) {
-        console.error('Error:', error);
-      }
-    };
   </script>
 
   <!-- Scroll to Top Button -->

@@ -181,8 +181,7 @@
         return;
       }
 
-      // Determine column size based on number of blogs
-      let colClass = 'col-lg-4 col-md-6'; // Default: 3 per row
+      let colClass = 'col-lg-4 col-md-6';
       if (blogs.length === 1) {
         colClass = 'col-lg-12 col-md-12'; // 1 per row (full width)
       } else if (blogs.length === 2) {
@@ -197,25 +196,19 @@
       
       let html = '<div class="row">';
       blogs.forEach((blog, index) => {
-        // Handle both blog format (titleEs) and featured news format (title)
         const title = blog.title || blog.titleEs || 'Sin título';
         const subtitle = blog.subtitle || blog.description || blog.subtitleEs || '';
         
-        // Convert Firestore Timestamp to Date and format
         let date = '';
         if (blog.createdAt) {
           let dateObj;
           if (blog.createdAt.toDate) {
-            // Firestore Timestamp
             dateObj = blog.createdAt.toDate();
           } else if (blog.createdAt instanceof Date) {
-            // Already a Date object
             dateObj = blog.createdAt;
           } else if (blog.createdAt.seconds) {
-            // Timestamp with seconds property
             dateObj = new Date(blog.createdAt.seconds * 1000);
           } else {
-            // Try to parse as Date
             dateObj = new Date(blog.createdAt);
           }
           
@@ -228,13 +221,11 @@
           }
         }
 
-        // Convert Quill Delta to HTML (simplified)
         let contentHtml = '';
         if (blog.contentEs && blog.contentEs.ops) {
           contentHtml = convertQuillDeltaToHTML(blog.contentEs);
         }
 
-        // Extract plain text from HTML for excerpt, or use subtitle/description
         let excerpt = subtitle;
         if (contentHtml) {
           const tempDiv = document.createElement('div');
@@ -246,10 +237,8 @@
           excerpt = 'Sin descripción disponible.';
         }
         
-        // Escape HTML for data attributes
         const escapedContentHtml = contentHtml.replace(/"/g, '&quot;').replace(/'/g, '&#39;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
         
-        // Category colors and icons
         const categoryInfo = {
           'fiscal': { color: 'primary', icon: 'calculator', name: 'Fiscal' },
           'laboral': { color: 'success', icon: 'briefcase', name: 'Laboral' },
@@ -259,7 +248,6 @@
         };
         const catInfo = categoryInfo[blog.category?.toLowerCase()] || categoryInfo.general;
         
-        // Render as attractive card with gradient and better styling
         const gradientColors = {
           'primary': 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
           'success': 'linear-gradient(135deg, #11998e 0%, #38ef7d 100%)',
@@ -325,7 +313,6 @@
       container.innerHTML = '';
       container.innerHTML = html;
 
-      // Add hover effects to featured news cards
       const featuredCards = container.querySelectorAll('.featured-news-card');
       featuredCards.forEach(card => {
         card.addEventListener('mouseenter', function() {
@@ -348,7 +335,6 @@
         });
       });
 
-      // Add click handlers to "Leer más" buttons
       const leerMasButtons = container.querySelectorAll('.leer-mas-btn');
       leerMasButtons.forEach(btn => {
         btn.addEventListener('click', function(e) {
@@ -360,7 +346,6 @@
           const newsDate = this.getAttribute('data-news-date');
           const newsContent = this.getAttribute('data-news-content');
           
-          // Show modal with news content
           showNewsModal(newsTitle, newsSubtitle, newsCategory, newsDate, newsContent);
         });
       });
@@ -398,7 +383,6 @@
             if (op.attributes.underline) text = `<u>${text}</u>`;
             if (op.attributes.header) {
               const level = op.attributes.header;
-              // Close previous paragraph if exists
               if (currentParagraph) {
                 html += `<p>${currentParagraph}</p>`;
                 currentParagraph = '';
@@ -411,7 +395,6 @@
               text = `<a href="${op.attributes.link}" target="_blank">${text}</a>`;
             }
             if (op.attributes.list) {
-              // Handle lists (simplified)
               if (op.attributes.list === 'ordered') {
                 text = `<li>${text}</li>`;
               } else {
@@ -469,7 +452,6 @@
       }
     });
     
-    // Close last paragraph
     if (currentParagraph) {
       html += `<p>${currentParagraph}</p>`;
     }
@@ -558,7 +540,6 @@
   document.addEventListener('click', function(e) {
     const modal = document.getElementById('newsModal');
     if (modal && modal.classList.contains('show')) {
-      // Check if click is outside modal content
       if (e.target === modal) {
         if (typeof $ !== 'undefined' && $.fn.modal) {
           $(modal).modal('hide');

@@ -7,175 +7,6 @@
   const auth = window.firebaseServices?.auth;
   let featuredNewsQuillEditor = null;
 
-  // Load featured news
-  // Function to add initial featured news (run once from console)
-  window.addInitialFeaturedNews = async function() {
-    if (!db || !auth) {
-      console.error('Firebase no está inicializado');
-      return;
-    }
-
-    const user = auth.currentUser;
-    if (!user) {
-      console.error('No estás autenticado');
-      return;
-    }
-
-    // Helper to convert text to Quill Delta
-    function textToQuillDelta(text) {
-      if (!text || !text.trim()) {
-        return { ops: [] };
-      }
-      
-      const paragraphs = text.split(/\n\s*\n/).filter(p => p.trim());
-      if (paragraphs.length === 0) {
-        return { ops: [{ insert: text + '\n' }] };
-      }
-      
-      const ops = [];
-      paragraphs.forEach((para, index) => {
-        const lines = para.split('\n').filter(l => l.trim());
-        lines.forEach((line, lineIndex) => {
-          ops.push({ insert: line.trim() });
-          if (lineIndex < lines.length - 1) {
-            ops.push({ insert: '\n' });
-          }
-        });
-        if (index < paragraphs.length - 1) {
-          ops.push({ insert: '\n\n' });
-        } else {
-          ops.push({ insert: '\n' });
-        }
-      });
-      
-      return { ops: ops };
-    }
-
-    const featuredNewsData = [
-      {
-        order: 1,
-        title: "Nuevas Obligaciones para Autónomos en 2025",
-        subtitle: "Actualización fiscal y cotizaciones al Régimen Especial de Trabajadores Autónomos (RETA)",
-        category: "fiscal",
-        content: `El nuevo sistema de cotización para autónomos, basado en ingresos reales, amplía su implantación en 2025. Los trabajadores por cuenta propia deberán declarar sus rendimientos netos y ajustar sus cuotas mensualmente.
-
-Además, se han introducido incentivos fiscales para nuevos emprendedores y deducciones por digitalización.
-
-Consejo: Revisa tu base de cotización y presenta tus previsiones de ingresos antes del cierre del primer trimestre.`,
-        date: new Date(2025, 10, 8) // 8 noviembre 2025
-      },
-      {
-        order: 2,
-        title: "Reforma Laboral: Cambios Clave en Contratación y Jornada",
-        subtitle: "Nuevas medidas para mejorar la estabilidad y el equilibrio laboral",
-        category: "laboral",
-        content: `La última reforma laboral refuerza los contratos indefinidos y regula el trabajo híbrido. Las empresas deben registrar electrónicamente las jornadas y garantizar el derecho a la desconexión digital.
-
-Se endurecen las sanciones por uso indebido de contratos temporales y se promueve la formación dual.
-
-Consejo: Asegúrate de actualizar tus modelos de contrato y tu sistema de control horario.`,
-        date: new Date(2025, 10, 7) // 7 noviembre 2025
-      },
-      {
-        order: 3,
-        title: "Deducciones Fiscales 2025: Ahorra con la Nueva Normativa",
-        subtitle: "Claves para optimizar tu declaración de la renta y la tributación empresarial",
-        category: "fiscal",
-        content: `Hacienda introduce nuevas deducciones por eficiencia energética, formación profesional y digitalización de procesos.
-
-Las pymes que inviertan en tecnología o sostenibilidad podrán reducir hasta un 10% su cuota íntegra.
-
-Los contribuyentes particulares podrán aplicar bonificaciones por rehabilitación de viviendas.
-
-Consejo: Guarda todas las facturas y justificantes digitales; serán necesarios en la declaración 2026.`,
-        date: new Date(2025, 10, 6) // 6 noviembre 2025
-      },
-      {
-        order: 4,
-        title: "Declaración de la Renta: Fechas y Recomendaciones Clave",
-        subtitle: "Todo lo que necesitas saber para preparar la campaña 2025",
-        category: "fiscal",
-        content: `La campaña de la renta comenzará el 3 de abril y finalizará el 30 de junio de 2025.
-
-Este año se incorporan nuevos avisos automáticos sobre criptoactivos y rendimientos extranjeros.
-
-Se recomienda revisar los borradores con especial atención a los datos de deducciones familiares y autonómicas.
-
-Consejo: Solicita una revisión profesional antes de presentar tu declaración para evitar errores o sanciones.`,
-        date: new Date(2025, 10, 3) // 3 noviembre 2025
-      },
-      {
-        order: 5,
-        title: "Sucesiones y Donaciones: Cambios en la Fiscalidad Autonómica",
-        subtitle: "Actualización de bonificaciones y exenciones en 2025",
-        category: "sucesiones",
-        content: `Varias comunidades autónomas han modificado los tramos del Impuesto de Sucesiones y Donaciones, reduciendo cargas fiscales para herederos directos.
-
-También se amplían los plazos para presentar la documentación notarial y liquidar el impuesto.
-
-Consejo: Antes de aceptar una herencia, revisa su valoración y los posibles beneficios fiscales aplicables.`,
-        date: new Date(2025, 10, 2) // 2 noviembre 2025
-      },
-      {
-        order: 6,
-        title: "Inteligencia Artificial y Cumplimiento Legal en Empresas",
-        subtitle: "Nuevos retos legales en el uso de herramientas digitales",
-        category: "legal",
-        content: `La nueva normativa europea sobre inteligencia artificial exige transparencia, seguridad y responsabilidad en el uso de algoritmos empresariales.
-
-Las empresas deberán adaptar sus políticas de privacidad y cumplir con el Reglamento de IA (AI Act) que entra en vigor en 2026.
-
-Consejo: Evalúa tus herramientas tecnológicas y asegúrate de cumplir con el RGPD y las normativas de IA.`,
-        date: new Date(2025, 10, 1) // 1 noviembre 2025
-      }
-    ];
-
-    try {
-      let successCount = 0;
-      let errorCount = 0;
-
-      for (const news of featuredNewsData) {
-        try {
-          const contentDelta = textToQuillDelta(news.content);
-          
-          const featuredData = {
-            blogId: null,
-            order: news.order,
-            title: news.title,
-            subtitle: news.subtitle,
-            description: news.subtitle,
-            category: news.category,
-            contentEs: contentDelta,
-            status: 'published',
-            draft: false,
-            hidden: false,
-            archived: false,
-            createdAt: firebase.firestore.Timestamp.fromDate(news.date),
-            updatedAt: firebase.firestore.Timestamp.now(),
-            authorId: user.uid
-          };
-
-          await db.collection('featuredNews').add(featuredData);
-          successCount++;
-        } catch (error) {
-          errorCount++;
-          console.error(`Error al agregar "${news.title}":`, error);
-        }
-      }
-      if (successCount === featuredNewsData.length) {
-        alert('¡Todas las noticias destacadas se agregaron correctamente!');
-        if (window.loadFeaturedNews) {
-          window.loadFeaturedNews();
-        }
-      } else {
-        alert(`Se agregaron ${successCount} de ${featuredNewsData.length} noticias. Revisa la consola para más detalles.`);
-      }
-    } catch (error) {
-      console.error('Error general:', error);
-      alert('Error al agregar noticias destacadas: ' + error.message);
-    }
-  };
-
   window.loadFeaturedNews = async function() {
     const listContainer = document.getElementById('featuredNewsList');
     if (!listContainer) return;
@@ -581,7 +412,7 @@ Consejo: Evalúa tus herramientas tecnológicas y asegúrate de cumplir con el R
       document.getElementById('featuredNewsTitle').value = '';
       document.getElementById('featuredNewsDescription').value = '';
       document.getElementById('featuredNewsCategory').value = 'fiscal';
-      document.getElementById('featuredNewsDraft').checked = false; // Default to published (not draft)
+      document.getElementById('featuredNewsDraft').checked = false;
       
       // Set date to today
       const dateInput = document.getElementById('featuredNewsDate');
@@ -596,12 +427,9 @@ Consejo: Evalúa tus herramientas tecnológicas y asegúrate de cumplir con el R
       featuredNewsQuillEditor.setContents([]);
     }
 
-    // Show modal
     $(modal).modal('show');
   };
 
-
-  // Load featured news data for editing
   async function loadFeaturedNewsData(featuredId) {
     try {
       if (!db) {
@@ -681,8 +509,6 @@ Consejo: Evalúa tus herramientas tecnológicas y asegúrate de cumplir con el R
       }
 
       await db.collection('featuredNews').doc(featuredId).update(updateData);
-      
-      // Reload the list to reflect changes
       loadFeaturedNews();
       
       if (publish) {
@@ -693,7 +519,6 @@ Consejo: Evalúa tus herramientas tecnológicas y asegúrate de cumplir con el R
     } catch (error) {
       console.error('Error toggling publish status:', error);
       alert('Error al cambiar el estado de publicación: ' + error.message);
-      // Reload to reset
       loadFeaturedNews();
     }
   };
@@ -728,72 +553,11 @@ Consejo: Evalúa tus herramientas tecnológicas y asegúrate de cumplir con el R
       updateData.updatedAt = firebase.firestore.FieldValue.serverTimestamp();
 
       await db.collection('featuredNews').doc(featuredId).update(updateData);
-      
-      // Reload the list to reflect changes
       loadFeaturedNews();
     } catch (error) {
       console.error('Error updating featured news status:', error);
       alert('Error al actualizar el estado: ' + error.message);
-      // Reload to reset checkbox
       loadFeaturedNews();
-    }
-  };
-
-  // Fix existing featured news - ensure they have correct status fields
-  window.fixFeaturedNewsStatus = async function() {
-    try {
-      if (!db) {
-        throw new Error('Firebase no está inicializado');
-      }
-
-      const snapshot = await db.collection('featuredNews').get();
-      let fixedCount = 0;
-
-      for (const doc of snapshot.docs) {
-        const data = doc.data();
-        const updates = {};
-
-        if (data.draft === undefined) {
-          if (data.status === 'draft') {
-            updates.draft = true;
-          } else if (data.status === 'published' || !data.status) {
-            updates.draft = false;
-          }
-        }
-
-        if (!data.status) {
-          if (data.draft === true) {
-            updates.status = 'draft';
-          } else {
-            updates.status = 'published';
-          }
-        }
-
-        if (data.hidden === undefined) {
-          updates.hidden = false;
-        }
-
-        if (data.archived === undefined) {
-          updates.archived = false;
-        }
-
-        if (!data.description && data.subtitle) {
-          updates.description = data.subtitle;
-        }
-
-        if (Object.keys(updates).length > 0) {
-          await db.collection('featuredNews').doc(doc.id).update(updates);
-          fixedCount++;
-        }
-      }
-      alert(`Se actualizaron ${fixedCount} noticias destacadas. Recarga la página para ver los cambios.`);
-      
-      if (window.loadFeaturedNews) {
-        window.loadFeaturedNews();
-      }
-    } catch (error) {
-      console.error('Error fixing featured news status:', error);
-      alert('Error al actualizar las noticias destacadas: ' + error.message);
     }
   };
 
@@ -833,17 +597,14 @@ Consejo: Evalúa tus herramientas tecnológicas y asegúrate de cumplir con el R
     const dateInputElement = document.getElementById('featuredNewsDate');
     const dateInput = dateInputElement ? dateInputElement.value.trim() : '';
     
-    // Get Quill Delta and convert to plain object for Firebase
-    let contentEs = { ops: [] };
-    if (featuredNewsQuillEditor) {
-      const delta = featuredNewsQuillEditor.getContents();
-      // Convert Delta to plain object (Firebase can't serialize Quill Delta objects)
-      contentEs = {
-        ops: delta.ops || []
-      };
-      // Ensure it's a plain object by serializing/deserializing
-      contentEs = JSON.parse(JSON.stringify(contentEs));
-    }
+      let contentEs = { ops: [] };
+      if (featuredNewsQuillEditor) {
+        const delta = featuredNewsQuillEditor.getContents();
+        contentEs = {
+          ops: delta.ops || []
+        };
+        contentEs = JSON.parse(JSON.stringify(contentEs));
+      }
 
     if (!title || !description) {
       alert('Por favor, completa el título y la descripción');
@@ -860,7 +621,6 @@ Consejo: Evalúa tus herramientas tecnológicas y asegúrate de cumplir con el R
         throw new Error('No estás autenticado');
       }
 
-      // Get current max order to set new order
       let order = 0;
       if (!featuredId) {
         const snapshot = await db.collection('featuredNews').orderBy('order', 'desc').limit(1).get();
@@ -869,7 +629,6 @@ Consejo: Evalúa tus herramientas tecnológicas y asegúrate de cumplir con el R
         }
       }
 
-      // Get current hidden and archived status if editing (preserve them)
       let hidden = false;
       let archived = false;
       if (featuredId) {
@@ -881,7 +640,6 @@ Consejo: Evalúa tus herramientas tecnológicas y asegúrate de cumplir con el R
         }
       }
 
-      // Prepare featured news data
       const featuredData = {
         title: title,
         subtitle: description,
@@ -948,7 +706,6 @@ Consejo: Evalúa tus herramientas tecnológicas y asegúrate de cumplir con el R
     }
   };
 
-  // Attach event listener using event delegation
   document.addEventListener('click', function(e) {
     if (e.target && e.target.id === 'saveFeaturedNewsBtn') {
       e.preventDefault();
