@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Migrar FAQs - Sercon Gestoría</title>
+  
+  <!-- Bootstrap CSS -->
+  <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  
+  <!-- Font Awesome -->
+  <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+  
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-storage-compat.js"></script>
+  
+  <style>
+    body {
+      background-color: #f5f5f5;
+      padding: 2rem;
+    }
+    .card {
+      margin-bottom: 1rem;
+    }
+    .log {
+      background-color: #f8f9fa;
+      border: 1px solid #dee2e6;
+      border-radius: 4px;
+      padding: 1rem;
+      max-height: 400px;
+      overflow-y: auto;
+      font-family: monospace;
+      font-size: 0.9rem;
+    }
+    .log-item {
+      margin-bottom: 0.5rem;
+      padding: 0.25rem;
+    }
+    .log-success {
+      color: #28a745;
+    }
+    .log-error {
+      color: #dc3545;
+    }
+    .log-info {
+      color: #17a2b8;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header bg-primary text-white">
+            <h3 class="mb-0"><i class="fas fa-database mr-2"></i>Migrar FAQs a Firebase</h3>
+          </div>
+          <div class="card-body">
+            <p class="text-muted">
+              Este script migrará las FAQs existentes del HTML a Firebase con la estructura faq_item_X.
+            </p>
+            
+            <div class="alert alert-warning">
+              <i class="fas fa-exclamation-triangle mr-2"></i>
+              <strong>Importante:</strong> Asegúrate de estar autenticado en Firebase antes de ejecutar este script.
+            </div>
+            
+            <button id="migrateBtn" class="btn btn-primary btn-lg">
+              <i class="fas fa-play mr-2"></i>Migrar FAQs
+            </button>
+            
+            <div id="logContainer" class="mt-4" style="display: none;">
+              <h5>Log de Proceso:</h5>
+              <div id="log" class="log"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Firebase Config -->
+  <script src="firebase-config.local.js" onerror="console.warn('firebase-config.local.js not found')"></script>
+  <script src="firebase-config.js"></script>
+  <!-- No cargar admin-auth.js aquí porque requiere elementos del DOM que no existen en esta página -->
+  <!-- <script src="admin-auth.js"></script> -->
+  <!-- <script src="init-firebase.js"></script> -->
+  
+  <script>
+    let faqsCargadas = false;
+    
+    // FAQs existentes del HTML
+    const existingFaqs = [
+      {
+        title: '¿Qué servicios ofrece Gestoría Sercon?',
+        answer: 'Ofrecemos servicios completos de gestión administrativa incluyendo asesoría fiscal y contable, servicios laborales, asesoramiento legal y gestión de sucesiones. Contamos con más de 100 asesores expertos para atender todas sus necesidades.'
+      },
+      {
+        title: '¿Cuál es el horario de atención?',
+        answer: 'Nuestro horario de atención es de lunes a viernes de 8:00 a 16:00 horas. Estamos cerrados los sábados y domingos. Puede contactarnos por teléfono, email o visitarnos en nuestras oficinas en Orense.'
+      },
+      {
+        title: '¿Cómo puedo solicitar una consulta?',
+        answer: 'Puede solicitar una consulta a través de nuestro formulario de contacto en la página web, por teléfono o visitándonos en nuestras oficinas. Le responderemos a la mayor brevedad posible para programar una cita.'
+      },
+      {
+        title: '¿Garantizan la confidencialidad de mis datos?',
+        answer: 'Absolutamente. La confidencialidad y protección de los datos de nuestros clientes es una prioridad. Cumplimos estrictamente con todas las normativas de protección de datos y mantenemos el secreto profesional en todas nuestras gestiones.'
+      },
+      {
+        title: '¿Trabajan con empresas y particulares?',
+        answer: 'Sí, trabajamos tanto con empresas de todos los tamaños como con particulares. Ofrecemos servicios personalizados adaptados a las necesidades específicas de cada cliente, ya sea una empresa o un particular.'
+      }
+    ];
+
+    function addLog(message, type = 'info') {
+      const logContainer = document.getElementById('logContainer');
+      const log = document.getElementById('log');
+      
+      logContainer.style.display = 'block';
+      
+      const logItem = document.createElement('div');
+      logItem.className = `log-item log-${type}`;
+      logItem.textContent = `[${new Date().toLocaleTimeString()}] ${message}`;
+      log.appendChild(logItem);
+      log.scrollTop = log.scrollHeight;
+    }
+
+    async function migrateFaqs() {
+      const btn = document.getElementById('migrateBtn');
+      btn.disabled = true;
+      btn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Migrando...';
+      
+      const log = document.getElementById('log');
+      log.innerHTML = '';
+      
+      addLog('⏳ Esperando inicialización de Firebase...', 'info');
+      
+      // Esperar a que Firebase esté listo con timeout
+      let firebaseReady = false;
+      let attempts = 0;
+      const maxAttempts = 50; // 5 segundos máximo
+      
+      await new Promise((resolve, reject) => {
+        function waitForFirebase() {
+          attempts++;
+          
+          // Verificar si Firebase SDK está cargado
+          if (typeof firebase === 'undefined') {
+            if (attempts >= maxAttempts) {
+              addLog('❌ Firebase SDK no se cargó. Verifica que los scripts de Firebase estén incluidos.', 'error');
+              reject(new Error('Firebase SDK no cargado'));
+              return;
+            }
+            setTimeout(waitForFirebase, 100);
+            return;
+          }
+          
+          // Verificar si firebaseServices está disponible
+          if (window.firebaseServices && window.firebaseServices.db && window.firebaseServices.auth) {
+            addLog('✅ Firebase inicializado correctamente', 'success');
+            firebaseReady = true;
+            resolve();
+          } else {
+            if (attempts >= maxAttempts) {
+              addLog('❌ Firebase no se inicializó correctamente. Verifica la configuración.', 'error');
+              addLog('💡 Asegúrate de que firebase-config.js se haya cargado correctamente.', 'info');
+              reject(new Error('Firebase no inicializado'));
+              return;
+            }
+            setTimeout(waitForFirebase, 100);
+          }
+        }
+        waitForFirebase();
+      });
+      
+      if (!firebaseReady) {
+        btn.disabled = false;
+        btn.innerHTML = '<i class="fas fa-play mr-2"></i>Migrar FAQs';
+        return;
+      }
+      
+      // Esperar a que el usuario esté autenticado
+      addLog('⏳ Verificando autenticación...', 'info');
+      await new Promise((resolve, reject) => {
+        const { auth } = window.firebaseServices;
+        
+        // Verificar estado actual
+        if (auth.currentUser) {
+          addLog('✅ Usuario autenticado: ' + auth.currentUser.email, 'success');
+          resolve();
+          return;
+        }
+        
+        // Esperar cambio de estado
+        const unsubscribe = auth.onAuthStateChanged((user) => {
+          if (user) {
+            unsubscribe();
+            addLog('✅ Usuario autenticado: ' + user.email, 'success');
+            resolve();
+          } else {
+            // Esperar un poco más antes de rechazar
+            setTimeout(() => {
+              if (!auth.currentUser) {
+                unsubscribe();
+                addLog('⚠️ No hay usuario autenticado. Por favor, inicia sesión primero.', 'error');
+                addLog('💡 Ve a /admin/index.html para iniciar sesión.', 'info');
+                reject(new Error('Usuario no autenticado'));
+              }
+            }, 2000);
+          }
+        });
+      });
+      
+      try {
+        const { db } = window.firebaseServices;
+        
+        // Cargar todas las FAQs existentes para verificar
+        const allPageContent = await db.collection('pageContent')
+          .where('page', '==', 'index')
+          .get();
+        
+        const existingFaqsMap = {};
+        allPageContent.forEach(doc => {
+          const data = doc.data();
+          if (data.fieldKey && data.fieldKey.startsWith('faq_item_')) {
+            existingFaqsMap[data.fieldKey] = { id: doc.id, data: data };
+          }
+        });
+        
+        if (Object.keys(existingFaqsMap).length > 0) {
+          addLog(`⚠️ Ya existen ${Object.keys(existingFaqsMap).length} FAQs en Firebase.`, 'info');
+          addLog('Se actualizarán las FAQs existentes y se crearán las que falten.', 'info');
+        }
+        
+        addLog(`📝 Procesando ${existingFaqs.length} FAQs...`, 'info');
+        
+        for (let i = 0; i < existingFaqs.length; i++) {
+          const faq = existingFaqs[i];
+          const order = i + 1;
+          const fieldKey = `faq_item_${order}`;
+          
+          // Combinar título y respuesta en HTML
+          const combinedHTML = `<h5>${faq.title}</h5><p>${faq.answer}</p>`;
+          
+          // Verificar si ya existe
+          if (existingFaqsMap[fieldKey]) {
+            // Actualizar FAQ existente
+            const existingId = existingFaqsMap[fieldKey].id;
+            await db.collection('pageContent').doc(existingId).update({
+              contentEs: combinedHTML,
+              section: `Pregunta ${order}`,
+              order: order,
+              updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+            });
+            addLog(`✓ Actualizada: ${faq.title}`, 'success');
+          } else {
+            // Crear nueva FAQ
+            await db.collection('pageContent').add({
+              page: 'index',
+              section: `Pregunta ${order}`,
+              fieldKey: fieldKey,
+              contentEs: combinedHTML,
+              order: order,
+              type: 'html',
+              createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+              updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+            });
+            addLog(`✓ Creada: ${faq.title}`, 'success');
+          }
+        }
+        
+        addLog('\n✅ ¡Migración completada!', 'success');
+        addLog('Ahora puedes editar las FAQs desde el panel de administración.', 'info');
+        faqsCargadas = true;
+        
+      } catch (error) {
+        addLog(`❌ Error: ${error.message}`, 'error');
+        console.error('Error completo:', error);
+        
+        if (error.message.includes('Firebase SDK no cargado')) {
+          addLog('💡 Verifica que los scripts de Firebase estén incluidos en el HTML.', 'info');
+        } else if (error.message.includes('Firebase no inicializado')) {
+          addLog('💡 Verifica que firebase-config.js y firebase-config.local.js estén correctamente configurados.', 'info');
+        } else if (error.message.includes('Usuario no autenticado')) {
+          addLog('💡 Ve a /admin/index.html para iniciar sesión y luego vuelve aquí.', 'info');
+        } else {
+          addLog('💡 Revisa la consola del navegador para más detalles del error.', 'info');
+        }
+      } finally {
+        btn.disabled = false;
+        if (faqsCargadas) {
+          btn.innerHTML = '<i class="fas fa-check mr-2"></i>Completado';
+        } else {
+          btn.innerHTML = '<i class="fas fa-play mr-2"></i>Migrar FAQs';
+        }
+      }
+    }
+
+    // Función para verificar y mostrar el estado de Firebase
+    let firebaseStatusChecked = false;
+    let sdkLoaded = false;
+    let servicesInitialized = false;
+    
+    function checkFirebaseStatus() {
+      if (firebaseStatusChecked) return;
+      
+      const log = document.getElementById('log');
+      const logContainer = document.getElementById('logContainer');
+      logContainer.style.display = 'block';
+      addLog('⏳ Verificando estado de Firebase...', 'info');
+      
+      let attempts = 0;
+      const maxAttempts = 100; // 10 segundos
+      
+      function waitForFirebase() {
+        attempts++;
+        
+        // Verificar Firebase SDK (solo mostrar una vez)
+        if (typeof firebase === 'undefined') {
+          if (attempts >= maxAttempts) {
+            addLog('❌ Firebase SDK no se cargó. Verifica que los scripts estén incluidos.', 'error');
+            addLog('💡 Verifica la consola del navegador para ver errores de carga.', 'info');
+            firebaseStatusChecked = true;
+            return;
+          }
+          setTimeout(waitForFirebase, 100);
+          return;
+        }
+        
+        // Mostrar que SDK está cargado solo una vez
+        if (!sdkLoaded) {
+          addLog('✅ Firebase SDK cargado', 'success');
+          sdkLoaded = true;
+        }
+        
+        // Verificar firebaseServices
+        if (window.firebaseServices && window.firebaseServices.db && window.firebaseServices.auth) {
+          if (!servicesInitialized) {
+            addLog('✅ Firebase Services inicializado', 'success');
+            servicesInitialized = true;
+            firebaseStatusChecked = true;
+            
+            const { auth } = window.firebaseServices;
+            
+            // Verificar autenticación
+            auth.onAuthStateChanged((user) => {
+              if (user) {
+                addLog('✅ Usuario autenticado: ' + user.email, 'success');
+                addLog('✅ Puedes hacer clic en "Migrar FAQs" para continuar.', 'success');
+              } else {
+                addLog('⚠️ Firebase listo pero no estás autenticado.', 'error');
+                addLog('💡 Ve a /admin/index.html para iniciar sesión y luego vuelve aquí.', 'info');
+              }
+            });
+          }
+          return;
+        }
+        
+        // Si no hay firebaseServices, intentar inicializar manualmente
+        if (attempts === 10) {
+          addLog('⚠️ Firebase Services no se inicializó automáticamente. Intentando inicializar...', 'info');
+          
+          // Verificar configuración
+          if (!window.FIREBASE_CONFIG || window.FIREBASE_CONFIG.apiKey === 'YOUR_API_KEY') {
+            addLog('❌ Firebase no está configurado correctamente.', 'error');
+            addLog('💡 Verifica que firebase-config.local.js exista y tenga la configuración correcta.', 'info');
+            firebaseStatusChecked = true;
+            return;
+          }
+          
+          // Intentar inicializar manualmente
+          try {
+            if (firebase.apps && firebase.apps.length === 0) {
+              firebase.initializeApp(window.FIREBASE_CONFIG);
+            }
+            
+            const db = firebase.firestore();
+            const auth = firebase.auth();
+            // Storage es opcional, solo inicializarlo si está disponible
+            let storage = null;
+            if (typeof firebase.storage === 'function') {
+              storage = firebase.storage();
+            }
+            
+            window.firebaseServices = {
+              db,
+              auth,
+              storage
+            };
+            
+            addLog('✅ Firebase inicializado manualmente', 'success');
+            servicesInitialized = true;
+            firebaseStatusChecked = true;
+            
+            // Verificar autenticación
+            auth.onAuthStateChanged((user) => {
+              if (user) {
+                addLog('✅ Usuario autenticado: ' + user.email, 'success');
+                addLog('✅ Puedes hacer clic en "Migrar FAQs" para continuar.', 'success');
+              } else {
+                addLog('⚠️ Firebase listo pero no estás autenticado.', 'error');
+                addLog('💡 Ve a /admin/index.html para iniciar sesión y luego vuelve aquí.', 'info');
+              }
+            });
+          } catch (error) {
+            addLog('❌ Error al inicializar Firebase: ' + error.message, 'error');
+            console.error('Error completo:', error);
+            firebaseStatusChecked = true;
+            return;
+          }
+        }
+        
+        if (attempts >= maxAttempts) {
+          addLog('❌ Firebase no se inicializó correctamente después de ' + maxAttempts + ' intentos.', 'error');
+          addLog('💡 Verifica que firebase-config.js esté correctamente configurado.', 'info');
+          addLog('💡 Verifica que firebase-config.local.js exista y tenga la configuración correcta.', 'info');
+          console.error('Firebase Services:', window.firebaseServices);
+          console.error('Firebase Config:', window.FIREBASE_CONFIG);
+          console.error('Firebase apps:', firebase.apps);
+          firebaseStatusChecked = true;
+          return;
+        }
+        
+        setTimeout(waitForFirebase, 100);
+      }
+      waitForFirebase();
+    }
+    
+    // Verificar estado inicial cuando el DOM esté listo
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', checkFirebaseStatus);
+    } else {
+      // Si el DOM ya está listo, esperar un poco para que los scripts se carguen
+      setTimeout(checkFirebaseStatus, 500);
+    }
+
+    document.getElementById('migrateBtn').addEventListener('click', migrateFaqs);
+  </script>
+</body>
+</html>
+

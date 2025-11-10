@@ -35,9 +35,48 @@
       "title": "Successions",
       "description": "Conseils spécialisés en héritages et successions.",
       "readMore": "Lire plus"
+    },
+    "whyChoose": {
+      "title": "Pourquoi Nous Choisir?",
+      "subtitle": "Nous sommes votre partenaire de confiance en gestion administrative",
+      "features": {
+        "trust": {
+          "title": "Confiance et Sécurité",
+          "description": "Plus de 40 ans d'expérience garantissent la confiance et la sécurité dans tous nos services."
+        },
+        "speed": {
+          "title": "Service Rapide",
+          "description": "Réponse immédiate à vos questions et gestion efficace de toutes vos procédures administratives."
+        },
+        "personalized": {
+          "title": "Attention Personnalisée",
+          "description": "Chaque client reçoit un traitement personnalisé adapté à ses besoins spécifiques."
+        },
+        "team": {
+          "title": "Équipe Professionnelle",
+          "description": "Nous avons plus de 100 conseillers experts dans tous les domaines de la gestion administrative."
+        },
+        "confidentiality": {
+          "title": "Confidentialité",
+          "description": "Nous garantissons la confidentialité et la protection maximales de toutes vos données personnelles."
+        },
+        "prices": {
+          "title": "Prix Compétitifs",
+          "description": "Nous offrons des services de haute qualité à des prix compétitifs et transparents."
+        }
+      }
+    },
+    "testimonials": {
+      "title": "Ce Que Disent Nos Clients",
+      "subtitle": "Témoignages réels de clients satisfaits"
+    },
+    "faq": {
+      "title": "Questions Fréquentes",
+      "subtitle": "Réponses aux questions les plus courantes"
     }
   },
   "about": {
+    "companyName": "Sercon Gestoría",
     "title": "À propos de nous",
     "subtitle": "Plus de 40 ans d'expérience à votre service",
     "founded": "Fondé en",
@@ -127,5 +166,11 @@
     "fr": "Français",
     "gl": "Galego",
     "pt": "Português"
+  },
+  "common": {
+    "menu": "Menu",
+    "loading": "Chargement...",
+    "loadingArticles": "Chargement des articles...",
+    "scrollToTop": "Retour en haut"
   }
 }

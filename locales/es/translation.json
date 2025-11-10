@@ -35,9 +35,48 @@
       "title": "Sucesiones",
       "description": "Asesoramiento especializado en herencias y sucesiones.",
       "readMore": "Leer más"
+    },
+    "whyChoose": {
+      "title": "¿Por Qué Elegirnos?",
+      "subtitle": "Somos su socio de confianza en gestión administrativa",
+      "features": {
+        "trust": {
+          "title": "Confianza y Seguridad",
+          "description": "Más de 40 años de experiencia garantizan la confianza y seguridad en todos nuestros servicios."
+        },
+        "speed": {
+          "title": "Atención Rápida",
+          "description": "Respuesta inmediata a sus consultas y gestión eficiente de todos sus trámites administrativos."
+        },
+        "personalized": {
+          "title": "Atención Personalizada",
+          "description": "Cada cliente recibe un trato personalizado adaptado a sus necesidades específicas."
+        },
+        "team": {
+          "title": "Equipo Profesional",
+          "description": "Contamos con más de 100 asesores expertos en todas las áreas de gestión administrativa."
+        },
+        "confidentiality": {
+          "title": "Confidencialidad",
+          "description": "Garantizamos la máxima confidencialidad y protección de todos sus datos personales."
+        },
+        "prices": {
+          "title": "Precios Competitivos",
+          "description": "Ofrecemos servicios de alta calidad a precios competitivos y transparentes."
+        }
+      }
+    },
+    "testimonials": {
+      "title": "Lo Que Dicen Nuestros Clientes",
+      "subtitle": "Testimonios reales de clientes satisfechos"
+    },
+    "faq": {
+      "title": "Preguntas Frecuentes",
+      "subtitle": "Respuestas a las dudas más comunes"
     }
   },
   "about": {
+    "companyName": "Sercon Gestoría",
     "title": "Sobre Nosotros",
     "subtitle": "Más de 40 años de experiencia a su servicio",
     "founded": "Fundado en",
@@ -127,5 +166,11 @@
     "fr": "Français",
     "gl": "Galego",
     "pt": "Português"
+  },
+  "common": {
+    "menu": "Menú",
+    "loading": "Cargando...",
+    "loadingArticles": "Cargando artículos...",
+    "scrollToTop": "Volver arriba"
   }
 }

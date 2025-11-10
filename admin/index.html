@@ -374,8 +374,8 @@
               <a class="nav-link" href="#" data-section="featured-news">
                 <i class="fas fa-star mr-2"></i> Noticias Destacadas
               </a>
-              <a class="nav-link" href="#" data-section="media">
-                <i class="fas fa-images mr-2"></i> Imágenes
+              <a class="nav-link" href="#" data-section="pages">
+                <i class="fas fa-file-alt mr-2"></i> Páginas
               </a>
               <a class="nav-link" href="#" id="logoutBtn">
                 <i class="fas fa-sign-out-alt mr-2"></i> Cerrar Sesión
@@ -656,17 +656,46 @@
             </div>
           </div>
 
-          <!-- Media Section -->
-          <div id="mediaSection" class="content-section" style="display: none;">
+          <!-- Pages Section -->
+          <div id="pagesSection" class="content-section" style="display: none;">
             <div class="d-flex justify-content-between align-items-center mb-4">
-              <h1>Gestor de Imágenes</h1>
-              <button class="btn btn-primary" id="uploadImageBtn">
-                <i class="fas fa-upload mr-2"></i> Subir Imagen
-              </button>
+              <h1>Gestión de Páginas</h1>
             </div>
-            <input type="file" id="imageUpload" accept="image/*" style="display: none;" multiple>
-            <div id="mediaGrid" class="row"></div>
+            
+            <div class="card mb-4">
+              <div class="card-body">
+                <h5 class="card-title mb-3">
+                  <i class="fas fa-info-circle mr-2 text-primary"></i>
+                  Información
+                </h5>
+                <p class="card-text text-muted">
+                  Edita el contenido de las páginas principales del sitio web. Selecciona una página y edita sus secciones de contenido.
+                </p>
+              </div>
+            </div>
+            
+            <div class="card mb-4">
+              <div class="card-body">
+                <div class="form-group">
+                  <label for="pageSelector"><strong>Seleccionar Página:</strong></label>
+                  <select class="form-control" id="pageSelector" style="max-width: 300px;">
+                    <option value="index">Inicio (index.html)</option>
+                    <option value="about">Empresa (about.html)</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title mb-4">Contenido de la Página</h5>
+                <div id="pageContentEditor">
+                  <p class="text-muted">Selecciona una página para comenzar a editar su contenido.</p>
+                </div>
+              </div>
+            </div>
           </div>
+
         </div>
       </div>
     </div>
@@ -738,6 +767,7 @@
   <script src="admin-auth.js"></script>
   <script src="admin-blogs.js"></script>
   <script src="admin-featured-news.js"></script>
+  <script src="admin-pages.js"></script>
   <script src="admin-media.js"></script>
   <script src="admin-main.js"></script>
   

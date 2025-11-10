@@ -460,21 +460,98 @@
   }
 
   async function updatePageContent(page) {
+    if (!window.firebaseServices || !window.firebaseServices.db) {
+      console.warn('Firebase no está inicializado. Esperando...');
+      setTimeout(() => updatePageContent(page), 500);
+      return;
+    }
+
     const elements = document.querySelectorAll(`[data-firebase-page="${page}"]`);
     
-    elements.forEach(async element => {
-      const fieldKey = element.getAttribute('data-firebase-field');
-      if (!fieldKey) return;
+    if (elements.length === 0) {
+      console.warn(`No se encontraron elementos con data-firebase-page="${page}"`);
+      return;
+    }
 
-      const content = await loadPageContent(page, fieldKey);
-      if (content) {
-        if (element.hasAttribute('data-firebase-html')) {
-          element.innerHTML = content;
-        } else {
-          element.textContent = content;
+    console.log(`📄 Cargando contenido para página "${page}" (${elements.length} elementos encontrados)`);
+    
+    // Para la página "about", verificar si "welcome" tiene contenido unificado
+    let hasUnifiedContent = false;
+    if (page === 'about') {
+      try {
+        const welcomeContent = await loadPageContent(page, 'welcome');
+        if (welcomeContent && welcomeContent.trim().length > 200) {
+          hasUnifiedContent = true;
+          console.log('📝 Contenido unificado detectado en campo "welcome"');
         }
+      } catch (error) {
+        console.warn('Error verificando contenido unificado:', error);
+      }
+    }
+    
+    let loadedCount = 0;
+    let emptyCount = 0;
+    
+    for (const element of elements) {
+      const fieldKey = element.getAttribute('data-firebase-field');
+      if (!fieldKey) {
+        console.warn('⚠️ Elemento sin data-firebase-field:', element);
+        continue;
+      }
+
+      // Si hay contenido unificado en "about", solo mostrar el campo "welcome" y ocultar los demás
+      if (page === 'about' && hasUnifiedContent && fieldKey !== 'welcome') {
+        // Ocultar los otros campos cuando hay contenido unificado
+        element.style.display = 'none';
+        element.classList.add('firebase-loaded');
+        continue;
+      }
+
+      try {
+        const content = await loadPageContent(page, fieldKey);
+        if (content && content.trim() !== '') {
+          // Remover atributo data-i18n temporalmente para evitar que i18n sobrescriba
+          const i18nKey = element.getAttribute('data-i18n');
+          if (i18nKey) {
+            element.removeAttribute('data-i18n');
+          }
+          
+          if (element.hasAttribute('data-firebase-html')) {
+            element.innerHTML = content;
+          } else {
+            // Si no es HTML, limpiar las etiquetas HTML del contenido
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = content;
+            const plainText = tempDiv.textContent || tempDiv.innerText || content;
+            element.textContent = plainText;
+          }
+          
+          // Marcar como cargado para mostrarlo
+          element.classList.add('firebase-loaded');
+          
+          loadedCount++;
+          console.log(`✓ Contenido cargado: ${fieldKey}`, content.substring(0, 50) + '...');
+        } else {
+          // Si no hay contenido en Firebase, mostrar el contenido por defecto
+          element.classList.add('firebase-loaded');
+          emptyCount++;
+          console.log(`⊘ Sin contenido en Firebase para: ${fieldKey} (usando contenido por defecto del HTML)`);
+        }
+      } catch (error) {
+        // En caso de error, mostrar contenido por defecto
+        element.classList.add('firebase-loaded');
+        console.error(`❌ Error cargando contenido para ${fieldKey}:`, error);
+      }
+    }
+    
+    // Mostrar todos los elementos que no se encontraron en Firebase
+    elements.forEach(element => {
+      if (!element.classList.contains('firebase-loaded')) {
+        element.classList.add('firebase-loaded');
       }
     });
+    
+    console.log(`✅ Carga completada: ${loadedCount} elementos actualizados, ${emptyCount} sin contenido en Firebase`);
   }
 
   function showNewsModal(title, subtitle, category, date, content) {

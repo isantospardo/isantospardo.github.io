@@ -5,7 +5,7 @@
 
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="Conozca Gestoría Sercon en Ourense. Más de 40 años de experiencia en servicios fiscales, contables, laborales, legales y sucesiones. Atención personalizada.">
+  <meta name="description" content="Conozca Gestoría Sercon en Orense. Más de 40 años de experiencia en servicios fiscales, contables, laborales, legales y sucesiones. Atención personalizada.">
   <meta name="author" content="Sercon Gestoría">
   <meta name="keywords" content="gestoría Ourense, sobre nosotros, empresa gestoría, servicios administrativos, Ourense">
 
@@ -26,6 +26,16 @@
 
   <!-- Custom styles for this template -->
   <link href="css/clean-blog.min.css" rel="stylesheet">
+  
+  <style>
+    /* Ocultar contenido de Firebase hasta que se cargue */
+    [data-firebase-page] {
+      visibility: hidden;
+    }
+    [data-firebase-page].firebase-loaded {
+      visibility: visible;
+    }
+  </style>
 
 </head>
 
@@ -35,32 +45,32 @@
   <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
     <div class="container">
       <a class="navbar-brand" href="index.html" aria-label="Sercon Gestoría - Inicio"><img src="img/main-logo2.png" width="200" height="90" alt="Sercon Gestoría Logo">      </a>
-      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-        Menu
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" data-i18n-attr="aria-label:nav.toggleAriaLabel" aria-label="Toggle navigation">
+        <span data-i18n="common.menu">Menú</span>
         <i class="fas fa-bars"></i>
       </button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a class="nav-link" href="index.html">Inicio</a>
+            <a class="nav-link" href="index.html" data-i18n="nav.inicio">Inicio</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="about.html">Empresa</a>
+            <a class="nav-link" href="about.html" data-i18n="nav.empresa">Empresa</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="fiscal.html">Fiscal y Contable</a>
+            <a class="nav-link" href="fiscal.html" data-i18n="nav.fiscal">Fiscal y Contable</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="laboral.html">Laboral</a>
+            <a class="nav-link" href="laboral.html" data-i18n="nav.laboral">Laboral</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="legal.html">Legal</a>
+            <a class="nav-link" href="legal.html" data-i18n="nav.legal">Legal</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="sucesiones.html">Sucesiones</a>
+            <a class="nav-link" href="sucesiones.html" data-i18n="nav.sucesiones">Sucesiones</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="contact.html">Contacto</a>
+            <a class="nav-link" href="contact.html" data-i18n="nav.contacto">Contacto</a>
           </li>
         </ul>
       </div>
@@ -73,12 +83,9 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
-          <div class="page-heading">
-            <h1>
-              <img src="img/main-title-logo2.png" width="90" height="90" class="center" alt="Sercon Gestoría">
-              <span class="display-4" data-i18n="about.title">Sobre Nosotros</span>
-            </h1>
-            <span class="subheading" data-i18n="about.subtitle">Más de 40 años de experiencia a su servicio</span>
+          <div class="site-heading">
+            <h1><img src="img/main-title-logo2.png" width="90" height="90" class="center" alt="Sercon Gestoría"> <span class="display-4" data-i18n="about.companyName">Sercon Gestoría</span></h1>
+            <span class="subheading" data-i18n="about.subtitle" data-firebase-page="about" data-firebase-field="subtitle">Más de 40 años de experiencia a su servicio</span>
           </div>
         </div>
       </div>
@@ -97,20 +104,20 @@
           </div>
         </div>
           
-        <p data-i18n="about.welcome">Bienvenido a nuestra página. Somos una prestigiosa gestoría administrativa formada por un excelente equipo humano que abarca una amplia lista de servicios para hacer su relación con la Administración más sencilla.
+        <p data-i18n="about.welcome" data-firebase-page="about" data-firebase-field="welcome" data-firebase-html>Bienvenido a nuestra página. Somos una prestigiosa gestoría administrativa formada por un excelente equipo humano que abarca una amplia lista de servicios para hacer su relación con la Administración más sencilla.
         </p>
-        <p data-i18n="about.mission">Nuestra misión es garantizarle una prestación de calidad, rigor y profesionalidad en cada uno de los servicios que le ofrecemos, resolver sus dudas y ayudarle a mejorar su gestión, así como optimizar sus resultados.
+        <p data-i18n="about.mission" data-firebase-page="about" data-firebase-field="mission" data-firebase-html>Nuestra misión es garantizarle una prestación de calidad, rigor y profesionalidad en cada uno de los servicios que le ofrecemos, resolver sus dudas y ayudarle a mejorar su gestión, así como optimizar sus resultados.
         </p>
-        <p data-i18n="about.experience">Desde la experiencia, conocimientos y medios tecnológicos que poseemos, le ofrecemos una atención personalizada basada en el respeto y la confidencialidad de todos sus datos, de acuerdo con el secreto profesional.
+        <p data-i18n="about.experience" data-firebase-page="about" data-firebase-field="experience" data-firebase-html>Desde la experiencia, conocimientos y medios tecnológicos que poseemos, le ofrecemos una atención personalizada basada en el respeto y la confidencialidad de todos sus datos, de acuerdo con el secreto profesional.
         </p>
-        <p data-i18n="about.objective">
+        <p data-i18n="about.objective" data-firebase-page="about" data-firebase-field="objective" data-firebase-html>
         Nuestro objetivo es ser una empresa valorada por los clientes, cuyas expectativas se cumplan, comprometida con sus obligaciones ante la Administración y siempre buscando las mejores ventajas legislativas.
         </p>
-        <p data-i18n="about.advice">
+        <p data-i18n="about.advice" data-firebase-page="about" data-firebase-field="advice" data-firebase-html>
         Estaremos encantados de asesorarle de manera integral en todos los trámites que precise realizar.
         </p>
-        <p data-i18n="about.visit">
-        Visítenos. Estamos en Ourense, Calle Peña Trevinca, 35 Bajo - 32005
+        <p data-i18n="about.visit" data-firebase-page="about" data-firebase-field="visit">
+        Visítenos. Estamos en Orense, Calle Peña Trevinca, 35 Bajo - 32005
         </p>
       </div>
     </div>
@@ -121,10 +128,10 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-12 text-center mb-5">
-          <h2 class="section-title" style="font-size: 2.5rem; font-weight: 700; color: #007f7e; margin-bottom: 1rem; letter-spacing: -0.02em;" data-i18n="about.team.title">
+          <h2 class="section-title" style="font-size: 2.5rem; font-weight: 700; color: #007f7e; margin-bottom: 1rem; letter-spacing: -0.02em;" data-i18n="about.team.title" data-firebase-page="about" data-firebase-field="team_title">
             Conoce a Nuestro Equipo
           </h2>
-          <p class="lead text-muted" style="font-size: 1.2rem; max-width: 700px; margin: 0 auto;" data-i18n="about.team.subtitle">
+          <p class="lead text-muted" style="font-size: 1.2rem; max-width: 700px; margin: 0 auto;" data-i18n="about.team.subtitle" data-firebase-page="about" data-firebase-field="team_subtitle">
             Profesionales comprometidos con su éxito
           </p>
         </div>
@@ -226,9 +233,61 @@
   <script src="https://cdn.jsdelivr.net/npm/i18next@23.7.6/dist/umd/i18next.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/i18next-browser-languagedetector@7.2.0/dist/umd/i18nextBrowserLanguageDetector.min.js"></script>
   
+  <!-- Firebase SDK (for dynamic content) -->
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+  
+  <!-- Firebase Config Local (NO en git) -->
+  <script src="js/firebase-config.local.js" onerror="console.info('firebase-config.local.js not found - create it')"></script>
+  
+  <!-- Firebase Initialization -->
+  <script src="js/firebase-init.min.js"></script>
+  
   <!-- Load reusable components (header and footer) -->
   <script src="js/load-components.min.js"></script>
   <script src="js/i18n.min.js"></script>
+  
+  <!-- Firebase Content Loader -->
+  <script src="js/firebase-content.min.js?v=5"></script>
+  
+  <script>
+    // Cargar contenido dinámico de páginas desde Firebase
+    // IMPORTANTE: Cargar DESPUÉS de i18n para que Firebase tenga prioridad
+    function loadPageContentFromFirebase() {
+      // Esperar a que Firebase esté inicializado
+      if (window.firebaseServices && window.firebaseServices.db && window.firebaseContent && window.firebaseContent.updatePageContent) {
+        console.log('🔄 Cargando contenido de Firebase para página "about"...');
+        window.firebaseContent.updatePageContent('about').then(() => {
+          console.log('✅ Contenido de Firebase cargado para página "about"');
+        }).catch(error => {
+          console.error('❌ Error cargando contenido de Firebase:', error);
+        });
+      } else {
+        // Reintentar después de un breve delay
+        setTimeout(loadPageContentFromFirebase, 100);
+      }
+    }
+    
+    // Esperar a que i18n termine de cargar antes de cargar contenido de Firebase
+    function waitForI18nThenLoadFirebase() {
+      if (window.i18nextInstance && window.i18nextInstance.isInitialized) {
+        // Esperar un poco más para que i18n termine de actualizar el DOM
+        setTimeout(loadPageContentFromFirebase, 500);
+      } else {
+        setTimeout(waitForI18nThenLoadFirebase, 100);
+      }
+    }
+    
+    // Iniciar carga cuando el DOM esté listo
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', function() {
+        // Esperar a que i18n se inicialice, luego cargar Firebase
+        waitForI18nThenLoadFirebase();
+      });
+    } else {
+      waitForI18nThenLoadFirebase();
+    }
+  </script>
 
   <style>
     /* Foundation Badge Styles - Elegant Design */

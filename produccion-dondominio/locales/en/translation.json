@@ -35,9 +35,48 @@
       "title": "Inheritance",
       "description": "Specialized advice on inheritances and successions.",
       "readMore": "Read more"
+    },
+    "whyChoose": {
+      "title": "Why Choose Us?",
+      "subtitle": "We are your trusted partner in administrative management",
+      "features": {
+        "trust": {
+          "title": "Trust and Security",
+          "description": "More than 40 years of experience guarantee trust and security in all our services."
+        },
+        "speed": {
+          "title": "Fast Service",
+          "description": "Immediate response to your queries and efficient management of all your administrative procedures."
+        },
+        "personalized": {
+          "title": "Personalized Attention",
+          "description": "Each client receives personalized treatment adapted to their specific needs."
+        },
+        "team": {
+          "title": "Professional Team",
+          "description": "We have more than 100 expert advisors in all areas of administrative management."
+        },
+        "confidentiality": {
+          "title": "Confidentiality",
+          "description": "We guarantee maximum confidentiality and protection of all your personal data."
+        },
+        "prices": {
+          "title": "Competitive Prices",
+          "description": "We offer high-quality services at competitive and transparent prices."
+        }
+      }
+    },
+    "testimonials": {
+      "title": "What Our Clients Say",
+      "subtitle": "Real testimonials from satisfied clients"
+    },
+    "faq": {
+      "title": "Frequently Asked Questions",
+      "subtitle": "Answers to the most common questions"
     }
   },
   "about": {
+    "companyName": "Sercon Gestoría",
     "title": "About Us",
     "subtitle": "More than 40 years of experience at your service",
     "founded": "Founded in",
@@ -127,5 +166,11 @@
     "fr": "Français",
     "gl": "Galego",
     "pt": "Português"
+  },
+  "common": {
+    "menu": "Menu",
+    "loading": "Loading...",
+    "loadingArticles": "Loading articles...",
+    "scrollToTop": "Back to top"
   }
 }

@@ -27,10 +27,6 @@
       document.querySelector('.nav-link[data-section="featured-news"]').classList.add('active');
       document.getElementById('featuredNewsSection').style.display = 'block';
       if (window.loadFeaturedNews) window.loadFeaturedNews();
-    } else if (section === 'media') {
-      document.querySelector('.nav-link[data-section="media"]').classList.add('active');
-      document.getElementById('mediaSection').style.display = 'block';
-      if (window.loadMedia) window.loadMedia();
     }
     
     // Guardar la sección activa en localStorage

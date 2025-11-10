@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inicializar Contenido de Páginas - Sercon Gestoría</title>
+  
+  <!-- Bootstrap CSS -->
+  <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  
+  <!-- Font Awesome -->
+  <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+  
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-storage-compat.js"></script>
+  
+  <style>
+    body {
+      background-color: #f5f5f5;
+      padding: 2rem;
+    }
+    .card {
+      margin-bottom: 1rem;
+    }
+    .log {
+      background-color: #f8f9fa;
+      border: 1px solid #dee2e6;
+      border-radius: 4px;
+      padding: 1rem;
+      max-height: 400px;
+      overflow-y: auto;
+      font-family: monospace;
+      font-size: 0.9rem;
+    }
+    .log-item {
+      margin-bottom: 0.5rem;
+      padding: 0.25rem;
+    }
+    .log-success {
+      color: #28a745;
+    }
+    .log-error {
+      color: #dc3545;
+    }
+    .log-info {
+      color: #17a2b8;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header bg-primary text-white">
+            <h3 class="mb-0"><i class="fas fa-database mr-2"></i>Inicializar Contenido de Páginas en Firebase</h3>
+          </div>
+          <div class="card-body">
+            <p class="text-muted">
+              Este script leerá el contenido actual de <code>index.html</code> y <code>about.html</code> 
+              y lo guardará en Firebase Firestore. Solo se actualizarán los campos que aún no tienen contenido.
+            </p>
+            
+            <div class="alert alert-warning">
+              <i class="fas fa-exclamation-triangle mr-2"></i>
+              <strong>Importante:</strong> Asegúrate de estar autenticado en Firebase antes de ejecutar este script.
+            </div>
+            
+            <button id="initBtn" class="btn btn-primary btn-lg">
+              <i class="fas fa-play mr-2"></i>Inicializar Contenido
+            </button>
+            
+            <div id="logContainer" class="mt-4" style="display: none;">
+              <h5>Log de Proceso:</h5>
+              <div id="log" class="log"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Firebase Config -->
+  <script src="firebase-config.local.js" onerror="console.warn('firebase-config.local.js not found - using default config')"></script>
+  <script src="firebase-config.js"></script>
+  <script src="admin-auth.js"></script>
+  <script src="init-firebase.js"></script>
+  
+  <script>
+    // Esperar a que Firebase esté inicializado
+    function waitForFirebase(callback, maxAttempts = 50) {
+      let attempts = 0;
+      const checkInterval = setInterval(() => {
+        attempts++;
+        if (window.firebaseServices && window.firebaseServices.db && window.firebaseServices.auth) {
+          clearInterval(checkInterval);
+          callback();
+        } else if (attempts >= maxAttempts) {
+          clearInterval(checkInterval);
+          addLog('❌ Error: Firebase no se inicializó después de 5 segundos. Verifica la configuración.', 'error');
+          addLog('💡 Asegúrate de que firebase-config.local.js existe y tiene la configuración correcta.', 'info');
+        }
+      }, 100);
+    }
+
+    // Esperar a que el usuario esté autenticado
+    function waitForAuth(callback) {
+      waitForFirebase(() => {
+        const { auth } = window.firebaseServices;
+        const unsubscribe = auth.onAuthStateChanged((user) => {
+          if (user) {
+            unsubscribe();
+            callback();
+          }
+        });
+      });
+    }
+
+    // Contenido actual de las páginas
+    const pageContentData = {
+      index: {
+        main_title: 'Sercon Gestoría',
+        subtitle: 'Más de 40 años a vuestro servicio',
+        description: 'En Gestoría Sercon contamos con un grupo de profesionales que ponemos a su servicio para resolver sus gestiones administrativas. Nuestro objetivo es evitarle preocupaciones y ahorrarle tiempo y dolores de cabeza frente a La Administración.',
+        contact_text: 'Si tiene alguna cuestión que quiera aclarar no dude en ponerse en contacto con nuestra gestoría. Le responderemos a la mayor brevedad posible.',
+        why_choose_title: '¿Por Qué Elegirnos?',
+        why_choose_subtitle: 'Somos su socio de confianza en gestión administrativa',
+        feature_trust: '<p>Más de 40 años de experiencia garantizan la confianza y seguridad en todos nuestros servicios.</p>',
+        feature_speed: '<p>Respuesta inmediata a sus consultas y gestión eficiente de todos sus trámites administrativos.</p>',
+        feature_personalized: '<p>Cada cliente recibe un trato personalizado adaptado a sus necesidades específicas.</p>',
+        feature_team: '<p>Contamos con más de 100 asesores expertos en todas las áreas de gestión administrativa.</p>',
+        feature_confidentiality: '<p>Garantizamos la máxima confidencialidad y protección de todos sus datos personales.</p>',
+        feature_prices: '<p>Ofrecemos servicios de alta calidad a precios competitivos y transparentes.</p>',
+        testimonials_title: 'Lo Que Dicen Nuestros Clientes',
+        testimonials_subtitle: 'Testimonios reales de clientes satisfechos',
+        faq_title: 'Preguntas Frecuentes',
+        faq_subtitle: 'Respuestas a las dudas más comunes'
+      },
+      about: {
+        title: 'Sobre Nosotros',
+        subtitle: 'Más de 40 años de experiencia a su servicio',
+        welcome: '<p>Bienvenido a nuestra página. Somos una prestigiosa gestoría administrativa formada por un excelente equipo humano que abarca una amplia lista de servicios para hacer su relación con la Administración más sencilla.</p>',
+        mission: '<p>Nuestra misión es garantizarle una prestación de calidad, rigor y profesionalidad en cada uno de los servicios que le ofrecemos, resolver sus dudas y ayudarle a mejorar su gestión, así como optimizar sus resultados.</p>',
+        experience: '<p>Desde la experiencia, conocimientos y medios tecnológicos que poseemos, le ofrecemos una atención personalizada basada en el respeto y la confidencialidad de todos sus datos, de acuerdo con el secreto profesional.</p>',
+        objective: '<p>Nuestro objetivo es ser una empresa valorada por los clientes, cuyas expectativas se cumplan, comprometida con sus obligaciones ante la Administración y siempre buscando las mejores ventajas legislativas.</p>',
+        advice: '<p>Estaremos encantados de asesorarle de manera integral en todos los trámites que precise realizar.</p>',
+        visit: 'Visítenos. Estamos en Orense, Calle Peña Trevinca, 35 Bajo - 32005',
+        team_title: 'Conoce a Nuestro Equipo',
+        team_subtitle: 'Profesionales comprometidos con su éxito'
+      }
+    };
+
+    // Estructura de secciones
+    const sectionsStructure = {
+      index: [
+        { section: 'Título Principal', fieldKey: 'main_title', order: 1, type: 'text' },
+        { section: 'Subtítulo', fieldKey: 'subtitle', order: 2, type: 'text' },
+        { section: 'Descripción Principal', fieldKey: 'description', order: 3, type: 'html' },
+        { section: 'Texto de Contacto', fieldKey: 'contact_text', order: 4, type: 'text' },
+        { section: 'Título "¿Por Qué Elegirnos?"', fieldKey: 'why_choose_title', order: 5, type: 'text' },
+        { section: 'Subtítulo "¿Por Qué Elegirnos?"', fieldKey: 'why_choose_subtitle', order: 6, type: 'text' },
+        { section: 'Feature: Confianza y Seguridad', fieldKey: 'feature_trust', order: 7, type: 'html' },
+        { section: 'Feature: Atención Rápida', fieldKey: 'feature_speed', order: 8, type: 'html' },
+        { section: 'Feature: Atención Personalizada', fieldKey: 'feature_personalized', order: 9, type: 'html' },
+        { section: 'Feature: Equipo Profesional', fieldKey: 'feature_team', order: 10, type: 'html' },
+        { section: 'Feature: Confidencialidad', fieldKey: 'feature_confidentiality', order: 11, type: 'html' },
+        { section: 'Feature: Precios Competitivos', fieldKey: 'feature_prices', order: 12, type: 'html' },
+        { section: 'Título Testimonios', fieldKey: 'testimonials_title', order: 13, type: 'text' },
+        { section: 'Subtítulo Testimonios', fieldKey: 'testimonials_subtitle', order: 14, type: 'text' },
+        { section: 'Título FAQ', fieldKey: 'faq_title', order: 15, type: 'text' },
+        { section: 'Subtítulo FAQ', fieldKey: 'faq_subtitle', order: 16, type: 'text' }
+      ],
+      about: [
+        { section: 'Título', fieldKey: 'title', order: 1, type: 'text' },
+        { section: 'Subtítulo', fieldKey: 'subtitle', order: 2, type: 'text' },
+        { section: 'Mensaje de Bienvenida', fieldKey: 'welcome', order: 3, type: 'html' },
+        { section: 'Misión', fieldKey: 'mission', order: 4, type: 'html' },
+        { section: 'Experiencia', fieldKey: 'experience', order: 5, type: 'html' },
+        { section: 'Objetivo', fieldKey: 'objective', order: 6, type: 'html' },
+        { section: 'Consejo', fieldKey: 'advice', order: 7, type: 'html' },
+        { section: 'Información de Visita', fieldKey: 'visit', order: 8, type: 'text' },
+        { section: 'Título Equipo', fieldKey: 'team_title', order: 9, type: 'text' },
+        { section: 'Subtítulo Equipo', fieldKey: 'team_subtitle', order: 10, type: 'text' }
+      ]
+    };
+
+    function addLog(message, type = 'info') {
+      const logContainer = document.getElementById('logContainer');
+      const log = document.getElementById('log');
+      
+      logContainer.style.display = 'block';
+      
+      const logItem = document.createElement('div');
+      logItem.className = `log-item log-${type}`;
+      logItem.textContent = `[${new Date().toLocaleTimeString()}] ${message}`;
+      log.appendChild(logItem);
+      log.scrollTop = log.scrollHeight;
+    }
+
+    async function initializePageContent() {
+      const btn = document.getElementById('initBtn');
+      btn.disabled = true;
+      btn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Inicializando...';
+      
+      const log = document.getElementById('log');
+      log.innerHTML = '';
+      
+      addLog('⏳ Esperando inicialización de Firebase...', 'info');
+      
+      // Esperar a que Firebase esté listo
+      await new Promise((resolve) => {
+        waitForFirebase(() => {
+          addLog('✅ Firebase inicializado', 'success');
+          resolve();
+        });
+      });
+      
+      // Esperar a que el usuario esté autenticado
+      await new Promise((resolve) => {
+        waitForAuth(() => {
+          addLog('✅ Usuario autenticado', 'success');
+          resolve();
+        });
+      });
+      
+      try {
+        const { db, auth } = window.firebaseServices;
+        
+        if (!auth.currentUser) {
+          addLog('❌ Error: No estás autenticado. Por favor, inicia sesión primero.', 'error');
+          btn.disabled = false;
+          btn.innerHTML = '<i class="fas fa-play mr-2"></i>Inicializar Contenido';
+          return;
+        }
+        
+        addLog('✅ Usuario autenticado correctamente', 'success');
+        
+        for (const [page, sections] of Object.entries(sectionsStructure)) {
+          addLog(`\n📄 Procesando página: ${page}`, 'info');
+          
+          for (const section of sections) {
+            try {
+              // Verificar si ya existe
+              const existingQuery = await db.collection('pageContent')
+                .where('page', '==', page)
+                .where('fieldKey', '==', section.fieldKey)
+                .limit(1)
+                .get();
+              
+              const content = pageContentData[page][section.fieldKey] || '';
+              
+              if (!existingQuery.empty) {
+                // Actualizar si existe pero está vacío
+                const doc = existingQuery.docs[0];
+                const docData = doc.data();
+                
+                if (!docData.contentEs || docData.contentEs.trim() === '') {
+                  await db.collection('pageContent').doc(doc.id).update({
+                    contentEs: content,
+                    updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+                  });
+                  addLog(`  ✓ Actualizado: ${section.section}`, 'success');
+                } else {
+                  addLog(`  ⊙ Ya existe con contenido: ${section.section}`, 'info');
+                }
+              } else {
+                // Crear nuevo
+                await db.collection('pageContent').add({
+                  page: page,
+                  section: section.section,
+                  fieldKey: section.fieldKey,
+                  contentEs: content,
+                  order: section.order,
+                  type: section.type || 'html',
+                  createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+                  updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+                });
+                addLog(`  ✓ Creado: ${section.section}`, 'success');
+              }
+            } catch (error) {
+              addLog(`  ✗ Error en ${section.section}: ${error.message}`, 'error');
+            }
+          }
+        }
+        
+        addLog('\n✅ ¡Inicialización completada!', 'success');
+        addLog('Ahora puedes editar el contenido desde el panel de administración.', 'info');
+        
+      } catch (error) {
+        addLog(`❌ Error general: ${error.message}`, 'error');
+        console.error('Error:', error);
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = '<i class="fas fa-check mr-2"></i>Completado';
+      }
+    }
+
+    // Verificar estado inicial
+    document.addEventListener('DOMContentLoaded', function() {
+      // Mostrar log inmediatamente
+      const log = document.getElementById('log');
+      const logContainer = document.getElementById('logContainer');
+      logContainer.style.display = 'block';
+      addLog('⏳ Esperando inicialización de Firebase...', 'info');
+      
+      // Verificar si Firebase está disponible
+      if (typeof firebase === 'undefined') {
+        addLog('❌ Error: Firebase SDK no está cargado. Verifica tu conexión a internet.', 'error');
+        return;
+      }
+      
+      if (!window.FIREBASE_CONFIG) {
+        addLog('⚠️ Advertencia: firebase-config.local.js no se encontró. Usando configuración por defecto.', 'error');
+        addLog('💡 Asegúrate de crear firebase-config.local.js con tu configuración de Firebase.', 'info');
+      }
+      
+      waitForFirebase(() => {
+        const { auth } = window.firebaseServices;
+        if (auth.currentUser) {
+          addLog('✅ Firebase listo y usuario autenticado. Puedes hacer clic en "Inicializar Contenido".', 'success');
+        } else {
+          addLog('⚠️ Firebase listo pero no estás autenticado. Por favor, inicia sesión primero.', 'error');
+          addLog('💡 Ve a /admin/index.html para iniciar sesión.', 'info');
+        }
+      });
+    });
+
+    document.getElementById('initBtn').addEventListener('click', initializePageContent);
+  </script>
+</body>
+</html>
+

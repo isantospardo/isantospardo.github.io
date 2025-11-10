@@ -5,25 +5,25 @@
 
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="Gestoría Sercon en Ourense. Más de 40 años de experiencia en servicios fiscales, contables, laborales, legales y sucesiones. Asesoramiento profesional y personalizado.">
+  <meta name="description" content="Gestoría Sercon en Orense. Más de 40 años de experiencia en servicios fiscales, contables, laborales, legales y sucesiones. Asesoramiento profesional y personalizado.">
   <meta name="author" content="Sercon Gestoría">
   <meta name="keywords" content="gestoría Ourense, asesoría fiscal, contabilidad, servicios laborales, gestoría administrativa, Ourense">
   
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://isantospardo.github.io/">
-  <meta property="og:title" content="Sercon Gestoría - Gestoría Administrativa en Ourense">
-  <meta property="og:description" content="Más de 40 años de experiencia en servicios fiscales, contables, laborales, legales y sucesiones en Ourense.">
+  <meta property="og:title" content="Sercon Gestoría - Gestoría Administrativa en Orense">
+  <meta property="og:description" content="Más de 40 años de experiencia en servicios fiscales, contables, laborales, legales y sucesiones en Orense.">
   <meta property="og:image" content="img/main-logo2.png">
 
   <!-- Twitter -->
   <meta property="twitter:card" content="summary_large_image">
   <meta property="twitter:url" content="https://isantospardo.github.io/">
-  <meta property="twitter:title" content="Sercon Gestoría - Gestoría Administrativa en Ourense">
-  <meta property="twitter:description" content="Más de 40 años de experiencia en servicios fiscales, contables, laborales, legales y sucesiones en Ourense.">
+  <meta property="twitter:title" content="Sercon Gestoría - Gestoría Administrativa en Orense">
+  <meta property="twitter:description" content="Más de 40 años de experiencia en servicios fiscales, contables, laborales, legales y sucesiones en Orense.">
   <meta property="twitter:image" content="img/main-logo2.png">
 
-  <title>Sercon Gestoría - Gestoría Administrativa en Ourense</title>
+  <title>Sercon Gestoría - Gestoría Administrativa en Orense</title>
 
   <!-- Bootstrap core CSS -->
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -37,6 +37,16 @@
 
   <!-- Custom styles for this template -->
   <link href="css/clean-blog.min.css" rel="stylesheet">
+  
+  <style>
+    /* Ocultar contenido de Firebase hasta que se cargue */
+    [data-firebase-page] {
+      visibility: hidden;
+    }
+    [data-firebase-page].firebase-loaded {
+      visibility: visible;
+    }
+  </style>
 
   <!-- Custom favicon -->
   <link rel="icon" href="favicon_io/favicon.ico" type="image/x-icon">
@@ -96,8 +106,8 @@
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
           <div class="site-heading">
-              <h1><img src="img/main-title-logo2.png" width="90" height="90" class="center" alt="Sercon Gestoría"> <span class="display-4" data-i18n="home.title">Sercon Gestoría</span></h1>
-            <span class="subheading" data-i18n="home.subtitle">Más de 40 años a vuestro servicio</span>
+              <h1><img src="img/main-title-logo2.png" width="90" height="90" class="center" alt="Sercon Gestoría"> <span class="display-4" data-i18n="home.title" data-firebase-page="index" data-firebase-field="main_title">Sercon Gestoría</span></h1>
+            <span class="subheading" data-i18n="home.subtitle" data-firebase-page="index" data-firebase-field="subtitle">Más de 40 años a vuestro servicio</span>
           </div>
         </div>
       </div>
@@ -108,8 +118,8 @@
   <div class="container my-5">
     <div class="row">
       <div class="col-lg-10 mx-auto text-center">
-        <p class="lead" style="font-size: 1.25rem; color: #495057; line-height: 1.8;" data-i18n="home.description">En Gestoría Sercon contamos con un grupo de profesionales que ponemos a su servicio para resolver sus gestiones administrativas. Nuestro objetivo es evitarle preocupaciones y ahorrarle tiempo y dolores de cabeza frente a La Administración.</p>
-        <p style="font-size: 1.1rem; color: #6c757d;" data-i18n="home.contactText">Si tiene alguna cuestión que quiera aclarar no dude en ponerse en contacto con nuestra gestoría. Le responderemos a la mayor brevedad posible.</p>
+        <p class="lead" style="font-size: 1.25rem; color: #495057; line-height: 1.8;" data-i18n="home.description" data-firebase-page="index" data-firebase-field="description" data-firebase-html>En Gestoría Sercon contamos con un grupo de profesionales que ponemos a su servicio para resolver sus gestiones administrativas. Nuestro objetivo es evitarle preocupaciones y ahorrarle tiempo y dolores de cabeza frente a La Administración.</p>
+        <p style="font-size: 1.1rem; color: #6c757d;" data-i18n="home.contactText" data-firebase-page="index" data-firebase-field="contact_text">Si tiene alguna cuestión que quiera aclarar no dude en ponerse en contacto con nuestra gestoría. Le responderemos a la mayor brevedad posible.</p>
       </div>
     </div>
     <hr class="my-5">
@@ -244,7 +254,7 @@
         <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
           <div class="stat-item" data-aos="fade-up" data-aos-delay="0">
             <i class="fas fa-users mb-3" style="color: rgba(255, 255, 255, 0.95); font-size: 4.5rem; text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);"></i>
-            <h2 class="counter" data-target="30">0</h2>
+            <h2 class="counter" data-target="40">0</h2>
             <p class="mb-0">Años de Experiencia</p>
           </div>
         </div>
@@ -278,8 +288,8 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-12 text-center mb-5">
-          <h2 class="section-title" data-aos="fade-up">¿Por Qué Elegirnos?</h2>
-          <p class="lead text-muted" data-aos="fade-up" data-aos-delay="100">Somos su socio de confianza en gestión administrativa</p>
+          <h2 class="section-title" data-aos="fade-up" data-i18n="home.whyChoose.title" data-firebase-page="index" data-firebase-field="why_choose_title">¿Por Qué Elegirnos?</h2>
+          <p class="lead text-muted" data-aos="fade-up" data-aos-delay="100" data-i18n="home.whyChoose.subtitle" data-firebase-page="index" data-firebase-field="why_choose_subtitle">Somos su socio de confianza en gestión administrativa</p>
         </div>
       </div>
       <div class="row">
@@ -288,8 +298,8 @@
             <div class="feature-icon mb-3">
               <i class="fas fa-shield-alt fa-3x" style="color: #007f7e;"></i>
             </div>
-            <h4>Confianza y Seguridad</h4>
-            <p>Más de 40 años de experiencia garantizan la confianza y seguridad en todos nuestros servicios.</p>
+            <h4 data-i18n="home.whyChoose.features.trust.title">Confianza y Seguridad</h4>
+            <div data-i18n="home.whyChoose.features.trust.description" data-firebase-page="index" data-firebase-field="feature_trust" data-firebase-html><p>Más de 40 años de experiencia garantizan la confianza y seguridad en todos nuestros servicios.</p></div>
           </div>
         </div>
         <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="100">
@@ -297,8 +307,8 @@
             <div class="feature-icon mb-3">
               <i class="fas fa-clock fa-3x" style="color: #007f7e;"></i>
             </div>
-            <h4>Atención Rápida</h4>
-            <p>Respuesta inmediata a sus consultas y gestión eficiente de todos sus trámites administrativos.</p>
+            <h4 data-i18n="home.whyChoose.features.speed.title">Atención Rápida</h4>
+            <div data-i18n="home.whyChoose.features.speed.description" data-firebase-page="index" data-firebase-field="feature_speed" data-firebase-html><p>Respuesta inmediata a sus consultas y gestión eficiente de todos sus trámites administrativos.</p></div>
           </div>
         </div>
         <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="200">
@@ -306,8 +316,8 @@
             <div class="feature-icon mb-3">
               <i class="fas fa-user-friends fa-3x" style="color: #007f7e;"></i>
             </div>
-            <h4>Atención Personalizada</h4>
-            <p>Cada cliente recibe un trato personalizado adaptado a sus necesidades específicas.</p>
+            <h4 data-i18n="home.whyChoose.features.personalized.title">Atención Personalizada</h4>
+            <div data-i18n="home.whyChoose.features.personalized.description" data-firebase-page="index" data-firebase-field="feature_personalized" data-firebase-html><p>Cada cliente recibe un trato personalizado adaptado a sus necesidades específicas.</p></div>
           </div>
         </div>
         <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="300">
@@ -315,8 +325,8 @@
             <div class="feature-icon mb-3">
               <i class="fas fa-graduation-cap fa-3x" style="color: #007f7e;"></i>
             </div>
-            <h4>Equipo Profesional</h4>
-            <p>Contamos con más de 100 asesores expertos en todas las áreas de gestión administrativa.</p>
+            <h4 data-i18n="home.whyChoose.features.team.title">Equipo Profesional</h4>
+            <div data-i18n="home.whyChoose.features.team.description" data-firebase-page="index" data-firebase-field="feature_team" data-firebase-html><p>Contamos con más de 100 asesores expertos en todas las áreas de gestión administrativa.</p></div>
           </div>
         </div>
         <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="400">
@@ -324,8 +334,8 @@
             <div class="feature-icon mb-3">
               <i class="fas fa-lock fa-3x" style="color: #007f7e;"></i>
             </div>
-            <h4>Confidencialidad</h4>
-            <p>Garantizamos la máxima confidencialidad y protección de todos sus datos personales.</p>
+            <h4 data-i18n="home.whyChoose.features.confidentiality.title">Confidencialidad</h4>
+            <div data-i18n="home.whyChoose.features.confidentiality.description" data-firebase-page="index" data-firebase-field="feature_confidentiality" data-firebase-html><p>Garantizamos la máxima confidencialidad y protección de todos sus datos personales.</p></div>
           </div>
         </div>
         <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="500">
@@ -333,8 +343,8 @@
             <div class="feature-icon mb-3">
               <i class="fas fa-euro-sign fa-3x" style="color: #007f7e;"></i>
             </div>
-            <h4>Precios Competitivos</h4>
-            <p>Ofrecemos servicios de alta calidad a precios competitivos y transparentes.</p>
+            <h4 data-i18n="home.whyChoose.features.prices.title">Precios Competitivos</h4>
+            <div data-i18n="home.whyChoose.features.prices.description" data-firebase-page="index" data-firebase-field="feature_prices" data-firebase-html><p>Ofrecemos servicios de alta calidad a precios competitivos y transparentes.</p></div>
           </div>
         </div>
       </div>
@@ -346,8 +356,8 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-12 text-center mb-5">
-          <h2 class="section-title" data-aos="fade-up">Lo Que Dicen Nuestros Clientes</h2>
-          <p class="lead text-muted" data-aos="fade-up" data-aos-delay="100">Testimonios reales de clientes satisfechos</p>
+          <h2 class="section-title" data-aos="fade-up" data-i18n="home.testimonials.title" data-firebase-page="index" data-firebase-field="testimonials_title">Lo Que Dicen Nuestros Clientes</h2>
+          <p class="lead text-muted" data-aos="fade-up" data-aos-delay="100" data-i18n="home.testimonials.subtitle" data-firebase-page="index" data-firebase-field="testimonials_subtitle">Testimonios reales de clientes satisfechos</p>
         </div>
       </div>
       <div class="row">
@@ -408,77 +418,19 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-12 text-center mb-5">
-          <h2 class="section-title" data-aos="fade-up">Preguntas Frecuentes</h2>
-          <p class="lead text-muted" data-aos="fade-up" data-aos-delay="100">Respuestas a las dudas más comunes</p>
+          <h2 class="section-title" data-aos="fade-up" data-i18n="home.faq.title" data-firebase-page="index" data-firebase-field="faq_title">Preguntas Frecuentes</h2>
+          <p class="lead text-muted" data-aos="fade-up" data-aos-delay="100" data-i18n="home.faq.subtitle" data-firebase-page="index" data-firebase-field="faq_subtitle">Respuestas a las dudas más comunes</p>
         </div>
       </div>
       <div class="row">
         <div class="col-lg-8 mx-auto">
           <div class="accordion" id="faqAccordion">
-            <div class="card mb-3" data-aos="fade-up" data-aos-delay="0">
-              <div class="card-header" id="headingOne" style="background-color: #f8f9fa; cursor: pointer;" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                <h5 class="mb-0" style="color: #007f7e;">
-                  <i class="fas fa-chevron-down mr-2"></i>
-                  ¿Qué servicios ofrece Gestoría Sercon?
-                </h5>
+            <!-- FAQs se cargarán dinámicamente desde Firebase -->
+            <div class="text-center py-4">
+              <div class="spinner-border text-primary mb-3" role="status">
+                <span class="sr-only">Cargando...</span>
               </div>
-              <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#faqAccordion">
-                <div class="card-body">
-                  Ofrecemos servicios completos de gestión administrativa incluyendo asesoría fiscal y contable, servicios laborales, asesoramiento legal y gestión de sucesiones. Contamos con más de 100 asesores expertos para atender todas sus necesidades.
-                </div>
-              </div>
-            </div>
-            <div class="card mb-3" data-aos="fade-up" data-aos-delay="100">
-              <div class="card-header" id="headingTwo" style="background-color: #f8f9fa; cursor: pointer;" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                <h5 class="mb-0" style="color: #007f7e;">
-                  <i class="fas fa-chevron-down mr-2"></i>
-                  ¿Cuál es el horario de atención?
-                </h5>
-              </div>
-              <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#faqAccordion">
-                <div class="card-body">
-                  Nuestro horario de atención es de lunes a viernes de 8:00 a 16:00 horas. Estamos cerrados los sábados y domingos. Puede contactarnos por teléfono, email o visitarnos en nuestras oficinas en Ourense.
-                </div>
-              </div>
-            </div>
-            <div class="card mb-3" data-aos="fade-up" data-aos-delay="200">
-              <div class="card-header" id="headingThree" style="background-color: #f8f9fa; cursor: pointer;" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                <h5 class="mb-0" style="color: #007f7e;">
-                  <i class="fas fa-chevron-down mr-2"></i>
-                  ¿Cómo puedo solicitar una consulta?
-                </h5>
-              </div>
-              <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#faqAccordion">
-                <div class="card-body">
-                  Puede solicitar una consulta a través de nuestro formulario de contacto en la página web, por teléfono o visitándonos en nuestras oficinas. Le responderemos a la mayor brevedad posible para programar una cita.
-                </div>
-              </div>
-            </div>
-            <div class="card mb-3" data-aos="fade-up" data-aos-delay="300">
-              <div class="card-header" id="headingFour" style="background-color: #f8f9fa; cursor: pointer;" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                <h5 class="mb-0" style="color: #007f7e;">
-                  <i class="fas fa-chevron-down mr-2"></i>
-                  ¿Garantizan la confidencialidad de mis datos?
-                </h5>
-              </div>
-              <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#faqAccordion">
-                <div class="card-body">
-                  Absolutamente. La confidencialidad y protección de los datos de nuestros clientes es una prioridad. Cumplimos estrictamente con todas las normativas de protección de datos y mantenemos el secreto profesional en todas nuestras gestiones.
-                </div>
-              </div>
-            </div>
-            <div class="card mb-3" data-aos="fade-up" data-aos-delay="400">
-              <div class="card-header" id="headingFive" style="background-color: #f8f9fa; cursor: pointer;" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
-                <h5 class="mb-0" style="color: #007f7e;">
-                  <i class="fas fa-chevron-down mr-2"></i>
-                  ¿Trabajan con empresas y particulares?
-                </h5>
-              </div>
-              <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#faqAccordion">
-                <div class="card-body">
-                  Sí, trabajamos tanto con empresas de todos los tamaños como con particulares. Ofrecemos servicios personalizados adaptados a las necesidades específicas de cada cliente, ya sea una empresa o un particular.
-                </div>
-              </div>
+              <p class="text-muted">Cargando preguntas frecuentes...</p>
             </div>
           </div>
         </div>
@@ -558,46 +510,52 @@
   <!-- FAQ Accordion Initialization -->
   <script>
     // Ensure FAQ accordion works correctly - only one open at a time
+    // Usar delegación de eventos para que funcione con elementos añadidos dinámicamente
     $(document).ready(function() {
-      // Remove default Bootstrap behavior and implement custom accordion
-      $('#faqAccordion .card-header').off('click').on('click', function(e) {
+      // Usar delegación de eventos en el contenedor padre
+      $('#faqAccordion').off('click', '.card-header').on('click', '.card-header', function(e) {
         e.preventDefault();
         e.stopPropagation();
         
         var $header = $(this);
         var targetId = $header.data('target');
+        if (!targetId) {
+          // Si no hay data-target, intentar obtenerlo del atributo data-target
+          targetId = $header.attr('data-target');
+        }
         var $target = $(targetId);
         
         if (!$target.length) return;
         
         var isCurrentlyOpen = $target.hasClass('show');
         
-        // Close all other open items first
+        // Cerrar todos los demás elementos abiertos primero
         $('#faqAccordion .collapse.show').each(function() {
           var $otherTarget = $(this);
           if ($otherTarget.attr('id') !== $target.attr('id')) {
             $otherTarget.removeClass('show').collapse('hide');
-            // Reset icon for closed items
-            $otherTarget.prev('.card-header').find('i.fa-chevron-down').css('transform', 'rotate(0deg)');
-            $otherTarget.prev('.card-header').attr('aria-expanded', 'false');
+            // Resetear icono para elementos cerrados
+            var $otherHeader = $otherTarget.prev('.card-header');
+            $otherHeader.find('i.fa-chevron-down').css('transform', 'rotate(0deg)');
+            $otherHeader.attr('aria-expanded', 'false');
           }
         });
         
-        // Toggle the clicked item
+        // Alternar el elemento clickeado
         if (isCurrentlyOpen) {
-          // If it's open, close it
+          // Si está abierto, cerrarlo
           $target.removeClass('show').collapse('hide');
           $header.find('i.fa-chevron-down').css('transform', 'rotate(0deg)');
           $header.attr('aria-expanded', 'false');
         } else {
-          // If it's closed, open it
+          // Si está cerrado, abrirlo
           $target.addClass('show').collapse('show');
           $header.find('i.fa-chevron-down').css('transform', 'rotate(180deg)');
           $header.attr('aria-expanded', 'true');
         }
       });
       
-      // Handle Bootstrap collapse events for icon rotation
+      // Manejar eventos de Bootstrap collapse para rotación de iconos
       $('#faqAccordion').on('shown.bs.collapse', function (e) {
         $(e.target).prev('.card-header').find('i.fa-chevron-down').css('transform', 'rotate(180deg)');
         $(e.target).prev('.card-header').attr('aria-expanded', 'true');
@@ -607,11 +565,6 @@
         $(e.target).prev('.card-header').find('i.fa-chevron-down').css('transform', 'rotate(0deg)');
         $(e.target).prev('.card-header').attr('aria-expanded', 'false');
       });
-      
-      // Initialize the first item as open
-      $('#collapseOne').addClass('show');
-      $('#headingOne').find('i.fa-chevron-down').css('transform', 'rotate(180deg)');
-      $('#headingOne').attr('aria-expanded', 'true');
     });
   </script>
   
@@ -634,7 +587,46 @@
   <script src="js/i18n.min.js"></script>
   
   <!-- Firebase Content Loader -->
-  <script src="js/firebase-content.min.js?v=3"></script>
+  <script src="js/firebase-content.min.js?v=5"></script>
+  
+  <script>
+    // Cargar contenido dinámico de páginas desde Firebase
+    // IMPORTANTE: Cargar DESPUÉS de i18n para que Firebase tenga prioridad
+    function loadPageContentFromFirebase() {
+      // Esperar a que Firebase esté inicializado
+      if (window.firebaseServices && window.firebaseServices.db && window.firebaseContent && window.firebaseContent.updatePageContent) {
+        console.log('🔄 Cargando contenido de Firebase para página "index"...');
+        window.firebaseContent.updatePageContent('index').then(() => {
+          console.log('✅ Contenido de Firebase cargado para página "index"');
+        }).catch(error => {
+          console.error('❌ Error cargando contenido de Firebase:', error);
+        });
+      } else {
+        // Reintentar después de un breve delay
+        setTimeout(loadPageContentFromFirebase, 100);
+      }
+    }
+    
+    // Esperar a que i18n termine de cargar antes de cargar contenido de Firebase
+    function waitForI18nThenLoadFirebase() {
+      if (window.i18nextInstance && window.i18nextInstance.isInitialized) {
+        // Esperar un poco más para que i18n termine de actualizar el DOM
+        setTimeout(loadPageContentFromFirebase, 500);
+      } else {
+        setTimeout(waitForI18nThenLoadFirebase, 100);
+      }
+    }
+    
+    // Iniciar carga cuando el DOM esté listo
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', function() {
+        // Esperar a que i18n se inicialice, luego cargar Firebase
+        waitForI18nThenLoadFirebase();
+      });
+    } else {
+      waitForI18nThenLoadFirebase();
+    }
+  </script>
   
   <script>
     let noticiasCargadas = false;
@@ -684,9 +676,203 @@
       setTimeout(cargarNoticias, 1000);
     }
   </script>
+  
+  <script>
+    // Cargar FAQs desde Firebase
+    let faqsCargadas = false;
+    let cargandoFaqs = false;
+    
+    async function cargarFaqs() {
+      if (faqsCargadas || cargandoFaqs) {
+        return;
+      }
+      
+      cargandoFaqs = true;
+      
+      const container = document.getElementById('faqAccordion');
+      if (!container) {
+        cargandoFaqs = false;
+        return;
+      }
+      
+      if (!window.firebaseServices || !window.firebaseServices.db) {
+        cargandoFaqs = false;
+        setTimeout(cargarFaqs, 500);
+        return;
+      }
+      
+      try {
+        // Cargar FAQs desde Firebase
+        let snapshot;
+        try {
+          // Intentar con orderBy
+          snapshot = await window.firebaseServices.db.collection('pageContent')
+            .where('page', '==', 'index')
+            .orderBy('order')
+            .get();
+        } catch (error) {
+          // Si falla, cargar todas y filtrar
+          snapshot = await window.firebaseServices.db.collection('pageContent')
+            .where('page', '==', 'index')
+            .get();
+        }
+        
+        const faqs = [];
+        snapshot.forEach(doc => {
+          const data = doc.data();
+          // Filtrar solo FAQs (fieldKey que empieza con faq_item_)
+          if (data.fieldKey && data.fieldKey.startsWith('faq_item_')) {
+            faqs.push({
+              id: doc.id,
+              order: data.order || 0,
+              content: data.contentEs || ''
+            });
+          }
+        });
+        
+        // Ordenar por order
+        faqs.sort((a, b) => a.order - b.order);
+        
+        if (faqs.length === 0) {
+          container.innerHTML = '<div class="text-center py-4"><p class="text-muted">No hay preguntas frecuentes disponibles.</p></div>';
+          faqsCargadas = true;
+          cargandoFaqs = false;
+          return;
+        }
+        
+        // Renderizar FAQs
+        let html = '';
+        faqs.forEach((faq, index) => {
+          // Parsear el contenido para extraer título y respuesta
+          const tempDiv = document.createElement('div');
+          tempDiv.innerHTML = faq.content;
+          
+          const titleElement = tempDiv.querySelector('h5, h4, h3');
+          let title = 'Pregunta';
+          let answer = '';
+          
+          if (titleElement) {
+            title = titleElement.textContent.trim();
+            titleElement.remove();
+            answer = tempDiv.innerHTML.trim();
+          } else {
+            const paragraphs = tempDiv.querySelectorAll('p');
+            if (paragraphs.length > 0) {
+              title = paragraphs[0].textContent.trim();
+              if (paragraphs.length > 1) {
+                answer = Array.from(paragraphs).slice(1).map(p => p.outerHTML).join('');
+              }
+            } else {
+              answer = faq.content;
+            }
+          }
+          
+          const faqId = `faq-${index + 1}`;
+          const headingId = `heading${index + 1}`;
+          const collapseId = `collapse${index + 1}`;
+          const isFirst = index === 0;
+          
+          html += `
+            <div class="card mb-3" data-aos="fade-up" data-aos-delay="${index * 100}">
+              <div class="card-header" id="${headingId}" style="background-color: #f8f9fa; cursor: pointer;" data-toggle="collapse" data-target="#${collapseId}" aria-expanded="${isFirst ? 'true' : 'false'}" aria-controls="${collapseId}">
+                <h5 class="mb-0" style="color: #007f7e;">
+                  <i class="fas fa-chevron-down mr-2"></i>
+                  ${title.replace(/"/g, '&quot;')}
+                </h5>
+              </div>
+              <div id="${collapseId}" class="collapse ${isFirst ? 'show' : ''}" aria-labelledby="${headingId}" data-parent="#faqAccordion">
+                <div class="card-body" data-firebase-html>
+                  ${answer || '<p class="text-muted">Sin respuesta disponible.</p>'}
+                </div>
+              </div>
+            </div>
+          `;
+        });
+        
+        container.innerHTML = html;
+        
+        // Reinicializar el accordion de Bootstrap después de cargar las FAQs dinámicamente
+        if (typeof $ !== 'undefined' && $.fn.collapse) {
+          // Usar delegación de eventos para que funcione con elementos añadidos dinámicamente
+          $('#faqAccordion').off('click', '.card-header').on('click', '.card-header', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            var $header = $(this);
+            var targetId = $header.data('target');
+            if (!targetId) {
+              // Si no hay data-target, intentar obtenerlo del atributo data-target
+              targetId = $header.attr('data-target');
+            }
+            var $target = $(targetId);
+            
+            if (!$target.length) return;
+            
+            var isCurrentlyOpen = $target.hasClass('show');
+            
+            // Cerrar todos los demás elementos abiertos primero
+            $('#faqAccordion .collapse.show').each(function() {
+              var $otherTarget = $(this);
+              if ($otherTarget.attr('id') !== $target.attr('id')) {
+                $otherTarget.removeClass('show').collapse('hide');
+                // Resetear icono para elementos cerrados
+                var $otherHeader = $otherTarget.prev('.card-header');
+                $otherHeader.find('i.fa-chevron-down').css('transform', 'rotate(0deg)');
+                $otherHeader.attr('aria-expanded', 'false');
+              }
+            });
+            
+            // Alternar el elemento clickeado
+            if (isCurrentlyOpen) {
+              // Si está abierto, cerrarlo
+              $target.removeClass('show').collapse('hide');
+              $header.find('i.fa-chevron-down').css('transform', 'rotate(0deg)');
+              $header.attr('aria-expanded', 'false');
+            } else {
+              // Si está cerrado, abrirlo
+              $target.addClass('show').collapse('show');
+              $header.find('i.fa-chevron-down').css('transform', 'rotate(180deg)');
+              $header.attr('aria-expanded', 'true');
+            }
+          });
+          
+          // Manejar eventos de Bootstrap collapse para rotación de iconos
+          $('#faqAccordion .collapse').on('show.bs.collapse', function() {
+            var $target = $(this);
+            var $header = $target.prev('.card-header');
+            $header.find('i.fa-chevron-down').css('transform', 'rotate(180deg)');
+            $header.attr('aria-expanded', 'true');
+          });
+          
+          $('#faqAccordion .collapse').on('hide.bs.collapse', function() {
+            var $target = $(this);
+            var $header = $target.prev('.card-header');
+            $header.find('i.fa-chevron-down').css('transform', 'rotate(0deg)');
+            $header.attr('aria-expanded', 'false');
+          });
+        }
+        
+        faqsCargadas = true;
+        
+      } catch (error) {
+        console.error('Error loading FAQs:', error);
+        container.innerHTML = '<div class="text-center py-4"><p class="text-danger">Error al cargar las preguntas frecuentes</p></div>';
+      } finally {
+        cargandoFaqs = false;
+      }
+    }
+    
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', function() {
+        setTimeout(cargarFaqs, 1500);
+      });
+    } else {
+      setTimeout(cargarFaqs, 1500);
+    }
+  </script>
 
   <!-- Scroll to Top Button -->
-  <button id="scrollToTop" class="scroll-to-top" aria-label="Volver arriba">
+  <button id="scrollToTop" class="scroll-to-top" data-i18n-attr="aria-label:common.scrollToTop" aria-label="Volver arriba">
     <i class="fas fa-arrow-up"></i>
   </button>
 
